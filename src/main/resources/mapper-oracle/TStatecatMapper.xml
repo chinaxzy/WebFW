@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="statecat">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="INTEGER" property="fId" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_ISMBOX" jdbcType="CHAR" property="fIsmbox" />
+    <result column="F_SHOW" jdbcType="CHAR" property="fShow" />
+    <result column="F_LEVEL" jdbcType="INTEGER" property="fLevel" />
+    <result column="F_NRANGE" jdbcType="CHAR" property="fNrange" />
+    <result column="F_WRANGE" jdbcType="CHAR" property="fWrange" />
+    <result column="F_CWRANGE" jdbcType="CHAR" property="fCwrange" />
+    <result column="F_WBROAD" jdbcType="CHAR" property="fWbroad" />
+    <result column="F_EBROAD" jdbcType="CHAR" property="fEbroad" />
+    <result column="F_TPMASK" jdbcType="INTEGER" property="fTpmask" />
+    <result column="F_ERULE" jdbcType="CHAR" property="fErule" />
+    <result column="F_WRULE" jdbcType="CHAR" property="fWrule" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+    <!--<result column="F_VISIBLE" jdbcType="INTEGER" property="fVisible" />-->
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_ISMBOX, F_SHOW, F_LEVEL, F_NRANGE, F_WRANGE, F_CWRANGE, F_WBROAD, 
+    F_EBROAD, F_TPMASK, F_ERULE, F_WRULE, F_PAD1
+--     , F_VISIBLE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_statecat
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectStatecat" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_statecat
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=INTEGER}
+      </if>
+      <if test="fIdPrefix != null">
+        AND F_ID LIKE #{fIdPrefix}||'0%'
+      </if>
+
+    </where>
+  </select>
+
+
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_statecat
+    where F_ID = #{fId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_statecat (F_ID, F_NAME, F_ISMBOX, 
+      F_SHOW, F_LEVEL, F_NRANGE, F_WRANGE, 
+      F_CWRANGE, F_WBROAD, F_EBROAD, 
+      F_TPMASK, F_ERULE, F_WRULE, 
+      F_PAD1
+--       , F_VISIBLE
+      )
+    values (#{fId,jdbcType=INTEGER}, #{fName,jdbcType=CHAR}, #{fIsmbox,jdbcType=CHAR}, 
+      #{fShow,jdbcType=CHAR}, #{fLevel,jdbcType=INTEGER}, #{fNrange,jdbcType=CHAR}, #{fWrange,jdbcType=CHAR}, 
+      #{fCwrange,jdbcType=CHAR}, #{fWbroad,jdbcType=CHAR}, #{fEbroad,jdbcType=CHAR}, 
+      #{fTpmask,jdbcType=INTEGER}, #{fErule,jdbcType=CHAR}, #{fWrule,jdbcType=CHAR}, 
+      #{fPad1,jdbcType=CHAR}, #{fVisible,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_statecat
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fIsmbox != null">
+        F_ISMBOX,
+      </if>
+      <if test="fShow != null">
+        F_SHOW,
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL,
+      </if>
+      <if test="fNrange != null">
+        F_NRANGE,
+      </if>
+      <if test="fWrange != null">
+        F_WRANGE,
+      </if>
+      <if test="fCwrange != null">
+        F_CWRANGE,
+      </if>
+      <if test="fWbroad != null">
+        F_WBROAD,
+      </if>
+      <if test="fEbroad != null">
+        F_EBROAD,
+      </if>
+      <if test="fTpmask != null">
+        F_TPMASK,
+      </if>
+      <if test="fErule != null">
+        F_ERULE,
+      </if>
+      <if test="fWrule != null">
+        F_WRULE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fVisible != null">
+        F_VISIBLE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=INTEGER},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fIsmbox != null">
+        #{fIsmbox,jdbcType=CHAR},
+      </if>
+      <if test="fShow != null">
+        #{fShow,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        #{fLevel,jdbcType=INTEGER},
+      </if>
+      <if test="fNrange != null">
+        #{fNrange,jdbcType=CHAR},
+      </if>
+      <if test="fWrange != null">
+        #{fWrange,jdbcType=CHAR},
+      </if>
+      <if test="fCwrange != null">
+        #{fCwrange,jdbcType=CHAR},
+      </if>
+      <if test="fWbroad != null">
+        #{fWbroad,jdbcType=CHAR},
+      </if>
+      <if test="fEbroad != null">
+        #{fEbroad,jdbcType=CHAR},
+      </if>
+      <if test="fTpmask != null">
+        #{fTpmask,jdbcType=INTEGER},
+      </if>
+      <if test="fErule != null">
+        #{fErule,jdbcType=CHAR},
+      </if>
+      <if test="fWrule != null">
+        #{fWrule,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fVisible != null">
+        #{fVisible,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_statecat
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fIsmbox != null">
+        F_ISMBOX = #{fIsmbox,jdbcType=CHAR},
+      </if>
+      <if test="fShow != null">
+        F_SHOW = #{fShow,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL = #{fLevel,jdbcType=INTEGER},
+      </if>
+      <if test="fNrange != null">
+        F_NRANGE = #{fNrange,jdbcType=CHAR},
+      </if>
+      <if test="fWrange != null">
+        F_WRANGE = #{fWrange,jdbcType=CHAR},
+      </if>
+      <if test="fCwrange != null">
+        F_CWRANGE = #{fCwrange,jdbcType=CHAR},
+      </if>
+      <if test="fWbroad != null">
+        F_WBROAD = #{fWbroad,jdbcType=CHAR},
+      </if>
+      <if test="fEbroad != null">
+        F_EBROAD = #{fEbroad,jdbcType=CHAR},
+      </if>
+      <if test="fTpmask != null">
+        F_TPMASK = #{fTpmask,jdbcType=INTEGER},
+      </if>
+      <if test="fErule != null">
+        F_ERULE = #{fErule,jdbcType=CHAR},
+      </if>
+      <if test="fWrule != null">
+        F_WRULE = #{fWrule,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fVisible != null">
+        F_VISIBLE = #{fVisible,jdbcType=INTEGER},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_statecat
+    set F_NAME = #{fName,jdbcType=CHAR},
+      F_ISMBOX = #{fIsmbox,jdbcType=CHAR},
+      F_SHOW = #{fShow,jdbcType=CHAR},
+      F_LEVEL = #{fLevel,jdbcType=INTEGER},
+      F_NRANGE = #{fNrange,jdbcType=CHAR},
+      F_WRANGE = #{fWrange,jdbcType=CHAR},
+      F_CWRANGE = #{fCwrange,jdbcType=CHAR},
+      F_WBROAD = #{fWbroad,jdbcType=CHAR},
+      F_EBROAD = #{fEbroad,jdbcType=CHAR},
+      F_TPMASK = #{fTpmask,jdbcType=INTEGER},
+      F_ERULE = #{fErule,jdbcType=CHAR},
+      F_WRULE = #{fWrule,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR},
+      F_VISIBLE = #{fVisible,jdbcType=INTEGER}
+    where F_ID = #{fId,jdbcType=INTEGER}
+  </update>
+
+</mapper>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pipelinederror">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_TERMINAL_ID" jdbcType="VARCHAR" property="fTerminalId" />
+    <result column="F_TERMINAL_NAME" jdbcType="VARCHAR" property="fTerminalName" />
+    <result column="F_ATMC_SERIAL_NUMBER" jdbcType="VARCHAR" property="fAtmcSerialNumber" />
+    <result column="F_ATMP_SERIAL_NUMBER" jdbcType="VARCHAR" property="fAtmpSerialNumber" />
+    <result column="F_TRADE_TYPE" jdbcType="VARCHAR" property="fTradeType" />
+    <result column="F_TRADE_DATE" jdbcType="VARCHAR" property="fTradeDate" />
+    <result column="F_TRADE_TIME" jdbcType="VARCHAR" property="fTradeTime" />
+    <result column="F_MASTER_ACCOUNT" jdbcType="VARCHAR" property="fMasterAccount" />
+    <result column="F_INTO_ACCOUNT" jdbcType="VARCHAR" property="fIntoAccount" />
+    <result column="F_TRADE_MONEY" jdbcType="DOUBLE" property="fTradeMoney" />
+    <result column="F_FEE" jdbcType="DOUBLE" property="fFee" />
+    <result column="F_ACT_MONEY" jdbcType="DOUBLE" property="fActMoney" />
+    <result column="F_B100" jdbcType="INTEGER" property="fB100" />
+    <result column="F_B050" jdbcType="INTEGER" property="fB050" />
+    <result column="F_B020" jdbcType="INTEGER" property="fB020" />
+    <result column="F_B010" jdbcType="INTEGER" property="fB010" />
+    <result column="F_BELONG" jdbcType="VARCHAR" property="fBelong" />
+    <result column="F_ABNORMAL" jdbcType="VARCHAR" property="fAbnormal" />
+    <result column="F_RETURN_CODE" jdbcType="VARCHAR" property="fReturnCode" />
+    <result column="F_REMARK" jdbcType="VARCHAR" property="fRemark" />
+    <result column="F_CLEARNO" jdbcType="VARCHAR" property="fClearno" />
+    <result column="F_CLEARDATE" jdbcType="VARCHAR" property="fCleardate" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_pipelined_error (F_TERMINAL_ID, F_TERMINAL_NAME, F_ATMC_SERIAL_NUMBER, 
+      F_ATMP_SERIAL_NUMBER, F_TRADE_TYPE, F_TRADE_DATE, 
+      F_TRADE_TIME, F_MASTER_ACCOUNT, F_INTO_ACCOUNT, 
+      F_TRADE_MONEY, F_FEE, F_ACT_MONEY, 
+      F_B100, F_B050, F_B020, 
+      F_B010, F_BELONG, F_ABNORMAL, 
+      F_RETURN_CODE, F_REMARK, F_CLEARNO, 
+      F_CLEARDATE)
+    values (#{fTerminalId,jdbcType=VARCHAR}, #{fTerminalName,jdbcType=VARCHAR}, #{fAtmcSerialNumber,jdbcType=VARCHAR}, 
+      #{fAtmpSerialNumber,jdbcType=VARCHAR}, #{fTradeType,jdbcType=VARCHAR}, #{fTradeDate,jdbcType=VARCHAR}, 
+      #{fTradeTime,jdbcType=VARCHAR}, #{fMasterAccount,jdbcType=VARCHAR}, #{fIntoAccount,jdbcType=VARCHAR}, 
+      #{fTradeMoney,jdbcType=DOUBLE}, #{fFee,jdbcType=DOUBLE}, #{fActMoney,jdbcType=DOUBLE}, 
+      #{fB100,jdbcType=INTEGER}, #{fB050,jdbcType=INTEGER}, #{fB020,jdbcType=INTEGER}, 
+      #{fB010,jdbcType=INTEGER}, #{fBelong,jdbcType=VARCHAR}, #{fAbnormal,jdbcType=VARCHAR}, 
+      #{fReturnCode,jdbcType=VARCHAR}, #{fRemark,jdbcType=VARCHAR}, #{fClearno,jdbcType=VARCHAR}, 
+      #{fCleardate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_pipelined_error
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fTerminalId != null">
+        F_TERMINAL_ID,
+      </if>
+      <if test="fTerminalName != null">
+        F_TERMINAL_NAME,
+      </if>
+      <if test="fAtmcSerialNumber != null">
+        F_ATMC_SERIAL_NUMBER,
+      </if>
+      <if test="fAtmpSerialNumber != null">
+        F_ATMP_SERIAL_NUMBER,
+      </if>
+      <if test="fTradeType != null">
+        F_TRADE_TYPE,
+      </if>
+      <if test="fTradeDate != null">
+        F_TRADE_DATE,
+      </if>
+      <if test="fTradeTime != null">
+        F_TRADE_TIME,
+      </if>
+      <if test="fMasterAccount != null">
+        F_MASTER_ACCOUNT,
+      </if>
+      <if test="fIntoAccount != null">
+        F_INTO_ACCOUNT,
+      </if>
+      <if test="fTradeMoney != null">
+        F_TRADE_MONEY,
+      </if>
+      <if test="fFee != null">
+        F_FEE,
+      </if>
+      <if test="fActMoney != null">
+        F_ACT_MONEY,
+      </if>
+      <if test="fB100 != null">
+        F_B100,
+      </if>
+      <if test="fB050 != null">
+        F_B050,
+      </if>
+      <if test="fB020 != null">
+        F_B020,
+      </if>
+      <if test="fB010 != null">
+        F_B010,
+      </if>
+      <if test="fBelong != null">
+        F_BELONG,
+      </if>
+      <if test="fAbnormal != null">
+        F_ABNORMAL,
+      </if>
+      <if test="fReturnCode != null">
+        F_RETURN_CODE,
+      </if>
+      <if test="fRemark != null">
+        F_REMARK,
+      </if>
+      <if test="fClearno != null">
+        F_CLEARNO,
+      </if>
+      <if test="fCleardate != null">
+        F_CLEARDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fTerminalId != null">
+        #{fTerminalId,jdbcType=VARCHAR},
+      </if>
+      <if test="fTerminalName != null">
+        #{fTerminalName,jdbcType=VARCHAR},
+      </if>
+      <if test="fAtmcSerialNumber != null">
+        #{fAtmcSerialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fAtmpSerialNumber != null">
+        #{fAtmpSerialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fTradeType != null">
+        #{fTradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="fTradeDate != null">
+        #{fTradeDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fTradeTime != null">
+        #{fTradeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fMasterAccount != null">
+        #{fMasterAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="fIntoAccount != null">
+        #{fIntoAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="fTradeMoney != null">
+        #{fTradeMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="fFee != null">
+        #{fFee,jdbcType=DOUBLE},
+      </if>
+      <if test="fActMoney != null">
+        #{fActMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="fB100 != null">
+        #{fB100,jdbcType=INTEGER},
+      </if>
+      <if test="fB050 != null">
+        #{fB050,jdbcType=INTEGER},
+      </if>
+      <if test="fB020 != null">
+        #{fB020,jdbcType=INTEGER},
+      </if>
+      <if test="fB010 != null">
+        #{fB010,jdbcType=INTEGER},
+      </if>
+      <if test="fBelong != null">
+        #{fBelong,jdbcType=VARCHAR},
+      </if>
+      <if test="fAbnormal != null">
+        #{fAbnormal,jdbcType=VARCHAR},
+      </if>
+      <if test="fReturnCode != null">
+        #{fReturnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fRemark != null">
+        #{fRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="fClearno != null">
+        #{fClearno,jdbcType=VARCHAR},
+      </if>
+      <if test="fCleardate != null">
+        #{fCleardate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

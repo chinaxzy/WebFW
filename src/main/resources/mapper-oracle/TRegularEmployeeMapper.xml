@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="regularemployee">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_EMPLOYEE_ID" jdbcType="VARCHAR" property="fEmployeeId" />
+    <result column="F_MONTH" jdbcType="VARCHAR" property="fMonth" />
+    <result column="F_INDIRECT_DIRECT" jdbcType="VARCHAR" property="fIndirectDirect" />
+    <result column="F_DEPTNO" jdbcType="VARCHAR" property="fDeptno" />
+    <result column="F_CARD_NO" jdbcType="VARCHAR" property="fCardNo" />
+    <result column="F_IDNUMBER" jdbcType="VARCHAR" property="fIdnumber" />
+    <result column="F_SITUATION" jdbcType="VARCHAR" property="fSituation" />
+    <result column="F_CHINESE_NAME" jdbcType="VARCHAR" property="fChineseName" />
+    <result column="F_HIREDATE" jdbcType="VARCHAR" property="fHiredate" />
+    <result column="F_WORKING_DAYS" jdbcType="VARCHAR" property="fWorkingDays" />
+    <result column="F_MONTH_SALARY" jdbcType="VARCHAR" property="fMonthSalary" />
+    <result column="F_SICK_LEAVE_HOURS" jdbcType="VARCHAR" property="fSickLeaveHours" />
+    <result column="F_SICK_LEAVE_MONEY" jdbcType="VARCHAR" property="fSickLeaveMoney" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_EMPLOYEE_ID, F_MONTH, F_INDIRECT_DIRECT, F_DEPTNO, F_CARD_NO, F_IDNUMBER, F_SITUATION, 
+    F_CHINESE_NAME, F_HIREDATE, F_WORKING_DAYS, F_MONTH_SALARY, F_SICK_LEAVE_HOURS, F_SICK_LEAVE_MONEY
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_regular_employee
+    <where>
+      <if test="fEmployeeId != null">
+        F_EMPLOYEE_ID = #{fEmployeeId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_regular_employee
+    where F_EMPLOYEE_ID = #{fEmployeeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_regular_employee (F_EMPLOYEE_ID, F_MONTH, F_INDIRECT_DIRECT, 
+      F_DEPTNO, F_CARD_NO, F_IDNUMBER, 
+      F_SITUATION, F_CHINESE_NAME, F_HIREDATE, 
+      F_WORKING_DAYS, F_MONTH_SALARY, F_SICK_LEAVE_HOURS, 
+      F_SICK_LEAVE_MONEY)
+    values (#{fEmployeeId,jdbcType=VARCHAR}, #{fMonth,jdbcType=VARCHAR}, #{fIndirectDirect,jdbcType=VARCHAR}, 
+      #{fDeptno,jdbcType=VARCHAR}, #{fCardNo,jdbcType=VARCHAR}, #{fIdnumber,jdbcType=VARCHAR}, 
+      #{fSituation,jdbcType=VARCHAR}, #{fChineseName,jdbcType=VARCHAR}, #{fHiredate,jdbcType=VARCHAR}, 
+      #{fWorkingDays,jdbcType=VARCHAR}, #{fMonthSalary,jdbcType=VARCHAR}, #{fSickLeaveHours,jdbcType=VARCHAR}, 
+      #{fSickLeaveMoney,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_regular_employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fEmployeeId != null">
+        F_EMPLOYEE_ID,
+      </if>
+      <if test="fMonth != null">
+        F_MONTH,
+      </if>
+      <if test="fIndirectDirect != null">
+        F_INDIRECT_DIRECT,
+      </if>
+      <if test="fDeptno != null">
+        F_DEPTNO,
+      </if>
+      <if test="fCardNo != null">
+        F_CARD_NO,
+      </if>
+      <if test="fIdnumber != null">
+        F_IDNUMBER,
+      </if>
+      <if test="fSituation != null">
+        F_SITUATION,
+      </if>
+      <if test="fChineseName != null">
+        F_CHINESE_NAME,
+      </if>
+      <if test="fHiredate != null">
+        F_HIREDATE,
+      </if>
+      <if test="fWorkingDays != null">
+        F_WORKING_DAYS,
+      </if>
+      <if test="fMonthSalary != null">
+        F_MONTH_SALARY,
+      </if>
+      <if test="fSickLeaveHours != null">
+        F_SICK_LEAVE_HOURS,
+      </if>
+      <if test="fSickLeaveMoney != null">
+        F_SICK_LEAVE_MONEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fEmployeeId != null">
+        #{fEmployeeId,jdbcType=VARCHAR},
+      </if>
+      <if test="fMonth != null">
+        #{fMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="fIndirectDirect != null">
+        #{fIndirectDirect,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeptno != null">
+        #{fDeptno,jdbcType=VARCHAR},
+      </if>
+      <if test="fCardNo != null">
+        #{fCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fIdnumber != null">
+        #{fIdnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fSituation != null">
+        #{fSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="fChineseName != null">
+        #{fChineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="fHiredate != null">
+        #{fHiredate,jdbcType=VARCHAR},
+      </if>
+      <if test="fWorkingDays != null">
+        #{fWorkingDays,jdbcType=VARCHAR},
+      </if>
+      <if test="fMonthSalary != null">
+        #{fMonthSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="fSickLeaveHours != null">
+        #{fSickLeaveHours,jdbcType=VARCHAR},
+      </if>
+      <if test="fSickLeaveMoney != null">
+        #{fSickLeaveMoney,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_regular_employee
+    <set>
+      <if test="fMonth != null">
+        F_MONTH = #{fMonth,jdbcType=VARCHAR},
+      </if>
+      <if test="fIndirectDirect != null">
+        F_INDIRECT_DIRECT = #{fIndirectDirect,jdbcType=VARCHAR},
+      </if>
+      <if test="fDeptno != null">
+        F_DEPTNO = #{fDeptno,jdbcType=VARCHAR},
+      </if>
+      <if test="fCardNo != null">
+        F_CARD_NO = #{fCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fIdnumber != null">
+        F_IDNUMBER = #{fIdnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fSituation != null">
+        F_SITUATION = #{fSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="fChineseName != null">
+        F_CHINESE_NAME = #{fChineseName,jdbcType=VARCHAR},
+      </if>
+      <if test="fHiredate != null">
+        F_HIREDATE = #{fHiredate,jdbcType=VARCHAR},
+      </if>
+      <if test="fWorkingDays != null">
+        F_WORKING_DAYS = #{fWorkingDays,jdbcType=VARCHAR},
+      </if>
+      <if test="fMonthSalary != null">
+        F_MONTH_SALARY = #{fMonthSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="fSickLeaveHours != null">
+        F_SICK_LEAVE_HOURS = #{fSickLeaveHours,jdbcType=VARCHAR},
+      </if>
+      <if test="fSickLeaveMoney != null">
+        F_SICK_LEAVE_MONEY = #{fSickLeaveMoney,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_EMPLOYEE_ID = #{fEmployeeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_regular_employee
+    set F_MONTH = #{fMonth,jdbcType=VARCHAR},
+      F_INDIRECT_DIRECT = #{fIndirectDirect,jdbcType=VARCHAR},
+      F_DEPTNO = #{fDeptno,jdbcType=VARCHAR},
+      F_CARD_NO = #{fCardNo,jdbcType=VARCHAR},
+      F_IDNUMBER = #{fIdnumber,jdbcType=VARCHAR},
+      F_SITUATION = #{fSituation,jdbcType=VARCHAR},
+      F_CHINESE_NAME = #{fChineseName,jdbcType=VARCHAR},
+      F_HIREDATE = #{fHiredate,jdbcType=VARCHAR},
+      F_WORKING_DAYS = #{fWorkingDays,jdbcType=VARCHAR},
+      F_MONTH_SALARY = #{fMonthSalary,jdbcType=VARCHAR},
+      F_SICK_LEAVE_HOURS = #{fSickLeaveHours,jdbcType=VARCHAR},
+      F_SICK_LEAVE_MONEY = #{fSickLeaveMoney,jdbcType=VARCHAR}
+    where F_EMPLOYEE_ID = #{fEmployeeId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

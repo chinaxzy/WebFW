@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="todo">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="INTEGER" property="fId" />
+    <result column="F_PARID" jdbcType="INTEGER" property="fParid" />
+    <result column="F_ACTION" jdbcType="INTEGER" property="fAction" />
+    <result column="F_ACTNAME" jdbcType="CHAR" property="fActname" />
+    <result column="F_CLIATTR" jdbcType="CHAR" property="fCliattr" />
+    <result column="F_DTIME" jdbcType="CHAR" property="fDtime" />
+    <result column="F_DEVID" jdbcType="CHAR" property="fDevid" />
+    <result column="F_SOFTID" jdbcType="CHAR" property="fSoftid" />
+    <result column="F_FILE" jdbcType="CHAR" property="fFile" />
+    <result column="F_ZIPFG" jdbcType="CHAR" property="fZipfg" />
+    <result column="F_PARAM" jdbcType="CHAR" property="fParam" />
+    <result column="F_DEFTIME" jdbcType="CHAR" property="fDeftime" />
+    <result column="F_DEFMAN" jdbcType="CHAR" property="fDefman" />
+    <result column="F_TRYTIME" jdbcType="INTEGER" property="fTrytime" />
+    <result column="F_TRYMAX" jdbcType="INTEGER" property="fTrymax" />
+    <result column="F_DONE" jdbcType="CHAR" property="fDone" />
+    <result column="F_RCINFO" jdbcType="CHAR" property="fRcinfo" />
+    <result column="F_DONETIME" jdbcType="CHAR" property="fDonetime" />
+    <result column="F_NEXTTIME" jdbcType="CHAR" property="fNexttime" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="map">
+    <result column="F_JSCRIPT" jdbcType="LONGVARBINARY" property="fJscript" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_PARID, F_ACTION, F_ACTNAME, F_CLIATTR, F_DTIME, F_DEVID, F_SOFTID, F_FILE, 
+    F_ZIPFG, F_PARAM, F_DEFTIME, F_DEFMAN, F_TRYTIME, F_TRYMAX, F_DONE, F_RCINFO, F_DONETIME, 
+    F_NEXTTIME, F_PAD1
+  </sql>
+  <sql id="Blob_Column_List">
+    F_JSCRIPT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_todo
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectTodoList" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+    A.F_ID,
+    A.F_DEVID,
+    A.F_ACTNAME,
+    A.F_SOFTID,
+    A.F_FILE,
+    Z.F_NAME DONE,
+    C.F_NAME WDNAME,
+    D.F_NAME ZHNAME,
+    CASE WHEN A.F_DTIME IS NOT NULL AND A.F_DTIME != ''
+    THEN CONVERT(CONCAT(SUBSTR(A.F_DTIME, 1, 4), '-', SUBSTR(A.F_DTIME, 5, 2), '-', SUBSTR(A.F_DTIME, 7, 2), ' ',
+    SUBSTR(A.F_DTIME, 9, 2), ':', SUBSTR(A.F_DTIME, 11, 2)), CHAR) END   DTIME,
+    CASE WHEN B.F_LASTST IS NOT NULL AND B.F_LASTST != ''
+    THEN CONVERT(CONCAT(SUBSTR(B.F_LASTST, 1, 4), '-', SUBSTR(B.F_LASTST, 5, 2), '-', SUBSTR(B.F_LASTST, 7, 2), ' ',
+    SUBSTR(B.F_LASTST, 9, 2), ':', SUBSTR(B.F_LASTST, 11, 2)), CHAR) END LASTST,
+    CASE WHEN A.F_ACTION = '115' AND A.F_DONE = '1'
+    THEN A.F_ID
+    ELSE '0' END DOWN,
+    CASE WHEN B.F_USESTAT = '0'
+    THEN '启用'
+    WHEN B.F_USESTAT = '2'
+    THEN '停用' END USESTAT
+    FROM t_todo A LEFT OUTER JOIN t_codes Z ON A.F_DONE = Z.F_ID AND Z.F_CATID = 'R2'
+    , t_dev B, t_branch C, t_branch D
+    <where>
+      C.F_DEPT = D.F_ID AND A.F_DEVID = B.F_ID AND B.F_DEPT = C.F_ID AND C.F_DEPTID LIKE '0000%'
+      <if test="fDateStart != null and fDateEnd != null">
+        AND SUBSTR(A.F_DTIME, 1, 8) BETWEEN #{fDateStart} AND #{fDateEnd}
+      </if>
+      <if test="fDevid != null">
+        AND a.F_DEVID = #{fDevid}
+      </if>
+      <if test="fAction != null">
+        AND a.F_ACTION = #{fAction}
+      </if>
+      <if test="fDone != null">
+        AND a.F_DONE = #{fDone}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectMaxId" parameterType="map" resultType="String">
+    SELECT MAX(F_ID) MAXID FROM t_todo
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_todo
+    where F_ID = #{fId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_todo (F_ID, F_PARID, F_ACTION, 
+      F_ACTNAME, F_CLIATTR, F_DTIME, 
+      F_DEVID, F_SOFTID, F_FILE, F_ZIPFG, 
+      F_PARAM, F_DEFTIME, F_DEFMAN, F_TRYTIME, 
+      F_TRYMAX, F_DONE, F_RCINFO, 
+      F_DONETIME, F_NEXTTIME, F_PAD1, 
+      F_JSCRIPT)
+    values (#{fId,jdbcType=INTEGER}, #{fParid,jdbcType=INTEGER}, #{fAction,jdbcType=INTEGER}, 
+      #{fActname,jdbcType=CHAR}, #{fCliattr,jdbcType=CHAR}, #{fDtime,jdbcType=CHAR}, 
+      #{fDevid,jdbcType=CHAR}, #{fSoftid,jdbcType=CHAR}, #{fFile,jdbcType=CHAR}, #{fZipfg,jdbcType=CHAR}, 
+      #{fParam,jdbcType=CHAR}, #{fDeftime,jdbcType=CHAR}, #{fDefman,jdbcType=CHAR}, #{fTrytime,jdbcType=INTEGER}, 
+      #{fTrymax,jdbcType=INTEGER}, #{fDone,jdbcType=CHAR}, #{fRcinfo,jdbcType=CHAR}, 
+      #{fDonetime,jdbcType=CHAR}, #{fNexttime,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR}, 
+      #{fJscript,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_todo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fParid != null">
+        F_PARID,
+      </if>
+      <if test="fAction != null">
+        F_ACTION,
+      </if>
+      <if test="fActname != null">
+        F_ACTNAME,
+      </if>
+      <if test="fCliattr != null">
+        F_CLIATTR,
+      </if>
+      <if test="fDtime != null">
+        F_DTIME,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fSoftid != null">
+        F_SOFTID,
+      </if>
+      <if test="fFile != null">
+        F_FILE,
+      </if>
+      <if test="fZipfg != null">
+        F_ZIPFG,
+      </if>
+      <if test="fParam != null">
+        F_PARAM,
+      </if>
+      <if test="fDeftime != null">
+        F_DEFTIME,
+      </if>
+      <if test="fDefman != null">
+        F_DEFMAN,
+      </if>
+      <if test="fTrytime != null">
+        F_TRYTIME,
+      </if>
+      <if test="fTrymax != null">
+        F_TRYMAX,
+      </if>
+      <if test="fDone != null">
+        F_DONE,
+      </if>
+      <if test="fRcinfo != null">
+        F_RCINFO,
+      </if>
+      <if test="fDonetime != null">
+        F_DONETIME,
+      </if>
+        F_NEXTTIME,
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fJscript != null">
+        F_JSCRIPT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=INTEGER},
+      </if>
+      <if test="fParid != null">
+        #{fParid,jdbcType=INTEGER},
+      </if>
+      <if test="fAction != null">
+        #{fAction,jdbcType=INTEGER},
+      </if>
+      <if test="fActname != null">
+        #{fActname,jdbcType=CHAR},
+      </if>
+      <if test="fCliattr != null">
+        #{fCliattr,jdbcType=CHAR},
+      </if>
+      <if test="fDtime != null">
+        #{fDtime,jdbcType=CHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fSoftid != null">
+        #{fSoftid,jdbcType=CHAR},
+      </if>
+      <if test="fFile != null">
+        #{fFile,jdbcType=CHAR},
+      </if>
+      <if test="fZipfg != null">
+        #{fZipfg,jdbcType=CHAR},
+      </if>
+      <if test="fParam != null">
+        #{fParam,jdbcType=CHAR},
+      </if>
+      <if test="fDeftime != null">
+        #{fDeftime,jdbcType=CHAR},
+      </if>
+      <if test="fDefman != null">
+        #{fDefman,jdbcType=CHAR},
+      </if>
+      <if test="fTrytime != null">
+        #{fTrytime,jdbcType=INTEGER},
+      </if>
+      <if test="fTrymax != null">
+        #{fTrymax,jdbcType=INTEGER},
+      </if>
+      <if test="fDone != null">
+        #{fDone,jdbcType=CHAR},
+      </if>
+      <if test="fRcinfo != null">
+        #{fRcinfo,jdbcType=CHAR},
+      </if>
+      <if test="fDonetime != null">
+        #{fDonetime,jdbcType=CHAR},
+      </if>
+        #{fDtime,jdbcType=CHAR},
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fJscript != null">
+        #{fJscript,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_todo
+    <set>
+      <if test="fParid != null">
+        F_PARID = #{fParid,jdbcType=INTEGER},
+      </if>
+      <if test="fAction != null">
+        F_ACTION = #{fAction,jdbcType=INTEGER},
+      </if>
+      <if test="fActname != null">
+        F_ACTNAME = #{fActname,jdbcType=CHAR},
+      </if>
+      <if test="fCliattr != null">
+        F_CLIATTR = #{fCliattr,jdbcType=CHAR},
+      </if>
+      <if test="fDtime != null">
+        F_DTIME = #{fDtime,jdbcType=CHAR},
+      </if>
+      <if test="fDevid != null">
+        F_DEVID = #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fSoftid != null">
+        F_SOFTID = #{fSoftid,jdbcType=CHAR},
+      </if>
+      <if test="fFile != null">
+        F_FILE = #{fFile,jdbcType=CHAR},
+      </if>
+      <if test="fZipfg != null">
+        F_ZIPFG = #{fZipfg,jdbcType=CHAR},
+      </if>
+      <if test="fParam != null">
+        F_PARAM = #{fParam,jdbcType=CHAR},
+      </if>
+      <if test="fDeftime != null">
+        F_DEFTIME = #{fDeftime,jdbcType=CHAR},
+      </if>
+      <if test="fDefman != null">
+        F_DEFMAN = #{fDefman,jdbcType=CHAR},
+      </if>
+      <if test="fTrytime != null">
+        F_TRYTIME = #{fTrytime,jdbcType=INTEGER},
+      </if>
+      <if test="fTrymax != null">
+        F_TRYMAX = #{fTrymax,jdbcType=INTEGER},
+      </if>
+      <if test="fDone != null">
+        F_DONE = #{fDone,jdbcType=CHAR},
+      </if>
+      <if test="fRcinfo != null">
+        F_RCINFO = #{fRcinfo,jdbcType=CHAR},
+      </if>
+      <if test="fDonetime != null">
+        F_DONETIME = #{fDonetime,jdbcType=CHAR},
+      </if>
+      <if test="fNexttime != null">
+        F_NEXTTIME = #{fNexttime,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fJscript != null">
+        F_JSCRIPT = #{fJscript,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="map">
+    update t_todo
+    set F_PARID = #{fParid,jdbcType=INTEGER},
+      F_ACTION = #{fAction,jdbcType=INTEGER},
+      F_ACTNAME = #{fActname,jdbcType=CHAR},
+      F_CLIATTR = #{fCliattr,jdbcType=CHAR},
+      F_DTIME = #{fDtime,jdbcType=CHAR},
+      F_DEVID = #{fDevid,jdbcType=CHAR},
+      F_SOFTID = #{fSoftid,jdbcType=CHAR},
+      F_FILE = #{fFile,jdbcType=CHAR},
+      F_ZIPFG = #{fZipfg,jdbcType=CHAR},
+      F_PARAM = #{fParam,jdbcType=CHAR},
+      F_DEFTIME = #{fDeftime,jdbcType=CHAR},
+      F_DEFMAN = #{fDefman,jdbcType=CHAR},
+      F_TRYTIME = #{fTrytime,jdbcType=INTEGER},
+      F_TRYMAX = #{fTrymax,jdbcType=INTEGER},
+      F_DONE = #{fDone,jdbcType=CHAR},
+      F_RCINFO = #{fRcinfo,jdbcType=CHAR},
+      F_DONETIME = #{fDonetime,jdbcType=CHAR},
+      F_NEXTTIME = #{fNexttime,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR},
+      F_JSCRIPT = #{fJscript,jdbcType=LONGVARBINARY}
+    where F_ID = #{fId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_todo
+    set F_PARID = #{fParid,jdbcType=INTEGER},
+      F_ACTION = #{fAction,jdbcType=INTEGER},
+      F_ACTNAME = #{fActname,jdbcType=CHAR},
+      F_CLIATTR = #{fCliattr,jdbcType=CHAR},
+      F_DTIME = #{fDtime,jdbcType=CHAR},
+      F_DEVID = #{fDevid,jdbcType=CHAR},
+      F_SOFTID = #{fSoftid,jdbcType=CHAR},
+      F_FILE = #{fFile,jdbcType=CHAR},
+      F_ZIPFG = #{fZipfg,jdbcType=CHAR},
+      F_PARAM = #{fParam,jdbcType=CHAR},
+      F_DEFTIME = #{fDeftime,jdbcType=CHAR},
+      F_DEFMAN = #{fDefman,jdbcType=CHAR},
+      F_TRYTIME = #{fTrytime,jdbcType=INTEGER},
+      F_TRYMAX = #{fTrymax,jdbcType=INTEGER},
+      F_DONE = #{fDone,jdbcType=CHAR},
+      F_RCINFO = #{fRcinfo,jdbcType=CHAR},
+      F_DONETIME = #{fDonetime,jdbcType=CHAR},
+      F_NEXTTIME = #{fNexttime,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=INTEGER}
+  </update>
+
+</mapper>

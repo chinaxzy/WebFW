@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="operators">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_LEVEL" jdbcType="CHAR" property="fLevel" />
+    <result column="F_DEPT" jdbcType="CHAR" property="fDept" />
+    <result column="F_SEX" jdbcType="CHAR" property="fSex" />
+    <result column="F_TEL" jdbcType="CHAR" property="fTel" />
+    <result column="F_MOBILE" jdbcType="CHAR" property="fMobile" />
+    <result column="F_BP" jdbcType="CHAR" property="fBp" />
+    <result column="F_EMAIL" jdbcType="CHAR" property="fEmail" />
+    <result column="F_BLTO" jdbcType="CHAR" property="fBlto" />
+    <result column="F_BLFLAG" jdbcType="CHAR" property="fBlflag" />
+    <result column="F_RECVER" jdbcType="CHAR" property="fRecver" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+    <result column="F_PAD2" jdbcType="CHAR" property="fPad2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_LEVEL, F_DEPT, F_SEX, F_TEL, F_MOBILE, F_BP, F_EMAIL, F_BLTO, F_BLFLAG, 
+    F_RECVER, F_PAD1, F_PAD2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_operators
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_operators
+    where F_ID = #{fId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_operators (F_ID, F_NAME, F_LEVEL, F_DEPT, 
+      F_SEX, F_TEL, F_MOBILE, F_BP, 
+      F_EMAIL, F_BLTO, F_BLFLAG, F_RECVER, 
+      F_PAD1, F_PAD2)
+    values (#{fId,jdbcType=CHAR}, #{fName,jdbcType=CHAR}, #{fLevel,jdbcType=CHAR}, #{fDept,jdbcType=CHAR}, 
+      #{fSex,jdbcType=CHAR}, #{fTel,jdbcType=CHAR}, #{fMobile,jdbcType=CHAR}, #{fBp,jdbcType=CHAR}, 
+      #{fEmail,jdbcType=CHAR}, #{fBlto,jdbcType=CHAR}, #{fBlflag,jdbcType=CHAR}, #{fRecver,jdbcType=CHAR}, 
+      #{fPad1,jdbcType=CHAR}, #{fPad2,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_operators
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fSex != null">
+        F_SEX,
+      </if>
+      <if test="fTel != null">
+        F_TEL,
+      </if>
+      <if test="fMobile != null">
+        F_MOBILE,
+      </if>
+      <if test="fBp != null">
+        F_BP,
+      </if>
+      <if test="fEmail != null">
+        F_EMAIL,
+      </if>
+      <if test="fBlto != null">
+        F_BLTO,
+      </if>
+      <if test="fBlflag != null">
+        F_BLFLAG,
+      </if>
+      <if test="fRecver != null">
+        F_RECVER,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        #{fLevel,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fSex != null">
+        #{fSex,jdbcType=CHAR},
+      </if>
+      <if test="fTel != null">
+        #{fTel,jdbcType=CHAR},
+      </if>
+      <if test="fMobile != null">
+        #{fMobile,jdbcType=CHAR},
+      </if>
+      <if test="fBp != null">
+        #{fBp,jdbcType=CHAR},
+      </if>
+      <if test="fEmail != null">
+        #{fEmail,jdbcType=CHAR},
+      </if>
+      <if test="fBlto != null">
+        #{fBlto,jdbcType=CHAR},
+      </if>
+      <if test="fBlflag != null">
+        #{fBlflag,jdbcType=CHAR},
+      </if>
+      <if test="fRecver != null">
+        #{fRecver,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fPad2 != null">
+        #{fPad2,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_operators
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL = #{fLevel,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fSex != null">
+        F_SEX = #{fSex,jdbcType=CHAR},
+      </if>
+      <if test="fTel != null">
+        F_TEL = #{fTel,jdbcType=CHAR},
+      </if>
+      <if test="fMobile != null">
+        F_MOBILE = #{fMobile,jdbcType=CHAR},
+      </if>
+      <if test="fBp != null">
+        F_BP = #{fBp,jdbcType=CHAR},
+      </if>
+      <if test="fEmail != null">
+        F_EMAIL = #{fEmail,jdbcType=CHAR},
+      </if>
+      <if test="fBlto != null">
+        F_BLTO = #{fBlto,jdbcType=CHAR},
+      </if>
+      <if test="fBlflag != null">
+        F_BLFLAG = #{fBlflag,jdbcType=CHAR},
+      </if>
+      <if test="fRecver != null">
+        F_RECVER = #{fRecver,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2 = #{fPad2,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_operators
+    set F_NAME = #{fName,jdbcType=CHAR},
+      F_LEVEL = #{fLevel,jdbcType=CHAR},
+      F_DEPT = #{fDept,jdbcType=CHAR},
+      F_SEX = #{fSex,jdbcType=CHAR},
+      F_TEL = #{fTel,jdbcType=CHAR},
+      F_MOBILE = #{fMobile,jdbcType=CHAR},
+      F_BP = #{fBp,jdbcType=CHAR},
+      F_EMAIL = #{fEmail,jdbcType=CHAR},
+      F_BLTO = #{fBlto,jdbcType=CHAR},
+      F_BLFLAG = #{fBlflag,jdbcType=CHAR},
+      F_RECVER = #{fRecver,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR},
+      F_PAD2 = #{fPad2,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+
+</mapper>

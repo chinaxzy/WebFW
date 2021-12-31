@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devmenu">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_MENU" jdbcType="VARCHAR" property="fMenu" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_DEVID, F_MENU, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_devmenu
+    <where>
+      <if test="fDevid != null">
+        F_DEVID = #{fDevid,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_devmenu
+    where F_DEVID = #{fDevid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_devmenu (F_DEVID, F_MENU, F_PAD1
+      )
+    values (#{fDevid,jdbcType=VARCHAR}, #{fMenu,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_devmenu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fMenu != null">
+        F_MENU,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=VARCHAR},
+      </if>
+      <if test="fMenu != null">
+        #{fMenu,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_devmenu
+    <set>
+      <if test="fMenu != null">
+        F_MENU = #{fMenu,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_DEVID = #{fDevid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_devmenu
+    set F_MENU = #{fMenu,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_DEVID = #{fDevid,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spcact">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_TIME" jdbcType="VARCHAR" property="fTime" />
+    <result column="F_EVID" jdbcType="VARCHAR" property="fEvid" />
+    <result column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_ASSERTS" jdbcType="VARCHAR" property="fAsserts" />
+    <result column="F_LOGVER" jdbcType="INTEGER" property="fLogver" />
+    <result column="F_ACNO" jdbcType="VARCHAR" property="fAcno" />
+    <result column="F_AMT" jdbcType="DECIMAL" property="fAmt" />
+    <result column="F_RETNO" jdbcType="VARCHAR" property="fRetno" />
+    <result column="F_RESULT" jdbcType="VARCHAR" property="fResult" />
+    <result column="F_HDERR" jdbcType="VARCHAR" property="fHderr" />
+    <result column="F_HOSTLS" jdbcType="VARCHAR" property="fHostls" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+
+    <result column="WDNAME" jdbcType="VARCHAR" property="fWdname" />
+    <result column="ZHNAME" jdbcType="VARCHAR" property="fZhname" />
+    <result column="FHNAME" jdbcType="VARCHAR" property="fFhname" />
+    <result column="RESULTNAME" jdbcType="VARCHAR" property="fResultname" />
+    <result column="F_DATE1" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_TIME1" jdbcType="VARCHAR" property="fTime" />
+    <result column="ZHID" jdbcType="VARCHAR" property="fZhid" />
+    <result column="WDID" jdbcType="VARCHAR" property="fWdid" />
+    <result column="F_INSTADDR" jdbcType="VARCHAR" property="fInstaddr" />
+
+  </resultMap>
+  <select id="selectRetainCardRecord" parameterType="map" resultMap="BaseResultMap">
+    SELECT D.F_NAME FHNAME,C.F_ID ZHID,B.F_ID WDID,C.F_NAME ZHNAME,B.F_NAME WDNAME,E.F_DEVID,E.F_ACNO,E.F_RESULT,F.F_NAME RESULTNAME,A.F_INSTADDR,E.F_HOSTLS,
+    CASE WHEN E.F_DATE IS NOT NULL AND E.F_DATE !='' THEN CONVERT(CONCAT(SUBSTR(E.F_DATE,1,4),'-',SUBSTR(E.F_DATE,5,2),'-',SUBSTR(E.F_DATE,7,2)),CHAR) END AS F_DATE1,
+    CASE WHEN E.F_TIME IS NOT NULL AND E.F_TIME !='' THEN CONVERT(CONCAT(SUBSTR(E.F_TIME,1,2),':',SUBSTR(E.F_TIME,3,2)),CHAR) END AS F_TIME1
+    FROM t_dev A
+
+    LEFT JOIN t_branch B ON A.F_DEPT=B.F_ID
+    LEFT JOIN t_branch C ON B.F_DEPT=C.F_ID
+    LEFT JOIN t_branch D ON C.F_DEPT=D.F_ID
+    LEFT JOIN t_spcact E ON E.F_DEVID=A.F_ID
+    LEFT OUTER JOIN t_codes F ON E.F_RESULT = F.F_ID AND F.F_CATID = 'T2'
+    <where>
+      <if test="fDateStart != null and fDateEnd != null">
+        E.F_DATE &gt;=#{fDateStart} AND E.F_DATE &lt;= #{fDateEnd}
+      </if>
+      <if test="deptid != null">
+        AND B.F_DEPTID LIKE concat(#{deptid},'%')
+      </if>
+      <if test="fEvid == null">
+        AND E.F_EVID='9901'
+      </if>
+      <if test="fEvid != null">
+        AND E.F_EVID=#{fEvid}
+      </if>
+      <if test="fDevid != null">
+        AND E.F_DEVID=#{fDevid}
+      </if>
+      <if test="fIdcard != null">
+        AND E.F_ACNO LIKE concat(#{fIdcard},'%')
+      </if>
+    </where>
+    ORDER BY E.F_DATE DESC,E.F_TIME DESC,C.F_ID,B.F_ID,E.F_DEVID
+  </select>
+</mapper>

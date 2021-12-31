@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seatcheck">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_SEATID" jdbcType="VARCHAR" property="fSeatid" />
+    <result column="F_INTIME" jdbcType="VARCHAR" property="fIntime" />
+    <result column="F_OUTTIME" jdbcType="VARCHAR" property="fOuttime" />
+    <result column="F_DEVIP" jdbcType="VARCHAR" property="fDevip" />
+    <result column="F_LEAVECOUNT" jdbcType="VARCHAR" property="fLeavecount" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_seatcheck (F_ID, F_SEATID, F_INTIME, 
+      F_OUTTIME, F_DEVIP, F_LEAVECOUNT
+      )
+    values (#{fId,jdbcType=VARCHAR}, #{fSeatid,jdbcType=VARCHAR}, #{fIntime,jdbcType=VARCHAR}, 
+      #{fOuttime,jdbcType=VARCHAR}, #{fDevip,jdbcType=VARCHAR}, #{fLeavecount,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_seatcheck
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fSeatid != null">
+        F_SEATID,
+      </if>
+      <if test="fIntime != null">
+        F_INTIME,
+      </if>
+      <if test="fOuttime != null">
+        F_OUTTIME,
+      </if>
+      <if test="fDevip != null">
+        F_DEVIP,
+      </if>
+      <if test="fLeavecount != null">
+        F_LEAVECOUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fSeatid != null">
+        #{fSeatid,jdbcType=VARCHAR},
+      </if>
+      <if test="fIntime != null">
+        #{fIntime,jdbcType=VARCHAR},
+      </if>
+      <if test="fOuttime != null">
+        #{fOuttime,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevip != null">
+        #{fDevip,jdbcType=VARCHAR},
+      </if>
+      <if test="fLeavecount != null">
+        #{fLeavecount,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

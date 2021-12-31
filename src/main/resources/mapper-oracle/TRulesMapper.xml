@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rules">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="map">
+    <result column="F_CONT" jdbcType="LONGVARBINARY" property="fCont" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_PAD1
+  </sql>
+  <sql id="Blob_Column_List">
+    F_CONT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_rules
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_rules
+    where F_ID = #{fId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_rules (F_ID, F_NAME, F_PAD1, F_CONT
+      )
+    values (#{fId,jdbcType=CHAR}, #{fName,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR}, #{fCont,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_rules
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fCont != null">
+        F_CONT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fCont != null">
+        #{fCont,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_rules
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fCont != null">
+        F_CONT = #{fCont,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="map">
+    update t_rules
+    set F_NAME = #{fName,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR},
+      F_CONT = #{fCont,jdbcType=LONGVARBINARY}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_rules
+    set F_NAME = #{fName,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+
+</mapper>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devinfo">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="F_DEVIP" jdbcType="VARCHAR" property="fDevip" />
+    <result column="F_ORGID" jdbcType="VARCHAR" property="fOrgid" />
+    <result column="F_ORGALIAS" jdbcType="VARCHAR" property="fOrgalias" />
+    <result column="F_MainMenuRight" jdbcType="VARCHAR" property="fMainmenuright" />
+    <result column="F_VIDEOIP" jdbcType="VARCHAR" property="fVideoip" />
+    <result column="F_PIP" jdbcType="VARCHAR" property="fPip" />
+    <result column="F_PPORT" jdbcType="VARCHAR" property="fPport" />
+    <result column="F_PFTPUSER" jdbcType="VARCHAR" property="fPftpuser" />
+    <result column="F_PFTPPWD" jdbcType="VARCHAR" property="fPftppwd" />
+    <result column="F_PFTPPATH" jdbcType="VARCHAR" property="fPftppath" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+    <result column="F_PAD2" jdbcType="VARCHAR" property="fPad2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, F_DEVIP, F_ORGID, F_ORGALIAS, F_MainMenuRight, F_VIDEOIP, F_PIP, F_PPORT, F_PFTPUSER, 
+    F_PFTPPWD, F_PFTPPATH, F_PAD1, F_PAD2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_devinfo
+    <where>
+      <if test="id != null">
+        ID = #{id,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_devinfo
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_devinfo (ID, F_DEVIP, F_ORGID, 
+      F_ORGALIAS, F_MainMenuRight, F_VIDEOIP, 
+      F_PIP, F_PPORT, F_PFTPUSER, 
+      F_PFTPPWD, F_PFTPPATH, F_PAD1, 
+      F_PAD2)
+    values (#{id,jdbcType=INTEGER}, #{fDevip,jdbcType=VARCHAR}, #{fOrgid,jdbcType=VARCHAR}, 
+      #{fOrgalias,jdbcType=VARCHAR}, #{fMainmenuright,jdbcType=VARCHAR}, #{fVideoip,jdbcType=VARCHAR}, 
+      #{fPip,jdbcType=VARCHAR}, #{fPport,jdbcType=VARCHAR}, #{fPftpuser,jdbcType=VARCHAR}, 
+      #{fPftppwd,jdbcType=VARCHAR}, #{fPftppath,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}, 
+      #{fPad2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_devinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="fDevip != null">
+        F_DEVIP,
+      </if>
+      <if test="fOrgid != null">
+        F_ORGID,
+      </if>
+      <if test="fOrgalias != null">
+        F_ORGALIAS,
+      </if>
+      <if test="fMainmenuright != null">
+        F_MainMenuRight,
+      </if>
+      <if test="fVideoip != null">
+        F_VIDEOIP,
+      </if>
+      <if test="fPip != null">
+        F_PIP,
+      </if>
+      <if test="fPport != null">
+        F_PPORT,
+      </if>
+      <if test="fPftpuser != null">
+        F_PFTPUSER,
+      </if>
+      <if test="fPftppwd != null">
+        F_PFTPPWD,
+      </if>
+      <if test="fPftppath != null">
+        F_PFTPPATH,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fDevip != null">
+        #{fDevip,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrgid != null">
+        #{fOrgid,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrgalias != null">
+        #{fOrgalias,jdbcType=VARCHAR},
+      </if>
+      <if test="fMainmenuright != null">
+        #{fMainmenuright,jdbcType=VARCHAR},
+      </if>
+      <if test="fVideoip != null">
+        #{fVideoip,jdbcType=VARCHAR},
+      </if>
+      <if test="fPip != null">
+        #{fPip,jdbcType=VARCHAR},
+      </if>
+      <if test="fPport != null">
+        #{fPport,jdbcType=VARCHAR},
+      </if>
+      <if test="fPftpuser != null">
+        #{fPftpuser,jdbcType=VARCHAR},
+      </if>
+      <if test="fPftppwd != null">
+        #{fPftppwd,jdbcType=VARCHAR},
+      </if>
+      <if test="fPftppath != null">
+        #{fPftppath,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad2 != null">
+        #{fPad2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_devinfo
+    <set>
+      <if test="fDevip != null">
+        F_DEVIP = #{fDevip,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrgid != null">
+        F_ORGID = #{fOrgid,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrgalias != null">
+        F_ORGALIAS = #{fOrgalias,jdbcType=VARCHAR},
+      </if>
+      <if test="fMainmenuright != null">
+        F_MainMenuRight = #{fMainmenuright,jdbcType=VARCHAR},
+      </if>
+      <if test="fVideoip != null">
+        F_VIDEOIP = #{fVideoip,jdbcType=VARCHAR},
+      </if>
+      <if test="fPip != null">
+        F_PIP = #{fPip,jdbcType=VARCHAR},
+      </if>
+      <if test="fPport != null">
+        F_PPORT = #{fPport,jdbcType=VARCHAR},
+      </if>
+      <if test="fPftpuser != null">
+        F_PFTPUSER = #{fPftpuser,jdbcType=VARCHAR},
+      </if>
+      <if test="fPftppwd != null">
+        F_PFTPPWD = #{fPftppwd,jdbcType=VARCHAR},
+      </if>
+      <if test="fPftppath != null">
+        F_PFTPPATH = #{fPftppath,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2 = #{fPad2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_devinfo
+    set F_DEVIP = #{fDevip,jdbcType=VARCHAR},
+      F_ORGID = #{fOrgid,jdbcType=VARCHAR},
+      F_ORGALIAS = #{fOrgalias,jdbcType=VARCHAR},
+      F_MainMenuRight = #{fMainmenuright,jdbcType=VARCHAR},
+      F_VIDEOIP = #{fVideoip,jdbcType=VARCHAR},
+      F_PIP = #{fPip,jdbcType=VARCHAR},
+      F_PPORT = #{fPport,jdbcType=VARCHAR},
+      F_PFTPUSER = #{fPftpuser,jdbcType=VARCHAR},
+      F_PFTPPWD = #{fPftppwd,jdbcType=VARCHAR},
+      F_PFTPPATH = #{fPftppath,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      F_PAD2 = #{fPad2,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

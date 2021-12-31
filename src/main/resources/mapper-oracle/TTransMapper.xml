@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="trans">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DATE" jdbcType="CHAR" property="fDate" />
+    <result column="F_TIME" jdbcType="CHAR" property="fTime" />
+    <result column="F_TRCD" jdbcType="CHAR" property="fTrcd" />
+    <result column="F_ACNO" jdbcType="CHAR" property="fAcno" />
+    <result column="F_ACTP" jdbcType="CHAR" property="fActp" />
+    <result column="F_CZNO" jdbcType="CHAR" property="fCzno" />
+    <result column="F_CYTP" jdbcType="CHAR" property="fCytp" />
+    <result column="F_TRAM" jdbcType="DOUBLE" property="fTram" />
+    <result column="F_FEE" jdbcType="DOUBLE" property="fFee" />
+    <result column="F_DEVID" jdbcType="CHAR" property="fDevid" />
+    <result column="F_ASSERTS" jdbcType="CHAR" property="fAsserts" />
+    <result column="F_DEPT" jdbcType="CHAR" property="fDept" />
+    <result column="F_DEPT1" jdbcType="CHAR" property="fDept1" />
+    <result column="F_DEPT3" jdbcType="CHAR" property="fDept3" />
+    <result column="F_LOGVER" jdbcType="INTEGER" property="fLogver" />
+    <result column="F_DEVLS" jdbcType="CHAR" property="fDevls" />
+    <result column="F_ACNO2" jdbcType="CHAR" property="fAcno2" />
+    <result column="F_BKNO" jdbcType="CHAR" property="fBkno" />
+    <result column="F_HOSTLS" jdbcType="CHAR" property="fHostls" />
+    <result column="F_VOLS" jdbcType="CHAR" property="fVols" />
+    <result column="F_STCD" jdbcType="CHAR" property="fStcd" />
+    <result column="F_FLAG1" jdbcType="CHAR" property="fFlag1" />
+    <result column="F_FLAG2" jdbcType="CHAR" property="fFlag2" />
+    <result column="F_FLAG3" jdbcType="CHAR" property="fFlag3" />
+    <result column="F_FLAG4" jdbcType="CHAR" property="fFlag4" />
+    <result column="F_DSF" jdbcType="CHAR" property="fDsf" />
+    <result column="F_VEROK" jdbcType="CHAR" property="fVerok" />
+    <result column="F_RETNO" jdbcType="CHAR" property="fRetno" />
+    <result column="F_ABIS" jdbcType="CHAR" property="fAbis" />
+    <result column="F_PCTIME" jdbcType="CHAR" property="fPctime" />
+    <result column="F_DATA" jdbcType="CHAR" property="fData" />
+    <result column="F_AUTH" jdbcType="CHAR" property="fAuth" />
+    <result column="F_VREASON" jdbcType="CHAR" property="fVreason" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+    <result column="F_TRAM2" jdbcType="DECIMAL" property="fTram2" />
+    <result column="F_MEMO" jdbcType="CHAR" property="fMemo" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_trans (F_DATE, F_TIME, F_TRCD, F_ACNO, 
+      F_ACTP, F_CZNO, F_CYTP, F_TRAM, 
+      F_FEE, F_DEVID, F_ASSERTS, F_DEPT, 
+      F_DEPT1, F_DEPT3, F_LOGVER, 
+      F_DEVLS, F_ACNO2, F_BKNO, F_HOSTLS, 
+      F_VOLS, F_STCD, F_FLAG1, F_FLAG2, 
+      F_FLAG3, F_FLAG4, F_DSF, F_VEROK, 
+      F_RETNO, F_ABIS, F_PCTIME, F_DATA, 
+      F_AUTH, F_VREASON, F_PAD1, F_TRAM2, 
+      F_MEMO)
+    values (#{fDate,jdbcType=CHAR}, #{fTime,jdbcType=CHAR}, #{fTrcd,jdbcType=CHAR}, #{fAcno,jdbcType=CHAR}, 
+      #{fActp,jdbcType=CHAR}, #{fCzno,jdbcType=CHAR}, #{fCytp,jdbcType=CHAR}, #{fTram,jdbcType=DOUBLE}, 
+      #{fFee,jdbcType=DOUBLE}, #{fDevid,jdbcType=CHAR}, #{fAsserts,jdbcType=CHAR}, #{fDept,jdbcType=CHAR}, 
+      #{fDept1,jdbcType=CHAR}, #{fDept3,jdbcType=CHAR}, #{fLogver,jdbcType=INTEGER}, 
+      #{fDevls,jdbcType=CHAR}, #{fAcno2,jdbcType=CHAR}, #{fBkno,jdbcType=CHAR}, #{fHostls,jdbcType=CHAR}, 
+      #{fVols,jdbcType=CHAR}, #{fStcd,jdbcType=CHAR}, #{fFlag1,jdbcType=CHAR}, #{fFlag2,jdbcType=CHAR}, 
+      #{fFlag3,jdbcType=CHAR}, #{fFlag4,jdbcType=CHAR}, #{fDsf,jdbcType=CHAR}, #{fVerok,jdbcType=CHAR}, 
+      #{fRetno,jdbcType=CHAR}, #{fAbis,jdbcType=CHAR}, #{fPctime,jdbcType=CHAR}, #{fData,jdbcType=CHAR}, 
+      #{fAuth,jdbcType=CHAR}, #{fVreason,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR}, #{fTram2,jdbcType=DECIMAL}, 
+      #{fMemo,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_trans
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fTrcd != null">
+        F_TRCD,
+      </if>
+      <if test="fAcno != null">
+        F_ACNO,
+      </if>
+      <if test="fActp != null">
+        F_ACTP,
+      </if>
+      <if test="fCzno != null">
+        F_CZNO,
+      </if>
+      <if test="fCytp != null">
+        F_CYTP,
+      </if>
+      <if test="fTram != null">
+        F_TRAM,
+      </if>
+      <if test="fFee != null">
+        F_FEE,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fAsserts != null">
+        F_ASSERTS,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fDept1 != null">
+        F_DEPT1,
+      </if>
+      <if test="fDept3 != null">
+        F_DEPT3,
+      </if>
+      <if test="fLogver != null">
+        F_LOGVER,
+      </if>
+      <if test="fDevls != null">
+        F_DEVLS,
+      </if>
+      <if test="fAcno2 != null">
+        F_ACNO2,
+      </if>
+      <if test="fBkno != null">
+        F_BKNO,
+      </if>
+      <if test="fHostls != null">
+        F_HOSTLS,
+      </if>
+      <if test="fVols != null">
+        F_VOLS,
+      </if>
+      <if test="fStcd != null">
+        F_STCD,
+      </if>
+      <if test="fFlag1 != null">
+        F_FLAG1,
+      </if>
+      <if test="fFlag2 != null">
+        F_FLAG2,
+      </if>
+      <if test="fFlag3 != null">
+        F_FLAG3,
+      </if>
+      <if test="fFlag4 != null">
+        F_FLAG4,
+      </if>
+      <if test="fDsf != null">
+        F_DSF,
+      </if>
+      <if test="fVerok != null">
+        F_VEROK,
+      </if>
+      <if test="fRetno != null">
+        F_RETNO,
+      </if>
+      <if test="fAbis != null">
+        F_ABIS,
+      </if>
+      <if test="fPctime != null">
+        F_PCTIME,
+      </if>
+      <if test="fData != null">
+        F_DATA,
+      </if>
+      <if test="fAuth != null">
+        F_AUTH,
+      </if>
+      <if test="fVreason != null">
+        F_VREASON,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fTram2 != null">
+        F_TRAM2,
+      </if>
+      <if test="fMemo != null">
+        F_MEMO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        #{fDate,jdbcType=CHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=CHAR},
+      </if>
+      <if test="fTrcd != null">
+        #{fTrcd,jdbcType=CHAR},
+      </if>
+      <if test="fAcno != null">
+        #{fAcno,jdbcType=CHAR},
+      </if>
+      <if test="fActp != null">
+        #{fActp,jdbcType=CHAR},
+      </if>
+      <if test="fCzno != null">
+        #{fCzno,jdbcType=CHAR},
+      </if>
+      <if test="fCytp != null">
+        #{fCytp,jdbcType=CHAR},
+      </if>
+      <if test="fTram != null">
+        #{fTram,jdbcType=DOUBLE},
+      </if>
+      <if test="fFee != null">
+        #{fFee,jdbcType=DOUBLE},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fAsserts != null">
+        #{fAsserts,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fDept1 != null">
+        #{fDept1,jdbcType=CHAR},
+      </if>
+      <if test="fDept3 != null">
+        #{fDept3,jdbcType=CHAR},
+      </if>
+      <if test="fLogver != null">
+        #{fLogver,jdbcType=INTEGER},
+      </if>
+      <if test="fDevls != null">
+        #{fDevls,jdbcType=CHAR},
+      </if>
+      <if test="fAcno2 != null">
+        #{fAcno2,jdbcType=CHAR},
+      </if>
+      <if test="fBkno != null">
+        #{fBkno,jdbcType=CHAR},
+      </if>
+      <if test="fHostls != null">
+        #{fHostls,jdbcType=CHAR},
+      </if>
+      <if test="fVols != null">
+        #{fVols,jdbcType=CHAR},
+      </if>
+      <if test="fStcd != null">
+        #{fStcd,jdbcType=CHAR},
+      </if>
+      <if test="fFlag1 != null">
+        #{fFlag1,jdbcType=CHAR},
+      </if>
+      <if test="fFlag2 != null">
+        #{fFlag2,jdbcType=CHAR},
+      </if>
+      <if test="fFlag3 != null">
+        #{fFlag3,jdbcType=CHAR},
+      </if>
+      <if test="fFlag4 != null">
+        #{fFlag4,jdbcType=CHAR},
+      </if>
+      <if test="fDsf != null">
+        #{fDsf,jdbcType=CHAR},
+      </if>
+      <if test="fVerok != null">
+        #{fVerok,jdbcType=CHAR},
+      </if>
+      <if test="fRetno != null">
+        #{fRetno,jdbcType=CHAR},
+      </if>
+      <if test="fAbis != null">
+        #{fAbis,jdbcType=CHAR},
+      </if>
+      <if test="fPctime != null">
+        #{fPctime,jdbcType=CHAR},
+      </if>
+      <if test="fData != null">
+        #{fData,jdbcType=CHAR},
+      </if>
+      <if test="fAuth != null">
+        #{fAuth,jdbcType=CHAR},
+      </if>
+      <if test="fVreason != null">
+        #{fVreason,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fTram2 != null">
+        #{fTram2,jdbcType=DECIMAL},
+      </if>
+      <if test="fMemo != null">
+        #{fMemo,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

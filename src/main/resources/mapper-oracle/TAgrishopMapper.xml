@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="agrishop">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_SHNAME" jdbcType="CHAR" property="fShname" />
+    <result column="F_ENNAME" jdbcType="CHAR" property="fEnname" />
+    <result column="F_ACQUIRER" jdbcType="CHAR" property="fAcquirer" />
+    <result column="F_MCC" jdbcType="CHAR" property="fMcc" />
+    <result column="F_LEGALMAN" jdbcType="CHAR" property="fLegalman" />
+    <result column="F_LEGALSID" jdbcType="CHAR" property="fLegalsid" />
+    <result column="F_MAN" jdbcType="CHAR" property="fMan" />
+    <result column="F_TEL" jdbcType="CHAR" property="fTel" />
+    <result column="F_ACCTNAME" jdbcType="CHAR" property="fAcctname" />
+    <result column="F_ACCTNO" jdbcType="CHAR" property="fAcctno" />
+    <result column="F_LICENCEID" jdbcType="CHAR" property="fLicenceid" />
+    <result column="F_BUSISCOPE" jdbcType="CHAR" property="fBusiscope" />
+    <result column="F_BUSIADDR" jdbcType="CHAR" property="fBusiaddr" />
+    <result column="F_POSTCODE" jdbcType="CHAR" property="fPostcode" />
+    <result column="F_BUSIAREA" jdbcType="CHAR" property="fBusiarea" />
+    <result column="F_BUSICHANL" jdbcType="CHAR" property="fBusichanl" />
+    <result column="F_AREAID" jdbcType="CHAR" property="fAreaid" />
+    <result column="F_ADMINDIV" jdbcType="CHAR" property="fAdmindiv" />
+    <result column="F_REGADDR" jdbcType="CHAR" property="fRegaddr" />
+    <result column="F_REGID" jdbcType="CHAR" property="fRegid" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_agrishop (F_ID, F_NAME, F_SHNAME, F_ENNAME, 
+      F_ACQUIRER, F_MCC, F_LEGALMAN, 
+      F_LEGALSID, F_MAN, F_TEL, F_ACCTNAME, 
+      F_ACCTNO, F_LICENCEID, F_BUSISCOPE, 
+      F_BUSIADDR, F_POSTCODE, F_BUSIAREA, 
+      F_BUSICHANL, F_AREAID, F_ADMINDIV, 
+      F_REGADDR, F_REGID, F_PAD1)
+    values (#{fId,jdbcType=CHAR}, #{fName,jdbcType=CHAR}, #{fShname,jdbcType=CHAR}, #{fEnname,jdbcType=CHAR}, 
+      #{fAcquirer,jdbcType=CHAR}, #{fMcc,jdbcType=CHAR}, #{fLegalman,jdbcType=CHAR}, 
+      #{fLegalsid,jdbcType=CHAR}, #{fMan,jdbcType=CHAR}, #{fTel,jdbcType=CHAR}, #{fAcctname,jdbcType=CHAR}, 
+      #{fAcctno,jdbcType=CHAR}, #{fLicenceid,jdbcType=CHAR}, #{fBusiscope,jdbcType=CHAR}, 
+      #{fBusiaddr,jdbcType=CHAR}, #{fPostcode,jdbcType=CHAR}, #{fBusiarea,jdbcType=CHAR}, 
+      #{fBusichanl,jdbcType=CHAR}, #{fAreaid,jdbcType=CHAR}, #{fAdmindiv,jdbcType=CHAR}, 
+      #{fRegaddr,jdbcType=CHAR}, #{fRegid,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_agrishop
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fShname != null">
+        F_SHNAME,
+      </if>
+      <if test="fEnname != null">
+        F_ENNAME,
+      </if>
+      <if test="fAcquirer != null">
+        F_ACQUIRER,
+      </if>
+      <if test="fMcc != null">
+        F_MCC,
+      </if>
+      <if test="fLegalman != null">
+        F_LEGALMAN,
+      </if>
+      <if test="fLegalsid != null">
+        F_LEGALSID,
+      </if>
+      <if test="fMan != null">
+        F_MAN,
+      </if>
+      <if test="fTel != null">
+        F_TEL,
+      </if>
+      <if test="fAcctname != null">
+        F_ACCTNAME,
+      </if>
+      <if test="fAcctno != null">
+        F_ACCTNO,
+      </if>
+      <if test="fLicenceid != null">
+        F_LICENCEID,
+      </if>
+      <if test="fBusiscope != null">
+        F_BUSISCOPE,
+      </if>
+      <if test="fBusiaddr != null">
+        F_BUSIADDR,
+      </if>
+      <if test="fPostcode != null">
+        F_POSTCODE,
+      </if>
+      <if test="fBusiarea != null">
+        F_BUSIAREA,
+      </if>
+      <if test="fBusichanl != null">
+        F_BUSICHANL,
+      </if>
+      <if test="fAreaid != null">
+        F_AREAID,
+      </if>
+      <if test="fAdmindiv != null">
+        F_ADMINDIV,
+      </if>
+      <if test="fRegaddr != null">
+        F_REGADDR,
+      </if>
+      <if test="fRegid != null">
+        F_REGID,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fShname != null">
+        #{fShname,jdbcType=CHAR},
+      </if>
+      <if test="fEnname != null">
+        #{fEnname,jdbcType=CHAR},
+      </if>
+      <if test="fAcquirer != null">
+        #{fAcquirer,jdbcType=CHAR},
+      </if>
+      <if test="fMcc != null">
+        #{fMcc,jdbcType=CHAR},
+      </if>
+      <if test="fLegalman != null">
+        #{fLegalman,jdbcType=CHAR},
+      </if>
+      <if test="fLegalsid != null">
+        #{fLegalsid,jdbcType=CHAR},
+      </if>
+      <if test="fMan != null">
+        #{fMan,jdbcType=CHAR},
+      </if>
+      <if test="fTel != null">
+        #{fTel,jdbcType=CHAR},
+      </if>
+      <if test="fAcctname != null">
+        #{fAcctname,jdbcType=CHAR},
+      </if>
+      <if test="fAcctno != null">
+        #{fAcctno,jdbcType=CHAR},
+      </if>
+      <if test="fLicenceid != null">
+        #{fLicenceid,jdbcType=CHAR},
+      </if>
+      <if test="fBusiscope != null">
+        #{fBusiscope,jdbcType=CHAR},
+      </if>
+      <if test="fBusiaddr != null">
+        #{fBusiaddr,jdbcType=CHAR},
+      </if>
+      <if test="fPostcode != null">
+        #{fPostcode,jdbcType=CHAR},
+      </if>
+      <if test="fBusiarea != null">
+        #{fBusiarea,jdbcType=CHAR},
+      </if>
+      <if test="fBusichanl != null">
+        #{fBusichanl,jdbcType=CHAR},
+      </if>
+      <if test="fAreaid != null">
+        #{fAreaid,jdbcType=CHAR},
+      </if>
+      <if test="fAdmindiv != null">
+        #{fAdmindiv,jdbcType=CHAR},
+      </if>
+      <if test="fRegaddr != null">
+        #{fRegaddr,jdbcType=CHAR},
+      </if>
+      <if test="fRegid != null">
+        #{fRegid,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

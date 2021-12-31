@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="branch">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_DEPT" jdbcType="CHAR" property="fDept" />
+    <result column="F_DEPTID" jdbcType="CHAR" property="fDeptid" />
+    <result column="F_LEVEL" jdbcType="CHAR" property="fLevel" />
+    <result column="F_ADDR" jdbcType="CHAR" property="fAddr" />
+    <result column="F_AREAID" jdbcType="CHAR" property="fAreaid" />
+    <result column="F_UNM" jdbcType="CHAR" property="fUnm" />
+    <result column="F_DEVNUM" jdbcType="INTEGER" property="fDevnum" />
+    <result column="F_MAPID" jdbcType="INTEGER" property="fMapid" />
+    <result column="F_MAPX" jdbcType="INTEGER" property="fMapx" />
+    <result column="F_MAPY" jdbcType="INTEGER" property="fMapy" />
+    <result column="F_TEL" jdbcType="CHAR" property="fTel" />
+    <result column="F_RECVER" jdbcType="CHAR" property="fRecver" />
+    <result column="F_RECVER1" jdbcType="CHAR" property="fRecver1" />
+    <result column="F_VALID" jdbcType="INTEGER" property="fValid" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+    <result column="f_type" jdbcType="CHAR" property="fType" />
+    <result column="f_area" jdbcType="CHAR" property="fArea" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_DEPT, F_DEPTID, F_LEVEL, F_ADDR, F_AREAID, F_UNM, F_DEVNUM, F_MAPID, 
+    F_MAPX, F_MAPY, F_TEL, F_RECVER, F_RECVER1, F_VALID, F_PAD1
+--     , f_type, f_area
+  </sql>
+
+  <sql id="Branch_Column_List">
+    F_ID, F_NAME, F_DEPT, F_DEPTID, F_LEVEL
+  </sql>
+
+  <select id="selectBranchByUser"  parameterType="map" resultMap="BaseResultMap">
+    SELECT F_ID,F_DEPT,F_LEVEL,F_DEPTID,F_NAME||'('||F_ID||')' F_NAME FROM t_branch WHERE F_ID=(
+      SELECT F_DEPT
+      FROM t_users WHERE F_ID = #{fUserid,jdbcType=VARCHAR}
+    )
+  </select>
+
+  <select id="selectSimpleBranch" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Branch_Column_List" />
+    from t_branch
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+      <if test="fDept != null">
+        AND F_DEPT = #{fDept}
+      </if>
+    </where>
+    order by F_ID
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_branch
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+      <if test="fDept != null">
+        AND F_DEPT = #{fDept}
+      </if>
+      <if test="fLevel != null">
+        AND F_LEVEL = #{fLevel}
+      </if>
+    </where>
+    ORDER BY F_NAME
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_branch
+    where F_ID = #{fId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_branch (F_ID, F_NAME, F_DEPT, F_DEPTID, 
+      F_LEVEL, F_ADDR, F_AREAID, F_UNM, 
+      F_DEVNUM, F_MAPID, F_MAPX, 
+      F_MAPY, F_TEL, F_RECVER, F_RECVER1, 
+      F_VALID, F_PAD1
+--       ,f_type, f_area
+      )
+    values (#{fId,jdbcType=CHAR}, #{fName,jdbcType=CHAR}, #{fDept,jdbcType=CHAR}, #{fDeptid,jdbcType=CHAR}, 
+      #{fLevel,jdbcType=CHAR}, #{fAddr,jdbcType=CHAR}, #{fAreaid,jdbcType=CHAR}, #{fUnm,jdbcType=CHAR}, 
+      #{fDevnum,jdbcType=INTEGER}, #{fMapid,jdbcType=INTEGER}, #{fMapx,jdbcType=INTEGER}, 
+      #{fMapy,jdbcType=INTEGER}, #{fTel,jdbcType=CHAR}, #{fRecver,jdbcType=CHAR}, #{fRecver1,jdbcType=CHAR}, 
+      #{fValid,jdbcType=INTEGER}, #{fPad1,jdbcType=CHAR}
+--       , #{fType,jdbcType=CHAR}, #{fArea,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_branch
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fDeptid != null">
+        F_DEPTID,
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL,
+      </if>
+      <if test="fAddr != null">
+        F_ADDR,
+      </if>
+      <if test="fAreaid != null">
+        F_AREAID,
+      </if>
+      <if test="fUnm != null">
+        F_UNM,
+      </if>
+      <if test="fDevnum != null">
+        F_DEVNUM,
+      </if>
+      <if test="fMapid != null">
+        F_MAPID,
+      </if>
+      <if test="fMapx != null">
+        F_MAPX,
+      </if>
+      <if test="fMapy != null">
+        F_MAPY,
+      </if>
+      <if test="fTel != null">
+        F_TEL,
+      </if>
+      <if test="fRecver != null">
+        F_RECVER,
+      </if>
+      <if test="fRecver1 != null">
+        F_RECVER1,
+      </if>
+      <if test="fValid != null">
+        F_VALID,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fType != null">
+        f_type,
+      </if>
+      <if test="fArea != null">
+        f_area,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fDeptid != null">
+        #{fDeptid,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        #{fLevel,jdbcType=CHAR},
+      </if>
+      <if test="fAddr != null">
+        #{fAddr,jdbcType=CHAR},
+      </if>
+      <if test="fAreaid != null">
+        #{fAreaid,jdbcType=CHAR},
+      </if>
+      <if test="fUnm != null">
+        #{fUnm,jdbcType=CHAR},
+      </if>
+      <if test="fDevnum != null">
+        #{fDevnum,jdbcType=INTEGER},
+      </if>
+      <if test="fMapid != null">
+        #{fMapid,jdbcType=INTEGER},
+      </if>
+      <if test="fMapx != null">
+        #{fMapx,jdbcType=INTEGER},
+      </if>
+      <if test="fMapy != null">
+        #{fMapy,jdbcType=INTEGER},
+      </if>
+      <if test="fTel != null">
+        #{fTel,jdbcType=CHAR},
+      </if>
+      <if test="fRecver != null">
+        #{fRecver,jdbcType=CHAR},
+      </if>
+      <if test="fRecver1 != null">
+        #{fRecver1,jdbcType=CHAR},
+      </if>
+      <if test="fValid != null">
+        #{fValid,jdbcType=INTEGER},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fArea != null">
+        #{fArea,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_branch
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fDeptid != null">
+        F_DEPTID = #{fDeptid,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL = #{fLevel,jdbcType=CHAR},
+      </if>
+      <if test="fAddr != null">
+        F_ADDR = #{fAddr,jdbcType=CHAR},
+      </if>
+      <if test="fAreaid != null">
+        F_AREAID = #{fAreaid,jdbcType=CHAR},
+      </if>
+      <if test="fUnm != null">
+        F_UNM = #{fUnm,jdbcType=CHAR},
+      </if>
+      <if test="fDevnum != null">
+        F_DEVNUM = #{fDevnum,jdbcType=INTEGER},
+      </if>
+      <if test="fMapid != null">
+        F_MAPID = #{fMapid,jdbcType=INTEGER},
+      </if>
+      <if test="fMapx != null">
+        F_MAPX = #{fMapx,jdbcType=INTEGER},
+      </if>
+      <if test="fMapy != null">
+        F_MAPY = #{fMapy,jdbcType=INTEGER},
+      </if>
+      <if test="fTel != null">
+        F_TEL = #{fTel,jdbcType=CHAR},
+      </if>
+      <if test="fRecver != null">
+        F_RECVER = #{fRecver,jdbcType=CHAR},
+      </if>
+      <if test="fRecver1 != null">
+        F_RECVER1 = #{fRecver1,jdbcType=CHAR},
+      </if>
+      <if test="fValid != null">
+        F_VALID = #{fValid,jdbcType=INTEGER},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fType != null">
+        f_type = #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fArea != null">
+        f_area = #{fArea,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_branch
+    set F_NAME = #{fName,jdbcType=CHAR},
+      F_DEPT = #{fDept,jdbcType=CHAR},
+      F_DEPTID = #{fDeptid,jdbcType=CHAR},
+      F_LEVEL = #{fLevel,jdbcType=CHAR},
+      F_ADDR = #{fAddr,jdbcType=CHAR},
+      F_AREAID = #{fAreaid,jdbcType=CHAR},
+      F_UNM = #{fUnm,jdbcType=CHAR},
+      F_DEVNUM = #{fDevnum,jdbcType=INTEGER},
+      F_MAPID = #{fMapid,jdbcType=INTEGER},
+      F_MAPX = #{fMapx,jdbcType=INTEGER},
+      F_MAPY = #{fMapy,jdbcType=INTEGER},
+      F_TEL = #{fTel,jdbcType=CHAR},
+      F_RECVER = #{fRecver,jdbcType=CHAR},
+      F_RECVER1 = #{fRecver1,jdbcType=CHAR},
+      F_VALID = #{fValid,jdbcType=INTEGER},
+      F_PAD1 = #{fPad1,jdbcType=CHAR},
+      f_type = #{fType,jdbcType=CHAR},
+      f_area = #{fArea,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+
+</mapper>

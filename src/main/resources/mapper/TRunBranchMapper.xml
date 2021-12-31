@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="runBranch">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <id column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <id column="F_NUMBER" jdbcType="VARCHAR" property="fNumber" />
+    <result column="F_NUMBER1" jdbcType="VARCHAR" property="fNumber1" />
+    <result column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_TIME" jdbcType="VARCHAR" property="fTime" />
+    <result column="F_TIME1" jdbcType="VARCHAR" property="fTime1" />
+    <result column="F_TIME2" jdbcType="VARCHAR" property="fTime2" />
+    <result column="F_TIME3" jdbcType="VARCHAR" property="fTime3" />
+    <result column="F_WAITTIME" jdbcType="INTEGER" property="fWaittime" />
+    <result column="F_BUSITIME" jdbcType="INTEGER" property="fBusitime" />
+    <result column="F_ACNO" jdbcType="VARCHAR" property="fAcno" />
+    <result column="F_IDNO" jdbcType="VARCHAR" property="fIdno" />
+    <result column="F_CUSTNAME" jdbcType="VARCHAR" property="fCustname" />
+    <result column="F_CUSTTYPE" jdbcType="VARCHAR" property="fCusttype" />
+    <result column="F_CUSTLEVEL" jdbcType="VARCHAR" property="fCustlevel" />
+    <result column="F_MENUTYPE" jdbcType="VARCHAR" property="fMenutype" />
+    <result column="F_TRTP" jdbcType="VARCHAR" property="fTrtp" />
+
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+
+    <result column="F_DEVLS" jdbcType="VARCHAR" property="fDevls" />
+    <result column="F_SERIAL" jdbcType="VARCHAR" property="fSerial" />
+    <result column="F_SOURCE" jdbcType="VARCHAR" property="fSource" />
+    <result column="F_CALLTYPE" jdbcType="VARCHAR" property="fCalltype" />
+    <result column="F_OPERATOR" jdbcType="VARCHAR" property="fOperator" />
+    <result column="F_WINDID" jdbcType="VARCHAR" property="fWindid" />
+    <result column="F_EVALUATE" jdbcType="VARCHAR" property="fEvaluate" />
+    <result column="F_DONE" jdbcType="VARCHAR" property="fDone" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+
+    <result column="WDNAME" jdbcType="VARCHAR" property="fWdname" />
+    <result column="ZHNAME" jdbcType="VARCHAR" property="fZhname" />
+    <result column="FHNAME" jdbcType="VARCHAR" property="fFhname" />
+
+	<!--20171020 新增-->
+	<result column="F_TKJALL" jdbcType="VARCHAR" property="fTkjall" />
+  <result column="F_TKJ7" jdbcType="VARCHAR" property="fTkj7" />
+	<result column="F_TKJ6" jdbcType="VARCHAR" property="fTkj6" />
+	<result column="F_TKJ5" jdbcType="VARCHAR" property="fTkj5" />
+	<result column="F_TKJ4" jdbcType="VARCHAR" property="fTkj4" />
+	<result column="SJKJ" jdbcType="VARCHAR" property="fSjkj" />
+	<result column="TXTS" jdbcType="VARCHAR" property="fTxts" />
+	<result column="ORGANID" jdbcType="VARCHAR" property="fOrganid" />
+	<result column="ORGANNAME" jdbcType="VARCHAR" property="fOrganname" />
+	<result column="PM" jdbcType="VARCHAR" property="fPm" />
+	<result column="COUNTDEV" jdbcType="VARCHAR" property="fCountdev" />
+  </resultMap>
+
+  <!-- dev run nomally statistic(Jigou) -->
+  <select id="selectRunBranch" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+      F.ORGANNAME,
+      F.ORGANID,
+      F.COUNTDEV,
+      F.TXTS,
+      CONCAT(F.F_TKJALL DIV 60,'时',F.F_TKJALL MOD 60,'分') F_TKJALL,
+      CONCAT(F.F_TKJ4 DIV 60,'时',F.F_TKJ4 MOD 60,'分') F_TKJ4,
+      CONCAT(F.F_TKJ5 DIV 60,'时',F.F_TKJ5 MOD 60,'分') F_TKJ5,
+      CONCAT(F.F_TKJ6 DIV 60,'时',F.F_TKJ6 MOD 60,'分') F_TKJ6,
+      CONCAT(F.SJKJ DIV 60,'时',F.SJKJ MOD 60,'分') SJKJ,
+      F.PM,
+      F.KJL
+    FROM (
+      SELECT
+
+      <!-- 标准版 -->
+      <!--<if test="fDeptid.length() &lt;= 4 ">-->
+        <!--C.F_NAME AS ORGANNAME,-->
+        <!--C.F_ID AS ORGANID,-->
+      <!--</if>-->
+      <!--<if test="fDeptid.length() &lt;= 9 and fDeptid.length() &gt; 4">-->
+        <!--D.F_NAME AS ORGANNAME,-->
+        <!--D.F_ID AS ORGANID,-->
+      <!--</if>-->
+      <!--<if test="fDeptid.length() &gt; 9">-->
+        <!--F.F_NAME AS ORGANNAME,-->
+        <!--F.F_ID AS ORGANID,-->
+      <!--</if>-->
+
+      <!-- 山西 -->
+      <if test="fDeptid.length() &lt;= 11">
+        D.F_NAME AS ORGANNAME,
+        D.F_ID AS ORGANID,
+      </if>
+      <if test="fDeptid.length() &gt; 11">
+        F.F_NAME AS ORGANNAME,
+        F.F_ID AS ORGANID,
+      </if>
+
+      COUNT(DISTINCT A.F_ID) AS COUNTDEV,
+      SUM(CASE WHEN E.F_TKJ0&gt;=1260 THEN 1 ELSE 0 END) TXTS,
+      SUM(E.F_TKJALL) F_TKJALL,
+      SUM(E.F_TKJ4) F_TKJ4,
+      SUM(E.F_TKJ5) F_TKJ5,
+      SUM(E.F_TKJ6) F_TKJ6,
+      SUM(E.F_TKJ7) F_TKJ7,
+      (SUM(E.F_TKJ0)+SUM(E.F_TKJ1)+SUM(E.F_TKJ7)+SUM(E.F_TKJ8)+SUM(E.F_TKJ9)) SJKJ,
+      concat(ROUND(CAST(((SUM(E.F_TKJ0)+SUM(E.F_TKJ1)+SUM(E.F_TKJ7)+SUM(E.F_TKJ8)+SUM(E.F_TKJ9))*1.0/SUM(E.F_TKJALL))*100 AS DECIMAL(10,2)),2),'%') PM,
+      concat(ROUND(CAST(((SUM(E.F_TKJ0)+SUM(E.F_TKJ1)+SUM(E.F_TKJ7)+SUM(E.F_TKJ8)+SUM(E.F_TKJ9))*1.0/SUM(E.F_TKJALL))*100 AS DECIMAL(10,2)),2),'%') KJL
+
+      FROM t_dev A,t_branch B,t_branch C,t_branch D,t_tj1kj E, t_branch F
+
+      <where>
+          <if test="fDateStart != null and fDateEnd != null">
+              AND E.F_DATE&gt;=#{fDateStart} AND E.F_DATE&lt;=#{fDateEnd}
+          </if>
+          <if test="fDeptid !=null "><!-- sqlcond3-->
+              AND F.F_DEPTID LIKE concat(#{fDeptid},'%')
+          </if>
+          AND E.F_DEPT=F.F_ID AND F.F_DEPT = D.F_ID AND D.F_DEPT=C.F_ID AND C.F_DEPT =B.F_ID
+
+          <!--AND A.F_DEPT=C.F_ID AND E.F_DEPT=C.F_ID AND C.F_DEPT=B.F_ID-->
+
+          AND E.F_DEVID=A.F_ID AND E.F_TKJBAD=1
+      </where>
+      GROUP BY
+
+      <!-- 标准版 -->
+      <!--<if test="fDeptid.length() &lt;= 4 ">-->
+        <!--C.F_ID,C.F_NAME-->
+      <!--</if>-->
+      <!--<if test="fDeptid.length() &lt;= 9 and fDeptid.length() &gt; 4">-->
+        <!--D.F_ID,D.F_NAME-->
+      <!--</if>-->
+      <!--<if test="fDeptid.length() &gt; 9">-->
+        <!--F.F_ID,F.F_NAME-->
+      <!--</if>-->
+
+      <!-- 山西农信 -->
+      <if test="fDeptid.length() &lt;= 11">
+        D.F_ID,D.F_NAME
+      </if>
+      <if test="fDeptid.length() &gt; 11">
+        F.F_ID,F.F_NAME
+      </if>
+      ) F
+
+  </select>
+</mapper>

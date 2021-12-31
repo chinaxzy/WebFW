@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hdgbox">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DEVID" jdbcType="CHAR" property="fDevid" />
+    <result column="F_NUMB" jdbcType="CHAR" property="fNumb" />
+    <result column="F_ROW" jdbcType="CHAR" property="fRow" />
+    <result column="F_COL" jdbcType="CHAR" property="fCol" />
+    <result column="F_BIND" jdbcType="CHAR" property="fBind" />
+    <result column="F_USE" jdbcType="CHAR" property="fUse" />
+    <result column="F_STATE" jdbcType="CHAR" property="fState" />
+    <result column="F_ACNO" jdbcType="CHAR" property="fAcno" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_hdgbox (F_DEVID, F_NUMB, F_ROW, F_COL, 
+      F_BIND, F_USE, F_STATE, F_ACNO, 
+      F_PAD1)
+    values (#{fDevid,jdbcType=CHAR}, #{fNumb,jdbcType=CHAR}, #{fRow,jdbcType=CHAR}, #{fCol,jdbcType=CHAR}, 
+      #{fBind,jdbcType=CHAR}, #{fUse,jdbcType=CHAR}, #{fState,jdbcType=CHAR}, #{fAcno,jdbcType=CHAR}, 
+      #{fPad1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_hdgbox
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fNumb != null">
+        F_NUMB,
+      </if>
+      <if test="fRow != null">
+        F_ROW,
+      </if>
+      <if test="fCol != null">
+        F_COL,
+      </if>
+      <if test="fBind != null">
+        F_BIND,
+      </if>
+      <if test="fUse != null">
+        F_USE,
+      </if>
+      <if test="fState != null">
+        F_STATE,
+      </if>
+      <if test="fAcno != null">
+        F_ACNO,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fNumb != null">
+        #{fNumb,jdbcType=CHAR},
+      </if>
+      <if test="fRow != null">
+        #{fRow,jdbcType=CHAR},
+      </if>
+      <if test="fCol != null">
+        #{fCol,jdbcType=CHAR},
+      </if>
+      <if test="fBind != null">
+        #{fBind,jdbcType=CHAR},
+      </if>
+      <if test="fUse != null">
+        #{fUse,jdbcType=CHAR},
+      </if>
+      <if test="fState != null">
+        #{fState,jdbcType=CHAR},
+      </if>
+      <if test="fAcno != null">
+        #{fAcno,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="f_id" jdbcType="VARCHAR" property="fId" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_SID" jdbcType="VARCHAR" property="fSid" />
+    <result column="F_PASSWORD" jdbcType="VARCHAR" property="fPassword" />
+    <result column="F_RIGHT" jdbcType="VARCHAR" property="fRight" />
+    <result column="F_STATUS" jdbcType="VARCHAR" property="fStatus" />
+    <result column="F_TEL" jdbcType="VARCHAR" property="fTel" />
+    <result column="F_FINGER1" jdbcType="VARCHAR" property="fFinger1" />
+    <result column="F_FINGER2" jdbcType="VARCHAR" property="fFinger2" />
+    <result column="F_FINGER3" jdbcType="VARCHAR" property="fFinger3" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_admin (F_DEVID, f_id, F_NAME, 
+      F_SID, F_PASSWORD, F_RIGHT, 
+      F_STATUS, F_TEL, F_FINGER1, 
+      F_FINGER2, F_FINGER3, F_PAD1
+      )
+    values (#{fDevid,jdbcType=VARCHAR}, #{fId,jdbcType=VARCHAR}, #{fName,jdbcType=VARCHAR}, 
+      #{fSid,jdbcType=VARCHAR}, #{fPassword,jdbcType=VARCHAR}, #{fRight,jdbcType=VARCHAR}, 
+      #{fStatus,jdbcType=VARCHAR}, #{fTel,jdbcType=VARCHAR}, #{fFinger1,jdbcType=VARCHAR}, 
+      #{fFinger2,jdbcType=VARCHAR}, #{fFinger3,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_admin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fId != null">
+        f_id,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fSid != null">
+        F_SID,
+      </if>
+      <if test="fPassword != null">
+        F_PASSWORD,
+      </if>
+      <if test="fRight != null">
+        F_RIGHT,
+      </if>
+      <if test="fStatus != null">
+        F_STATUS,
+      </if>
+      <if test="fTel != null">
+        F_TEL,
+      </if>
+      <if test="fFinger1 != null">
+        F_FINGER1,
+      </if>
+      <if test="fFinger2 != null">
+        F_FINGER2,
+      </if>
+      <if test="fFinger3 != null">
+        F_FINGER3,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=VARCHAR},
+      </if>
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fSid != null">
+        #{fSid,jdbcType=VARCHAR},
+      </if>
+      <if test="fPassword != null">
+        #{fPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fRight != null">
+        #{fRight,jdbcType=VARCHAR},
+      </if>
+      <if test="fStatus != null">
+        #{fStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fTel != null">
+        #{fTel,jdbcType=VARCHAR},
+      </if>
+      <if test="fFinger1 != null">
+        #{fFinger1,jdbcType=VARCHAR},
+      </if>
+      <if test="fFinger2 != null">
+        #{fFinger2,jdbcType=VARCHAR},
+      </if>
+      <if test="fFinger3 != null">
+        #{fFinger3,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="menuauth">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="INTEGER" property="menuId" />
+    <result column="F_NAME" jdbcType="CHAR" property="menuName" />
+    <result column="F_TYPE" jdbcType="CHAR" property="fType" />
+    <result column="F_URL" jdbcType="CHAR" property="fUrl" />
+    <result column="F_PID" jdbcType="INTEGER" property="parentId" />
+    <result column="F_SORT" jdbcType="INTEGER" property="fSort" />
+    <result column="F_STATE" jdbcType="CHAR" property="activeFlag" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_TYPE, F_URL, F_PID, F_SORT, F_STATE, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_menuauth
+    <where>
+    <if test="fId != null">
+      F_ID = #{fId,jdbcType=INTEGER}
+    </if>
+      <if test="fPid != null and fPid != ''">
+        AND F_PID = #{fPid}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_menuauth
+    where F_ID = #{fId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_menuauth (F_ID, F_NAME, F_TYPE, 
+      F_URL, F_PID, F_SORT, F_STATE, 
+      F_PAD1)
+    values (#{fId,jdbcType=INTEGER}, #{fName,jdbcType=CHAR}, #{fType,jdbcType=CHAR}, 
+      #{fUrl,jdbcType=CHAR}, #{fPid,jdbcType=INTEGER}, #{fSort,jdbcType=INTEGER}, #{fState,jdbcType=CHAR}, 
+      #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_menuauth
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fUrl != null">
+        F_URL,
+      </if>
+      <if test="fPid != null">
+        F_PID,
+      </if>
+      <if test="fSort != null">
+        F_SORT,
+      </if>
+      <if test="fState != null">
+        F_STATE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=INTEGER},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fUrl != null">
+        #{fUrl,jdbcType=CHAR},
+      </if>
+      <if test="fPid != null">
+        #{fPid,jdbcType=INTEGER},
+      </if>
+      <if test="fSort != null">
+        #{fSort,jdbcType=INTEGER},
+      </if>
+      <if test="fState != null">
+        #{fState,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_menuauth
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fType != null">
+        F_TYPE = #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fUrl != null">
+        F_URL = #{fUrl,jdbcType=CHAR},
+      </if>
+      <if test="fPid != null">
+        F_PID = #{fPid,jdbcType=INTEGER},
+      </if>
+      <if test="fSort != null">
+        F_SORT = #{fSort,jdbcType=INTEGER},
+      </if>
+      <if test="fState != null">
+        F_STATE = #{fState,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_menuauth
+    set F_NAME = #{fName,jdbcType=CHAR},
+      F_TYPE = #{fType,jdbcType=CHAR},
+      F_URL = #{fUrl,jdbcType=CHAR},
+      F_PID = #{fPid,jdbcType=INTEGER},
+      F_SORT = #{fSort,jdbcType=INTEGER},
+      F_STATE = #{fState,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=INTEGER}
+  </update>
+
+  <select id="getMenu"  parameterType="map" resultMap="BaseResultMap">
+    select F_NAME,F_STATE,F_ID,F_PID,F_URL from t_menuauth
+    <if test="fType!=null and fType!='' ">
+      where f_type = #{fType}
+      AND F_STATE = 0
+    </if>
+    order by F_SORT,F_ID
+  </select>
+
+</mapper>

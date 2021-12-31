@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devoper">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_PASSWD" jdbcType="VARCHAR" property="fPasswd" />
+    <result column="F_VIDEOID" jdbcType="VARCHAR" property="fVideoid" />
+    <result column="F_PAD" jdbcType="VARCHAR" property="fPad" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_devoper (F_DEVID, F_ID, F_PASSWD, 
+      F_VIDEOID, F_PAD)
+    values (#{fDevid,jdbcType=VARCHAR}, #{fId,jdbcType=VARCHAR}, #{fPasswd,jdbcType=VARCHAR}, 
+      #{fVideoid,jdbcType=VARCHAR}, #{fPad,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_devoper
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fPasswd != null">
+        F_PASSWD,
+      </if>
+      <if test="fVideoid != null">
+        F_VIDEOID,
+      </if>
+      <if test="fPad != null">
+        F_PAD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=VARCHAR},
+      </if>
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fPasswd != null">
+        #{fPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="fVideoid != null">
+        #{fVideoid,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad != null">
+        #{fPad,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

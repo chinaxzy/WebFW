@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tddetail">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_SERIAL" jdbcType="VARCHAR" property="fSerial" />
+    <result column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_TIME" jdbcType="VARCHAR" property="fTime" />
+    <result column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_TERM" jdbcType="VARCHAR" property="fTerm" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_IDNO" jdbcType="VARCHAR" property="fIdno" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_TYPE" jdbcType="VARCHAR" property="fType" />
+    <result column="F_DESC" jdbcType="VARCHAR" property="fDesc" />
+    <result column="F_STATE" jdbcType="VARCHAR" property="fState" />
+    <result column="F_DATE1" jdbcType="VARCHAR" property="fDate1" />
+    <result column="F_TIME1" jdbcType="VARCHAR" property="fTime1" />
+    <result column="F_DETAIL" jdbcType="VARCHAR" property="fDetail" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_tddetail (F_SERIAL, F_DATE, F_TIME, 
+      F_DEVID, F_TERM, F_DEPT, 
+      F_IDNO, F_NAME, F_TYPE, 
+      F_DESC, F_STATE, F_DATE1, 
+      F_TIME1, F_DETAIL, F_PAD1
+      )
+    values (#{fSerial,jdbcType=VARCHAR}, #{fDate,jdbcType=VARCHAR}, #{fTime,jdbcType=VARCHAR}, 
+      #{fDevid,jdbcType=VARCHAR}, #{fTerm,jdbcType=VARCHAR}, #{fDept,jdbcType=VARCHAR}, 
+      #{fIdno,jdbcType=VARCHAR}, #{fName,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR}, 
+      #{fDesc,jdbcType=VARCHAR}, #{fState,jdbcType=VARCHAR}, #{fDate1,jdbcType=VARCHAR}, 
+      #{fTime1,jdbcType=VARCHAR}, #{fDetail,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_tddetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fSerial != null">
+        F_SERIAL,
+      </if>
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fTerm != null">
+        F_TERM,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fIdno != null">
+        F_IDNO,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fDesc != null">
+        F_DESC,
+      </if>
+      <if test="fState != null">
+        F_STATE,
+      </if>
+      <if test="fDate1 != null">
+        F_DATE1,
+      </if>
+      <if test="fTime1 != null">
+        F_TIME1,
+      </if>
+      <if test="fDetail != null">
+        F_DETAIL,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fSerial != null">
+        #{fSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=VARCHAR},
+      </if>
+      <if test="fTerm != null">
+        #{fTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fIdno != null">
+        #{fIdno,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fDesc != null">
+        #{fDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fState != null">
+        #{fState,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate1 != null">
+        #{fDate1,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime1 != null">
+        #{fTime1,jdbcType=VARCHAR},
+      </if>
+      <if test="fDetail != null">
+        #{fDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

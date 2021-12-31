@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="users">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_PASSWD" jdbcType="CHAR" property="fPasswd" />
+    <result column="F_PART" jdbcType="CHAR" property="fPart" />
+    <result column="F_LEVEL" jdbcType="CHAR" property="fLevel" />
+    <result column="F_CANLOGIN" jdbcType="CHAR" property="fCanlogin" />
+    <result column="F_DEPT" jdbcType="CHAR" property="fDept" />
+    <result column="F_RECVER" jdbcType="CHAR" property="fRecver" />
+    <result column="F_TEL" jdbcType="CHAR" property="fTel" />
+    <result column="F_MOBILE" jdbcType="CHAR" property="fMobile" />
+    <result column="F_BP" jdbcType="CHAR" property="fBp" />
+    <result column="F_EMAIL" jdbcType="CHAR" property="fEmail" />
+    <result column="F_WEBRIGHT" jdbcType="VARCHAR" property="fWebright" />
+    <result column="F_BLTO" jdbcType="CHAR" property="fBlto" />
+    <result column="F_BLFLAG" jdbcType="CHAR" property="fBlflag" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+    <result column="F_PAD2" jdbcType="CHAR" property="fPad2" />
+    <result column="F_TOKEN" jdbcType="VARCHAR" property="fToken" />
+
+    <result column="F_DEPTNAME" jdbcType="VARCHAR" property="fDeptname" />
+    <result column="F_ROLENAME" jdbcType="VARCHAR" property="fRolename" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_PASSWD, F_PART, F_LEVEL, F_CANLOGIN, F_DEPT, F_RECVER, F_TEL, F_MOBILE, 
+    F_BP, F_EMAIL, F_WEBRIGHT, F_BLTO, F_BLFLAG, F_PAD1, F_PAD2
+  </sql>
+
+  <select id="selectUsers" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+      A.*,
+      B.F_NAME F_DEPTNAME,
+      C.F_NAME F_ROLENAME
+    FROM t_users A LEFT OUTER JOIN t_userrole C ON A.F_PART = C.F_ROLEID
+        , t_branch B
+    WHERE A.F_DEPT = B.F_ID
+     AND B.F_DEPTID LIKE concat(#{fDeptid},"%")
+  </select>
+
+  <insert id="insertUserSelective" parameterType="map">
+    <selectKey keyProperty="fLevel" resultType="String" order="BEFORE">
+      select F_LEVEL from t_branch
+      where F_ID = #{fDept}
+    </selectKey>
+    insert into t_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fPasswd != null">
+        F_PASSWD,
+      </if>
+      <if test="fPart != null">
+        F_PART,
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL,
+      </if>
+      <if test="fCanlogin != null">
+        F_CANLOGIN,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fRecver != null">
+        F_RECVER,
+      </if>
+      <if test="fTel != null">
+        F_TEL,
+      </if>
+      <if test="fMobile != null">
+        F_MOBILE,
+      </if>
+      <if test="fBp != null">
+        F_BP,
+      </if>
+      <if test="fEmail != null">
+        F_EMAIL,
+      </if>
+      <if test="fWebright != null">
+        F_WEBRIGHT,
+      </if>
+      <if test="fBlto != null">
+        F_BLTO,
+      </if>
+      <if test="fBlflag != null">
+        F_BLFLAG,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fPasswd != null">
+        #{fPasswd,jdbcType=CHAR},
+      </if>
+      <if test="fPart != null">
+        #{fPart,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        #{fLevel,jdbcType=CHAR},
+      </if>
+      <if test="fCanlogin != null">
+        #{fCanlogin},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fRecver != null">
+        #{fRecver,jdbcType=CHAR},
+      </if>
+      <if test="fTel != null">
+        #{fTel,jdbcType=CHAR},
+      </if>
+      <if test="fMobile != null">
+        #{fMobile,jdbcType=CHAR},
+      </if>
+      <if test="fBp != null">
+        #{fBp,jdbcType=CHAR},
+      </if>
+      <if test="fEmail != null">
+        #{fEmail,jdbcType=CHAR},
+      </if>
+      <if test="fWebright != null">
+        #{fWebright,jdbcType=VARCHAR},
+      </if>
+      <if test="fBlto != null">
+        #{fBlto,jdbcType=CHAR},
+      </if>
+      <if test="fBlflag != null">
+        #{fBlflag,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fPad2 != null">
+        #{fPad2,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    SELECT b.F_NAME fRolename,c.F_NAME fDeptname,c.F_DEPTID fDeptid,
+    CASE b.F_LEVEL
+    WHEN '1' THEN '网点'
+    WHEN '2' THEN '支行'
+    WHEN '3' THEN '市行'
+    WHEN '4' THEN '省行'
+    ELSE '' END fLevelname,
+    a.F_TOKEN,
+    a.F_ID, a.F_NAME, a.F_PASSWD, a.F_PART, a.F_LEVEL, a.F_CANLOGIN, a.F_DEPT, a.F_RECVER, a.F_TEL, a.F_MOBILE,
+    a.F_BP, a.F_EMAIL, a.F_WEBRIGHT, a.F_BLTO, a.F_BLFLAG, a.F_PAD1, a.F_PAD2
+    FROM t_users a,t_userrole b,t_branch c
+    <where>
+      a.F_PART = b.F_ROLEID
+      AND a.F_DEPT = c.F_ID
+      <if test="fId != null">
+        AND a.F_ID = #{fId,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_users
+    where F_ID = #{fId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_users (F_ID, F_NAME, F_PASSWD, F_PART, 
+      F_LEVEL, F_CANLOGIN, F_DEPT, F_RECVER, 
+      F_TEL, F_MOBILE, F_BP, F_EMAIL, 
+      F_WEBRIGHT, F_BLTO, F_BLFLAG, 
+      F_PAD1, F_PAD2)
+    values (#{fId,jdbcType=CHAR}, #{fName,jdbcType=CHAR}, #{fPasswd,jdbcType=CHAR}, #{fPart,jdbcType=CHAR}, 
+      #{fLevel,jdbcType=CHAR}, #{fCanlogin,jdbcType=CHAR}, #{fDept,jdbcType=CHAR}, #{fRecver,jdbcType=CHAR}, 
+      #{fTel,jdbcType=CHAR}, #{fMobile,jdbcType=CHAR}, #{fBp,jdbcType=CHAR}, #{fEmail,jdbcType=CHAR}, 
+      #{fWebright,jdbcType=VARCHAR}, #{fBlto,jdbcType=CHAR}, #{fBlflag,jdbcType=CHAR}, 
+      #{fPad1,jdbcType=CHAR}, #{fPad2,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fPasswd != null">
+        F_PASSWD,
+      </if>
+      <if test="fPart != null">
+        F_PART,
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL,
+      </if>
+      <if test="fCanlogin != null">
+        F_CANLOGIN,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fRecver != null">
+        F_RECVER,
+      </if>
+      <if test="fTel != null">
+        F_TEL,
+      </if>
+      <if test="fMobile != null">
+        F_MOBILE,
+      </if>
+      <if test="fBp != null">
+        F_BP,
+      </if>
+      <if test="fEmail != null">
+        F_EMAIL,
+      </if>
+      <if test="fWebright != null">
+        F_WEBRIGHT,
+      </if>
+      <if test="fBlto != null">
+        F_BLTO,
+      </if>
+      <if test="fBlflag != null">
+        F_BLFLAG,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fPasswd != null">
+        #{fPasswd,jdbcType=CHAR},
+      </if>
+      <if test="fPart != null">
+        #{fPart,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        #{fLevel,jdbcType=CHAR},
+      </if>
+      <if test="fCanlogin != null">
+        #{fCanlogin,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fRecver != null">
+        #{fRecver,jdbcType=CHAR},
+      </if>
+      <if test="fTel != null">
+        #{fTel,jdbcType=CHAR},
+      </if>
+      <if test="fMobile != null">
+        #{fMobile,jdbcType=CHAR},
+      </if>
+      <if test="fBp != null">
+        #{fBp,jdbcType=CHAR},
+      </if>
+      <if test="fEmail != null">
+        #{fEmail,jdbcType=CHAR},
+      </if>
+      <if test="fWebright != null">
+        #{fWebright,jdbcType=VARCHAR},
+      </if>
+      <if test="fBlto != null">
+        #{fBlto,jdbcType=CHAR},
+      </if>
+      <if test="fBlflag != null">
+        #{fBlflag,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fPad2 != null">
+        #{fPad2,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_users
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fPasswd != null">
+        F_PASSWD = #{fPasswd,jdbcType=CHAR},
+      </if>
+      <if test="fPart != null">
+        F_PART = #{fPart,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL = #{fLevel,jdbcType=CHAR},
+      </if>
+      <if test="fCanlogin != null">
+        F_CANLOGIN = #{fCanlogin,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fRecver != null">
+        F_RECVER = #{fRecver,jdbcType=CHAR},
+      </if>
+      <if test="fTel != null">
+        F_TEL = #{fTel,jdbcType=CHAR},
+      </if>
+      <if test="fMobile != null">
+        F_MOBILE = #{fMobile,jdbcType=CHAR},
+      </if>
+      <if test="fBp != null">
+        F_BP = #{fBp,jdbcType=CHAR},
+      </if>
+      <if test="fEmail != null">
+        F_EMAIL = #{fEmail,jdbcType=CHAR},
+      </if>
+      <if test="fWebright != null">
+        F_WEBRIGHT = #{fWebright,jdbcType=VARCHAR},
+      </if>
+      <if test="fBlto != null">
+        F_BLTO = #{fBlto,jdbcType=CHAR},
+      </if>
+      <if test="fBlflag != null">
+        F_BLFLAG = #{fBlflag,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2 = #{fPad2,jdbcType=CHAR},
+      </if>
+      <if test="fToken != null">
+        F_TOKEN = #{fToken,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_users
+    set F_NAME = #{fName,jdbcType=CHAR},
+      F_PASSWD = #{fPasswd,jdbcType=CHAR},
+      F_PART = #{fPart,jdbcType=CHAR},
+      F_LEVEL = #{fLevel,jdbcType=CHAR},
+      F_CANLOGIN = #{fCanlogin,jdbcType=CHAR},
+      F_DEPT = #{fDept,jdbcType=CHAR},
+      F_RECVER = #{fRecver,jdbcType=CHAR},
+      F_TEL = #{fTel,jdbcType=CHAR},
+      F_MOBILE = #{fMobile,jdbcType=CHAR},
+      F_BP = #{fBp,jdbcType=CHAR},
+      F_EMAIL = #{fEmail,jdbcType=CHAR},
+      F_WEBRIGHT = #{fWebright,jdbcType=VARCHAR},
+      F_BLTO = #{fBlto,jdbcType=CHAR},
+      F_BLFLAG = #{fBlflag,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR},
+      F_PAD2 = #{fPad2,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+
+</mapper>

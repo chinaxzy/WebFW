@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tj2trans">
+    <resultMap id="BaseResultMap" type="map">
+        <result column="F_DATE" jdbcType="CHAR" property="fDate" />
+        <result column="F_DEVID" jdbcType="CHAR" property="fDevid" />
+        <result column="F_DEPT" jdbcType="CHAR" property="fDept" />
+        <result column="F_TRCD" jdbcType="CHAR" property="fTrcd" />
+        <result column="F_FLAG" jdbcType="CHAR" property="fFlag" />
+        <result column="F_SUC_N" jdbcType="INTEGER" property="fSucN" />
+        <result column="F_SUC_M" jdbcType="DECIMAL" property="fSucM" />
+        <result column="F_FAL_N" jdbcType="INTEGER" property="fFalN" />
+        <result column="F_FAL_M" jdbcType="DECIMAL" property="fFalM" />
+        <result column="F_PROFIT" jdbcType="DECIMAL" property="fProfit" />
+        <result column="F_PAD_N" jdbcType="INTEGER" property="fPadN" />
+        <result column="F_PAD_M" jdbcType="DECIMAL" property="fPadM" />
+        <result column="WDNAME" jdbcType="VARCHAR" property="fWdname" />
+        <result column="ZHNAME" jdbcType="VARCHAR" property="fZhname" />
+        <result column="FHNAME" jdbcType="VARCHAR" property="fFhname" />
+        <result column="TRCD" jdbcType="VARCHAR" property="fTrcd" />
+    </resultMap>
+
+    <select id="selectTjtrans" parameterType="map" resultMap="BaseResultMap">
+        SELECT B.F_NAME WDNAME,
+        C.F_NAME ZHNAME,
+        D.F_NAME FHNAME,
+        Z.F_NAME TRCD,A.*
+        FROM t_tj2trans A LEFT OUTER JOIN t_codes Z ON Z.F_CATID='JY'
+        AND A.F_TRCD=Z.F_ID,
+        t_branch B,
+        t_branch C,
+        t_branch D
+        <where>
+            <if test="startdate != null">
+                A.F_DATE &gt;= #{startdate}
+            </if>
+            <if test="enddate != null">
+                AND A.F_DATE &lt;= #{enddate}
+            </if>
+
+            <if test="deptid != null">
+                AND B.F_DEPTID LIKE concat(#{deptid},"%")
+            </if>
+            <if test=" 1==1">
+                AND A.F_DEPT=B.F_ID
+                AND B.F_DEPT=C.F_ID
+                AND C.F_DEPT=D.F_ID
+            </if>
+            <if test="fDevid != null">
+                AND A.F_DEVID = #{fDevid}
+            </if>
+            <if test="fTrcd != null">
+                AND Z.F_NAME=#{fTrcd}
+            </if>
+        </where>
+    </select>
+</mapper>

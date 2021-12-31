@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="state3log">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_USERID" jdbcType="CHAR" property="fUserid" />
+    <result column="F_RDATE" jdbcType="CHAR" property="fRdate" />
+    <result column="F_CDATE" jdbcType="CHAR" property="fCdate" />
+    <result column="F_ODATE" jdbcType="CHAR" property="fOdate" />
+    <result column="F_CTIME" jdbcType="DOUBLE" property="fCtime" />
+    <result column="F_DEVID" jdbcType="CHAR" property="fDevid" />
+    <result column="F_ASSERTS" jdbcType="CHAR" property="fAsserts" />
+    <result column="F_LOGVER" jdbcType="INTEGER" property="fLogver" />
+    <result column="F_TYPE" jdbcType="CHAR" property="fType" />
+    <result column="F_REASON" jdbcType="CHAR" property="fReason" />
+    <result column="F_REFUSE" jdbcType="CHAR" property="fRefuse" />
+    <result column="F_FLAG" jdbcType="CHAR" property="fFlag" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+    <result column="f_todept" jdbcType="CHAR" property="fTodept" />
+    <result column="f_dept" jdbcType="CHAR" property="fDept" />
+    <result column="f_adate" jdbcType="CHAR" property="fAdate" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_state3log (F_USERID, F_RDATE, F_CDATE, 
+      F_ODATE, F_CTIME, F_DEVID, F_ASSERTS, 
+      F_LOGVER, F_TYPE, F_REASON, 
+      F_REFUSE, F_FLAG, F_PAD1, f_todept, 
+      f_dept, f_adate)
+    values (#{fUserid,jdbcType=CHAR}, #{fRdate,jdbcType=CHAR}, #{fCdate,jdbcType=CHAR}, 
+      #{fOdate,jdbcType=CHAR}, #{fCtime,jdbcType=DOUBLE}, #{fDevid,jdbcType=CHAR}, #{fAsserts,jdbcType=CHAR}, 
+      #{fLogver,jdbcType=INTEGER}, #{fType,jdbcType=CHAR}, #{fReason,jdbcType=CHAR}, 
+      #{fRefuse,jdbcType=CHAR}, #{fFlag,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR}, #{fTodept,jdbcType=CHAR}, 
+      #{fDept,jdbcType=CHAR}, #{fAdate,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_state3log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fUserid != null">
+        F_USERID,
+      </if>
+      <if test="fRdate != null">
+        F_RDATE,
+      </if>
+      <if test="fCdate != null">
+        F_CDATE,
+      </if>
+      <if test="fOdate != null">
+        F_ODATE,
+      </if>
+      <if test="fCtime != null">
+        F_CTIME,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fAsserts != null">
+        F_ASSERTS,
+      </if>
+      <if test="fLogver != null">
+        F_LOGVER,
+      </if>
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fReason != null">
+        F_REASON,
+      </if>
+      <if test="fRefuse != null">
+        F_REFUSE,
+      </if>
+      <if test="fFlag != null">
+        F_FLAG,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fTodept != null">
+        f_todept,
+      </if>
+      <if test="fDept != null">
+        f_dept,
+      </if>
+      <if test="fAdate != null">
+        f_adate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fUserid != null">
+        #{fUserid,jdbcType=CHAR},
+      </if>
+      <if test="fRdate != null">
+        #{fRdate,jdbcType=CHAR},
+      </if>
+      <if test="fCdate != null">
+        #{fCdate,jdbcType=CHAR},
+      </if>
+      <if test="fOdate != null">
+        #{fOdate,jdbcType=CHAR},
+      </if>
+      <if test="fCtime != null">
+        #{fCtime,jdbcType=DOUBLE},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fAsserts != null">
+        #{fAsserts,jdbcType=CHAR},
+      </if>
+      <if test="fLogver != null">
+        #{fLogver,jdbcType=INTEGER},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fReason != null">
+        #{fReason,jdbcType=CHAR},
+      </if>
+      <if test="fRefuse != null">
+        #{fRefuse,jdbcType=CHAR},
+      </if>
+      <if test="fFlag != null">
+        #{fFlag,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fTodept != null">
+        #{fTodept,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fAdate != null">
+        #{fAdate,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

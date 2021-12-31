@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userpart">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_userpart
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_userpart
+    where F_ID = #{fId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_userpart (F_ID, F_NAME, F_PAD1)
+    values (#{fId,jdbcType=CHAR}, #{fName,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_userpart
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_userpart
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_userpart
+    set F_NAME = #{fName,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+
+</mapper>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="syscfg">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_SECTION" jdbcType="CHAR" property="fSection" />
+    <id column="F_KEY" jdbcType="CHAR" property="fKey" />
+    <result column="F_VALUE" jdbcType="CHAR" property="fValue" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_SECTION, F_KEY, F_VALUE, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_syscfg
+    <where>
+      <if test="fSection != null">
+        F_SECTION = #{fSection,jdbcType=CHAR}
+      </if>
+      <if test="fKey != null">
+        and F_KEY = #{fKey,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectKeyBySection" parameterType="map" resultType="String">
+    select
+    F_VALUE
+    from t_syscfg
+    <where>
+      <if test="fSection != null">
+        F_SECTION = #{fSection,jdbcType=CHAR}
+      </if>
+      <if test="fKey != null">
+        and F_KEY = #{fKey,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_syscfg
+    where F_SECTION = #{fSection,jdbcType=CHAR}
+      and F_KEY = #{fKey,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_syscfg (F_SECTION, F_KEY, F_VALUE, 
+      F_PAD1)
+    values (#{fSection,jdbcType=CHAR}, #{fKey,jdbcType=CHAR}, #{fValue,jdbcType=CHAR}, 
+      #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_syscfg
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fSection != null">
+        F_SECTION,
+      </if>
+      <if test="fKey != null">
+        F_KEY,
+      </if>
+      <if test="fValue != null">
+        F_VALUE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fSection != null">
+        #{fSection,jdbcType=CHAR},
+      </if>
+      <if test="fKey != null">
+        #{fKey,jdbcType=CHAR},
+      </if>
+      <if test="fValue != null">
+        #{fValue,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_syscfg
+    <set>
+      <if test="fValue != null">
+        F_VALUE = #{fValue,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_SECTION = #{fSection,jdbcType=CHAR}
+      and F_KEY = #{fKey,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_syscfg
+    set F_VALUE = #{fValue,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR}
+    where F_SECTION = #{fSection,jdbcType=CHAR}
+      and F_KEY = #{fKey,jdbcType=CHAR}
+  </update>
+
+</mapper>

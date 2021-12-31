@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spcact">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DATE" jdbcType="CHAR" property="fDate" />
+    <result column="F_TIME" jdbcType="CHAR" property="fTime" />
+    <result column="F_EVID" jdbcType="CHAR" property="fEvid" />
+    <result column="F_DEVID" jdbcType="CHAR" property="fDevid" />
+    <result column="F_ASSERTS" jdbcType="CHAR" property="fAsserts" />
+    <result column="F_LOGVER" jdbcType="INTEGER" property="fLogver" />
+    <result column="F_ACNO" jdbcType="CHAR" property="fAcno" />
+    <result column="F_AMT" jdbcType="DOUBLE" property="fAmt" />
+    <result column="F_RETNO" jdbcType="CHAR" property="fRetno" />
+    <result column="F_RESULT" jdbcType="CHAR" property="fResult" />
+    <result column="F_HDERR" jdbcType="CHAR" property="fHderr" />
+    <result column="F_HOSTLS" jdbcType="CHAR" property="fHostls" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_spcact (F_DATE, F_TIME, F_EVID, F_DEVID, 
+      F_ASSERTS, F_LOGVER, F_ACNO, 
+      F_AMT, F_RETNO, F_RESULT, F_HDERR, 
+      F_HOSTLS, F_PAD1)
+    values (#{fDate,jdbcType=CHAR}, #{fTime,jdbcType=CHAR}, #{fEvid,jdbcType=CHAR}, #{fDevid,jdbcType=CHAR}, 
+      #{fAsserts,jdbcType=CHAR}, #{fLogver,jdbcType=INTEGER}, #{fAcno,jdbcType=CHAR}, 
+      #{fAmt,jdbcType=DOUBLE}, #{fRetno,jdbcType=CHAR}, #{fResult,jdbcType=CHAR}, #{fHderr,jdbcType=CHAR}, 
+      #{fHostls,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_spcact
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fEvid != null">
+        F_EVID,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fAsserts != null">
+        F_ASSERTS,
+      </if>
+      <if test="fLogver != null">
+        F_LOGVER,
+      </if>
+      <if test="fAcno != null">
+        F_ACNO,
+      </if>
+      <if test="fAmt != null">
+        F_AMT,
+      </if>
+      <if test="fRetno != null">
+        F_RETNO,
+      </if>
+      <if test="fResult != null">
+        F_RESULT,
+      </if>
+      <if test="fHderr != null">
+        F_HDERR,
+      </if>
+      <if test="fHostls != null">
+        F_HOSTLS,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        #{fDate,jdbcType=CHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=CHAR},
+      </if>
+      <if test="fEvid != null">
+        #{fEvid,jdbcType=CHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fAsserts != null">
+        #{fAsserts,jdbcType=CHAR},
+      </if>
+      <if test="fLogver != null">
+        #{fLogver,jdbcType=INTEGER},
+      </if>
+      <if test="fAcno != null">
+        #{fAcno,jdbcType=CHAR},
+      </if>
+      <if test="fAmt != null">
+        #{fAmt,jdbcType=DOUBLE},
+      </if>
+      <if test="fRetno != null">
+        #{fRetno,jdbcType=CHAR},
+      </if>
+      <if test="fResult != null">
+        #{fResult,jdbcType=CHAR},
+      </if>
+      <if test="fHderr != null">
+        #{fHderr,jdbcType=CHAR},
+      </if>
+      <if test="fHostls != null">
+        #{fHostls,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

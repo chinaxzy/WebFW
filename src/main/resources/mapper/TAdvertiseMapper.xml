@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="advertise">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_DEVTYPE" jdbcType="VARCHAR" property="fDevtype" />
+    <result column="F_SCRNTP" jdbcType="VARCHAR" property="fScrntp" />
+    <result column="F_FILE" jdbcType="VARCHAR" property="fFile" />
+    <result column="F_DESC" jdbcType="VARCHAR" property="fDesc" />
+    <result column="F_DATESTART" jdbcType="VARCHAR" property="fDatestart" />
+    <result column="F_DATEEND" jdbcType="VARCHAR" property="fDateend" />
+    <result column="F_PLAYSECS" jdbcType="DECIMAL" property="fPlaysecs" />
+    <result column="F_UPDTIME" jdbcType="VARCHAR" property="fUpdtime" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+
+    <result column="WDNAME" jdbcType="VARCHAR" property="fWdname" />
+    <result column="ZHNAME" jdbcType="VARCHAR" property="fZhname" />
+    <result column="FHNAME" jdbcType="VARCHAR" property="fFhname" />
+    <result column="DEPTNAME" jdbcType="VARCHAR" property="fDeptname" />
+
+    <result column="DEVTYPENAME" jdbcType="VARCHAR" property="fDevtypename" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_DEPT, F_DEVTYPE, F_SCRNTP, F_FILE, F_DESC, F_PLAYSECS, F_PAD1
+  </sql>
+
+  <select id="selectMaxId" parameterType="map" resultType="String">
+    SELECT MAX(SUBSTR(F_ID,10,3)) MAXID FROM t_advertise WHERE SUBSTR(F_ID,1,8)=#{fDate}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    A.*,B.F_NAME DEPTNAME,
+    C.F_NAME DEVTYPENAME,
+    concat(substr(A.F_DATESTART,1,4),'-',substr(A.F_DATESTART,5,2),'-',substr(A.F_DATESTART,7,2)) F_DATESTART,
+    concat(substr(A.F_DATEEND,1,4),'-',substr(A.F_DATEEND,5,2),'-',substr(A.F_DATEEND,7,2)) F_DATEEND,
+    concat(substr(A.F_UPDTIME,1,4),'-',substr(A.F_UPDTIME,5,2),'-',substr(A.F_UPDTIME,7,2),' ',
+    substr(A.F_UPDTIME,9,2),':',substr(A.F_UPDTIME,11,2),':',substr(A.F_UPDTIME,13,2)) F_UPDTIME
+    from t_advertise A
+    LEFT JOIN t_branch B ON A.F_DEPT=B.F_ID
+    LEFT JOIN t_devtype C ON A.F_DEVTYPE = C.F_ID
+    <where>
+      <if test="fId != null">
+        A.F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+      <if test="fDept != null">
+        AND A.F_DEPT = #{fDept}
+      </if>
+      <if test="fDevtype != null">
+        AND A.F_DEVTYPE = #{fDevtype}
+      </if>
+      <if test="fScrntp != null">
+        AND A.F_SCRNTP = #{fScrntp}
+      </if>
+      <if test="fDeptid != null">
+        AND B.F_DEPTID LIKE concat(#{fDeptid},'%')
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_advertise
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_advertise (F_ID, F_DEPT, F_DEVTYPE, 
+      F_SCRNTP, F_FILE, F_DESC, 
+      F_DATESTART, F_DATEEND, F_PLAYSECS, 
+      F_UPDTIME, F_PAD1)
+    values (#{fId,jdbcType=VARCHAR}, #{fDept,jdbcType=VARCHAR}, #{fDevtype,jdbcType=VARCHAR}, 
+      #{fScrntp,jdbcType=VARCHAR}, #{fFile,jdbcType=VARCHAR}, #{fDesc,jdbcType=VARCHAR}, 
+      #{fDatestart,jdbcType=VARCHAR}, #{fDateend,jdbcType=VARCHAR}, #{fPlaysecs,jdbcType=DECIMAL}, 
+      #{fUpdtime,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_advertise
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fDevtype != null">
+        F_DEVTYPE,
+      </if>
+      <if test="fScrntp != null">
+        F_SCRNTP,
+      </if>
+      <if test="fFile != null">
+        F_FILE,
+      </if>
+      <if test="fDesc != null">
+        F_DESC,
+      </if>
+      <if test="fDatestart != null">
+        F_DATESTART,
+      </if>
+      <if test="fDateend != null">
+        F_DATEEND,
+      </if>
+      <if test="fPlaysecs != null">
+        F_PLAYSECS,
+      </if>
+      <if test="fUpdtime != null">
+        F_UPDTIME,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevtype != null">
+        #{fDevtype,jdbcType=VARCHAR},
+      </if>
+      <if test="fScrntp != null">
+        #{fScrntp,jdbcType=VARCHAR},
+      </if>
+      <if test="fFile != null">
+        #{fFile,jdbcType=VARCHAR},
+      </if>
+      <if test="fDesc != null">
+        #{fDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fDatestart != null">
+        #{fDatestart,jdbcType=VARCHAR},
+      </if>
+      <if test="fDateend != null">
+        #{fDateend,jdbcType=VARCHAR},
+      </if>
+      <if test="fPlaysecs != null">
+        #{fPlaysecs,jdbcType=DECIMAL},
+      </if>
+      <if test="fUpdtime != null">
+        #{fUpdtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_advertise
+    <set>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevtype != null">
+        F_DEVTYPE = #{fDevtype,jdbcType=VARCHAR},
+      </if>
+      <if test="fScrntp != null">
+        F_SCRNTP = #{fScrntp,jdbcType=VARCHAR},
+      </if>
+      <if test="fFile != null">
+        F_FILE = #{fFile,jdbcType=VARCHAR},
+      </if>
+      <if test="fDesc != null">
+        F_DESC = #{fDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fDatestart != null">
+        F_DATESTART = #{fDatestart,jdbcType=VARCHAR},
+      </if>
+      <if test="fDateend != null">
+        F_DATEEND = #{fDateend,jdbcType=VARCHAR},
+      </if>
+      <if test="fPlaysecs != null">
+        F_PLAYSECS = #{fPlaysecs,jdbcType=DECIMAL},
+      </if>
+      <if test="fUpdtime != null">
+        F_UPDTIME = #{fUpdtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_ID = #{ofId,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateWhenDelete" parameterType="map">
+    update t_advertise
+    <set>
+      <if test="fId != null ">
+        F_ID = #{fId},
+      </if>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevtype != null">
+        F_DEVTYPE = #{fDevtype,jdbcType=VARCHAR},
+      </if>
+      <if test="fScrntp != null">
+        F_SCRNTP = #{fScrntp,jdbcType=VARCHAR},
+      </if>
+      <if test="fFile != null">
+        F_FILE = #{fFile,jdbcType=VARCHAR},
+      </if>
+      <if test="fDesc != null">
+        F_DESC = #{fDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="fDatestart != null">
+        F_DATESTART = #{fDatestart,jdbcType=VARCHAR},
+      </if>
+      <if test="fDateend != null">
+        F_DATEEND = #{fDateend,jdbcType=VARCHAR},
+      </if>
+      <if test="fPlaysecs != null">
+        F_PLAYSECS = #{fPlaysecs,jdbcType=DECIMAL},
+      </if>
+      <if test="fUpdtime != null">
+        F_UPDTIME = #{fUpdtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where
+        F_DEPT = #{fDept}
+        AND F_DEVTYPE = #{fDevtype}
+        AND F_SCRNTP = #{fScrntp}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_advertise
+    set F_DEPT = #{fDept,jdbcType=VARCHAR},
+      F_DEVTYPE = #{fDevtype,jdbcType=VARCHAR},
+      F_SCRNTP = #{fScrntp,jdbcType=VARCHAR},
+      F_FILE = #{fFile,jdbcType=VARCHAR},
+      F_DESC = #{fDesc,jdbcType=VARCHAR},
+      F_DATESTART = #{fDatestart,jdbcType=VARCHAR},
+      F_DATEEND = #{fDateend,jdbcType=VARCHAR},
+      F_PLAYSECS = #{fPlaysecs,jdbcType=DECIMAL},
+      F_UPDTIME = #{fUpdtime,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cardbin">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <id column="F_LEN" jdbcType="DECIMAL" property="fLen" />
+    <id column="F_BANKID" jdbcType="VARCHAR" property="fBankid" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_OWN" jdbcType="VARCHAR" property="fOwn" />
+    <result column="F_TYPE" jdbcType="VARCHAR" property="fType" />
+    <result column="F_MDTP" jdbcType="VARCHAR" property="fMdtp" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+
+    <result column="F_BANKIDNAME" jdbcType="VARCHAR" property="fBankidname" />
+    <result column="F_OWNNAME" jdbcType="VARCHAR" property="fOwnname" />
+    <result column="F_MDTPNAME" jdbcType="VARCHAR" property="fMdtpname" />
+    <result column="F_TYPENAME" jdbcType="VARCHAR" property="fTypename" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_LEN, F_BANKID, F_NAME, F_OWN, F_TYPE, F_MDTP, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    A.*,
+    B.F_NAME F_BANKIDNAME,
+    C.F_NAME F_TYPENAME,
+    CASE A.F_OWN WHEN '1' THEN '是' WHEN '0' THEN '否' ELSE '' END F_OWNNAME,
+    CASE A.F_MDTP WHEN '1' THEN '磁条卡' WHEN '2' THEN 'IC卡' WHEN '0' THEN '复合卡' ELSE '' END F_MDTPNAME
+    from t_cardbin A
+    LEFT JOIN t_codes B ON A.F_BANKID = B.F_ID AND B.F_CATID = 'BK'
+    LEFT JOIN t_codes C ON A.F_TYPE = C.F_ID AND C.F_CATID = 'LX'
+    <where>
+      <if test="fId != null">
+        A.F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+      <if test="fLen != null">
+        and A.F_LEN = #{fLen,jdbcType=DECIMAL}
+      </if>
+      <if test="fBankid != null">
+        and A.F_BANKID = #{fBankid,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_cardbin
+    where F_ID = #{fId,jdbcType=VARCHAR}
+      and F_LEN = #{fLen,jdbcType=DECIMAL}
+      and F_BANKID = #{fBankid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_cardbin (F_ID, F_LEN, F_BANKID, 
+      F_NAME, F_OWN, F_TYPE, 
+      F_MDTP, F_PAD1)
+    values (#{fId,jdbcType=VARCHAR}, #{fLen,jdbcType=DECIMAL}, #{fBankid,jdbcType=VARCHAR}, 
+      #{fName,jdbcType=VARCHAR}, #{fOwn,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR}, 
+      #{fMdtp,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_cardbin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fLen != null">
+        F_LEN,
+      </if>
+      <if test="fBankid != null">
+        F_BANKID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fOwn != null">
+        F_OWN,
+      </if>
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fMdtp != null">
+        F_MDTP,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fLen != null">
+        #{fLen,jdbcType=DECIMAL},
+      </if>
+      <if test="fBankid != null">
+        #{fBankid,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fOwn != null">
+        #{fOwn,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fMdtp != null">
+        #{fMdtp,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_cardbin
+    <set>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fLen != null">
+        F_LEN = #{fLen,jdbcType=DECIMAL},
+      </if>
+      <if test="fBankid != null">
+        F_BANKID = #{fBankid,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fOwn != null">
+        F_OWN = #{fOwn,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null">
+        F_TYPE = #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fMdtp != null">
+        F_MDTP = #{fMdtp,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_ID = #{ofId,jdbcType=VARCHAR}
+      and F_LEN = #{ofLen,jdbcType=DECIMAL}
+      and F_BANKID = #{ofBankid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_cardbin
+    set F_NAME = #{fName,jdbcType=VARCHAR},
+      F_OWN = #{fOwn,jdbcType=VARCHAR},
+      F_TYPE = #{fType,jdbcType=VARCHAR},
+      F_MDTP = #{fMdtp,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+      and F_LEN = #{fLen,jdbcType=DECIMAL}
+      and F_BANKID = #{fBankid,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

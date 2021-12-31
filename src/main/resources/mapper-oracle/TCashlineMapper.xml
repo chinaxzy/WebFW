@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cashline">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_USER" jdbcType="VARCHAR" property="fUser" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_cashline (F_DEPT, F_ID, F_NAME, 
+      F_USER, F_PAD1)
+    values (#{fDept,jdbcType=VARCHAR}, #{fId,jdbcType=VARCHAR}, #{fName,jdbcType=VARCHAR}, 
+      #{fUser,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_cashline
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fUser != null">
+        F_USER,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fUser != null">
+        #{fUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="params">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <id column="F_SYSID" jdbcType="VARCHAR" property="fSysid" />
+    <id column="F_KEY" jdbcType="VARCHAR" property="fKey" />
+    <result column="F_SELECT" jdbcType="VARCHAR" property="fSelect" />
+    <result column="F_VALUE" jdbcType="VARCHAR" property="fValue" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_DEPT, F_SYSID, F_KEY, F_SELECT, F_VALUE, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_params
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+      and F_SYSID = #{fSysid,jdbcType=VARCHAR}
+      and F_KEY = #{fKey,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_params
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+      and F_SYSID = #{fSysid,jdbcType=VARCHAR}
+      and F_KEY = #{fKey,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_params (F_DEPT, F_SYSID, F_KEY, 
+      F_SELECT, F_VALUE, F_PAD1
+      )
+    values (#{fDept,jdbcType=VARCHAR}, #{fSysid,jdbcType=VARCHAR}, #{fKey,jdbcType=VARCHAR}, 
+      #{fSelect,jdbcType=VARCHAR}, #{fValue,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_params
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fSysid != null">
+        F_SYSID,
+      </if>
+      <if test="fKey != null">
+        F_KEY,
+      </if>
+      <if test="fSelect != null">
+        F_SELECT,
+      </if>
+      <if test="fValue != null">
+        F_VALUE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fSysid != null">
+        #{fSysid,jdbcType=VARCHAR},
+      </if>
+      <if test="fKey != null">
+        #{fKey,jdbcType=VARCHAR},
+      </if>
+      <if test="fSelect != null">
+        #{fSelect,jdbcType=VARCHAR},
+      </if>
+      <if test="fValue != null">
+        #{fValue,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_params
+    <set>
+      <if test="fSelect != null">
+        F_SELECT = #{fSelect,jdbcType=VARCHAR},
+      </if>
+      <if test="fValue != null">
+        F_VALUE = #{fValue,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+      and F_SYSID = #{fSysid,jdbcType=VARCHAR}
+      and F_KEY = #{fKey,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_params
+    set F_SELECT = #{fSelect,jdbcType=VARCHAR},
+      F_VALUE = #{fValue,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+      and F_SYSID = #{fSysid,jdbcType=VARCHAR}
+      and F_KEY = #{fKey,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

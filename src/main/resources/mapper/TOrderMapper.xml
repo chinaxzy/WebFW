@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_SERIAL" jdbcType="VARCHAR" property="fSerial" />
+    <result column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_TIME" jdbcType="VARCHAR" property="fTime" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_ACNO" jdbcType="VARCHAR" property="fAcno" />
+    <result column="F_IDNO" jdbcType="VARCHAR" property="fIdno" />
+    <result column="F_CUSTNAME" jdbcType="VARCHAR" property="fCustname" />
+    <result column="F_MOBILE" jdbcType="VARCHAR" property="fMobile" />
+    <result column="F_CHANNEL" jdbcType="VARCHAR" property="fChannel" />
+    <result column="F_OPTIME" jdbcType="VARCHAR" property="fOptime" />
+    <result column="F_OPTIME1" jdbcType="VARCHAR" property="fOptime1" />
+    <result column="F_STATE" jdbcType="VARCHAR" property="fState" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+
+    <result column="WDNAME" jdbcType="VARCHAR" property="fWdname" />
+    <result column="ZHNAME" jdbcType="VARCHAR" property="fZhname" />
+    <result column="FHNAME" jdbcType="VARCHAR" property="fFhname" />
+  </resultMap>
+
+  <select id="selectCountGD" parameterType="map" resultType="int">
+
+    SELECT COUNT(*) FROM t_order
+    WHERE f_date LIKE concat('%',#{fDate}) AND f_date>=#{fDate}
+
+  </select>
+
+  <select id="selectCountWK" parameterType="map" resultType="int">
+    SELECT COUNT(*) FROM t_order
+    WHERE F_DATE BETWEEN #{fDateStart} AND #{fDateEnd}
+  </select>
+
+  <select id="selectCount" parameterType="map" resultType="int">
+
+    SELECT COUNT(*) FROM t_order
+    WHERE f_dept=#{fDept} AND f_date>=#{fDate}
+
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select
+    a.F_DEPT,
+    F_ACNO,
+    F_IDNO,
+    F_CUSTNAME,
+    F_MOBILE,
+    F_SERIAL,
+    F_CHANNEL,
+    F_STATE,CASE F_STATE WHEN 1 THEN '预约成功' WHEN 0 THEN '取消' WHEN 2 THEN '已取号' ELSE '其他' END fStatename,
+    CASE F_CHANNEL WHEN 'T' THEN '终端' WHEN 'W' THEN '网银' WHEN 'M' THEN '手机' ELSE '' END fChannelname,
+
+    concat(substr(F_DATE,1,4),'-',substr(F_DATE,5,2),'-',substr(F_DATE,7,2)) fDate,
+    concat(substr(F_TIME,1,2),':',substr(F_TIME,3,5),':',substr(F_TIME,8,2)) fTime,
+    CASE WHEN F_OPTIME IS NOT NULL THEN concat(substr(F_OPTIME,1,4),'-',substr(F_OPTIME,5,2),'-',substr(F_OPTIME,7,2),' ',substr(F_OPTIME,9,2),':',substr(F_OPTIME,11,2),':',substr(F_OPTIME,13,2))
+    ELSE '' END fOptime,
+    CASE WHEN F_OPTIME1 IS NOT NULL THEN concat(substr(F_OPTIME1,1,4),'-',substr(F_OPTIME1,5,2),'-',substr(F_OPTIME1,7,2),' ',substr(F_OPTIME1,9,2),':',substr(F_OPTIME1,11,2),':',substr(F_OPTIME1,13,2))
+    ELSE '' END fOptime1,
+    B.F_DEPTID deptid,
+    B.F_NAME WDNAME,
+    C.F_NAME ZHNAME,
+    D.F_NAME FHNAME
+
+    from t_order a,
+    t_branch B,
+    t_branch C,
+    t_branch D
+    <where>
+      <if test="fDept != null">
+        a.F_DEPT = #{fDept,jdbcType=VARCHAR}
+      </if>
+      <if test="fStadate != null">
+        and F_DATE = #{fStadate,jdbcType=VARCHAR}
+      </if>
+      <if test="fDate != null">
+        and F_DATE = #{fDate,jdbcType=VARCHAR}
+      </if>
+
+      <if test="fDateStart != null and fDateEnd != null">
+        AND F_DATE BETWEEN #{fDateStart} AND #{fDateEnd}
+      </if>
+
+      <if test="fChannel != null">
+        and F_CHANNEL = #{fChannel}
+      </if>
+      <if test="fOptime != null">
+        and F_OPTIME  LIKE concat(#{fOptime},'%')
+      </if>
+      <if test=" 1==1">
+        AND a.F_DEPT=B.F_ID
+        AND B.F_DEPT=C.F_ID
+        AND C.F_DEPT=D.F_ID
+      </if>
+      <if test="deptid != null">
+        AND B.F_DEPTID LIKE concat(#{deptid},"%")
+      </if>
+    </where>
+  </select>
+
+  <insert id="insert" parameterType="map">
+    insert into t_order (F_SERIAL, F_DATE, F_TIME, 
+      F_DEPT, F_ACNO, F_IDNO, 
+      F_CUSTNAME, F_MOBILE, F_CHANNEL, 
+      F_OPTIME, F_OPTIME1, F_STATE, 
+      F_PAD1)
+    values (#{fSerial,jdbcType=VARCHAR}, #{fDate,jdbcType=VARCHAR}, #{fTime,jdbcType=VARCHAR}, 
+      #{fDept,jdbcType=VARCHAR}, #{fAcno,jdbcType=VARCHAR}, #{fIdno,jdbcType=VARCHAR}, 
+      #{fCustname,jdbcType=VARCHAR}, #{fMobile,jdbcType=VARCHAR}, #{fChannel,jdbcType=VARCHAR}, 
+      #{fOptime,jdbcType=VARCHAR}, #{fOptime1,jdbcType=VARCHAR}, #{fState,jdbcType=VARCHAR}, 
+      #{fPad1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fSerial != null">
+        F_SERIAL,
+      </if>
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fAcno != null">
+        F_ACNO,
+      </if>
+      <if test="fIdno != null">
+        F_IDNO,
+      </if>
+      <if test="fCustname != null">
+        F_CUSTNAME,
+      </if>
+      <if test="fMobile != null">
+        F_MOBILE,
+      </if>
+      <if test="fChannel != null">
+        F_CHANNEL,
+      </if>
+      <if test="fOptime != null">
+        F_OPTIME,
+      </if>
+      <if test="fOptime1 != null">
+        F_OPTIME1,
+      </if>
+      <if test="fState != null">
+        F_STATE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fSerial != null">
+        #{fSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fAcno != null">
+        #{fAcno,jdbcType=VARCHAR},
+      </if>
+      <if test="fIdno != null">
+        #{fIdno,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustname != null">
+        #{fCustname,jdbcType=VARCHAR},
+      </if>
+      <if test="fMobile != null">
+        #{fMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="fChannel != null">
+        #{fChannel,jdbcType=VARCHAR},
+      </if>
+      <if test="fOptime != null">
+        #{fOptime,jdbcType=VARCHAR},
+      </if>
+      <if test="fOptime1 != null">
+        #{fOptime1,jdbcType=VARCHAR},
+      </if>
+      <if test="fState != null">
+        #{fState,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

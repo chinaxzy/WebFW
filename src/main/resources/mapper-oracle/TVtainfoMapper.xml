@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vtainfo">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_SEATID" jdbcType="VARCHAR" property="fSeatid" />
+    <result column="F_SEATPWD" jdbcType="VARCHAR" property="fSeatpwd" />
+    <result column="F_SEATPWD2" jdbcType="VARCHAR" property="fSeatpwd2" />
+    <result column="F_SEATNAME" jdbcType="VARCHAR" property="fSeatname" />
+    <result column="F_RIGHT" jdbcType="VARCHAR" property="fRight" />
+    <result column="F_ORG" jdbcType="VARCHAR" property="fOrg" />
+    <result column="F_ORGNAME" jdbcType="VARCHAR" property="fOrgname" />
+    <result column="F_STATUS" jdbcType="VARCHAR" property="fStatus" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+    <result column="F_PAD2" jdbcType="VARCHAR" property="fPad2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_SEATID, F_SEATPWD, F_SEATPWD2, F_SEATNAME, F_RIGHT, F_ORG, F_ORGNAME, F_STATUS, 
+    F_PAD1, F_PAD2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_vtainfo
+    <where>
+      <if test="fSeatid != null">
+        F_SEATID = #{fSeatid,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_vtainfo
+    where F_SEATID = #{fSeatid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_vtainfo (F_SEATID, F_SEATPWD, F_SEATPWD2, 
+      F_SEATNAME, F_RIGHT, F_ORG, 
+      F_ORGNAME, F_STATUS, F_PAD1, 
+      F_PAD2)
+    values (#{fSeatid,jdbcType=VARCHAR}, #{fSeatpwd,jdbcType=VARCHAR}, #{fSeatpwd2,jdbcType=VARCHAR}, 
+      #{fSeatname,jdbcType=VARCHAR}, #{fRight,jdbcType=VARCHAR}, #{fOrg,jdbcType=VARCHAR}, 
+      #{fOrgname,jdbcType=VARCHAR}, #{fStatus,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}, 
+      #{fPad2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_vtainfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fSeatid != null">
+        F_SEATID,
+      </if>
+      <if test="fSeatpwd != null">
+        F_SEATPWD,
+      </if>
+      <if test="fSeatpwd2 != null">
+        F_SEATPWD2,
+      </if>
+      <if test="fSeatname != null">
+        F_SEATNAME,
+      </if>
+      <if test="fRight != null">
+        F_RIGHT,
+      </if>
+      <if test="fOrg != null">
+        F_ORG,
+      </if>
+      <if test="fOrgname != null">
+        F_ORGNAME,
+      </if>
+      <if test="fStatus != null">
+        F_STATUS,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fSeatid != null">
+        #{fSeatid,jdbcType=VARCHAR},
+      </if>
+      <if test="fSeatpwd != null">
+        #{fSeatpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="fSeatpwd2 != null">
+        #{fSeatpwd2,jdbcType=VARCHAR},
+      </if>
+      <if test="fSeatname != null">
+        #{fSeatname,jdbcType=VARCHAR},
+      </if>
+      <if test="fRight != null">
+        #{fRight,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrg != null">
+        #{fOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrgname != null">
+        #{fOrgname,jdbcType=VARCHAR},
+      </if>
+      <if test="fStatus != null">
+        #{fStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad2 != null">
+        #{fPad2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_vtainfo
+    <set>
+      <if test="fSeatpwd != null">
+        F_SEATPWD = #{fSeatpwd,jdbcType=VARCHAR},
+      </if>
+      <if test="fSeatpwd2 != null">
+        F_SEATPWD2 = #{fSeatpwd2,jdbcType=VARCHAR},
+      </if>
+      <if test="fSeatname != null">
+        F_SEATNAME = #{fSeatname,jdbcType=VARCHAR},
+      </if>
+      <if test="fRight != null">
+        F_RIGHT = #{fRight,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrg != null">
+        F_ORG = #{fOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrgname != null">
+        F_ORGNAME = #{fOrgname,jdbcType=VARCHAR},
+      </if>
+      <if test="fStatus != null">
+        F_STATUS = #{fStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2 = #{fPad2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_SEATID = #{fSeatid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_vtainfo
+    set F_SEATPWD = #{fSeatpwd,jdbcType=VARCHAR},
+      F_SEATPWD2 = #{fSeatpwd2,jdbcType=VARCHAR},
+      F_SEATNAME = #{fSeatname,jdbcType=VARCHAR},
+      F_RIGHT = #{fRight,jdbcType=VARCHAR},
+      F_ORG = #{fOrg,jdbcType=VARCHAR},
+      F_ORGNAME = #{fOrgname,jdbcType=VARCHAR},
+      F_STATUS = #{fStatus,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      F_PAD2 = #{fPad2,jdbcType=VARCHAR}
+    where F_SEATID = #{fSeatid,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="windquetype">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <id column="F_WINDID" jdbcType="VARCHAR" property="fWindid" />
+    <id column="F_QUETYPE" jdbcType="VARCHAR" property="fQuetype" />
+    <result column="F_LEVEL" jdbcType="VARCHAR" property="fLevel" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+
+    <result column="F_QUETYPELIST" jdbcType="VARCHAR" property="fQuetypeList" />
+    <result column="F_QUETYPELISTNAME" jdbcType="VARCHAR" property="fQuetypeListName" />
+
+    <result column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_COUNT" jdbcType="VARCHAR" property="fCount" />
+    <result column="F_NUMBER" jdbcType="VARCHAR" property="fNumber" />
+    <result column="F_TIME1" jdbcType="VARCHAR" property="fTime1" />
+    <result column="F_TIME2" jdbcType="VARCHAR" property="fTime2" />
+    <result column="F_STATE" jdbcType="VARCHAR" property="fState" />
+    <result column="F_STATE1" jdbcType="VARCHAR" property="fState1" />
+    <result column="F_SCRNNO" jdbcType="VARCHAR" property="fScrnno" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+
+    <result column="F_STATENAME" jdbcType="VARCHAR" property="fStatename" />
+
+    <result column="WDNAME" jdbcType="VARCHAR" property="fWdname" />
+    <result column="ZHNAME" jdbcType="VARCHAR" property="fZhname" />
+    <result column="FHNAME" jdbcType="VARCHAR" property="fFhname" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_DEPT, F_WINDID, F_QUETYPE,F_LEVEL,F_PAD1
+  </sql>
+
+
+  <select id="selectWindAndQue" parameterType="map" resultMap="BaseResultMap">
+    SELECT b.F_WINDID,b.F_QUETYPELIST,b.F_QUETYPELISTNAME,c.F_DEPT,c.F_ID,c.F_NUMBER,
+    concat(substr(c.F_TIME1,1,4),'-',substr(c.F_TIME1,5,2),'-',substr(c.F_TIME1,7,2),' ',substr(c.F_TIME1,9,2),':',substr(c.F_TIME1,11,2)) F_TIME1,
+    concat(substr(c.F_TIME2,1,4),'-',substr(c.F_TIME2,5,2),'-',substr(c.F_TIME2,7,2),' ',substr(c.F_TIME2,9,2),':',substr(c.F_TIME2,11,2)) F_TIME2,
+
+    CASE c.F_STATE1
+      WHEN '1' THEN c.F_COUNT
+      ELSE '' END F_COUNT,
+
+    c.F_STATE1,c.F_SCRNNO,c.F_PAD1,
+    case F_STATE1
+    when '1' then '签到'
+    when '0' then '签退'
+    when 'P' then '暂停'
+    else '' end F_STATENAME,
+
+    e.F_NAME WDNAME,
+    f.F_NAME ZHNAME,
+    g.F_NAME FHNAME
+    FROM t_wind c LEFT OUTER JOIN (
+    SELECT
+    a.F_DEPT,
+    a.F_WINDID,
+
+    CASE a.F_LEVEL
+    WHEN '' THEN group_concat(a.F_QUETYPE)
+    ELSE group_concat(a.F_LEVEL,'-',a.F_QUETYPE) END F_QUETYPELIST,
+
+    CASE a.F_LEVEL
+    WHEN '' THEN group_concat(d.F_NAME)
+    ELSE group_concat(a.F_LEVEL,'-',d.F_NAME) END F_QUETYPELISTNAME
+
+    FROM t_windquetype a LEFT JOIN t_queuetype d ON a.F_DEPT = d.F_DEPT
+    AND a.F_QUETYPE = d.F_QUETYPE
+    GROUP BY F_DEPT, F_WINDID
+    ) b
+    ON b.F_DEPT = c.F_DEPT
+    AND b.F_WINDID = c.F_ID,
+
+    t_branch e,
+    t_branch f,
+    t_branch g
+    <where>
+      <if test="fDept != null">
+        c.F_DEPT = #{fDept}
+      </if>
+      <if test=" 1==1">
+        AND c.F_DEPT=e.F_ID
+        AND e.F_DEPT=f.F_ID
+        AND f.F_DEPT=g.F_ID
+      </if>
+      <if test="deptid != null">
+        AND e.F_DEPTID LIKE concat(#{deptid},"%")
+      </if>
+    </where>
+
+
+  </select>
+
+
+  <select id="selectWindquetype" parameterType="map"  resultMap="BaseResultMap">
+    SELECT F_DEPT,F_WINDID,group_concat(F_QUETYPE) F_QUETYPE_LIST
+    FROM t_windquetype
+    <where>
+      <if test="fDept != null">
+        F_DEPT=#{fDept}
+      </if>
+      <if test="fWindid != null">
+        AND F_WINDID=#{fWindid}
+      </if>
+    </where>
+    GROUP BY F_DEPT,F_WINDID
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_windquetype
+    <where>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=VARCHAR}
+      </if>
+      <if test="fWindid != null">
+        and F_WINDID = #{fWindid,jdbcType=VARCHAR}
+      </if>
+      <if test="fQuetype != null">
+        and F_QUETYPE = #{fQuetype,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_windquetype
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+      and F_WINDID = #{fWindid,jdbcType=VARCHAR}
+      <if test="fQuetype != null">
+        and F_QUETYPE = #{fQuetype,jdbcType=VARCHAR}
+      </if>
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_windquetype (F_DEPT, F_WINDID, F_QUETYPE, 
+      F_PAD1)
+    values (#{fDept,jdbcType=VARCHAR}, #{fWindid,jdbcType=VARCHAR}, #{fQuetype,jdbcType=VARCHAR}, 
+      #{fPad1,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertWindquetype" parameterType="map">
+    insert into t_windquetype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fWindid != null">
+        F_WINDID,
+      </if>
+      <if test="fQuetypeList != null">
+        F_QUETYPE,
+      </if>
+      <if test="fLevel == null">
+        F_LEVEL,
+      </if>
+    </trim>
+    values
+    <foreach collection="fQuetypeList" item="fQuetype" index="index" separator="," >
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+          <if test="fDept != null">
+            #{fDept,jdbcType=VARCHAR},
+          </if>
+          <if test="fWindid != null">
+            #{fWindid,jdbcType=VARCHAR},
+          </if>
+          <if test="fQuetype != null">
+            #{fQuetype,jdbcType=VARCHAR},
+          </if>
+          <if test="fLevel == null">
+            '',
+          </if>
+      </trim>
+    </foreach>
+  </insert>
+
+  <insert id="insertWithZH" parameterType="map">
+    INSERT INTO t_windquetype(F_DEPT,F_WINDID,F_QUETYPE,F_LEVEL)
+    SELECT #{fDept},#{fWindid},F_QUETYPE,F_LEVEL
+    FROM t_queuetype
+    WHERE F_DEPT = (SELECT max(F_DEPT) FROM t_queuetype where F_DEPT IN ('0000',#{fDept}))
+  </insert>
+
+  <insert id="insertSelective" parameterType="map">
+    insert into t_windquetype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fWindid != null">
+        F_WINDID,
+      </if>
+      <if test="fQuetype != null">
+        F_QUETYPE,
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fWindid != null">
+        #{fWindid,jdbcType=VARCHAR},
+      </if>
+      <if test="fQuetype != null">
+        #{fQuetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fLevel != null">
+        #{fLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_windquetype
+    <set>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fWindid != null">
+        F_WINDID = #{fWindid,jdbcType=VARCHAR},
+      </if>
+      <if test="fQuetype != null">
+        F_QUETYPE = #{fQuetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL = #{fLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_DEPT = #{ofDept,jdbcType=VARCHAR}
+      and F_WINDID = #{ofWindid,jdbcType=VARCHAR}
+      and F_QUETYPE = #{ofQuetype,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_windquetype
+    set F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+      and F_WINDID = #{fWindid,jdbcType=VARCHAR}
+      and F_QUETYPE = #{fQuetype,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

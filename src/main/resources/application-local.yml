@@ -1,0 +1,44 @@
+# Server settings
+server:
+    port: 8010
+
+# SPRING PROFILES
+spring:
+    profiles: local
+    # HTTP ENCODING
+    http:
+        encoding.charset: UTF-8
+        encoding.enable: true
+        encoding.force: true
+        multipart:
+            maxFileSize : 128MB
+            maxRequestSize : 128MB
+
+    datasource:
+#        url : jdbc:mysql://192.168.218.133:3306/ebms_test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&connectTimeout=60000&socketTimeout=60000&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false
+#        username : root
+#        password : 123456
+#        driverClassName : com.mysql.jdbc.Driver
+
+        url : jdbc:oracle:thin:@192.168.1.129:1521/pdb01
+        schema: classpath:/schema.sql
+        username : ydcard
+        password : 123456
+        driverClassName : oracle.jdbc.driver.OracleDriver
+
+
+# MyBatis
+mybatis:
+#    mapperLocations: classpath:/mapper/*.xml
+    mapperLocations: classpath:/mapper-oracle/*.xml
+#    mapperLocations: file:mapper-oracle/*.xml
+    configLocation: classpath:/mybatis-config.xml
+
+# LOGGING
+logging:
+    config: classpath:logback-spring.xml
+
+upload:
+    url: /Users/Jeremy/Downloads/
+
+#pdj: false

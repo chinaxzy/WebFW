@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vtmqueryinfo">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_DEVNO" jdbcType="VARCHAR" property="fDevno" />
+    <result column="F_TIME" jdbcType="VARCHAR" property="fTime" />
+    <result column="F_VIP_GRADE" jdbcType="VARCHAR" property="fVipGrade" />
+    <result column="F_CNAME" jdbcType="VARCHAR" property="fCname" />
+    <result column="F_CIDCARDNO" jdbcType="VARCHAR" property="fCidcardno" />
+    <result column="F_DEVIP" jdbcType="VARCHAR" property="fDevip" />
+    <result column="F_LARGETYPE" jdbcType="VARCHAR" property="fLargetype" />
+    <result column="F_MEDIUM" jdbcType="VARCHAR" property="fMedium" />
+    <result column="F_SMALL" jdbcType="VARCHAR" property="fSmall" />
+    <result column="F_REQTYPE" jdbcType="VARCHAR" property="fReqtype" />
+    <result column="F_REQSTARTTIME" jdbcType="VARCHAR" property="fReqstarttime" />
+    <result column="F_REQENDTIME" jdbcType="VARCHAR" property="fReqendtime" />
+    <result column="F_REQTOTALTIME" jdbcType="VARCHAR" property="fReqtotaltime" />
+    <result column="F_LEAVEREASON" jdbcType="VARCHAR" property="fLeavereason" />
+    <result column="F_WAITTOTALTIME" jdbcType="CHAR" property="fWaittotaltime" />
+    <result column="F_WAITENDTIME" jdbcType="CHAR" property="fWaitendtime" />
+    <result column="F_WAITSTARTTIME" jdbcType="CHAR" property="fWaitstarttime" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_vtmqueryinfo (F_ID, F_DEVNO, F_TIME, 
+      F_VIP_GRADE, F_CNAME, F_CIDCARDNO, 
+      F_DEVIP, F_LARGETYPE, F_MEDIUM, 
+      F_SMALL, F_REQTYPE, F_REQSTARTTIME, 
+      F_REQENDTIME, F_REQTOTALTIME, F_LEAVEREASON, 
+      F_WAITTOTALTIME, F_WAITENDTIME, F_WAITSTARTTIME
+      )
+    values (#{fId,jdbcType=VARCHAR}, #{fDevno,jdbcType=VARCHAR}, #{fTime,jdbcType=VARCHAR}, 
+      #{fVipGrade,jdbcType=VARCHAR}, #{fCname,jdbcType=VARCHAR}, #{fCidcardno,jdbcType=VARCHAR}, 
+      #{fDevip,jdbcType=VARCHAR}, #{fLargetype,jdbcType=VARCHAR}, #{fMedium,jdbcType=VARCHAR}, 
+      #{fSmall,jdbcType=VARCHAR}, #{fReqtype,jdbcType=VARCHAR}, #{fReqstarttime,jdbcType=VARCHAR}, 
+      #{fReqendtime,jdbcType=VARCHAR}, #{fReqtotaltime,jdbcType=VARCHAR}, #{fLeavereason,jdbcType=VARCHAR}, 
+      #{fWaittotaltime,jdbcType=CHAR}, #{fWaitendtime,jdbcType=CHAR}, #{fWaitstarttime,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_vtmqueryinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fDevno != null">
+        F_DEVNO,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fVipGrade != null">
+        F_VIP_GRADE,
+      </if>
+      <if test="fCname != null">
+        F_CNAME,
+      </if>
+      <if test="fCidcardno != null">
+        F_CIDCARDNO,
+      </if>
+      <if test="fDevip != null">
+        F_DEVIP,
+      </if>
+      <if test="fLargetype != null">
+        F_LARGETYPE,
+      </if>
+      <if test="fMedium != null">
+        F_MEDIUM,
+      </if>
+      <if test="fSmall != null">
+        F_SMALL,
+      </if>
+      <if test="fReqtype != null">
+        F_REQTYPE,
+      </if>
+      <if test="fReqstarttime != null">
+        F_REQSTARTTIME,
+      </if>
+      <if test="fReqendtime != null">
+        F_REQENDTIME,
+      </if>
+      <if test="fReqtotaltime != null">
+        F_REQTOTALTIME,
+      </if>
+      <if test="fLeavereason != null">
+        F_LEAVEREASON,
+      </if>
+      <if test="fWaittotaltime != null">
+        F_WAITTOTALTIME,
+      </if>
+      <if test="fWaitendtime != null">
+        F_WAITENDTIME,
+      </if>
+      <if test="fWaitstarttime != null">
+        F_WAITSTARTTIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevno != null">
+        #{fDevno,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fVipGrade != null">
+        #{fVipGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="fCname != null">
+        #{fCname,jdbcType=VARCHAR},
+      </if>
+      <if test="fCidcardno != null">
+        #{fCidcardno,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevip != null">
+        #{fDevip,jdbcType=VARCHAR},
+      </if>
+      <if test="fLargetype != null">
+        #{fLargetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fMedium != null">
+        #{fMedium,jdbcType=VARCHAR},
+      </if>
+      <if test="fSmall != null">
+        #{fSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="fReqtype != null">
+        #{fReqtype,jdbcType=VARCHAR},
+      </if>
+      <if test="fReqstarttime != null">
+        #{fReqstarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="fReqendtime != null">
+        #{fReqendtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fReqtotaltime != null">
+        #{fReqtotaltime,jdbcType=VARCHAR},
+      </if>
+      <if test="fLeavereason != null">
+        #{fLeavereason,jdbcType=VARCHAR},
+      </if>
+      <if test="fWaittotaltime != null">
+        #{fWaittotaltime,jdbcType=CHAR},
+      </if>
+      <if test="fWaitendtime != null">
+        #{fWaitendtime,jdbcType=CHAR},
+      </if>
+      <if test="fWaitstarttime != null">
+        #{fWaitstarttime,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

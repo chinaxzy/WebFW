@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devisp">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_ADDR" jdbcType="CHAR" property="fAddr" />
+    <result column="F_ADMIN" jdbcType="CHAR" property="fAdmin" />
+    <result column="F_TEL" jdbcType="CHAR" property="fTel" />
+    <result column="F_MOBILE" jdbcType="CHAR" property="fMobile" />
+    <result column="F_EMAIL" jdbcType="CHAR" property="fEmail" />
+    <result column="F_FAX" jdbcType="CHAR" property="fFax" />
+    <result column="F_ACKTIME" jdbcType="INTEGER" property="fAcktime" />
+    <result column="F_ENGIN1" jdbcType="CHAR" property="fEngin1" />
+    <result column="F_EMOBILE1" jdbcType="CHAR" property="fEmobile1" />
+    <result column="F_ENGIN2" jdbcType="CHAR" property="fEngin2" />
+    <result column="F_EMOBILE2" jdbcType="CHAR" property="fEmobile2" />
+    <result column="F_ENGIN3" jdbcType="CHAR" property="fEngin3" />
+    <result column="F_EMOBILE3" jdbcType="CHAR" property="fEmobile3" />
+    <result column="F_ENGIN4" jdbcType="CHAR" property="fEngin4" />
+    <result column="F_EMOBILE4" jdbcType="CHAR" property="fEmobile4" />
+    <result column="F_ENGIN5" jdbcType="CHAR" property="fEngin5" />
+    <result column="F_EMOBILE5" jdbcType="CHAR" property="fEmobile5" />
+    <result column="F_MSGIDX" jdbcType="INTEGER" property="fMsgidx" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_ADDR, F_ADMIN, F_TEL, F_MOBILE, F_EMAIL, F_FAX, F_ACKTIME, F_ENGIN1, 
+    F_EMOBILE1, F_ENGIN2, F_EMOBILE2, F_ENGIN3, F_EMOBILE3, F_ENGIN4, F_EMOBILE4, F_ENGIN5, 
+    F_EMOBILE5, F_MSGIDX, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_devisp
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_devisp
+    where F_ID = #{fId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_devisp (F_ID, F_NAME, F_ADDR, F_ADMIN, 
+      F_TEL, F_MOBILE, F_EMAIL, F_FAX, 
+      F_ACKTIME, F_ENGIN1, F_EMOBILE1, 
+      F_ENGIN2, F_EMOBILE2, F_ENGIN3, 
+      F_EMOBILE3, F_ENGIN4, F_EMOBILE4, 
+      F_ENGIN5, F_EMOBILE5, F_MSGIDX, 
+      F_PAD1)
+    values (#{fId,jdbcType=CHAR}, #{fName,jdbcType=CHAR}, #{fAddr,jdbcType=CHAR}, #{fAdmin,jdbcType=CHAR}, 
+      #{fTel,jdbcType=CHAR}, #{fMobile,jdbcType=CHAR}, #{fEmail,jdbcType=CHAR}, #{fFax,jdbcType=CHAR}, 
+      #{fAcktime,jdbcType=INTEGER}, #{fEngin1,jdbcType=CHAR}, #{fEmobile1,jdbcType=CHAR}, 
+      #{fEngin2,jdbcType=CHAR}, #{fEmobile2,jdbcType=CHAR}, #{fEngin3,jdbcType=CHAR}, 
+      #{fEmobile3,jdbcType=CHAR}, #{fEngin4,jdbcType=CHAR}, #{fEmobile4,jdbcType=CHAR}, 
+      #{fEngin5,jdbcType=CHAR}, #{fEmobile5,jdbcType=CHAR}, #{fMsgidx,jdbcType=INTEGER}, 
+      #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_devisp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fAddr != null">
+        F_ADDR,
+      </if>
+      <if test="fAdmin != null">
+        F_ADMIN,
+      </if>
+      <if test="fTel != null">
+        F_TEL,
+      </if>
+      <if test="fMobile != null">
+        F_MOBILE,
+      </if>
+      <if test="fEmail != null">
+        F_EMAIL,
+      </if>
+      <if test="fFax != null">
+        F_FAX,
+      </if>
+      <if test="fAcktime != null">
+        F_ACKTIME,
+      </if>
+      <if test="fEngin1 != null">
+        F_ENGIN1,
+      </if>
+      <if test="fEmobile1 != null">
+        F_EMOBILE1,
+      </if>
+      <if test="fEngin2 != null">
+        F_ENGIN2,
+      </if>
+      <if test="fEmobile2 != null">
+        F_EMOBILE2,
+      </if>
+      <if test="fEngin3 != null">
+        F_ENGIN3,
+      </if>
+      <if test="fEmobile3 != null">
+        F_EMOBILE3,
+      </if>
+      <if test="fEngin4 != null">
+        F_ENGIN4,
+      </if>
+      <if test="fEmobile4 != null">
+        F_EMOBILE4,
+      </if>
+      <if test="fEngin5 != null">
+        F_ENGIN5,
+      </if>
+      <if test="fEmobile5 != null">
+        F_EMOBILE5,
+      </if>
+      <if test="fMsgidx != null">
+        F_MSGIDX,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fAddr != null">
+        #{fAddr,jdbcType=CHAR},
+      </if>
+      <if test="fAdmin != null">
+        #{fAdmin,jdbcType=CHAR},
+      </if>
+      <if test="fTel != null">
+        #{fTel,jdbcType=CHAR},
+      </if>
+      <if test="fMobile != null">
+        #{fMobile,jdbcType=CHAR},
+      </if>
+      <if test="fEmail != null">
+        #{fEmail,jdbcType=CHAR},
+      </if>
+      <if test="fFax != null">
+        #{fFax,jdbcType=CHAR},
+      </if>
+      <if test="fAcktime != null">
+        #{fAcktime,jdbcType=INTEGER},
+      </if>
+      <if test="fEngin1 != null">
+        #{fEngin1,jdbcType=CHAR},
+      </if>
+      <if test="fEmobile1 != null">
+        #{fEmobile1,jdbcType=CHAR},
+      </if>
+      <if test="fEngin2 != null">
+        #{fEngin2,jdbcType=CHAR},
+      </if>
+      <if test="fEmobile2 != null">
+        #{fEmobile2,jdbcType=CHAR},
+      </if>
+      <if test="fEngin3 != null">
+        #{fEngin3,jdbcType=CHAR},
+      </if>
+      <if test="fEmobile3 != null">
+        #{fEmobile3,jdbcType=CHAR},
+      </if>
+      <if test="fEngin4 != null">
+        #{fEngin4,jdbcType=CHAR},
+      </if>
+      <if test="fEmobile4 != null">
+        #{fEmobile4,jdbcType=CHAR},
+      </if>
+      <if test="fEngin5 != null">
+        #{fEngin5,jdbcType=CHAR},
+      </if>
+      <if test="fEmobile5 != null">
+        #{fEmobile5,jdbcType=CHAR},
+      </if>
+      <if test="fMsgidx != null">
+        #{fMsgidx,jdbcType=INTEGER},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_devisp
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fAddr != null">
+        F_ADDR = #{fAddr,jdbcType=CHAR},
+      </if>
+      <if test="fAdmin != null">
+        F_ADMIN = #{fAdmin,jdbcType=CHAR},
+      </if>
+      <if test="fTel != null">
+        F_TEL = #{fTel,jdbcType=CHAR},
+      </if>
+      <if test="fMobile != null">
+        F_MOBILE = #{fMobile,jdbcType=CHAR},
+      </if>
+      <if test="fEmail != null">
+        F_EMAIL = #{fEmail,jdbcType=CHAR},
+      </if>
+      <if test="fFax != null">
+        F_FAX = #{fFax,jdbcType=CHAR},
+      </if>
+      <if test="fAcktime != null">
+        F_ACKTIME = #{fAcktime,jdbcType=INTEGER},
+      </if>
+      <if test="fEngin1 != null">
+        F_ENGIN1 = #{fEngin1,jdbcType=CHAR},
+      </if>
+      <if test="fEmobile1 != null">
+        F_EMOBILE1 = #{fEmobile1,jdbcType=CHAR},
+      </if>
+      <if test="fEngin2 != null">
+        F_ENGIN2 = #{fEngin2,jdbcType=CHAR},
+      </if>
+      <if test="fEmobile2 != null">
+        F_EMOBILE2 = #{fEmobile2,jdbcType=CHAR},
+      </if>
+      <if test="fEngin3 != null">
+        F_ENGIN3 = #{fEngin3,jdbcType=CHAR},
+      </if>
+      <if test="fEmobile3 != null">
+        F_EMOBILE3 = #{fEmobile3,jdbcType=CHAR},
+      </if>
+      <if test="fEngin4 != null">
+        F_ENGIN4 = #{fEngin4,jdbcType=CHAR},
+      </if>
+      <if test="fEmobile4 != null">
+        F_EMOBILE4 = #{fEmobile4,jdbcType=CHAR},
+      </if>
+      <if test="fEngin5 != null">
+        F_ENGIN5 = #{fEngin5,jdbcType=CHAR},
+      </if>
+      <if test="fEmobile5 != null">
+        F_EMOBILE5 = #{fEmobile5,jdbcType=CHAR},
+      </if>
+      <if test="fMsgidx != null">
+        F_MSGIDX = #{fMsgidx,jdbcType=INTEGER},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_devisp
+    set F_NAME = #{fName,jdbcType=CHAR},
+      F_ADDR = #{fAddr,jdbcType=CHAR},
+      F_ADMIN = #{fAdmin,jdbcType=CHAR},
+      F_TEL = #{fTel,jdbcType=CHAR},
+      F_MOBILE = #{fMobile,jdbcType=CHAR},
+      F_EMAIL = #{fEmail,jdbcType=CHAR},
+      F_FAX = #{fFax,jdbcType=CHAR},
+      F_ACKTIME = #{fAcktime,jdbcType=INTEGER},
+      F_ENGIN1 = #{fEngin1,jdbcType=CHAR},
+      F_EMOBILE1 = #{fEmobile1,jdbcType=CHAR},
+      F_ENGIN2 = #{fEngin2,jdbcType=CHAR},
+      F_EMOBILE2 = #{fEmobile2,jdbcType=CHAR},
+      F_ENGIN3 = #{fEngin3,jdbcType=CHAR},
+      F_EMOBILE3 = #{fEmobile3,jdbcType=CHAR},
+      F_ENGIN4 = #{fEngin4,jdbcType=CHAR},
+      F_EMOBILE4 = #{fEmobile4,jdbcType=CHAR},
+      F_ENGIN5 = #{fEngin5,jdbcType=CHAR},
+      F_EMOBILE5 = #{fEmobile5,jdbcType=CHAR},
+      F_MSGIDX = #{fMsgidx,jdbcType=INTEGER},
+      F_PAD1 = #{fPad1,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deptflag">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_LMTIME" jdbcType="VARCHAR" property="fLmtime" />
+    <result column="F_TUTIME" jdbcType="VARCHAR" property="fTutime" />
+    <result column="F_SUTIME" jdbcType="VARCHAR" property="fSutime" />
+    <result column="F_MODIFIED" jdbcType="VARCHAR" property="fModified" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_DEPT, F_LMTIME, F_TUTIME, F_SUTIME, F_MODIFIED, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_deptflag
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_deptflag
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_deptflag (F_DEPT, F_LMTIME, F_TUTIME, 
+      F_SUTIME, F_MODIFIED, F_PAD1
+      )
+    values (#{fDept,jdbcType=VARCHAR}, #{fLmtime,jdbcType=VARCHAR}, #{fTutime,jdbcType=VARCHAR}, 
+      #{fSutime,jdbcType=VARCHAR}, #{fModified,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_deptflag
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fLmtime != null">
+        F_LMTIME,
+      </if>
+      <if test="fTutime != null">
+        F_TUTIME,
+      </if>
+      <if test="fSutime != null">
+        F_SUTIME,
+      </if>
+      <if test="fModified != null">
+        F_MODIFIED,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fLmtime != null">
+        #{fLmtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fTutime != null">
+        #{fTutime,jdbcType=VARCHAR},
+      </if>
+      <if test="fSutime != null">
+        #{fSutime,jdbcType=VARCHAR},
+      </if>
+      <if test="fModified != null">
+        #{fModified,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_deptflag
+    <set>
+      <if test="fLmtime != null">
+        F_LMTIME = #{fLmtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fTutime != null">
+        F_TUTIME = #{fTutime,jdbcType=VARCHAR},
+      </if>
+      <if test="fSutime != null">
+        F_SUTIME = #{fSutime,jdbcType=VARCHAR},
+      </if>
+      <if test="fModified != null">
+        F_MODIFIED = #{fModified,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_deptflag
+    set F_LMTIME = #{fLmtime,jdbcType=VARCHAR},
+      F_TUTIME = #{fTutime,jdbcType=VARCHAR},
+      F_SUTIME = #{fSutime,jdbcType=VARCHAR},
+      F_MODIFIED = #{fModified,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

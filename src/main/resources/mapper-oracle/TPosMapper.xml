@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pos">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_SHOPID" jdbcType="VARCHAR" property="fShopid" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_ADDR" jdbcType="VARCHAR" property="fAddr" />
+    <result column="F_MAN" jdbcType="VARCHAR" property="fMan" />
+    <result column="F_TEL" jdbcType="VARCHAR" property="fTel" />
+    <result column="F_USESTAT" jdbcType="VARCHAR" property="fUsestat" />
+    <result column="F_SHOPTYPE" jdbcType="VARCHAR" property="fShoptype" />
+    <result column="F_YLFLAG" jdbcType="VARCHAR" property="fYlflag" />
+    <result column="F_FEETYPE" jdbcType="VARCHAR" property="fFeetype" />
+    <result column="F_FEE" jdbcType="DECIMAL" property="fFee" />
+    <result column="F_ACCT" jdbcType="VARCHAR" property="fAcct" />
+    <result column="F_MARK" jdbcType="VARCHAR" property="fMark" />
+    <result column="F_SPC" jdbcType="VARCHAR" property="fSpc" />
+    <result column="F_FACID" jdbcType="VARCHAR" property="fFacid" />
+    <result column="F_ISPID" jdbcType="VARCHAR" property="fIspid" />
+    <result column="F_CODE" jdbcType="VARCHAR" property="fCode" />
+    <result column="F_DTBUY" jdbcType="VARCHAR" property="fDtbuy" />
+    <result column="F_DTOPEN" jdbcType="VARCHAR" property="fDtopen" />
+    <result column="F_PARAM" jdbcType="VARCHAR" property="fParam" />
+    <result column="F_LASTTX" jdbcType="VARCHAR" property="fLasttx" />
+    <result column="F_LASTTS" jdbcType="VARCHAR" property="fLastts" />
+    <result column="F_LASTST" jdbcType="VARCHAR" property="fLastst" />
+    <result column="F_FLAG1" jdbcType="VARCHAR" property="fFlag1" />
+    <result column="F_FLAG2" jdbcType="VARCHAR" property="fFlag2" />
+    <result column="F_FLAG3" jdbcType="VARCHAR" property="fFlag3" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_DEPT, F_SHOPID, F_NAME, F_ADDR, F_MAN, F_TEL, F_USESTAT, F_SHOPTYPE, F_YLFLAG, 
+    F_FEETYPE, F_FEE, F_ACCT, F_MARK, F_SPC, F_FACID, F_ISPID, F_CODE, F_DTBUY, F_DTOPEN, 
+    F_PARAM, F_LASTTX, F_LASTTS, F_LASTST, F_FLAG1, F_FLAG2, F_FLAG3, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_pos
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_pos
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_pos (F_ID, F_DEPT, F_SHOPID, 
+      F_NAME, F_ADDR, F_MAN, 
+      F_TEL, F_USESTAT, F_SHOPTYPE, 
+      F_YLFLAG, F_FEETYPE, F_FEE, 
+      F_ACCT, F_MARK, F_SPC, 
+      F_FACID, F_ISPID, F_CODE, 
+      F_DTBUY, F_DTOPEN, F_PARAM, 
+      F_LASTTX, F_LASTTS, F_LASTST, 
+      F_FLAG1, F_FLAG2, F_FLAG3, 
+      F_PAD1)
+    values (#{fId,jdbcType=VARCHAR}, #{fDept,jdbcType=VARCHAR}, #{fShopid,jdbcType=VARCHAR}, 
+      #{fName,jdbcType=VARCHAR}, #{fAddr,jdbcType=VARCHAR}, #{fMan,jdbcType=VARCHAR}, 
+      #{fTel,jdbcType=VARCHAR}, #{fUsestat,jdbcType=VARCHAR}, #{fShoptype,jdbcType=VARCHAR}, 
+      #{fYlflag,jdbcType=VARCHAR}, #{fFeetype,jdbcType=VARCHAR}, #{fFee,jdbcType=DECIMAL}, 
+      #{fAcct,jdbcType=VARCHAR}, #{fMark,jdbcType=VARCHAR}, #{fSpc,jdbcType=VARCHAR}, 
+      #{fFacid,jdbcType=VARCHAR}, #{fIspid,jdbcType=VARCHAR}, #{fCode,jdbcType=VARCHAR}, 
+      #{fDtbuy,jdbcType=VARCHAR}, #{fDtopen,jdbcType=VARCHAR}, #{fParam,jdbcType=VARCHAR}, 
+      #{fLasttx,jdbcType=VARCHAR}, #{fLastts,jdbcType=VARCHAR}, #{fLastst,jdbcType=VARCHAR}, 
+      #{fFlag1,jdbcType=VARCHAR}, #{fFlag2,jdbcType=VARCHAR}, #{fFlag3,jdbcType=VARCHAR}, 
+      #{fPad1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_pos
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fShopid != null">
+        F_SHOPID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fAddr != null">
+        F_ADDR,
+      </if>
+      <if test="fMan != null">
+        F_MAN,
+      </if>
+      <if test="fTel != null">
+        F_TEL,
+      </if>
+      <if test="fUsestat != null">
+        F_USESTAT,
+      </if>
+      <if test="fShoptype != null">
+        F_SHOPTYPE,
+      </if>
+      <if test="fYlflag != null">
+        F_YLFLAG,
+      </if>
+      <if test="fFeetype != null">
+        F_FEETYPE,
+      </if>
+      <if test="fFee != null">
+        F_FEE,
+      </if>
+      <if test="fAcct != null">
+        F_ACCT,
+      </if>
+      <if test="fMark != null">
+        F_MARK,
+      </if>
+      <if test="fSpc != null">
+        F_SPC,
+      </if>
+      <if test="fFacid != null">
+        F_FACID,
+      </if>
+      <if test="fIspid != null">
+        F_ISPID,
+      </if>
+      <if test="fCode != null">
+        F_CODE,
+      </if>
+      <if test="fDtbuy != null">
+        F_DTBUY,
+      </if>
+      <if test="fDtopen != null">
+        F_DTOPEN,
+      </if>
+      <if test="fParam != null">
+        F_PARAM,
+      </if>
+      <if test="fLasttx != null">
+        F_LASTTX,
+      </if>
+      <if test="fLastts != null">
+        F_LASTTS,
+      </if>
+      <if test="fLastst != null">
+        F_LASTST,
+      </if>
+      <if test="fFlag1 != null">
+        F_FLAG1,
+      </if>
+      <if test="fFlag2 != null">
+        F_FLAG2,
+      </if>
+      <if test="fFlag3 != null">
+        F_FLAG3,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fShopid != null">
+        #{fShopid,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fAddr != null">
+        #{fAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="fMan != null">
+        #{fMan,jdbcType=VARCHAR},
+      </if>
+      <if test="fTel != null">
+        #{fTel,jdbcType=VARCHAR},
+      </if>
+      <if test="fUsestat != null">
+        #{fUsestat,jdbcType=VARCHAR},
+      </if>
+      <if test="fShoptype != null">
+        #{fShoptype,jdbcType=VARCHAR},
+      </if>
+      <if test="fYlflag != null">
+        #{fYlflag,jdbcType=VARCHAR},
+      </if>
+      <if test="fFeetype != null">
+        #{fFeetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fFee != null">
+        #{fFee,jdbcType=DECIMAL},
+      </if>
+      <if test="fAcct != null">
+        #{fAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="fMark != null">
+        #{fMark,jdbcType=VARCHAR},
+      </if>
+      <if test="fSpc != null">
+        #{fSpc,jdbcType=VARCHAR},
+      </if>
+      <if test="fFacid != null">
+        #{fFacid,jdbcType=VARCHAR},
+      </if>
+      <if test="fIspid != null">
+        #{fIspid,jdbcType=VARCHAR},
+      </if>
+      <if test="fCode != null">
+        #{fCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fDtbuy != null">
+        #{fDtbuy,jdbcType=VARCHAR},
+      </if>
+      <if test="fDtopen != null">
+        #{fDtopen,jdbcType=VARCHAR},
+      </if>
+      <if test="fParam != null">
+        #{fParam,jdbcType=VARCHAR},
+      </if>
+      <if test="fLasttx != null">
+        #{fLasttx,jdbcType=VARCHAR},
+      </if>
+      <if test="fLastts != null">
+        #{fLastts,jdbcType=VARCHAR},
+      </if>
+      <if test="fLastst != null">
+        #{fLastst,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag1 != null">
+        #{fFlag1,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag2 != null">
+        #{fFlag2,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag3 != null">
+        #{fFlag3,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_pos
+    <set>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fShopid != null">
+        F_SHOPID = #{fShopid,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fAddr != null">
+        F_ADDR = #{fAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="fMan != null">
+        F_MAN = #{fMan,jdbcType=VARCHAR},
+      </if>
+      <if test="fTel != null">
+        F_TEL = #{fTel,jdbcType=VARCHAR},
+      </if>
+      <if test="fUsestat != null">
+        F_USESTAT = #{fUsestat,jdbcType=VARCHAR},
+      </if>
+      <if test="fShoptype != null">
+        F_SHOPTYPE = #{fShoptype,jdbcType=VARCHAR},
+      </if>
+      <if test="fYlflag != null">
+        F_YLFLAG = #{fYlflag,jdbcType=VARCHAR},
+      </if>
+      <if test="fFeetype != null">
+        F_FEETYPE = #{fFeetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fFee != null">
+        F_FEE = #{fFee,jdbcType=DECIMAL},
+      </if>
+      <if test="fAcct != null">
+        F_ACCT = #{fAcct,jdbcType=VARCHAR},
+      </if>
+      <if test="fMark != null">
+        F_MARK = #{fMark,jdbcType=VARCHAR},
+      </if>
+      <if test="fSpc != null">
+        F_SPC = #{fSpc,jdbcType=VARCHAR},
+      </if>
+      <if test="fFacid != null">
+        F_FACID = #{fFacid,jdbcType=VARCHAR},
+      </if>
+      <if test="fIspid != null">
+        F_ISPID = #{fIspid,jdbcType=VARCHAR},
+      </if>
+      <if test="fCode != null">
+        F_CODE = #{fCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fDtbuy != null">
+        F_DTBUY = #{fDtbuy,jdbcType=VARCHAR},
+      </if>
+      <if test="fDtopen != null">
+        F_DTOPEN = #{fDtopen,jdbcType=VARCHAR},
+      </if>
+      <if test="fParam != null">
+        F_PARAM = #{fParam,jdbcType=VARCHAR},
+      </if>
+      <if test="fLasttx != null">
+        F_LASTTX = #{fLasttx,jdbcType=VARCHAR},
+      </if>
+      <if test="fLastts != null">
+        F_LASTTS = #{fLastts,jdbcType=VARCHAR},
+      </if>
+      <if test="fLastst != null">
+        F_LASTST = #{fLastst,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag1 != null">
+        F_FLAG1 = #{fFlag1,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag2 != null">
+        F_FLAG2 = #{fFlag2,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag3 != null">
+        F_FLAG3 = #{fFlag3,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_pos
+    set F_DEPT = #{fDept,jdbcType=VARCHAR},
+      F_SHOPID = #{fShopid,jdbcType=VARCHAR},
+      F_NAME = #{fName,jdbcType=VARCHAR},
+      F_ADDR = #{fAddr,jdbcType=VARCHAR},
+      F_MAN = #{fMan,jdbcType=VARCHAR},
+      F_TEL = #{fTel,jdbcType=VARCHAR},
+      F_USESTAT = #{fUsestat,jdbcType=VARCHAR},
+      F_SHOPTYPE = #{fShoptype,jdbcType=VARCHAR},
+      F_YLFLAG = #{fYlflag,jdbcType=VARCHAR},
+      F_FEETYPE = #{fFeetype,jdbcType=VARCHAR},
+      F_FEE = #{fFee,jdbcType=DECIMAL},
+      F_ACCT = #{fAcct,jdbcType=VARCHAR},
+      F_MARK = #{fMark,jdbcType=VARCHAR},
+      F_SPC = #{fSpc,jdbcType=VARCHAR},
+      F_FACID = #{fFacid,jdbcType=VARCHAR},
+      F_ISPID = #{fIspid,jdbcType=VARCHAR},
+      F_CODE = #{fCode,jdbcType=VARCHAR},
+      F_DTBUY = #{fDtbuy,jdbcType=VARCHAR},
+      F_DTOPEN = #{fDtopen,jdbcType=VARCHAR},
+      F_PARAM = #{fParam,jdbcType=VARCHAR},
+      F_LASTTX = #{fLasttx,jdbcType=VARCHAR},
+      F_LASTTS = #{fLastts,jdbcType=VARCHAR},
+      F_LASTST = #{fLastst,jdbcType=VARCHAR},
+      F_FLAG1 = #{fFlag1,jdbcType=VARCHAR},
+      F_FLAG2 = #{fFlag2,jdbcType=VARCHAR},
+      F_FLAG3 = #{fFlag3,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

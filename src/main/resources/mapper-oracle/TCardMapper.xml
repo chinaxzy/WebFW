@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="card">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_FITCODE" jdbcType="CHAR" property="fFitcode" />
+    <result column="F_FITLEN" jdbcType="INTEGER" property="fFitlen" />
+    <result column="F_FITOFFSET" jdbcType="INTEGER" property="fFitoffset" />
+    <result column="F_TYPE" jdbcType="CHAR" property="fType" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_FITCODE, F_FITLEN, F_FITOFFSET, F_TYPE, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_card
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_card
+    where F_ID = #{fId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_card (F_ID, F_FITCODE, F_FITLEN, 
+      F_FITOFFSET, F_TYPE, F_PAD1)
+    values (#{fId,jdbcType=CHAR}, #{fFitcode,jdbcType=CHAR}, #{fFitlen,jdbcType=INTEGER}, 
+      #{fFitoffset,jdbcType=INTEGER}, #{fType,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_card
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fFitcode != null">
+        F_FITCODE,
+      </if>
+      <if test="fFitlen != null">
+        F_FITLEN,
+      </if>
+      <if test="fFitoffset != null">
+        F_FITOFFSET,
+      </if>
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fFitcode != null">
+        #{fFitcode,jdbcType=CHAR},
+      </if>
+      <if test="fFitlen != null">
+        #{fFitlen,jdbcType=INTEGER},
+      </if>
+      <if test="fFitoffset != null">
+        #{fFitoffset,jdbcType=INTEGER},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_card
+    <set>
+      <if test="fFitcode != null">
+        F_FITCODE = #{fFitcode,jdbcType=CHAR},
+      </if>
+      <if test="fFitlen != null">
+        F_FITLEN = #{fFitlen,jdbcType=INTEGER},
+      </if>
+      <if test="fFitoffset != null">
+        F_FITOFFSET = #{fFitoffset,jdbcType=INTEGER},
+      </if>
+      <if test="fType != null">
+        F_TYPE = #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_card
+    set F_FITCODE = #{fFitcode,jdbcType=CHAR},
+      F_FITLEN = #{fFitlen,jdbcType=INTEGER},
+      F_FITOFFSET = #{fFitoffset,jdbcType=INTEGER},
+      F_TYPE = #{fType,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+
+</mapper>

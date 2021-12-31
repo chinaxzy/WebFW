@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="keys">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_ZMK_LMK" jdbcType="VARCHAR" property="fZmkLmk" />
+    <result column="F_ZPK_LMK" jdbcType="VARCHAR" property="fZpkLmk" />
+    <result column="F_ZAK_LMK" jdbcType="VARCHAR" property="fZakLmk" />
+    <result column="F_ZPK_ZMK" jdbcType="VARCHAR" property="fZpkZmk" />
+    <result column="F_ZAK_ZMK" jdbcType="VARCHAR" property="fZakZmk" />
+    <result column="F_ZMK_BMK" jdbcType="VARCHAR" property="fZmkBmk" />
+    <result column="F_ZPK_BMK" jdbcType="VARCHAR" property="fZpkBmk" />
+    <result column="F_ZAK_BMK" jdbcType="VARCHAR" property="fZakBmk" />
+    <result column="F_ZMK_BMK_LMK" jdbcType="VARCHAR" property="fZmkBmkLmk" />
+    <result column="F_ZPK_BMK_LMK" jdbcType="VARCHAR" property="fZpkBmkLmk" />
+    <result column="F_ZAK_BMK_LMK" jdbcType="VARCHAR" property="fZakBmkLmk" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_DEVID, F_ZMK_LMK, F_ZPK_LMK, F_ZAK_LMK, F_ZPK_ZMK, F_ZAK_ZMK, F_ZMK_BMK, F_ZPK_BMK, 
+    F_ZAK_BMK, F_ZMK_BMK_LMK, F_ZPK_BMK_LMK, F_ZAK_BMK_LMK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_keys
+    <where>
+      <if test="fDevid != null">
+        F_DEVID = #{fDevid,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_keys
+    where F_DEVID = #{fDevid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_keys (F_DEVID, F_ZMK_LMK, F_ZPK_LMK, 
+      F_ZAK_LMK, F_ZPK_ZMK, F_ZAK_ZMK, 
+      F_ZMK_BMK, F_ZPK_BMK, F_ZAK_BMK, 
+      F_ZMK_BMK_LMK, F_ZPK_BMK_LMK, F_ZAK_BMK_LMK
+      )
+    values (#{fDevid,jdbcType=VARCHAR}, #{fZmkLmk,jdbcType=VARCHAR}, #{fZpkLmk,jdbcType=VARCHAR}, 
+      #{fZakLmk,jdbcType=VARCHAR}, #{fZpkZmk,jdbcType=VARCHAR}, #{fZakZmk,jdbcType=VARCHAR}, 
+      #{fZmkBmk,jdbcType=VARCHAR}, #{fZpkBmk,jdbcType=VARCHAR}, #{fZakBmk,jdbcType=VARCHAR}, 
+      #{fZmkBmkLmk,jdbcType=VARCHAR}, #{fZpkBmkLmk,jdbcType=VARCHAR}, #{fZakBmkLmk,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_keys
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fZmkLmk != null">
+        F_ZMK_LMK,
+      </if>
+      <if test="fZpkLmk != null">
+        F_ZPK_LMK,
+      </if>
+      <if test="fZakLmk != null">
+        F_ZAK_LMK,
+      </if>
+      <if test="fZpkZmk != null">
+        F_ZPK_ZMK,
+      </if>
+      <if test="fZakZmk != null">
+        F_ZAK_ZMK,
+      </if>
+      <if test="fZmkBmk != null">
+        F_ZMK_BMK,
+      </if>
+      <if test="fZpkBmk != null">
+        F_ZPK_BMK,
+      </if>
+      <if test="fZakBmk != null">
+        F_ZAK_BMK,
+      </if>
+      <if test="fZmkBmkLmk != null">
+        F_ZMK_BMK_LMK,
+      </if>
+      <if test="fZpkBmkLmk != null">
+        F_ZPK_BMK_LMK,
+      </if>
+      <if test="fZakBmkLmk != null">
+        F_ZAK_BMK_LMK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=VARCHAR},
+      </if>
+      <if test="fZmkLmk != null">
+        #{fZmkLmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZpkLmk != null">
+        #{fZpkLmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZakLmk != null">
+        #{fZakLmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZpkZmk != null">
+        #{fZpkZmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZakZmk != null">
+        #{fZakZmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZmkBmk != null">
+        #{fZmkBmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZpkBmk != null">
+        #{fZpkBmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZakBmk != null">
+        #{fZakBmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZmkBmkLmk != null">
+        #{fZmkBmkLmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZpkBmkLmk != null">
+        #{fZpkBmkLmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZakBmkLmk != null">
+        #{fZakBmkLmk,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_keys
+    <set>
+      <if test="fZmkLmk != null">
+        F_ZMK_LMK = #{fZmkLmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZpkLmk != null">
+        F_ZPK_LMK = #{fZpkLmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZakLmk != null">
+        F_ZAK_LMK = #{fZakLmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZpkZmk != null">
+        F_ZPK_ZMK = #{fZpkZmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZakZmk != null">
+        F_ZAK_ZMK = #{fZakZmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZmkBmk != null">
+        F_ZMK_BMK = #{fZmkBmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZpkBmk != null">
+        F_ZPK_BMK = #{fZpkBmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZakBmk != null">
+        F_ZAK_BMK = #{fZakBmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZmkBmkLmk != null">
+        F_ZMK_BMK_LMK = #{fZmkBmkLmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZpkBmkLmk != null">
+        F_ZPK_BMK_LMK = #{fZpkBmkLmk,jdbcType=VARCHAR},
+      </if>
+      <if test="fZakBmkLmk != null">
+        F_ZAK_BMK_LMK = #{fZakBmkLmk,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_DEVID = #{fDevid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_keys
+    set F_ZMK_LMK = #{fZmkLmk,jdbcType=VARCHAR},
+      F_ZPK_LMK = #{fZpkLmk,jdbcType=VARCHAR},
+      F_ZAK_LMK = #{fZakLmk,jdbcType=VARCHAR},
+      F_ZPK_ZMK = #{fZpkZmk,jdbcType=VARCHAR},
+      F_ZAK_ZMK = #{fZakZmk,jdbcType=VARCHAR},
+      F_ZMK_BMK = #{fZmkBmk,jdbcType=VARCHAR},
+      F_ZPK_BMK = #{fZpkBmk,jdbcType=VARCHAR},
+      F_ZAK_BMK = #{fZakBmk,jdbcType=VARCHAR},
+      F_ZMK_BMK_LMK = #{fZmkBmkLmk,jdbcType=VARCHAR},
+      F_ZPK_BMK_LMK = #{fZpkBmkLmk,jdbcType=VARCHAR},
+      F_ZAK_BMK_LMK = #{fZakBmkLmk,jdbcType=VARCHAR}
+    where F_DEVID = #{fDevid,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

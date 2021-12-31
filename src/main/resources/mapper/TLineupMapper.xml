@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="lineup">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <id column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <id column="F_NUMBER" jdbcType="VARCHAR" property="fNumber" />
+    <result column="F_NUMBER1" jdbcType="VARCHAR" property="fNumber1" />
+    <result column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_TIME" jdbcType="VARCHAR" property="fTime" />
+    <result column="F_TIME1" jdbcType="VARCHAR" property="fTime1" />
+    <result column="F_TIME2" jdbcType="VARCHAR" property="fTime2" />
+    <result column="F_TIME3" jdbcType="VARCHAR" property="fTime3" />
+    <result column="F_WAITTIME" jdbcType="INTEGER" property="fWaittime" />
+    <result column="F_BUSITIME" jdbcType="INTEGER" property="fBusitime" />
+    <result column="F_ACNO" jdbcType="VARCHAR" property="fAcno" />
+    <result column="F_IDNO" jdbcType="VARCHAR" property="fIdno" />
+    <result column="F_CUSTNAME" jdbcType="VARCHAR" property="fCustname" />
+    <result column="F_CUSTTYPE" jdbcType="VARCHAR" property="fCusttype" />
+    <result column="F_CUSTLEVEL" jdbcType="VARCHAR" property="fCustlevel" />
+    <result column="F_MENUTYPE" jdbcType="VARCHAR" property="fMenutype" />
+    <result column="F_TRTP" jdbcType="VARCHAR" property="fTrtp" />
+
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+
+    <result column="F_DEVLS" jdbcType="VARCHAR" property="fDevls" />
+    <result column="F_SERIAL" jdbcType="VARCHAR" property="fSerial" />
+    <result column="F_SOURCE" jdbcType="VARCHAR" property="fSource" />
+    <result column="F_CALLTYPE" jdbcType="VARCHAR" property="fCalltype" />
+    <result column="F_OPERATOR" jdbcType="VARCHAR" property="fOperator" />
+    <result column="F_WINDID" jdbcType="VARCHAR" property="fWindid" />
+    <result column="F_EVALUATE" jdbcType="VARCHAR" property="fEvaluate" />
+    <result column="F_DONE" jdbcType="VARCHAR" property="fDone" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+
+    <result column="WDNAME" jdbcType="VARCHAR" property="fWdname" />
+    <result column="ZHNAME" jdbcType="VARCHAR" property="fZhname" />
+    <result column="FHNAME" jdbcType="VARCHAR" property="fFhname" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_DATE, a.F_DEPT, F_NUMBER, F_NUMBER1, F_DEVID, F_TIME, F_TIME1, F_TIME2, F_TIME3,
+    F_WAITTIME, F_BUSITIME, F_ACNO, F_IDNO, F_CUSTNAME, F_CUSTTYPE, F_CUSTLEVEL, F_MENUTYPE, 
+    F_TRTP, F_DEVLS, F_SERIAL, F_SOURCE, F_CALLTYPE, F_OPERATOR, F_WINDID, F_EVALUATE, 
+    F_DONE,
+
+    CASE F_CUSTTYPE
+    WHEN 'V' THEN 'VIP客户'
+    WHEN 'C' THEN '普通客户'
+    WHEN 'N' THEN '新入网'
+    ELSE '' END fCusttypename,
+
+    CASE F_MENUTYPE
+    WHEN '1' THEN '全球通'
+    WHEN '2' THEN '神州行'
+    WHEN '3' THEN '动感地带'
+    ELSE '' END fMenutypename,
+
+    F_CUSTLEVEL+'级' fCustlevelname,
+
+    CASE F_SOURCE
+    WHEN 'a' THEN '现场取号'
+    WHEN 'b' THEN '预约取号'
+    WHEN 'z' THEN '其他'
+    ELSE '' END fSourcename,
+
+    CASE F_CALLTYPE
+    WHEN '1' THEN '第一次叫号'
+    WHEN '2' THEN '重叫'
+    WHEN '0' THEN '优先叫号'
+    ELSE '' END fCalltypename,
+
+    CASE F_EVALUATE
+    WHEN '1' THEN '不满意'
+    WHEN '2' THEN '一般'
+    WHEN '3' THEN '满意'
+    ELSE '' END fEvaluatename,
+
+    CASE F_DONE
+    WHEN '0' THEN '取号'
+    WHEN '1' THEN '已叫号'
+    WHEN '2' THEN '交易结束'
+    WHEN '3' THEN '过号作废'
+    WHEN '4' THEN '调号后原号作废'
+    ELSE '' END fDonename
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    SELECT c.*
+    FROM (
+    select
+    concat(substr(F_DATE,1,4),'-',substr(F_DATE,5,2),'-',substr(F_DATE,7,2)) fDate,
+    concat(substr(F_TIME,1,2),':',substr(F_TIME,3,2)) fTime,
+    concat(substr(F_TIME1,1,2),':',substr(F_TIME1,3,2)) fTime1,
+    concat(substr(F_TIME2,1,2),':',substr(F_TIME2,3,2)) fTime2,
+    concat(substr(F_TIME3,1,2),':',substr(F_TIME3,3,2)) fTime3,
+     a.F_DEPT, F_NUMBER, F_NUMBER1, F_DEVID,
+    F_WAITTIME, F_BUSITIME, F_ACNO, F_IDNO, F_CUSTNAME, F_CUSTTYPE, F_CUSTLEVEL, F_MENUTYPE,
+    F_TRTP, F_DEVLS, F_SERIAL, F_SOURCE, F_CALLTYPE, F_OPERATOR, F_WINDID, F_EVALUATE,
+    F_DONE,b.F_NAME fTrtpname,
+
+    CASE F_CUSTTYPE
+    WHEN 'V' THEN 'VIP客户'
+    WHEN 'C' THEN '普通客户'
+    WHEN 'N' THEN '新入网'
+    ELSE '' END fCusttypename,
+
+    CASE F_MENUTYPE
+    WHEN '1' THEN '全球通'
+    WHEN '2' THEN '神州行'
+    WHEN '3' THEN '动感地带'
+    ELSE '' END fMenutypename,
+
+    F_CUSTLEVEL+'级' fCustlevelname,
+
+    CASE F_SOURCE
+    WHEN 'a' THEN '现场取号'
+    WHEN 'b' THEN '预约取号'
+    WHEN 'z' THEN '其他'
+    ELSE '' END fSourcename,
+
+    CASE F_CALLTYPE
+    WHEN '1' THEN '第一次叫号'
+    WHEN '2' THEN '重叫'
+    WHEN '0' THEN '优先叫号'
+    ELSE '' END fCalltypename,
+
+    CASE F_EVALUATE
+    WHEN '1' THEN '不满意'
+    WHEN '2' THEN '一般'
+    WHEN '3' THEN '满意'
+    ELSE '' END fEvaluatename,
+
+    CASE F_DONE
+    WHEN '0' THEN '取号'
+    WHEN '1' THEN '已叫号'
+    WHEN '2' THEN '交易结束'
+    WHEN '3' THEN '过号作废'
+    WHEN '4' THEN '调号后原号作废'
+    ELSE '' END fDonename
+
+    ,f.F_DEPTID fDeptid,f.F_NAME fDeptname
+    from t_lineup a LEFT JOIN t_pmenu b ON a.F_TRTP = b.F_ID
+      LEFT JOIN t_branch f
+      ON a.F_DEPT = f.F_ID
+    <where>
+      <if test="fDate != null">
+        F_DATE = #{fDate,jdbcType=VARCHAR}
+      </if>
+      <if test="fDateStart != null and fDateEnd != null">
+        AND F_DATE BETWEEN #{fDateStart} AND #{fDateEnd}
+      </if>
+      <if test="fDept != null">
+        AND F_DEPT = #{fDept,jdbcType=VARCHAR}
+      </if>
+      <if test="fNumber != null">
+        AND F_NUMBER = #{fNumber,jdbcType=VARCHAR}
+      </if>
+      <if test="fNumber1 != null">
+        AND F_NUMBER1 = #{fNumber1,jdbcType=VARCHAR}
+      </if>
+      <if test="fDevid != null">
+        AND F_DEVID = #{fDevid,jdbcType=VARCHAR}
+      </if>
+      <if test="fTime != null">
+        AND F_TIME = #{fTime,jdbcType=VARCHAR}
+      </if>
+      <if test="fTimeStart != null and fTimeEnd != null">
+        AND F_TIME BETWEEN #{fTimeStart} AND #{fTimeEnd}
+      </if>
+      <if test="fTime1 != null">
+        AND F_TIME1 = #{fTime1,jdbcType=VARCHAR}
+      </if>
+      <if test="fTime1Start != null and fTime1End != null">
+        AND F_TIME1 BETWEEN #{fTime1Start} AND #{fTime1End}
+      </if>
+      <if test="fTime2 != null">
+        AND F_TIME2 = #{fTime2,jdbcType=VARCHAR}
+      </if>
+      <if test="fTime2Start != null and fTime2End != null">
+        AND F_TIME2 BETWEEN #{fTime2Start} AND #{fTime2End}
+      </if>
+      <if test="fTime3 != null">
+        AND F_TIME3 = #{fTime3,jdbcType=VARCHAR}
+      </if>
+      <if test="fTime3Start != null and fTime3End != null">
+        AND F_TIME3 BETWEEN #{fTime3Start} AND #{fTime3End}
+      </if>
+      <if test="fWaittime != null">
+        AND F_WAITTIME = #{fWaittime,jdbcType=INTEGER}
+      </if>
+      <if test="fWaittimeStart != null and fWaittimeEnd != null">
+        AND F_WAITTIME BETWEEN #{fWaittimeStart} AND #{fWaittimeEnd}
+      </if>
+      <if test="fBusitime != null">
+        AND F_BUSITIME = #{fBusitime,jdbcType=INTEGER}
+      </if>
+      <if test="fBusitimeStart != null and fBusitimeEnd != null">
+        AND F_BUSITIME BETWEEN #{fBusitimeStart} AND #{fBusitimeEnd}
+      </if>
+      <if test="fAcno != null">
+        AND F_ACNO = #{fAcno,jdbcType=VARCHAR}
+      </if>
+      <if test="fIdno != null">
+        AND F_IDNO = #{fIdno,jdbcType=VARCHAR}
+      </if>
+      <if test="fCustname != null">
+        AND F_CUSTNAME = #{fCustname,jdbcType=VARCHAR}
+      </if>
+      <if test="fCusttype != null">
+        AND F_CUSTTYPE = #{fCusttype,jdbcType=VARCHAR}
+      </if>
+      <if test="fCustlevel != null">
+        AND F_CUSTLEVEL = #{fCustlevel,jdbcType=VARCHAR}
+      </if>
+      <if test="fMenutype != null">
+        AND F_MENUTYPE = #{fMenutype,jdbcType=VARCHAR}
+      </if>
+      <if test="fTrtp != null">
+        AND F_TRTP = #{fTrtp,jdbcType=VARCHAR}
+      </if>
+      <if test="fDevls != null">
+        AND F_DEVLS = #{fDevls,jdbcType=VARCHAR}
+      </if>
+      <if test="fSerial != null">
+        AND F_SERIAL = #{fSerial,jdbcType=VARCHAR}
+      </if>
+      <if test="fSource != null">
+        AND F_SOURCE = #{fSource,jdbcType=VARCHAR}
+      </if>
+      <if test="fCalltype != null">
+        AND F_CALLTYPE = #{fCalltype,jdbcType=VARCHAR}
+      </if>
+      <if test="fOperator != null">
+        AND F_OPERATOR = #{fOperator,jdbcType=VARCHAR}
+      </if>
+      <if test="fWindid != null">
+        AND F_WINDID = #{fWindid,jdbcType=VARCHAR}
+      </if>
+      <if test="fEvaluate != null">
+        AND F_EVALUATE = #{fEvaluate,jdbcType=VARCHAR}
+      </if>
+      <if test="fDone != null">
+        AND F_DONE = #{fDone,jdbcType=VARCHAR}
+      </if>
+      <if test="fPad1 != null">
+        AND F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+      </if>
+    </where>
+    ) c
+    <where>
+      <if test="fDeptid != null">
+        c.fDeptid LIKE concat(#{fDeptid},'%')
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_lineup
+    where F_DATE = #{fDate,jdbcType=VARCHAR}
+      and F_DEPT = #{fDept,jdbcType=VARCHAR}
+      and F_NUMBER = #{fNumber,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_lineup (F_DATE, F_DEPT, F_NUMBER, 
+      F_NUMBER1, F_DEVID, F_TIME, 
+      F_TIME1, F_TIME2, F_TIME3, 
+      F_WAITTIME, F_BUSITIME, F_ACNO, 
+      F_IDNO, F_CUSTNAME, F_CUSTTYPE, 
+      F_CUSTLEVEL, F_MENUTYPE, F_TRTP, 
+      F_DEVLS, F_SERIAL, F_SOURCE, 
+      F_CALLTYPE, F_OPERATOR, F_WINDID, 
+      F_EVALUATE, F_DONE, F_PAD1
+      )
+    values (#{fDate,jdbcType=VARCHAR}, #{fDept,jdbcType=VARCHAR}, #{fNumber,jdbcType=VARCHAR}, 
+      #{fNumber1,jdbcType=VARCHAR}, #{fDevid,jdbcType=VARCHAR}, #{fTime,jdbcType=VARCHAR}, 
+      #{fTime1,jdbcType=VARCHAR}, #{fTime2,jdbcType=VARCHAR}, #{fTime3,jdbcType=VARCHAR}, 
+      #{fWaittime,jdbcType=INTEGER}, #{fBusitime,jdbcType=INTEGER}, #{fAcno,jdbcType=VARCHAR}, 
+      #{fIdno,jdbcType=VARCHAR}, #{fCustname,jdbcType=VARCHAR}, #{fCusttype,jdbcType=VARCHAR}, 
+      #{fCustlevel,jdbcType=VARCHAR}, #{fMenutype,jdbcType=VARCHAR}, #{fTrtp,jdbcType=VARCHAR}, 
+      #{fDevls,jdbcType=VARCHAR}, #{fSerial,jdbcType=VARCHAR}, #{fSource,jdbcType=VARCHAR}, 
+      #{fCalltype,jdbcType=VARCHAR}, #{fOperator,jdbcType=VARCHAR}, #{fWindid,jdbcType=VARCHAR}, 
+      #{fEvaluate,jdbcType=VARCHAR}, #{fDone,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_lineup
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fNumber != null">
+        F_NUMBER,
+      </if>
+      <if test="fNumber1 != null">
+        F_NUMBER1,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fTime1 != null">
+        F_TIME1,
+      </if>
+      <if test="fTime2 != null">
+        F_TIME2,
+      </if>
+      <if test="fTime3 != null">
+        F_TIME3,
+      </if>
+      <if test="fWaittime != null">
+        F_WAITTIME,
+      </if>
+      <if test="fBusitime != null">
+        F_BUSITIME,
+      </if>
+      <if test="fAcno != null">
+        F_ACNO,
+      </if>
+      <if test="fIdno != null">
+        F_IDNO,
+      </if>
+      <if test="fCustname != null">
+        F_CUSTNAME,
+      </if>
+      <if test="fCusttype != null">
+        F_CUSTTYPE,
+      </if>
+      <if test="fCustlevel != null">
+        F_CUSTLEVEL,
+      </if>
+      <if test="fMenutype != null">
+        F_MENUTYPE,
+      </if>
+      <if test="fTrtp != null">
+        F_TRTP,
+      </if>
+      <if test="fDevls != null">
+        F_DEVLS,
+      </if>
+      <if test="fSerial != null">
+        F_SERIAL,
+      </if>
+      <if test="fSource != null">
+        F_SOURCE,
+      </if>
+      <if test="fCalltype != null">
+        F_CALLTYPE,
+      </if>
+      <if test="fOperator != null">
+        F_OPERATOR,
+      </if>
+      <if test="fWindid != null">
+        F_WINDID,
+      </if>
+      <if test="fEvaluate != null">
+        F_EVALUATE,
+      </if>
+      <if test="fDone != null">
+        F_DONE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fNumber != null">
+        #{fNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fNumber1 != null">
+        #{fNumber1,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime1 != null">
+        #{fTime1,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime2 != null">
+        #{fTime2,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime3 != null">
+        #{fTime3,jdbcType=VARCHAR},
+      </if>
+      <if test="fWaittime != null">
+        #{fWaittime,jdbcType=INTEGER},
+      </if>
+      <if test="fBusitime != null">
+        #{fBusitime,jdbcType=INTEGER},
+      </if>
+      <if test="fAcno != null">
+        #{fAcno,jdbcType=VARCHAR},
+      </if>
+      <if test="fIdno != null">
+        #{fIdno,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustname != null">
+        #{fCustname,jdbcType=VARCHAR},
+      </if>
+      <if test="fCusttype != null">
+        #{fCusttype,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustlevel != null">
+        #{fCustlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="fMenutype != null">
+        #{fMenutype,jdbcType=VARCHAR},
+      </if>
+      <if test="fTrtp != null">
+        #{fTrtp,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevls != null">
+        #{fDevls,jdbcType=VARCHAR},
+      </if>
+      <if test="fSerial != null">
+        #{fSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="fSource != null">
+        #{fSource,jdbcType=VARCHAR},
+      </if>
+      <if test="fCalltype != null">
+        #{fCalltype,jdbcType=VARCHAR},
+      </if>
+      <if test="fOperator != null">
+        #{fOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="fWindid != null">
+        #{fWindid,jdbcType=VARCHAR},
+      </if>
+      <if test="fEvaluate != null">
+        #{fEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="fDone != null">
+        #{fDone,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_lineup
+    <set>
+      <if test="fNumber1 != null">
+        F_NUMBER1 = #{fNumber1,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevid != null">
+        F_DEVID = #{fDevid,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime != null">
+        F_TIME = #{fTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime1 != null">
+        F_TIME1 = #{fTime1,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime2 != null">
+        F_TIME2 = #{fTime2,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime3 != null">
+        F_TIME3 = #{fTime3,jdbcType=VARCHAR},
+      </if>
+      <if test="fWaittime != null">
+        F_WAITTIME = #{fWaittime,jdbcType=INTEGER},
+      </if>
+      <if test="fBusitime != null">
+        F_BUSITIME = #{fBusitime,jdbcType=INTEGER},
+      </if>
+      <if test="fAcno != null">
+        F_ACNO = #{fAcno,jdbcType=VARCHAR},
+      </if>
+      <if test="fIdno != null">
+        F_IDNO = #{fIdno,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustname != null">
+        F_CUSTNAME = #{fCustname,jdbcType=VARCHAR},
+      </if>
+      <if test="fCusttype != null">
+        F_CUSTTYPE = #{fCusttype,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustlevel != null">
+        F_CUSTLEVEL = #{fCustlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="fMenutype != null">
+        F_MENUTYPE = #{fMenutype,jdbcType=VARCHAR},
+      </if>
+      <if test="fTrtp != null">
+        F_TRTP = #{fTrtp,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevls != null">
+        F_DEVLS = #{fDevls,jdbcType=VARCHAR},
+      </if>
+      <if test="fSerial != null">
+        F_SERIAL = #{fSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="fSource != null">
+        F_SOURCE = #{fSource,jdbcType=VARCHAR},
+      </if>
+      <if test="fCalltype != null">
+        F_CALLTYPE = #{fCalltype,jdbcType=VARCHAR},
+      </if>
+      <if test="fOperator != null">
+        F_OPERATOR = #{fOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="fWindid != null">
+        F_WINDID = #{fWindid,jdbcType=VARCHAR},
+      </if>
+      <if test="fEvaluate != null">
+        F_EVALUATE = #{fEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="fDone != null">
+        F_DONE = #{fDone,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_DATE = #{fDate,jdbcType=VARCHAR}
+      and F_DEPT = #{fDept,jdbcType=VARCHAR}
+      and F_NUMBER = #{fNumber,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_lineup
+    set F_NUMBER1 = #{fNumber1,jdbcType=VARCHAR},
+      F_DEVID = #{fDevid,jdbcType=VARCHAR},
+      F_TIME = #{fTime,jdbcType=VARCHAR},
+      F_TIME1 = #{fTime1,jdbcType=VARCHAR},
+      F_TIME2 = #{fTime2,jdbcType=VARCHAR},
+      F_TIME3 = #{fTime3,jdbcType=VARCHAR},
+      F_WAITTIME = #{fWaittime,jdbcType=INTEGER},
+      F_BUSITIME = #{fBusitime,jdbcType=INTEGER},
+      F_ACNO = #{fAcno,jdbcType=VARCHAR},
+      F_IDNO = #{fIdno,jdbcType=VARCHAR},
+      F_CUSTNAME = #{fCustname,jdbcType=VARCHAR},
+      F_CUSTTYPE = #{fCusttype,jdbcType=VARCHAR},
+      F_CUSTLEVEL = #{fCustlevel,jdbcType=VARCHAR},
+      F_MENUTYPE = #{fMenutype,jdbcType=VARCHAR},
+      F_TRTP = #{fTrtp,jdbcType=VARCHAR},
+      F_DEVLS = #{fDevls,jdbcType=VARCHAR},
+      F_SERIAL = #{fSerial,jdbcType=VARCHAR},
+      F_SOURCE = #{fSource,jdbcType=VARCHAR},
+      F_CALLTYPE = #{fCalltype,jdbcType=VARCHAR},
+      F_OPERATOR = #{fOperator,jdbcType=VARCHAR},
+      F_WINDID = #{fWindid,jdbcType=VARCHAR},
+      F_EVALUATE = #{fEvaluate,jdbcType=VARCHAR},
+      F_DONE = #{fDone,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_DATE = #{fDate,jdbcType=VARCHAR}
+      and F_DEPT = #{fDept,jdbcType=VARCHAR}
+      and F_NUMBER = #{fNumber,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectLineupSummary" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+        c.F_DEPT,
+    sum(CASE c.F_TRTP WHEN 'A110' THEN 1 ELSE 0 END) fCol0,
+    sum(CASE c.F_TRTP WHEN 'A120' THEN 1 ELSE 0 END) fCol1,
+    sum(CASE c.F_TRTP WHEN 'A210' THEN 1 ELSE 0 END) fCol2,
+    sum(CASE c.F_TRTP WHEN 'A220' THEN 1 ELSE 0 END) fCol3,
+    sum(CASE c.F_TRTP WHEN 'A230' THEN 1 ELSE 0 END) fCol4,
+    sum(CASE c.F_TRTP WHEN 'A240' THEN 1 ELSE 0 END) fCol5,
+    sum(CASE c.F_TRTP WHEN 'A250' THEN 1 ELSE 0 END) fCol6,
+    sum(CASE c.F_TRTP WHEN 'A310' THEN 1 ELSE 0 END) fCol7,
+    sum(CASE c.F_TRTP WHEN 'A320' THEN 1 ELSE 0 END) fCol8,
+    sum(CASE c.F_TRTP WHEN 'A410' THEN 1 ELSE 0 END) fCol9,
+    sum(CASE c.F_TRTP WHEN 'A420' THEN 1 ELSE 0 END) fCol10,
+    sum(CASE c.F_TRTP WHEN 'A430' THEN 1 ELSE 0 END) fCol11,
+    sum(CASE c.F_TRTP WHEN 'A510' THEN 1 ELSE 0 END) fCol12,
+    sum(CASE c.F_TRTP WHEN 'A520' THEN 1 ELSE 0 END) fCol13,
+    sum(CASE c.F_TRTP WHEN 'A710' THEN 1 ELSE 0 END) fCol14,
+    sum(CASE c.F_TRTP WHEN 'A720' THEN 1 ELSE 0 END) fCol15,
+    sum(CASE c.F_TRTP WHEN 'A730' THEN 1 ELSE 0 END) fCol16,
+    sum(CASE c.F_TRTP WHEN 'A999' THEN 1 ELSE 0 END) fCol17,
+    sum(CASE c.F_TRTP WHEN 'B110' THEN 1 ELSE 0 END) fCol18,
+    sum(CASE c.F_TRTP WHEN 'B120' THEN 1 ELSE 0 END) fCol19,
+    sum(CASE c.F_TRTP WHEN 'B210' THEN 1 ELSE 0 END) fCol20,
+    sum(CASE c.F_TRTP WHEN 'B220' THEN 1 ELSE 0 END) fCol21,
+    sum(CASE c.F_TRTP WHEN 'B230' THEN 1 ELSE 0 END) fCol22,
+    sum(CASE c.F_TRTP WHEN 'B410' THEN 1 ELSE 0 END) fCol23,
+    sum(CASE c.F_TRTP WHEN 'B420' THEN 1 ELSE 0 END) fCol24
+      FROM (
+             SELECT
+               a.F_TRTP,
+               b.F_NAME,
+               b.F_LAYER,
+               a.F_DEPT,
+               a.F_DATE
+              <if test="fDeptid != null">
+                ,f.F_DEPTID
+              </if>
+             FROM t_lineup a
+              <if test="fDeptid != null">
+                LEFT JOIN t_branch f
+                ON a.F_DEPT = f.F_ID
+              </if>
+              , t_pmenu b
+             WHERE a.F_TRTP = b.F_ID
+              <if test="fDept != null">
+                AND a.F_DEPT = #{fDept}
+              </if>
+              <if test="fDateStart != null and fDateEnd != null">
+                AND a.F_DATE BETWEEN #{fDateStart} AND #{fDateEnd}
+              </if>
+              ORDER BY a.F_TRTP
+           ) c
+      <where>
+        <if test="fDeptid != null">
+          c.F_DEPTID LIKE concat(#{fDeptid},'%')
+        </if>
+      </where>
+      GROUP BY c.F_DEPT
+  </select>
+
+  <select id="selectBusiSummary" parameterType="map" resultMap="BaseResultMap">
+    SELECT d.F_ID F_TRTP, d.F_NAME,CASE WHEN e.count IS NOT NULL THEN e.count ELSE 0 END count
+    FROM t_pmenu d LEFT JOIN
+    (SELECT c.F_TRTP,c.F_NAME,count(c.F_TRTP) count
+    FROM (
+    SELECT
+    a.F_TRTP,
+    b.F_NAME,
+    b.F_LAYER,
+    a.F_DEPT,
+    a.F_DATE
+    <if test="fDeptid != null">
+      ,f.F_DEPTID
+    </if>
+    FROM t_lineup a
+    <if test="fDeptid != null">
+      LEFT JOIN t_branch f
+      ON a.F_DEPT = f.F_ID
+    </if>
+    , t_pmenu b
+    WHERE a.F_TRTP = b.F_ID
+    <if test="fDept != null">
+      AND a.F_DEPT = #{fDept}
+    </if>
+    <if test="fDateStart != null and fDateEnd != null">
+      AND a.F_DATE BETWEEN #{fDateStart} AND #{fDateEnd}
+    </if>
+    ) c
+    <where>
+      <if test="fDeptid != null">
+        c.F_DEPTID LIKE concat(#{fDeptid},'%')
+      </if>
+    </where>
+    GROUP BY F_TRTP,F_NAME) e
+    ON d.F_ID = e.F_TRTP
+    WHERE d.F_LAYER = 3
+  </select>
+
+  <select id="selectLineupSummary1" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+    b.F_NAME,
+    count(*) count
+    FROM t_lineup a, t_pmenu b
+    WHERE a.F_TRTP = b.F_ID
+    GROUP BY F_NAME
+  </select>
+  
+  <select id="selectSummaryByTrtp" parameterType="map" resultMap="BaseResultMap">
+
+    SELECT a.F_TRTP,b.F_NAME typeName,count(*) count,cast(avg(F_BUSITIME)as decimal(9,2)) avgBusitime,max(F_BUSITIME) maxBusitime,min(F_BUSITIME) minBusitime,
+    cast(avg(F_WAITTIME)as decimal(9,2)) avgWaittime,max(F_WAITTIME) maxWaittime,min(F_WAITTIME) minWaittime,
+
+    E.F_DEPTID deptid,
+    E.F_NAME WDNAME,
+    C.F_NAME ZHNAME,
+    D.F_NAME FHNAME
+    FROM t_lineup a LEFT JOIN t_pmenu b ON a.F_TRTP = b.F_ID,
+
+    t_branch E,
+    t_branch C,
+    t_branch D
+    <where>
+      <if test="fDateStart != null and fDateEnd != null">
+        a.F_DATE BETWEEN #{fDateStart} AND #{fDateEnd}
+      </if>
+      <if test="fTrtp != null">
+        AND a.F_TRTP = #{fTrtp}
+      </if>
+
+      <if test=" 1==1">
+        AND a.F_DEPT=E.F_ID
+        AND E.F_DEPT=C.F_ID
+        AND C.F_DEPT=D.F_ID
+      </if>
+      <if test="deptid != null">
+        AND E.F_DEPTID LIKE concat(#{deptid},"%")
+      </if>
+
+    </where>
+    GROUP BY  a.F_TRTP,b.F_NAME,E.F_DEPTID, E.F_NAME, C.F_NAME, D.F_NAME
+  </select>
+
+  <select id="selectSummaryByDeptid" parameterType="map" resultMap="BaseResultMap">
+
+    SELECT count(*) count,cast(avg(F_BUSITIME)as decimal(9,2)) avgBusitime,max(F_BUSITIME) maxBusitime,min(F_BUSITIME) minBusitime,
+    cast(avg(F_WAITTIME)as decimal(9,2)) avgWaittime,max(F_WAITTIME) maxWaittime,min(F_WAITTIME) minWaittime,
+
+    E.F_DEPTID deptid,
+    E.F_NAME WDNAME,
+    C.F_NAME ZHNAME,
+    D.F_NAME FHNAME
+
+    FROM t_lineup a,
+
+    t_branch E,
+    t_branch C,
+    t_branch D
+    <where>
+      <if test="fDateStart != null and fDateEnd != null">
+        a.F_DATE BETWEEN #{fDateStart} AND #{fDateEnd}
+      </if>
+      <if test=" 1==1">
+        AND a.F_DEPT=E.F_ID
+        AND E.F_DEPT=C.F_ID
+        AND C.F_DEPT=D.F_ID
+      </if>
+      <if test="deptid != null">
+        AND E.F_DEPTID LIKE concat(#{deptid},"%")
+      </if>
+
+    </where>
+    GROUP BY E.F_DEPTID,E.F_NAME, C.F_NAME, D.F_NAME
+  </select>
+
+  <select id="selectSummaryByOperator" parameterType="map" resultMap="BaseResultMap">
+
+    SELECT a.F_OPERATOR,b.F_NAME,count(*) count,cast(avg(F_BUSITIME)as decimal(9,2)) avgBusitime,max(F_BUSITIME) maxBusitime,min(F_BUSITIME) minBusitime,
+
+    E.F_DEPTID deptid,
+    E.F_NAME WDNAME,
+    C.F_NAME ZHNAME,
+    D.F_NAME FHNAME
+
+    FROM t_lineup a INNER JOIN t_count b ON a.F_OPERATOR = b.F_ID,
+
+    t_branch E,
+    t_branch C,
+    t_branch D
+
+
+    <where>
+      <if test="fDateStart != null and fDateEnd != null">
+        a.F_DATE BETWEEN #{fDateStart} AND #{fDateEnd}
+      </if>
+      <if test="fOperatorname != null">
+        AND b.F_NAME = #{fOperatorname}
+      </if>
+
+      <if test=" 1==1">
+        AND a.F_DEPT=E.F_ID
+        AND E.F_DEPT=C.F_ID
+        AND C.F_DEPT=D.F_ID
+      </if>
+      <if test="deptid != null">
+        AND E.F_DEPTID LIKE concat(#{deptid},"%")
+      </if>
+
+    </where>
+    GROUP BY a.F_OPERATOR
+  </select>
+
+  <select id="selectSummaryByEva" parameterType="map" resultMap="BaseResultMap">
+
+    SELECT c.*, concat(cast((cast(c.eva0/c.count as decimal(9,2))*100) as char(100)),'%') eva0percent,
+    concat(cast((cast(c.eva4/c.count as decimal(9,2))*100) as char(100)),'%') eva4percent,
+    concat(cast((cast(c.eva2/c.count as decimal(9,2))*100) as char(100)),'%') eva2percent,
+    concat(cast((cast(c.eva3/c.count as decimal(9,2))*100) as char(100)),'%') eva3percent
+    FROM (SELECT a.F_OPERATOR,b.F_NAME,count(*) count,
+    sum(CASE a.F_EVALUATE WHEN 1 THEN 1 ELSE 0 END ) eva1,
+    sum(CASE a.F_EVALUATE WHEN 2 THEN 1 ELSE 0 END ) eva2,
+    sum(CASE a.F_EVALUATE WHEN 3 THEN 1 ELSE 0 END ) eva3,
+    sum(CASE a.F_EVALUATE WHEN 4 THEN 1 ELSE 0 END ) eva4,
+    sum(CASE a.F_EVALUATE WHEN 5 THEN 1 ELSE 0 END ) eva5,
+    sum(CASE WHEN a.F_EVALUATE IS NULL THEN 1 ELSE 0 END ) eva0,
+
+    E.F_DEPTID deptid,
+    E.F_NAME WDNAME,
+    C.F_NAME ZHNAME,
+    D.F_NAME FHNAME
+
+    FROM t_lineup a LEFT JOIN t_count b ON a.F_OPERATOR = b.F_ID,
+
+    t_branch E,
+    t_branch C,
+    t_branch D
+
+    <where>
+      <if test="fDateStart != null and fDateEnd != null">
+        a.F_DATE BETWEEN #{fDateStart} AND #{fDateEnd}
+      </if>
+      <if test="fOperatorname != null">
+        AND b.F_NAME = #{fOperatorname}
+      </if>
+
+      <if test=" 1==1">
+        AND a.F_DEPT=E.F_ID
+        AND E.F_DEPT=C.F_ID
+        AND C.F_DEPT=D.F_ID
+      </if>
+      <if test="deptid != null">
+        AND E.F_DEPTID LIKE concat(#{deptid},"%")
+      </if>
+
+    </where>
+    GROUP BY a.F_OPERATOR) c
+
+  </select>
+
+  <select id="selectTrtp" parameterType="map" resultMap="BaseResultMap">
+    SELECT b.*,f.F_NAME
+    FROM (SELECT DISTINCT F_TRTP
+    FROM t_lineup a ,
+    t_branch E,
+    t_branch C,
+    t_branch D
+    <where>
+      <if test="fDept != null">
+        F_DEPT = #{fDept}
+      </if>
+      <if test=" 1==1">
+        AND a.F_DEPT=E.F_ID
+        AND E.F_DEPT=C.F_ID
+        AND C.F_DEPT=D.F_ID
+      </if>
+      <if test="deptid != null">
+        AND E.F_DEPTID LIKE concat(#{deptid},"%")
+      </if>
+    </where>
+      ) b LEFT JOIN t_pmenu f ON b.F_TRTP = f.F_ID
+  </select>
+
+</mapper>

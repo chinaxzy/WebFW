@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="room">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_IP" jdbcType="VARCHAR" property="fIp" />
+    <result column="F_PAD" jdbcType="VARCHAR" property="fPad" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_IP, F_PAD
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_room
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_room
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_room (F_ID, F_NAME, F_IP, 
+      F_PAD)
+    values (#{fId,jdbcType=VARCHAR}, #{fName,jdbcType=VARCHAR}, #{fIp,jdbcType=VARCHAR}, 
+      #{fPad,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_room
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fIp != null">
+        F_IP,
+      </if>
+      <if test="fPad != null">
+        F_PAD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fIp != null">
+        #{fIp,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad != null">
+        #{fPad,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_room
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fIp != null">
+        F_IP = #{fIp,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad != null">
+        F_PAD = #{fPad,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_room
+    set F_NAME = #{fName,jdbcType=VARCHAR},
+      F_IP = #{fIp,jdbcType=VARCHAR},
+      F_PAD = #{fPad,jdbcType=VARCHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

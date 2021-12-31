@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devconfig">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_INFO1" jdbcType="VARCHAR" property="fInfo1" />
+    <result column="F_INFO2" jdbcType="VARCHAR" property="fInfo2" />
+    <result column="F_INFO3" jdbcType="VARCHAR" property="fInfo3" />
+    <result column="F_INFO4" jdbcType="VARCHAR" property="fInfo4" />
+    <result column="F_INFO5" jdbcType="VARCHAR" property="fInfo5" />
+    <result column="F_INFO6" jdbcType="VARCHAR" property="fInfo6" />
+    <result column="F_INFO7" jdbcType="VARCHAR" property="fInfo7" />
+    <result column="F_INFO8" jdbcType="VARCHAR" property="fInfo8" />
+    <result column="F_INFO9" jdbcType="VARCHAR" property="fInfo9" />
+    <result column="F_INFO10" jdbcType="VARCHAR" property="fInfo10" />
+    <result column="F_INFO11" jdbcType="VARCHAR" property="fInfo11" />
+    <result column="F_INFO12" jdbcType="VARCHAR" property="fInfo12" />
+    <result column="F_INFO13" jdbcType="VARCHAR" property="fInfo13" />
+    <result column="F_INFO14" jdbcType="VARCHAR" property="fInfo14" />
+    <result column="F_INFO15" jdbcType="VARCHAR" property="fInfo15" />
+    <result column="F_INFO16" jdbcType="VARCHAR" property="fInfo16" />
+    <result column="F_INFO17" jdbcType="VARCHAR" property="fInfo17" />
+    <result column="F_INFO18" jdbcType="VARCHAR" property="fInfo18" />
+    <result column="F_INFO19" jdbcType="VARCHAR" property="fInfo19" />
+    <result column="F_INFO20" jdbcType="VARCHAR" property="fInfo20" />
+    <result column="F_INFO21" jdbcType="VARCHAR" property="fInfo21" />
+    <result column="F_INFO22" jdbcType="VARCHAR" property="fInfo22" />
+    <result column="F_INFO23" jdbcType="VARCHAR" property="fInfo23" />
+    <result column="F_INFO24" jdbcType="VARCHAR" property="fInfo24" />
+    <result column="F_INFO25" jdbcType="VARCHAR" property="fInfo25" />
+    <result column="F_INFO26" jdbcType="VARCHAR" property="fInfo26" />
+    <result column="F_INFO27" jdbcType="VARCHAR" property="fInfo27" />
+    <result column="F_INFO28" jdbcType="VARCHAR" property="fInfo28" />
+    <result column="F_INFO29" jdbcType="VARCHAR" property="fInfo29" />
+    <result column="F_INFO30" jdbcType="VARCHAR" property="fInfo30" />
+    <result column="F_INFO31" jdbcType="VARCHAR" property="fInfo31" />
+    <result column="F_INFO32" jdbcType="VARCHAR" property="fInfo32" />
+    <result column="F_INFO33" jdbcType="VARCHAR" property="fInfo33" />
+    <result column="F_INFO34" jdbcType="VARCHAR" property="fInfo34" />
+    <result column="F_INFO35" jdbcType="VARCHAR" property="fInfo35" />
+    <result column="F_INFO36" jdbcType="VARCHAR" property="fInfo36" />
+    <result column="F_INFO37" jdbcType="VARCHAR" property="fInfo37" />
+    <result column="F_INFO38" jdbcType="VARCHAR" property="fInfo38" />
+    <result column="F_INFO39" jdbcType="VARCHAR" property="fInfo39" />
+    <result column="F_INFO40" jdbcType="VARCHAR" property="fInfo40" />
+    <result column="F_INFO41" jdbcType="VARCHAR" property="fInfo41" />
+    <result column="F_INFO42" jdbcType="VARCHAR" property="fInfo42" />
+    <result column="F_INFO43" jdbcType="VARCHAR" property="fInfo43" />
+    <result column="F_INFO44" jdbcType="VARCHAR" property="fInfo44" />
+    <result column="F_INFO45" jdbcType="VARCHAR" property="fInfo45" />
+    <result column="F_INFO46" jdbcType="VARCHAR" property="fInfo46" />
+    <result column="F_INFO47" jdbcType="VARCHAR" property="fInfo47" />
+    <result column="F_INFO48" jdbcType="VARCHAR" property="fInfo48" />
+    <result column="F_INFO49" jdbcType="VARCHAR" property="fInfo49" />
+    <result column="F_INFO50" jdbcType="VARCHAR" property="fInfo50" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_devconfig (F_INFO1, F_INFO2, F_INFO3, 
+      F_INFO4, F_INFO5, F_INFO6, 
+      F_INFO7, F_INFO8, F_INFO9, 
+      F_INFO10, F_INFO11, F_INFO12, 
+      F_INFO13, F_INFO14, F_INFO15, 
+      F_INFO16, F_INFO17, F_INFO18, 
+      F_INFO19, F_INFO20, F_INFO21, 
+      F_INFO22, F_INFO23, F_INFO24, 
+      F_INFO25, F_INFO26, F_INFO27, 
+      F_INFO28, F_INFO29, F_INFO30, 
+      F_INFO31, F_INFO32, F_INFO33, 
+      F_INFO34, F_INFO35, F_INFO36, 
+      F_INFO37, F_INFO38, F_INFO39, 
+      F_INFO40, F_INFO41, F_INFO42, 
+      F_INFO43, F_INFO44, F_INFO45, 
+      F_INFO46, F_INFO47, F_INFO48, 
+      F_INFO49, F_INFO50)
+    values (#{fInfo1,jdbcType=VARCHAR}, #{fInfo2,jdbcType=VARCHAR}, #{fInfo3,jdbcType=VARCHAR}, 
+      #{fInfo4,jdbcType=VARCHAR}, #{fInfo5,jdbcType=VARCHAR}, #{fInfo6,jdbcType=VARCHAR}, 
+      #{fInfo7,jdbcType=VARCHAR}, #{fInfo8,jdbcType=VARCHAR}, #{fInfo9,jdbcType=VARCHAR}, 
+      #{fInfo10,jdbcType=VARCHAR}, #{fInfo11,jdbcType=VARCHAR}, #{fInfo12,jdbcType=VARCHAR}, 
+      #{fInfo13,jdbcType=VARCHAR}, #{fInfo14,jdbcType=VARCHAR}, #{fInfo15,jdbcType=VARCHAR}, 
+      #{fInfo16,jdbcType=VARCHAR}, #{fInfo17,jdbcType=VARCHAR}, #{fInfo18,jdbcType=VARCHAR}, 
+      #{fInfo19,jdbcType=VARCHAR}, #{fInfo20,jdbcType=VARCHAR}, #{fInfo21,jdbcType=VARCHAR}, 
+      #{fInfo22,jdbcType=VARCHAR}, #{fInfo23,jdbcType=VARCHAR}, #{fInfo24,jdbcType=VARCHAR}, 
+      #{fInfo25,jdbcType=VARCHAR}, #{fInfo26,jdbcType=VARCHAR}, #{fInfo27,jdbcType=VARCHAR}, 
+      #{fInfo28,jdbcType=VARCHAR}, #{fInfo29,jdbcType=VARCHAR}, #{fInfo30,jdbcType=VARCHAR}, 
+      #{fInfo31,jdbcType=VARCHAR}, #{fInfo32,jdbcType=VARCHAR}, #{fInfo33,jdbcType=VARCHAR}, 
+      #{fInfo34,jdbcType=VARCHAR}, #{fInfo35,jdbcType=VARCHAR}, #{fInfo36,jdbcType=VARCHAR}, 
+      #{fInfo37,jdbcType=VARCHAR}, #{fInfo38,jdbcType=VARCHAR}, #{fInfo39,jdbcType=VARCHAR}, 
+      #{fInfo40,jdbcType=VARCHAR}, #{fInfo41,jdbcType=VARCHAR}, #{fInfo42,jdbcType=VARCHAR}, 
+      #{fInfo43,jdbcType=VARCHAR}, #{fInfo44,jdbcType=VARCHAR}, #{fInfo45,jdbcType=VARCHAR}, 
+      #{fInfo46,jdbcType=VARCHAR}, #{fInfo47,jdbcType=VARCHAR}, #{fInfo48,jdbcType=VARCHAR}, 
+      #{fInfo49,jdbcType=VARCHAR}, #{fInfo50,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_devconfig
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fInfo1 != null">
+        F_INFO1,
+      </if>
+      <if test="fInfo2 != null">
+        F_INFO2,
+      </if>
+      <if test="fInfo3 != null">
+        F_INFO3,
+      </if>
+      <if test="fInfo4 != null">
+        F_INFO4,
+      </if>
+      <if test="fInfo5 != null">
+        F_INFO5,
+      </if>
+      <if test="fInfo6 != null">
+        F_INFO6,
+      </if>
+      <if test="fInfo7 != null">
+        F_INFO7,
+      </if>
+      <if test="fInfo8 != null">
+        F_INFO8,
+      </if>
+      <if test="fInfo9 != null">
+        F_INFO9,
+      </if>
+      <if test="fInfo10 != null">
+        F_INFO10,
+      </if>
+      <if test="fInfo11 != null">
+        F_INFO11,
+      </if>
+      <if test="fInfo12 != null">
+        F_INFO12,
+      </if>
+      <if test="fInfo13 != null">
+        F_INFO13,
+      </if>
+      <if test="fInfo14 != null">
+        F_INFO14,
+      </if>
+      <if test="fInfo15 != null">
+        F_INFO15,
+      </if>
+      <if test="fInfo16 != null">
+        F_INFO16,
+      </if>
+      <if test="fInfo17 != null">
+        F_INFO17,
+      </if>
+      <if test="fInfo18 != null">
+        F_INFO18,
+      </if>
+      <if test="fInfo19 != null">
+        F_INFO19,
+      </if>
+      <if test="fInfo20 != null">
+        F_INFO20,
+      </if>
+      <if test="fInfo21 != null">
+        F_INFO21,
+      </if>
+      <if test="fInfo22 != null">
+        F_INFO22,
+      </if>
+      <if test="fInfo23 != null">
+        F_INFO23,
+      </if>
+      <if test="fInfo24 != null">
+        F_INFO24,
+      </if>
+      <if test="fInfo25 != null">
+        F_INFO25,
+      </if>
+      <if test="fInfo26 != null">
+        F_INFO26,
+      </if>
+      <if test="fInfo27 != null">
+        F_INFO27,
+      </if>
+      <if test="fInfo28 != null">
+        F_INFO28,
+      </if>
+      <if test="fInfo29 != null">
+        F_INFO29,
+      </if>
+      <if test="fInfo30 != null">
+        F_INFO30,
+      </if>
+      <if test="fInfo31 != null">
+        F_INFO31,
+      </if>
+      <if test="fInfo32 != null">
+        F_INFO32,
+      </if>
+      <if test="fInfo33 != null">
+        F_INFO33,
+      </if>
+      <if test="fInfo34 != null">
+        F_INFO34,
+      </if>
+      <if test="fInfo35 != null">
+        F_INFO35,
+      </if>
+      <if test="fInfo36 != null">
+        F_INFO36,
+      </if>
+      <if test="fInfo37 != null">
+        F_INFO37,
+      </if>
+      <if test="fInfo38 != null">
+        F_INFO38,
+      </if>
+      <if test="fInfo39 != null">
+        F_INFO39,
+      </if>
+      <if test="fInfo40 != null">
+        F_INFO40,
+      </if>
+      <if test="fInfo41 != null">
+        F_INFO41,
+      </if>
+      <if test="fInfo42 != null">
+        F_INFO42,
+      </if>
+      <if test="fInfo43 != null">
+        F_INFO43,
+      </if>
+      <if test="fInfo44 != null">
+        F_INFO44,
+      </if>
+      <if test="fInfo45 != null">
+        F_INFO45,
+      </if>
+      <if test="fInfo46 != null">
+        F_INFO46,
+      </if>
+      <if test="fInfo47 != null">
+        F_INFO47,
+      </if>
+      <if test="fInfo48 != null">
+        F_INFO48,
+      </if>
+      <if test="fInfo49 != null">
+        F_INFO49,
+      </if>
+      <if test="fInfo50 != null">
+        F_INFO50,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fInfo1 != null">
+        #{fInfo1,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo2 != null">
+        #{fInfo2,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo3 != null">
+        #{fInfo3,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo4 != null">
+        #{fInfo4,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo5 != null">
+        #{fInfo5,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo6 != null">
+        #{fInfo6,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo7 != null">
+        #{fInfo7,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo8 != null">
+        #{fInfo8,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo9 != null">
+        #{fInfo9,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo10 != null">
+        #{fInfo10,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo11 != null">
+        #{fInfo11,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo12 != null">
+        #{fInfo12,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo13 != null">
+        #{fInfo13,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo14 != null">
+        #{fInfo14,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo15 != null">
+        #{fInfo15,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo16 != null">
+        #{fInfo16,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo17 != null">
+        #{fInfo17,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo18 != null">
+        #{fInfo18,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo19 != null">
+        #{fInfo19,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo20 != null">
+        #{fInfo20,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo21 != null">
+        #{fInfo21,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo22 != null">
+        #{fInfo22,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo23 != null">
+        #{fInfo23,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo24 != null">
+        #{fInfo24,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo25 != null">
+        #{fInfo25,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo26 != null">
+        #{fInfo26,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo27 != null">
+        #{fInfo27,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo28 != null">
+        #{fInfo28,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo29 != null">
+        #{fInfo29,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo30 != null">
+        #{fInfo30,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo31 != null">
+        #{fInfo31,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo32 != null">
+        #{fInfo32,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo33 != null">
+        #{fInfo33,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo34 != null">
+        #{fInfo34,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo35 != null">
+        #{fInfo35,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo36 != null">
+        #{fInfo36,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo37 != null">
+        #{fInfo37,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo38 != null">
+        #{fInfo38,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo39 != null">
+        #{fInfo39,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo40 != null">
+        #{fInfo40,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo41 != null">
+        #{fInfo41,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo42 != null">
+        #{fInfo42,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo43 != null">
+        #{fInfo43,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo44 != null">
+        #{fInfo44,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo45 != null">
+        #{fInfo45,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo46 != null">
+        #{fInfo46,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo47 != null">
+        #{fInfo47,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo48 != null">
+        #{fInfo48,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo49 != null">
+        #{fInfo49,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo50 != null">
+        #{fInfo50,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

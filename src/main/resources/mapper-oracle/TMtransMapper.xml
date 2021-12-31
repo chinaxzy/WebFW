@@ -1,0 +1,938 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mtrans">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DATE" jdbcType="CHAR" property="fDate" />
+    <result column="F_TIME" jdbcType="CHAR" property="fTime" />
+    <result column="F_DEVID" jdbcType="CHAR" property="fDevid" />
+    <result column="F_DEPT" jdbcType="CHAR" property="fDept" />
+    <result column="F_TRCD" jdbcType="CHAR" property="fTrcd" />
+    <result column="F_ACNO" jdbcType="CHAR" property="fAcno" />
+    <result column="F_ACNO2" jdbcType="CHAR" property="fAcno2" />
+    <result column="F_CDNO" jdbcType="CHAR" property="fCdno" />
+    <result column="F_IDNO" jdbcType="CHAR" property="fIdno" />
+    <result column="F_USRNO" jdbcType="CHAR" property="fUsrno" />
+    <result column="F_TRAM" jdbcType="DECIMAL" property="fTram" />
+    <result column="F_FEE" jdbcType="DECIMAL" property="fFee" />
+    <result column="F_DEVLS" jdbcType="CHAR" property="fDevls" />
+    <result column="F_RCPTNO" jdbcType="CHAR" property="fRcptno" />
+    <result column="F_CHKNO" jdbcType="CHAR" property="fChkno" />
+    <result column="F_ACCTNO" jdbcType="CHAR" property="fAcctno" />
+    <result column="F_ACCTOFF" jdbcType="CHAR" property="fAcctoff" />
+    <result column="F_RETNO" jdbcType="CHAR" property="fRetno" />
+    <result column="F_STCD" jdbcType="CHAR" property="fStcd" />
+    <result column="F_FLAG1" jdbcType="CHAR" property="fFlag1" />
+    <result column="F_FLAG2" jdbcType="CHAR" property="fFlag2" />
+    <result column="F_FLAG3" jdbcType="CHAR" property="fFlag3" />
+    <result column="F_FLAG4" jdbcType="CHAR" property="fFlag4" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+    <result column="F_MEMO" jdbcType="CHAR" property="fMemo" />
+    <result column="F_TIME1" jdbcType="VARCHAR" property="fTime1" />
+    <result column="F_TIME2" jdbcType="VARCHAR" property="fTime2" />
+    <result column="F_VIDEOID" jdbcType="VARCHAR" property="fVideoid" />
+    <result column="F_PERMIT" jdbcType="VARCHAR" property="fPermit" />
+    <result column="F_INFO" jdbcType="VARCHAR" property="fInfo" />
+    <result column="F_DATE1" jdbcType="VARCHAR" property="fDate1" />
+    <result column="F_DATE2" jdbcType="VARCHAR" property="fDate2" />
+    <result column="F_PRDTYPE" jdbcType="VARCHAR" property="fPrdtype" />
+    <result column="F_PERIOD" jdbcType="VARCHAR" property="fPeriod" />
+    <result column="F_OPERATOR" jdbcType="VARCHAR" property="fOperator" />
+    <result column="f_file1" jdbcType="VARCHAR" property="fFile1" />
+    <result column="f_file2" jdbcType="VARCHAR" property="fFile2" />
+    <result column="f_file3" jdbcType="VARCHAR" property="fFile3" />
+    <result column="f_flag" jdbcType="VARCHAR" property="fFlag" />
+    <result column="F_PZFLAG" jdbcType="VARCHAR" property="fPzflag" />
+    <result column="F_USRNAME" jdbcType="VARCHAR" property="fUsrname" />
+    <result column="F_PHONE" jdbcType="VARCHAR" property="fPhone" />
+    <result column="F_CDTYPE" jdbcType="VARCHAR" property="fCdtype" />
+    <result column="F_FMTYPE" jdbcType="VARCHAR" property="fFmtype" />
+    <result column="F_TERM" jdbcType="VARCHAR" property="fTerm" />
+    <result column="F_PRINT" jdbcType="INTEGER" property="fPrint" />
+    <result column="WDNAME" jdbcType="VARCHAR" property="fWdname" />
+    <result column="ZHNAME" jdbcType="VARCHAR" property="fZhname" />
+    <result column="FHNAME" jdbcType="VARCHAR" property="fFhname" />
+    <result column="TRCD" jdbcType="VARCHAR" property="fTrcd" />
+    <result column="F_DEPTNAME" jdbcType="VARCHAR" property="fDeptname" />
+    <result column="F_ID" jdbcType="VARCHAR" property="fId" />
+
+    <result column="FK_SUM" jdbcType="VARCHAR" property="fksum" />
+    <result column="QY_SUM" jdbcType="VARCHAR" property="qysum" />
+    <result column="SJ_KK_SUM" jdbcType="VARCHAR" property="sj_kksum" />
+    <result column="SJ_KEK_SUM" jdbcType="VARCHAR" property="sj_keksum" />
+    <result column="SJ_DXQY_SUM" jdbcType="VARCHAR" property="sj_dxqysum" />
+    <result column="SJ_WYQY_SUM" jdbcType="VARCHAR" property="sj_wyqysum" />
+    <result column="SJ_SJQY_SUM" jdbcType="VARCHAR" property="sj_sjqysum" />
+    <result column="SJ_SJQYXG_SUM" jdbcType="VARCHAR" property="sj_sjqyxgsum" />
+    <result column="SJ_DSQY_SUM" jdbcType="VARCHAR" property="sj_dsqysum" />
+    <result column="SJ_DSQYXG_SUM" jdbcType="VARCHAR" property="sj_dsqyxgsum" />
+    <result column="SJ_ERBANGYI_SUM" jdbcType="VARCHAR" property="sj_erbangyisum" />
+    <result column="SJ_SHEBAOIC_SUM" jdbcType="VARCHAR" property="sj_shebaoicsum" />
+
+  </resultMap>
+
+  <select id="selectTrcdSingle" parameterType="map" resultMap="BaseResultMap">
+    SELECT A.*,CASE WHEN B.KKSL IS NOT NULL THEN B.KKSL ELSE 0 END KKSL FROM (
+    SELECT A.F_DEVID,C.F_TYPE,C.F_MARK,C.F_INSTADDR,A.F_DEPT WDID,B.F_NAME WDNAME,D.F_NAME ZHNAME,Z.F_NAME INSTSTYLE,
+    SUM(CASE WHEN A.F_TRCD IN ('1005','1006','3001') THEN A.F_SUC_N ELSE 0 END) ZZBS,
+    SUM(CASE WHEN A.F_TRCD IN ('1005','1006','3001') THEN A.F_SUC_M ELSE 0 END) ZZJE,
+    SUM(CASE WHEN A.F_TRCD IN ('1008','1009','1012') THEN A.F_SUC_N ELSE 0 END) QCBS,
+    SUM(CASE WHEN A.F_TRCD IN ('1008','1009','1012') THEN A.F_SUC_M ELSE 0 END) QCJE,
+    SUM(CASE WHEN A.F_TRCD='1005' THEN A.F_SUC_N ELSE 0 END) ZZHNBS,
+    SUM(CASE WHEN A.F_TRCD='1005' THEN A.F_SUC_M ELSE 0 END) ZZHNJE,
+    SUM(CASE WHEN A.F_TRCD='1006' THEN A.F_SUC_N ELSE 0 END) ZZKHBS,
+    SUM(CASE WHEN A.F_TRCD='1006' THEN A.F_SUC_M ELSE 0 END) ZZKHJE,
+    SUM(CASE WHEN A.F_TRCD='3001' THEN A.F_SUC_N ELSE 0 END) CZZZBS,
+    SUM(CASE WHEN A.F_TRCD='3001' THEN A.F_SUC_M ELSE 0 END) CZZZJE,
+    SUM(CASE WHEN A.F_TRCD IN ('1008','1012') THEN A.F_SUC_N ELSE 0 END) QCHNBS,
+    SUM(CASE WHEN A.F_TRCD IN ('1008','1012') THEN A.F_SUC_M ELSE 0 END) QCHNJE,
+    SUM(CASE WHEN A.F_TRCD='1009' THEN A.F_SUC_N ELSE 0 END) QCKHBS,
+    SUM(CASE WHEN A.F_TRCD='1009' THEN A.F_SUC_M ELSE 0 END) QCKHJE,
+    SUM(CASE WHEN A.F_TRCD='8901' THEN A.F_SUC_N ELSE 0 END) DZWYBS,
+    SUM(CASE WHEN A.F_TRCD='8704' THEN A.F_SUC_N ELSE 0 END) DXBS,
+    SUM(CASE WHEN A.F_TRCD='DHYH' THEN A.F_SUC_N ELSE 0 END) DHYHBS,
+    SUM(CASE WHEN A.F_TRCD='MB01' THEN A.F_SUC_N ELSE 0 END) SJYH1BS,
+    SUM(CASE WHEN A.F_TRCD='8660' THEN A.F_SUC_N ELSE 0 END) SJYH2BS,
+    SUM(CASE WHEN A.F_TRCD='A001' THEN A.F_SUC_N ELSE 0 END) KHBS,
+    SUM(CASE WHEN A.F_TRCD='A004' THEN A.F_SUC_N ELSE 0 END) GSSQBS,
+    SUM(CASE WHEN A.F_TRCD='A005' THEN A.F_SUC_N ELSE 0 END) GRHKBS,
+    SUM(CASE WHEN A.F_TRCD='A002' THEN A.F_SUC_N ELSE 0 END) XJJKBS,
+    SUM(CASE WHEN A.F_TRCD='3520' THEN A.F_SUC_N ELSE 0 END) CZBD,
+    SUM(CASE WHEN A.F_TRCD='3041' THEN A.F_SUC_N ELSE 0 END) WDZHIISJ,
+    SUM(CASE WHEN A.F_TRCD='13041' THEN A.F_SUC_N ELSE 0 END) WDZHIJJ,
+    SUM(CASE WHEN A.F_TRCD='3516' THEN A.F_SUC_N ELSE 0 END) WDKKISL,
+    SUM(CASE WHEN A.F_TRCD='3040' THEN A.F_SUC_N ELSE 0 END) WDKKIISL,
+    SUM(CASE WHEN A.F_TRCD IN ('8631','8627','1302','7181','7202','7216') THEN A.F_SUC_N ELSE 0 END) DJFBS,
+    SUM(CASE WHEN A.F_TRCD IN ('8631','8627','1302','7181','7202','7216') THEN A.F_SUC_M ELSE 0 END) DJFJE,
+    SUM(CASE WHEN A.F_TRCD IN ('8230','8232','8233','8235','8236') THEN A.F_SUC_N ELSE 0 END) YWTBS,
+    SUM(CASE WHEN A.F_TRCD IN ('8230','8232','8233','8235','8236') THEN A.F_SUC_M ELSE 0 END) YWTJE,
+    SUM(CASE WHEN A.F_TRCD IN ('3203') THEN A.F_SUC_N ELSE 0 END) KTGSBS,
+    SUM(CASE WHEN A.F_TRCD IN ('1401','11005','13001') THEN A.F_SUC_N ELSE 0 END) ZNQKBS,
+    SUM(CASE WHEN A.F_TRCD IN ('1401','11005','13001') THEN A.F_SUC_M ELSE 0 END) ZNQKJE,
+    SUM(CASE WHEN A.F_TRCD IN ('21005','21006') THEN A.F_SUC_N ELSE 0 END) ZNZZBS,
+    SUM(CASE WHEN A.F_TRCD IN ('21005','21006') THEN A.F_SUC_M ELSE 0 END) ZNZZJE,
+    SUM(CASE WHEN A.F_TRCD IN ('1403','31006') THEN A.F_SUC_N ELSE 0 END) ZNHKBS,
+    SUM(CASE WHEN A.F_TRCD IN ('1403','31006') THEN A.F_SUC_M ELSE 0 END) ZNHKJE,
+    SUM(CASE WHEN A.F_TRCD IN (SELECT F_ID FROM t_codes WHERE F_CATID='JY' AND F_PAD1='9') THEN A.F_SUC_N ELSE 0 END) HDBS
+    FROM t_tj2trans A,t_branch B,t_branch D,t_dev C
+    LEFT OUTER JOIN t_codes Z ON Z.F_CATID='C5' AND C.F_INSTSTYLE=Z.F_ID
+    <where>
+      <if test="fDateStart != null and fDateEnd != null">
+        A.F_DATE &gt;= #{fDateStart} AND A.F_DATE &lt;= #{fDateEnd}
+      </if>
+      <if test="deptid != null">
+        AND B.F_DEPTID LIKE deptid||'%'
+      </if>
+      AND A.F_DEPT=B.F_ID AND A.F_FLAG='00' AND A.F_DEVID=C.F_ID AND B.F_DEPT=D.F_ID
+      <if test="fDevid != null">
+        AND A.F_DEVID=#{fDevid}
+      </if>
+      <if test="fType != null">
+        AND C.F_TYPE=#{fType}
+      </if>
+    </where>
+    GROUP BY A.F_DEVID,C.F_TYPE,C.F_MARK,C.F_INSTADDR,A.F_DEPT,B.F_NAME,D.F_NAME,Z.F_NAME
+    ) A LEFT OUTER JOIN (
+    SELECT SUM(CASE WHEN A.F_DEVID != '' THEN 1 ELSE 0 END) KKSL,A.F_DEVID
+    FROM t_discard A,t_branch B
+    <where>
+      <if test="fDateStart != null and fDateEnd != null">
+        A.F_DATE &gt;= #{fDateStart} AND A.F_DATE &lt;= #{fDateEnd}
+      </if>
+      <if test="deptid != null">
+        AND B.F_DEPTID LIKE deptid||'%'
+      </if>
+      AND A.F_DEPT=B.F_ID
+      <if test="fDevid != null">
+        AND A.F_DEVID=#{fDevid}
+      </if>
+    </where>
+    GROUP BY A.F_DEVID) B ON A.F_DEVID=B.F_DEVID ORDER BY A.WDID,A.F_DEVID
+  </select>
+
+  <select id="selectTrcdBranch" parameterType="map" resultMap="BaseResultMap">
+    SELECT A.*,CASE WHEN B.KKSL IS NOT NULL THEN B.KKSL ELSE 0 END KKSL FROM (
+    SELECT B.F_ID JGID,B.F_NAME JGNAME,
+    SUM(CASE WHEN A.F_TRCD IN ('1005','1006') THEN A.F_SUC_N ELSE 0 END) ZZBS,
+    SUM(CASE WHEN A.F_TRCD IN ('1005','1006') THEN A.F_SUC_M ELSE 0 END) ZZJE,
+    SUM(CASE WHEN A.F_TRCD IN ('1008','1009','1012') THEN A.F_SUC_N ELSE 0 END) QCBS,
+    SUM(CASE WHEN A.F_TRCD IN ('1008','1009','1012') THEN A.F_SUC_M ELSE 0 END) QCJE,
+    SUM(CASE WHEN A.F_TRCD='1005' THEN A.F_SUC_N ELSE 0 END) ZZHNBS,
+    SUM(CASE WHEN A.F_TRCD='1005' THEN A.F_SUC_M ELSE 0 END) ZZHNJE,
+    SUM(CASE WHEN A.F_TRCD='1006' THEN A.F_SUC_N ELSE 0 END) ZZKHBS,
+    SUM(CASE WHEN A.F_TRCD='1006' THEN A.F_SUC_M ELSE 0 END) ZZKHJE,
+    SUM(CASE WHEN A.F_TRCD='3001' THEN A.F_SUC_N ELSE 0 END) CZZZBS,
+    SUM(CASE WHEN A.F_TRCD='3001' THEN A.F_SUC_M ELSE 0 END) CZZZJE,
+    SUM(CASE WHEN A.F_TRCD IN ('1008','1012') THEN A.F_SUC_N ELSE 0 END) QCHNBS,
+    SUM(CASE WHEN A.F_TRCD IN ('1008','1012') THEN A.F_SUC_M ELSE 0 END) QCHNJE,
+    SUM(CASE WHEN A.F_TRCD='1009' THEN A.F_SUC_N ELSE 0 END) QCKHBS,
+    SUM(CASE WHEN A.F_TRCD='1009' THEN A.F_SUC_M ELSE 0 END) QCKHJE,
+    SUM(CASE WHEN A.F_TRCD='8901' THEN A.F_SUC_N ELSE 0 END) DZWYBS,
+    SUM(CASE WHEN A.F_TRCD='8704' THEN A.F_SUC_N ELSE 0 END) DXBS,
+    SUM(CASE WHEN A.F_TRCD='DHYH' THEN A.F_SUC_N ELSE 0 END) DHYHBS,
+    SUM(CASE WHEN A.F_TRCD='MB01' THEN A.F_SUC_N ELSE 0 END) SJYH1BS,
+    SUM(CASE WHEN A.F_TRCD='8660' THEN A.F_SUC_N ELSE 0 END) SJYH2BS,
+    SUM(CASE WHEN A.F_TRCD='A001' THEN A.F_SUC_N ELSE 0 END) KHBS,
+    SUM(CASE WHEN A.F_TRCD='A004' THEN A.F_SUC_N ELSE 0 END) GSSQBS,
+    SUM(CASE WHEN A.F_TRCD='A005' THEN A.F_SUC_N ELSE 0 END) GRHKBS,
+    SUM(CASE WHEN A.F_TRCD='A002' THEN A.F_SUC_N ELSE 0 END) XJJKBS,
+    SUM(CASE WHEN A.F_TRCD='3520' THEN A.F_SUC_N ELSE 0 END) CZBD,
+    SUM(CASE WHEN A.F_TRCD IN ('8631','8627','1302','7181','7202','7216') THEN A.F_SUC_N ELSE 0 END) DJFBS,
+    SUM(CASE WHEN A.F_TRCD IN ('8631','8627','1302','7181','7202','7216') THEN A.F_SUC_M ELSE 0 END) DJFJE,
+    SUM(CASE WHEN A.F_TRCD IN ('8230','8232','8233','8235','8236') THEN A.F_SUC_N ELSE 0 END) YWTBS,
+    SUM(CASE WHEN A.F_TRCD IN ('8230','8232','8233','8235','8236') THEN A.F_SUC_M ELSE 0 END) YWTJE,
+    SUM(CASE WHEN A.F_TRCD IN ('3203') THEN A.F_SUC_N ELSE 0 END) KTGSBS,
+    SUM(CASE WHEN A.F_TRCD='3041' THEN A.F_SUC_N ELSE 0 END) JGZHIISJ,
+    SUM(CASE WHEN A.F_TRCD='13041' THEN A.F_SUC_N ELSE 0 END) JGZHIJJ,
+    SUM(CASE WHEN A.F_TRCD='3516' THEN A.F_SUC_N ELSE 0 END) JGKKISL,
+    SUM(CASE WHEN A.F_TRCD='3040' THEN A.F_SUC_N ELSE 0 END) JGKKIISL,
+    SUM(CASE WHEN A.F_TRCD IN ('1401','11005','13001') THEN A.F_SUC_N ELSE 0 END) ZNQKBS,
+    SUM(CASE WHEN A.F_TRCD IN ('1401','11005','13001') THEN A.F_SUC_M ELSE 0 END) ZNQKJE,
+    SUM(CASE WHEN A.F_TRCD IN ('21005','21006') THEN A.F_SUC_N ELSE 0 END) ZNZZBS,
+    SUM(CASE WHEN A.F_TRCD IN ('21005','21006') THEN A.F_SUC_M ELSE 0 END) ZNZZJE,
+    SUM(CASE WHEN A.F_TRCD IN ('1403','31006') THEN A.F_SUC_N ELSE 0 END) ZNHKBS,
+    SUM(CASE WHEN A.F_TRCD IN ('1403','31006') THEN A.F_SUC_M ELSE 0 END) ZNHKJE,
+    SUM(CASE WHEN A.F_TRCD IN (SELECT F_ID FROM t_codes WHERE F_CATID='JY' AND F_PAD1='9') THEN A.F_SUC_N ELSE 0 END) HDBS
+    FROM t_tj2trans A,t_branch B,t_dev D
+    <if test="fLevel == '3' or fLevel == '4'">
+      ,t_branch C
+    </if>
+    <where>
+      <if test="fDateStart != null and fDateEnd != null">
+        A.F_DATE &gt;= #{fDateStart} AND A.F_DATE &lt;= #{fDateEnd}
+      </if>
+      AND A.F_DEVID=D.F_ID
+      <if test="(fLevel == '3' or fLevel == '4') and deptid != null ">
+        AND A.F_DEPT=C.F_ID AND C.F_DEPT=B.F_ID AND C.F_DEPTID LIKE deptid||'%'
+      </if>
+      <if test="(fLevel == '1' or fLevel == '2') and deptid != null ">
+        AND A.F_DEPT=B.F_ID AND B.F_DEPTID LIKE deptid||'%'
+      </if>
+      <if test="fType != null">
+        AND D.F_TYPE=#{fType}
+      </if>
+    </where>
+    GROUP BY B.F_ID,B.F_NAME
+    ) A LEFT OUTER JOIN (
+    SELECT SUM(CASE WHEN A.F_DEVID!='' THEN 1 ELSE 0 END) KKSL,B.F_ID JGID
+    FROM t_discard A,t_branch B
+    <if test="fLevel == '3' or fLevel == '4'">
+      ,t_branch C
+    </if>
+    <where>
+      <if test="fDateStart != null and fDateEnd != null">
+        A.F_DATE &gt;= #{fDateStart} AND A.F_DATE &lt;= #{fDateEnd}
+      </if>
+      <if test="fLevel == '3' or fLevel == '4'">
+        AND A.F_DEPT=C.F_ID AND C.F_DEPT=B.F_ID AND C.F_DEPTID LIKE deptid||'%'
+      </if>
+      <if test="fLevel == '1' or fLevel == '2'">
+        AND A.F_DEPT=B.F_ID AND B.F_DEPTID LIKE deptid||'%'
+      </if>
+    </where>
+    GROUP BY B.F_ID) B ON A.JGID=B.JGID ORDER BY A.JGID
+  </select>
+
+  <!--20171010  append  update  by ZQ -->
+  <!--query param B.F_DEPTID-->
+  <select id="selectMTransByDeptid" parameterType="map" resultMap="BaseResultMap">
+
+    SELECT
+    E.F_DATE,
+    E.F_TIME,
+    E.F_DEVID,
+    E.F_DEPT,
+    E.WDNAME,
+    E.ZHNAME,
+    E.FHNAME,
+    E.TRCD,
+    E.F_ACNO,
+    E.F_ACNO2,
+    E.F_CDNO,
+    E.F_IDNO,
+    E.F_USRNO,
+    E.F_TRAM,
+    E.F_DEVLS,
+    E.F_RCPTNO,
+    E.F_CHKNO,
+    E.F_ACCTNO,
+    E.F_RETNO,
+    E.F_MEMO,
+    E.F_ACCTOFF,
+    E.F_DATE1,
+    E.F_TIME1
+
+    FROM (
+    SELECT A.F_DATE,
+    A.F_TIME,
+    A.F_DEVID,
+    A.F_DEPT,
+    B.F_NAME WDNAME,
+    C.F_NAME ZHNAME,
+    D.F_NAME FHNAME,
+    Z.F_NAME TRCD,
+    A.F_ACNO,
+    A.F_ACNO2,
+    A.F_CDNO,
+    A.F_IDNO,
+    A.F_USRNO,
+    A.F_TRAM,
+    A.F_DEVLS,
+    A.F_RCPTNO,
+    A.F_CHKNO,
+    A.F_ACCTNO,
+    A.F_MEMO,
+    CASE
+    WHEN A.F_ACCTOFF='1' THEN '是'
+    WHEN A.F_ACCTOFF='0' THEN '否'
+    END AS F_ACCTOFF,
+    CASE
+    WHEN Y.F_NAME IS NOT NULL THEN Y.F_NAME
+    ELSE A.F_RETNO
+    END AS F_RETNO,
+    SUBSTR(A.F_DATE,1,4)||'-'||SUBSTR(A.F_DATE,5,2)||'-'||SUBSTR(A.F_DATE,7,2) F_DATE1,
+    SUBSTR(A.F_TIME,1,2)||':'||SUBSTR(A.F_TIME,3,2) F_TIME1
+    FROM
+    (SELECT *
+    FROM t_mtrans
+    UNION SELECT *
+    FROM ht_mtrans) A
+    LEFT OUTER JOIN t_codes Z ON Z.F_CATID='JY'
+    AND A.F_TRCD=Z.F_ID
+    LEFT OUTER JOIN t_codes Y ON Y.F_CATID='RS'
+    AND A.F_RETNO=Y.F_ID,
+    t_branch B,
+    t_branch C,
+    t_branch D
+    <where>
+      <if test="fDeptid != null">
+        B.F_DEPTID LIKE #{fDeptid}||'%'
+      </if>
+      <if test=" 1==1">
+        AND A.F_DEPT=B.F_ID
+        AND B.F_DEPT=C.F_ID
+        AND C.F_DEPT=D.F_ID
+      </if>
+    </where>
+    ORDER BY A.F_DATE DESC,A.F_TIME DESC
+    ) E
+    where rownum &lt;=50
+  </select>
+  <!--end append-->
+
+
+  <select id="selectMTrans" parameterType="map" resultMap="BaseResultMap">
+
+    SELECT A.F_DATE,
+    A.F_TIME,
+    A.F_DEVID,
+    A.F_DEPT,
+    B.F_NAME WDNAME,
+    C.F_NAME ZHNAME,
+    D.F_NAME FHNAME,
+    Z.F_NAME TRCD,
+    A.F_ACNO,
+    A.F_ACNO2,
+    A.F_CDNO,
+    A.F_IDNO,
+    A.F_USRNO,
+    A.F_TRAM,
+    A.F_DEVLS,
+    A.F_RCPTNO,
+    A.F_CHKNO,
+    A.F_ACCTNO,
+    A.F_MEMO,
+    A.F_TERM,
+    CASE
+    WHEN A.F_ACCTOFF='1' THEN '是'
+    WHEN A.F_ACCTOFF='0' THEN '否'
+    END AS F_ACCTOFF,
+    CASE
+    WHEN Y.F_NAME IS NOT NULL THEN Y.F_NAME
+    ELSE A.F_RETNO
+    END AS F_RETNO,
+    SUBSTR(A.F_DATE,1,4)||'-'||SUBSTR(A.F_DATE,5,2)||'-'||SUBSTR(A.F_DATE,7,2) F_DATE1,
+    SUBSTR(A.F_TIME,1,2)||':'||SUBSTR(A.F_TIME,3,2) F_TIME1
+    FROM
+    (SELECT *
+    FROM t_mtrans
+    UNION SELECT *
+    FROM ht_mtrans) A
+    LEFT OUTER JOIN t_codes Z ON Z.F_CATID='JY'
+    AND A.F_TRCD=Z.F_ID
+    LEFT OUTER JOIN t_codes Y ON Y.F_CATID='RS'
+    AND A.F_RETNO=Y.F_ID,
+    t_branch B,
+    t_branch C,
+    t_branch D
+    <where>
+      <if test="startdate != null">
+        A.F_DATE &gt;= #{startdate}
+      </if>
+      <if test="enddate != null">
+        AND A.F_DATE &lt;= #{enddate}
+      </if>
+      <if test="starttime != null">
+        AND A.F_TIME &gt;= #{starttime}
+      </if>
+      <if test="endtime != null">
+        AND A.F_TIME &lt;= #{endtime}
+      </if>
+      <if test="deptid != null">
+        AND B.F_DEPTID LIKE #{deptid}||'%'
+      </if>
+      <if test=" 1==1">
+        AND A.F_DEPT=B.F_ID
+        AND B.F_DEPT=C.F_ID
+        AND C.F_DEPT=D.F_ID
+      </if>
+      <if test="fDept != null">
+        AND A.F_DEPT = #{fDept}
+      </if>
+      <if test="fAcno != null">
+        AND A.F_ACNO = #{fAcno}
+      </if>
+      <if test="fAcctno != null">
+        AND A.F_ACCTNO = #{fAcctno}
+      </if>
+      <if test="fDevid != null">
+        AND A.F_DEVID = #{fDevid}
+      </if>
+      <if test="fIdno != null">
+        AND A.F_IDNO = #{fIdno}
+      </if>
+      <if test="fRet != null and fRet == 0">
+        AND A.F_RETNO in ('00','0000','成功','000000')
+      </if>
+      <if test="fRet != null and fRet == 1">
+        AND (A.F_RETNO not in ('00','0000','成功','000000') OR A.F_RETNO IS NULL)
+      </if>
+      <if test="fTrcdname != null">
+        AND Z.F_NAME=#{fTrcdname,jdbcType=VARCHAR}
+      </if>
+      <if test="fTrcd != null">
+        AND A.F_TRCD = #{fTrcd,jdbcType=VARCHAR}
+      </if>
+      <if test="fTerm != null">
+        AND A.F_TERM = #{fTerm}
+      </if>
+      <if test="fOperator != null">
+        AND A.F_OPERATOR = #{fOperator}
+      </if>
+    </where>
+    <if test="orderby!=null">
+      ORDER BY ${orderby}
+    </if>
+    <if test="orderby == null">
+      ORDER BY A.F_DATE DESC,A.F_TIME DESC
+    </if>
+  </select>
+
+  <!-- shengjing bank-->
+  <select id="selectTrcdSummary" parameterType="map" resultMap="BaseResultMap">
+
+    SELECT g.F_ID,g.F_NAME F_DEPTNAME,
+    CASE WHEN f.FK_SUM IS NULL THEN 0 ELSE f.FK_SUM END FK_SUM,
+    CASE WHEN f.QY_SUM IS NULL THEN 0 ELSE f.QY_SUM END QY_SUM,
+    CASE WHEN f.SJ_KK_SUM IS NULL THEN 0 ELSE f.SJ_KK_SUM END SJ_KK_SUM,
+    CASE WHEN f.SJ_KEK_SUM IS NULL THEN 0 ELSE f.SJ_KEK_SUM END SJ_KEK_SUM,
+    CASE WHEN f.SJ_DXQY_SUM IS NULL THEN 0 ELSE f.SJ_DXQY_SUM END SJ_DXQY_SUM,
+    CASE WHEN f.SJ_WYQY_SUM IS NULL THEN 0 ELSE f.SJ_WYQY_SUM END SJ_WYQY_SUM,
+    CASE WHEN f.SJ_SJQY_SUM IS NULL THEN 0 ELSE f.SJ_SJQY_SUM END SJ_SJQY_SUM,
+    CASE WHEN f.SJ_SJQYXG_SUM IS NULL THEN 0 ELSE f.SJ_SJQYXG_SUM END SJ_SJQYXG_SUM,
+    CASE WHEN f.SJ_DSQY_SUM IS NULL THEN 0 ELSE f.SJ_DSQY_SUM END SJ_DSQY_SUM,
+    CASE WHEN f.SJ_DSQYXG_SUM IS NULL THEN 0 ELSE f.SJ_DSQYXG_SUM END SJ_DSQYXG_SUM,
+    CASE WHEN f.SJ_ERBANGYI_SUM IS NULL THEN 0 ELSE f.SJ_ERBANGYI_SUM END SJ_ERBANGYI_SUM,
+    CASE WHEN f.SJ_SHEBAOIC_SUM IS NULL THEN 0 ELSE f.SJ_SHEBAOIC_SUM END SJ_SHEBAOIC_SUM
+
+    FROM (
+    SELECT *
+    FROM t_branch
+    WHERE F_DEPTID LIKE #{fDeptid}||'%'
+    <if test="fLevel > 2">
+      AND F_LEVEL = #{fLevel}-1
+    </if>
+    <if test="fLevel == 2">
+      AND F_LEVEL = 2
+    </if>
+    ) g
+    LEFT JOIN
+    (
+    SELECT
+    <if test="fLevel == 2 or fLevel == 3">
+      B.F_ID,B.F_NAME F_DEPTNAME,
+    </if>
+    <if test="fLevel == 4">
+      C.F_ID,C.F_NAME F_DEPTNAME,
+    </if>
+    <if test="fLevel == 5">
+      D.F_ID,D.F_NAME F_DEPTNAME,
+    </if>
+    sum(case A.F_TRCD WHEN 'ZZFK' THEN 1 ELSE 0 END ) FK_SUM,
+    sum(case A.F_TRCD WHEN 'ZZQY' THEN 1 ELSE 0 END ) QY_SUM,
+    sum(case A.F_TRCD WHEN 'O30021' THEN 1 ELSE 0 END ) SJ_KK_SUM,
+    sum(case A.F_TRCD WHEN 'O31021' THEN 1 ELSE 0 END ) SJ_KEK_SUM,
+    sum(case A.F_TRCD WHEN 'O57661' THEN 1 ELSE 0 END ) SJ_DXQY_SUM,
+    sum(case A.F_TRCD WHEN '101002' THEN 1 ELSE 0 END ) SJ_WYQY_SUM,
+    sum(case A.F_TRCD WHEN '171070' THEN 1 ELSE 0 END ) SJ_SJQY_SUM,
+    sum(case A.F_TRCD WHEN '171064' THEN 1 ELSE 0 END ) SJ_SJQYXG_SUM,
+    sum(case A.F_TRCD WHEN '171170' THEN 1 ELSE 0 END ) SJ_DSQY_SUM,
+    sum(case A.F_TRCD WHEN '171164' THEN 1 ELSE 0 END ) SJ_DSQYXG_SUM,
+    sum(case A.F_TRCD WHEN 'O33211' THEN 1 ELSE 0 END ) SJ_ERBANGYI_SUM,
+    sum(case A.F_TRCD WHEN 'O39941' THEN 1 ELSE 0 END ) SJ_SHEBAOIC_SUM
+    FROM
+    (
+    SELECT *
+    FROM t_mtrans
+    UNION SELECT *
+    FROM ht_mtrans) A
+    LEFT OUTER JOIN t_codes Z ON Z.F_CATID='JY'
+    AND A.F_TRCD=Z.F_ID
+    LEFT OUTER JOIN t_codes Y ON Y.F_CATID='RS'
+    AND A.F_RETNO=Y.F_ID,
+    t_branch B,
+    t_branch C,
+    t_branch D
+    <where>
+      <if test="startdate != null">
+        A.F_DATE &gt;= #{startdate}
+      </if>
+      <if test="enddate != null">
+        AND A.F_DATE &lt;= #{enddate}
+      </if>
+      <if test="starttime != null">
+        AND A.F_TIME &gt;= #{starttime}
+      </if>
+      <if test="endtime != null">
+        AND A.F_TIME &lt;= #{endtime}
+      </if>
+      <if test="fDeptid != null and fLevel == 2 or fLevel == 3">
+        AND B.F_DEPTID LIKE #{fDeptid}||'%'
+      </if>
+      <if test="fDeptid != null and fLevel == 4">
+        AND C.F_DEPTID LIKE #{fDeptid}||'%'
+      </if>
+      <if test="fDeptid != null and fLevel == 5">
+        AND D.F_DEPTID LIKE #{fDeptid}||'%'
+      </if>
+      <if test=" 1==1">
+        AND A.F_DEPT=B.F_ID
+        AND B.F_DEPT=C.F_ID
+        AND C.F_DEPT=D.F_ID
+		AND A.F_RETNO='000000'
+      </if>
+      <if test="fAcno != null">
+        AND A.F_ACNO = #{fAcno}
+      </if>
+      <if test="fAcctno != null">
+        AND A.F_ACCTNO = #{fAcctno}
+      </if>
+      <if test="fDevid != null">
+        AND A.F_DEVID = #{fDevid}
+      </if>
+      <if test="fIdno != null">
+        AND A.F_IDNO = #{fIdno}
+      </if>
+      <if test="fTrcd != null">
+        AND Z.F_NAME=#{fTrcd}
+      </if>
+      <if test="fTerm != null">
+        AND A.F_TERM = #{fTerm}
+      </if>
+      <if test="fOperator != null">
+        AND A.F_OPERATOR = #{fOperator}
+      </if>
+    </where>
+    GROUP BY
+    <if test="fLevel == 2 or fLevel ==3">
+      B.F_ID,B.F_NAME
+    </if>
+    <if test="fLevel == 4">
+      C.F_ID,C.F_NAME
+    </if>
+    <if test="fLevel == 5">
+      D.F_ID,D.F_NAME
+    </if>
+    ) f ON g.F_ID = f.F_ID
+  </select>
+
+  <select id="selectCount" parameterType="map" resultType="int">
+    SELECT count(*)
+    FROM
+    (SELECT *
+    FROM t_mtrans
+    UNION SELECT *
+    FROM ht_mtrans) A
+    LEFT OUTER JOIN t_codes Z ON Z.F_CATID='JY'
+    AND A.F_TRCD=Z.F_ID
+    LEFT OUTER JOIN t_codes Y ON Y.F_CATID='RS'
+    AND A.F_RETNO=Y.F_ID,
+    t_branch B,
+    t_branch C,
+    t_branch D
+    <where>
+      <if test="startdate != null">
+        A.F_DATE &gt;= #{startdate}
+      </if>
+      <if test="enddate != null">
+        AND A.F_DATE &lt;= #{enddate}
+      </if>
+      <if test="starttime != null">
+        AND A.F_TIME &gt;= #{starttime}
+      </if>
+      <if test="endtime != null">
+        AND A.F_TIME &lt;= #{endtime}
+      </if>
+      <if test="deptid != null">
+        AND B.F_DEPTID LIKE #{deptid}||'%'
+      </if>
+      <if test=" 1==1">
+        AND A.F_DEPT=B.F_ID
+        AND B.F_DEPT=C.F_ID
+        AND C.F_DEPT=D.F_ID
+      </if>
+      <if test="fAcno != null">
+        AND A.F_ACNO = #{fAcno}
+      </if>
+      <if test="fAcctno != null">
+        AND A.F_ACCTNO = #{fAcctno}
+      </if>
+      <if test="fDevid != null">
+        AND A.F_DEVID = #{fDevid}
+      </if>
+      <if test="fIdno != null">
+        AND A.F_IDNO = #{fIdno}
+      </if>
+      <if test="fRet != null and fRetno == 0">
+        AND A.F_RETNO in ('00','0000','成功','000000')
+      </if>
+      <if test="fRet != null and fRetno == 1">
+        AND (A.F_RETNO not in ('00','0000','成功','000000') OR A.F_RETNO IS NULL)
+      </if>
+      <if test="fTrcd != null">
+        AND Z.F_NAME=#{fTrcd}
+      </if>
+      <if test="fOperator != null">
+        AND A.F_OPERATOR = #{fOperator}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    SELECT *
+    FROM t_mtrans
+  </select>
+
+  <insert id="insert" parameterType="map">
+    insert into t_mtrans (F_DATE, F_TIME, F_DEVID,
+      F_DEPT, F_TRCD, F_ACNO, F_ACNO2,
+      F_CDNO, F_IDNO, F_USRNO, F_TRAM,
+      F_FEE, F_DEVLS, F_RCPTNO, F_CHKNO,
+      F_ACCTNO, F_ACCTOFF, F_RETNO, F_STCD,
+      F_FLAG1, F_FLAG2, F_FLAG3, F_FLAG4,
+      F_PAD1, F_MEMO, F_TIME1, F_TIME2,
+      F_VIDEOID, F_PERMIT, F_INFO,
+      f_date1, F_DATE2, F_PRDTYPE,
+      F_PERIOD, F_OPERATOR, f_file1,
+      f_file2, f_file3, f_flag,
+      F_PZFLAG, F_USRNAME, F_PHONE,
+      F_CDTYPE, F_FMTYPE, F_TERM,
+      F_PRINT)
+    values (#{fDate,jdbcType=CHAR}, #{fTime,jdbcType=CHAR}, #{fDevid,jdbcType=CHAR},
+      #{fDept,jdbcType=CHAR}, #{fTrcd,jdbcType=CHAR}, #{fAcno,jdbcType=CHAR}, #{fAcno2,jdbcType=CHAR},
+      #{fCdno,jdbcType=CHAR}, #{fIdno,jdbcType=CHAR}, #{fUsrno,jdbcType=CHAR}, #{fTram,jdbcType=DECIMAL},
+      #{fFee,jdbcType=DECIMAL}, #{fDevls,jdbcType=CHAR}, #{fRcptno,jdbcType=CHAR}, #{fChkno,jdbcType=CHAR},
+      #{fAcctno,jdbcType=CHAR}, #{fAcctoff,jdbcType=CHAR}, #{fRetno,jdbcType=CHAR}, #{fStcd,jdbcType=CHAR},
+      #{fFlag1,jdbcType=CHAR}, #{fFlag2,jdbcType=CHAR}, #{fFlag3,jdbcType=CHAR}, #{fFlag4,jdbcType=CHAR},
+      #{fPad1,jdbcType=CHAR}, #{fMemo,jdbcType=CHAR}, #{fTime1,jdbcType=VARCHAR}, #{fTime2,jdbcType=VARCHAR},
+      #{fVideoid,jdbcType=VARCHAR}, #{fPermit,jdbcType=VARCHAR}, #{fInfo,jdbcType=VARCHAR},
+      #{fDate1,jdbcType=VARCHAR}, #{fDate2,jdbcType=VARCHAR}, #{fPrdtype,jdbcType=VARCHAR},
+      #{fPeriod,jdbcType=VARCHAR}, #{fOperator,jdbcType=VARCHAR}, #{fFile1,jdbcType=VARCHAR},
+      #{fFile2,jdbcType=VARCHAR}, #{fFile3,jdbcType=VARCHAR}, #{fFlag,jdbcType=VARCHAR},
+      #{fPzflag,jdbcType=VARCHAR}, #{fUsrname,jdbcType=VARCHAR}, #{fPhone,jdbcType=VARCHAR},
+      #{fCdtype,jdbcType=VARCHAR}, #{fFmtype,jdbcType=VARCHAR}, #{fTerm,jdbcType=VARCHAR},
+      #{fPrint,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_mtrans
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fTrcd != null">
+        F_TRCD,
+      </if>
+      <if test="fAcno != null">
+        F_ACNO,
+      </if>
+      <if test="fAcno2 != null">
+        F_ACNO2,
+      </if>
+      <if test="fCdno != null">
+        F_CDNO,
+      </if>
+      <if test="fIdno != null">
+        F_IDNO,
+      </if>
+      <if test="fUsrno != null">
+        F_USRNO,
+      </if>
+      <if test="fTram != null">
+        F_TRAM,
+      </if>
+      <if test="fFee != null">
+        F_FEE,
+      </if>
+      <if test="fDevls != null">
+        F_DEVLS,
+      </if>
+      <if test="fRcptno != null">
+        F_RCPTNO,
+      </if>
+      <if test="fChkno != null">
+        F_CHKNO,
+      </if>
+      <if test="fAcctno != null">
+        F_ACCTNO,
+      </if>
+      <if test="fAcctoff != null">
+        F_ACCTOFF,
+      </if>
+      <if test="fRetno != null">
+        F_RETNO,
+      </if>
+      <if test="fStcd != null">
+        F_STCD,
+      </if>
+      <if test="fFlag1 != null">
+        F_FLAG1,
+      </if>
+      <if test="fFlag2 != null">
+        F_FLAG2,
+      </if>
+      <if test="fFlag3 != null">
+        F_FLAG3,
+      </if>
+      <if test="fFlag4 != null">
+        F_FLAG4,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fMemo != null">
+        F_MEMO,
+      </if>
+      <if test="fTime1 != null">
+        F_TIME1,
+      </if>
+      <if test="fTime2 != null">
+        F_TIME2,
+      </if>
+      <if test="fVideoid != null">
+        F_VIDEOID,
+      </if>
+      <if test="fPermit != null">
+        F_PERMIT,
+      </if>
+      <if test="fInfo != null">
+        F_INFO,
+      </if>
+      <if test="fDate1 != null">
+        f_date1,
+      </if>
+      <if test="fDate2 != null">
+        F_DATE2,
+      </if>
+      <if test="fPrdtype != null">
+        F_PRDTYPE,
+      </if>
+      <if test="fPeriod != null">
+        F_PERIOD,
+      </if>
+      <if test="fOperator != null">
+        F_OPERATOR,
+      </if>
+      <if test="fFile1 != null">
+        f_file1,
+      </if>
+      <if test="fFile2 != null">
+        f_file2,
+      </if>
+      <if test="fFile3 != null">
+        f_file3,
+      </if>
+      <if test="fFlag != null">
+        f_flag,
+      </if>
+      <if test="fPzflag != null">
+        F_PZFLAG,
+      </if>
+      <if test="fUsrname != null">
+        F_USRNAME,
+      </if>
+      <if test="fPhone != null">
+        F_PHONE,
+      </if>
+      <if test="fCdtype != null">
+        F_CDTYPE,
+      </if>
+      <if test="fFmtype != null">
+        F_FMTYPE,
+      </if>
+      <if test="fTerm != null">
+        F_TERM,
+      </if>
+      <if test="fPrint != null">
+        F_PRINT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        #{fDate,jdbcType=CHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=CHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fTrcd != null">
+        #{fTrcd,jdbcType=CHAR},
+      </if>
+      <if test="fAcno != null">
+        #{fAcno,jdbcType=CHAR},
+      </if>
+      <if test="fAcno2 != null">
+        #{fAcno2,jdbcType=CHAR},
+      </if>
+      <if test="fCdno != null">
+        #{fCdno,jdbcType=CHAR},
+      </if>
+      <if test="fIdno != null">
+        #{fIdno,jdbcType=CHAR},
+      </if>
+      <if test="fUsrno != null">
+        #{fUsrno,jdbcType=CHAR},
+      </if>
+      <if test="fTram != null">
+        #{fTram,jdbcType=DECIMAL},
+      </if>
+      <if test="fFee != null">
+        #{fFee,jdbcType=DECIMAL},
+      </if>
+      <if test="fDevls != null">
+        #{fDevls,jdbcType=CHAR},
+      </if>
+      <if test="fRcptno != null">
+        #{fRcptno,jdbcType=CHAR},
+      </if>
+      <if test="fChkno != null">
+        #{fChkno,jdbcType=CHAR},
+      </if>
+      <if test="fAcctno != null">
+        #{fAcctno,jdbcType=CHAR},
+      </if>
+      <if test="fAcctoff != null">
+        #{fAcctoff,jdbcType=CHAR},
+      </if>
+      <if test="fRetno != null">
+        #{fRetno,jdbcType=CHAR},
+      </if>
+      <if test="fStcd != null">
+        #{fStcd,jdbcType=CHAR},
+      </if>
+      <if test="fFlag1 != null">
+        #{fFlag1,jdbcType=CHAR},
+      </if>
+      <if test="fFlag2 != null">
+        #{fFlag2,jdbcType=CHAR},
+      </if>
+      <if test="fFlag3 != null">
+        #{fFlag3,jdbcType=CHAR},
+      </if>
+      <if test="fFlag4 != null">
+        #{fFlag4,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fMemo != null">
+        #{fMemo,jdbcType=CHAR},
+      </if>
+      <if test="fTime1 != null">
+        #{fTime1,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime2 != null">
+        #{fTime2,jdbcType=VARCHAR},
+      </if>
+      <if test="fVideoid != null">
+        #{fVideoid,jdbcType=VARCHAR},
+      </if>
+      <if test="fPermit != null">
+        #{fPermit,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo != null">
+        #{fInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate1 != null">
+        #{fDate1,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate2 != null">
+        #{fDate2,jdbcType=VARCHAR},
+      </if>
+      <if test="fPrdtype != null">
+        #{fPrdtype,jdbcType=VARCHAR},
+      </if>
+      <if test="fPeriod != null">
+        #{fPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="fOperator != null">
+        #{fOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="fFile1 != null">
+        #{fFile1,jdbcType=VARCHAR},
+      </if>
+      <if test="fFile2 != null">
+        #{fFile2,jdbcType=VARCHAR},
+      </if>
+      <if test="fFile3 != null">
+        #{fFile3,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag != null">
+        #{fFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="fPzflag != null">
+        #{fPzflag,jdbcType=VARCHAR},
+      </if>
+      <if test="fUsrname != null">
+        #{fUsrname,jdbcType=VARCHAR},
+      </if>
+      <if test="fPhone != null">
+        #{fPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="fCdtype != null">
+        #{fCdtype,jdbcType=VARCHAR},
+      </if>
+      <if test="fFmtype != null">
+        #{fFmtype,jdbcType=VARCHAR},
+      </if>
+      <if test="fTerm != null">
+        #{fTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="fPrint != null">
+        #{fPrint,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

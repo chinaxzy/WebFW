@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="count">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_PASSWD" jdbcType="VARCHAR" property="fPasswd" />
+    <result column="F_WINDID" jdbcType="VARCHAR" property="fWindid" />
+    <result column="F_TIME1" jdbcType="VARCHAR" property="fTime1" />
+    <result column="F_TIME2" jdbcType="VARCHAR" property="fTime2" />
+    <result column="F_STATE" jdbcType="VARCHAR" property="fState" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+    <result column="F_STATENAME" jdbcType="VARCHAR" property="fStatename" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_DEPT, F_ID, F_NAME, F_PASSWD, F_WINDID, F_TIME1, F_TIME2, F_STATE, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,
+    case F_STATE
+    when '1' then '签到'
+    when '0' then '签退'
+    else '' end F_STATENAME
+    from t_count
+    <where>
+      <if test="fDept != null and fDept != '0000'">
+        F_DEPT = #{fDept,jdbcType=VARCHAR}
+      </if>
+      <if test="fId != null">
+        and F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_count
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+      and F_ID = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_count (F_DEPT, F_ID, F_NAME, 
+      F_PASSWD, F_WINDID, F_TIME1, 
+      F_TIME2, F_STATE, F_PAD1
+      )
+    values (#{fDept,jdbcType=VARCHAR}, #{fId,jdbcType=VARCHAR}, #{fName,jdbcType=VARCHAR}, 
+      #{fPasswd,jdbcType=VARCHAR}, #{fWindid,jdbcType=VARCHAR}, #{fTime1,jdbcType=VARCHAR}, 
+      #{fTime2,jdbcType=VARCHAR}, #{fState,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_count
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fPasswd != null">
+        F_PASSWD,
+      </if>
+      <if test="fWindid != null">
+        F_WINDID,
+      </if>
+      <if test="fTime1 != null">
+        F_TIME1,
+      </if>
+      <if test="fTime2 != null">
+        F_TIME2,
+      </if>
+      <if test="fState != null">
+        F_STATE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fPasswd != null">
+        #{fPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="fWindid != null">
+        #{fWindid,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime1 != null">
+        #{fTime1,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime2 != null">
+        #{fTime2,jdbcType=VARCHAR},
+      </if>
+      <if test="fState != null">
+        #{fState,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_count
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fPasswd != null">
+        F_PASSWD = #{fPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="fWindid != null">
+        F_WINDID = #{fWindid,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime1 != null">
+        F_TIME1 = #{fTime1,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime2 != null">
+        F_TIME2 = #{fTime2,jdbcType=VARCHAR},
+      </if>
+      <if test="fState != null">
+        F_STATE = #{fState,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+      and F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_count
+    set F_NAME = #{fName,jdbcType=VARCHAR},
+      F_PASSWD = #{fPasswd,jdbcType=VARCHAR},
+      F_WINDID = #{fWindid,jdbcType=VARCHAR},
+      F_TIME1 = #{fTime1,jdbcType=VARCHAR},
+      F_TIME2 = #{fTime2,jdbcType=VARCHAR},
+      F_STATE = #{fState,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_DEPT = #{fDept,jdbcType=VARCHAR}
+      and F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

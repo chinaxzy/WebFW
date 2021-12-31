@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="soft">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_VER" jdbcType="CHAR" property="fVer" />
+    <result column="F_DTIME" jdbcType="CHAR" property="fDtime" />
+    <result column="F_DEFMAN" jdbcType="CHAR" property="fDefman" />
+    <result column="F_FILE" jdbcType="CHAR" property="fFile" />
+    <result column="F_ZIPFG" jdbcType="CHAR" property="fZipfg" />
+    <result column="F_TYPE" jdbcType="CHAR" property="fType" />
+    <result column="F_RDONLY" jdbcType="CHAR" property="fRdonly" />
+    <result column="F_DEVTYPE" jdbcType="CHAR" property="fDevtype" />
+    <result column="F_DEVMARK" jdbcType="CHAR" property="fDevmark" />
+    <result column="F_DEVSPC" jdbcType="CHAR" property="fDevspc" />
+    <result column="F_VERTYPE" jdbcType="CHAR" property="fVertype" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+    <result column="F_PAD" jdbcType="CHAR" property="fPad" />
+    <result column="FDATE" jdbcType="CHAR" property="fDate" />
+    <result column="FZIPFGNAME" jdbcType="CHAR" property="fZipfgname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_VER, F_DTIME, F_DEFMAN, F_FILE, F_ZIPFG, F_TYPE, F_RDONLY, F_DEVTYPE, 
+    F_DEVMARK, F_DEVSPC, F_VERTYPE, F_PAD1, F_PAD
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,CONVERT(CONCAT(SUBSTR(F_ID, 1, 4), '-', SUBSTR(F_ID, 5, 2), '-', SUBSTR(F_ID, 7, 2)), CHAR) AS fDate,
+    case F_ZIPFG WHEN '1' THEN '是'
+    WHEN '0' THEN '否'
+    ELSE '' END FZIPFGNAME
+    from t_soft
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=CHAR}
+      </if>
+      <if test="fDevtype != null">
+        AND F_DEVTYPE = #{fDevtype}
+      </if>
+      <if test="fDevmark != null">
+        AND F_DEVMARK = #{fDevmark}
+      </if>
+      <if test="fDevspc != null">
+        AND F_DEVSPC = #{fDevspc}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectMaxId" parameterType="map" resultType="String">
+    SELECT MAX(SUBSTR(F_ID,10,3)) MAXID FROM t_soft WHERE SUBSTR(F_ID,1,8)=#{fDate}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_soft
+    where RTRIM(F_ID) = #{fId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_soft (F_ID, F_NAME, F_VER, F_DTIME, 
+      F_DEFMAN, F_FILE, F_ZIPFG, F_TYPE, 
+      F_RDONLY, F_DEVTYPE, F_DEVMARK, 
+      F_DEVSPC, F_VERTYPE, F_PAD1, F_PAD
+      )
+    values (#{fId,jdbcType=CHAR}, #{fName,jdbcType=CHAR}, #{fVer,jdbcType=CHAR}, #{fDtime,jdbcType=CHAR}, 
+      #{fDefman,jdbcType=CHAR}, #{fFile,jdbcType=CHAR}, #{fZipfg,jdbcType=CHAR}, #{fType,jdbcType=CHAR}, 
+      #{fRdonly,jdbcType=CHAR}, #{fDevtype,jdbcType=CHAR}, #{fDevmark,jdbcType=CHAR}, 
+      #{fDevspc,jdbcType=CHAR}, #{fVertype,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR}, #{fPad,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_soft
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fVer != null">
+        F_VER,
+      </if>
+      <if test="fDtime != null">
+        F_DTIME,
+      </if>
+      <if test="fDefman != null">
+        F_DEFMAN,
+      </if>
+      <if test="fFile != null">
+        F_FILE,
+      </if>
+        F_ZIPFG,
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fRdonly != null">
+        F_RDONLY,
+      </if>
+      <if test="fDevtype != null">
+        F_DEVTYPE,
+      </if>
+      <if test="fDevmark != null">
+        F_DEVMARK,
+      </if>
+      <if test="fDevspc != null">
+        F_DEVSPC,
+      </if>
+      <if test="fVertype != null">
+        F_VERTYPE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fPad != null">
+        F_PAD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fVer != null">
+        #{fVer,jdbcType=CHAR},
+      </if>
+      <if test="fDtime != null">
+        #{fDtime,jdbcType=CHAR},
+      </if>
+      <if test="fDefman != null">
+        #{fDefman,jdbcType=CHAR},
+      </if>
+      <if test="fFile != null">
+        #{fFile,jdbcType=CHAR},
+      </if>
+      <if test="fZipfg != null">
+        #{fZipfg,jdbcType=CHAR},
+      </if>
+      <if test="fZipfg == null">
+        0,
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fRdonly != null">
+        #{fRdonly,jdbcType=CHAR},
+      </if>
+      <if test="fDevtype != null">
+        #{fDevtype,jdbcType=CHAR},
+      </if>
+      <if test="fDevmark != null">
+        #{fDevmark,jdbcType=CHAR},
+      </if>
+      <if test="fDevspc != null">
+        #{fDevspc,jdbcType=CHAR},
+      </if>
+      <if test="fVertype != null">
+        #{fVertype,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fPad != null">
+        #{fPad,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_soft
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fVer != null">
+        F_VER = #{fVer,jdbcType=CHAR},
+      </if>
+      <if test="fDtime != null">
+        F_DTIME = #{fDtime,jdbcType=CHAR},
+      </if>
+      <if test="fDefman != null">
+        F_DEFMAN = #{fDefman,jdbcType=CHAR},
+      </if>
+      <if test="fFile != null">
+        F_FILE = #{fFile,jdbcType=CHAR},
+      </if>
+      <if test="fZipfg != null">
+        F_ZIPFG = #{fZipfg,jdbcType=CHAR},
+      </if>
+      <if test="fType != null">
+        F_TYPE = #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fRdonly != null">
+        F_RDONLY = #{fRdonly,jdbcType=CHAR},
+      </if>
+      <if test="fDevtype != null">
+        F_DEVTYPE = #{fDevtype,jdbcType=CHAR},
+      </if>
+      <if test="fDevmark != null">
+        F_DEVMARK = #{fDevmark,jdbcType=CHAR},
+      </if>
+      <if test="fDevspc != null">
+        F_DEVSPC = #{fDevspc,jdbcType=CHAR},
+      </if>
+      <if test="fVertype != null">
+        F_VERTYPE = #{fVertype,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fPad != null">
+        F_PAD = #{fPad,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_soft
+    set F_NAME = #{fName,jdbcType=CHAR},
+      F_VER = #{fVer,jdbcType=CHAR},
+      F_DTIME = #{fDtime,jdbcType=CHAR},
+      F_DEFMAN = #{fDefman,jdbcType=CHAR},
+      F_FILE = #{fFile,jdbcType=CHAR},
+      F_ZIPFG = #{fZipfg,jdbcType=CHAR},
+      F_TYPE = #{fType,jdbcType=CHAR},
+      F_RDONLY = #{fRdonly,jdbcType=CHAR},
+      F_DEVTYPE = #{fDevtype,jdbcType=CHAR},
+      F_DEVMARK = #{fDevmark,jdbcType=CHAR},
+      F_DEVSPC = #{fDevspc,jdbcType=CHAR},
+      F_VERTYPE = #{fVertype,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR},
+      F_PAD = #{fPad,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+
+</mapper>

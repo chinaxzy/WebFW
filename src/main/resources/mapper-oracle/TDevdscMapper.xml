@@ -1,0 +1,646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devdsc">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_ASSERTS" jdbcType="VARCHAR" property="fAsserts" />
+    <result column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_INST" jdbcType="VARCHAR" property="fInst" />
+    <result column="F_INSTADDR" jdbcType="VARCHAR" property="fInstaddr" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_DEPT1" jdbcType="VARCHAR" property="fDept1" />
+    <result column="F_DEPT3" jdbcType="VARCHAR" property="fDept3" />
+    <result column="F_ZCID" jdbcType="VARCHAR" property="fZcid" />
+    <result column="F_OPERATOR" jdbcType="VARCHAR" property="fOperator" />
+    <result column="F_ADMIN" jdbcType="VARCHAR" property="fAdmin" />
+    <result column="F_ADMIN2" jdbcType="VARCHAR" property="fAdmin2" />
+    <result column="F_ADMIN3" jdbcType="VARCHAR" property="fAdmin3" />
+    <result column="F_USESTAT" jdbcType="VARCHAR" property="fUsestat" />
+    <result column="F_ABIS" jdbcType="VARCHAR" property="fAbis" />
+    <result column="F_IP" jdbcType="VARCHAR" property="fIp" />
+    <result column="F_PORT" jdbcType="INTEGER" property="fPort" />
+    <result column="F_LOCID" jdbcType="VARCHAR" property="fLocid" />
+    <result column="F_COM" jdbcType="VARCHAR" property="fCom" />
+    <result column="F_SPECIALCD" jdbcType="VARCHAR" property="fSpecialcd" />
+    <result column="F_MAC" jdbcType="VARCHAR" property="fMac" />
+    <result column="F_STYLE" jdbcType="VARCHAR" property="fStyle" />
+    <result column="F_INSTSTYLE" jdbcType="VARCHAR" property="fInststyle" />
+    <result column="F_AREA" jdbcType="VARCHAR" property="fArea" />
+    <result column="F_FUNCAREA" jdbcType="VARCHAR" property="fFuncarea" />
+    <result column="F_USETYPE" jdbcType="VARCHAR" property="fUsetype" />
+    <result column="F_TYPE" jdbcType="VARCHAR" property="fType" />
+    <result column="F_MARK" jdbcType="VARCHAR" property="fMark" />
+    <result column="F_SPC" jdbcType="VARCHAR" property="fSpc" />
+    <result column="F_UPS" jdbcType="VARCHAR" property="fUps" />
+    <result column="F_PC" jdbcType="VARCHAR" property="fPc" />
+    <result column="F_BOX" jdbcType="INTEGER" property="fBox" />
+    <result column="F_MBOX" jdbcType="INTEGER" property="fMbox" />
+    <result column="F_RESTIME" jdbcType="INTEGER" property="fRestime" />
+    <result column="F_MONEYDEV" jdbcType="VARCHAR" property="fMoneydev" />
+    <result column="F_FACID" jdbcType="VARCHAR" property="fFacid" />
+    <result column="F_ISPID" jdbcType="VARCHAR" property="fIspid" />
+    <result column="F_BUYHT" jdbcType="VARCHAR" property="fBuyht" />
+    <result column="F_ADMHT" jdbcType="VARCHAR" property="fAdmht" />
+    <result column="F_SOFTID" jdbcType="VARCHAR" property="fSoftid" />
+    <result column="F_CURVER" jdbcType="VARCHAR" property="fCurver" />
+    <result column="F_LVERSION" jdbcType="VARCHAR" property="fLversion" />
+    <result column="F_LVERDATE" jdbcType="VARCHAR" property="fLverdate" />
+    <result column="F_CODE" jdbcType="VARCHAR" property="fCode" />
+    <result column="F_DTARRIV" jdbcType="VARCHAR" property="fDtarriv" />
+    <result column="F_DTIMAX" jdbcType="VARCHAR" property="fDtimax" />
+    <result column="F_DTOPEN" jdbcType="VARCHAR" property="fDtopen" />
+    <result column="F_DTCLOSE" jdbcType="VARCHAR" property="fDtclose" />
+    <result column="F_DTBX1" jdbcType="VARCHAR" property="fDtbx1" />
+    <result column="F_DTBX2" jdbcType="VARCHAR" property="fDtbx2" />
+    <result column="F_DTREST" jdbcType="VARCHAR" property="fDtrest" />
+    <result column="F_WORK1" jdbcType="VARCHAR" property="fWork1" />
+    <result column="F_WORK2" jdbcType="VARCHAR" property="fWork2" />
+    <result column="F_WORKDX" jdbcType="DECIMAL" property="fWorkdx" />
+    <result column="F_DCOST" jdbcType="INTEGER" property="fDcost" />
+    <result column="F_SEARCH" jdbcType="VARCHAR" property="fSearch" />
+    <result column="F_MAPID" jdbcType="INTEGER" property="fMapid" />
+    <result column="F_MAPX" jdbcType="INTEGER" property="fMapx" />
+    <result column="F_MAPY" jdbcType="INTEGER" property="fMapy" />
+    <result column="F_GETDATA" jdbcType="VARCHAR" property="fGetdata" />
+    <result column="F_COLTP" jdbcType="VARCHAR" property="fColtp" />
+    <result column="F_VIDID" jdbcType="VARCHAR" property="fVidid" />
+    <result column="F_LASTTX" jdbcType="VARCHAR" property="fLasttx" />
+    <result column="F_LASTTS" jdbcType="VARCHAR" property="fLastts" />
+    <result column="F_LASTST" jdbcType="VARCHAR" property="fLastst" />
+    <result column="F_FTXSUPP" jdbcType="VARCHAR" property="fFtxsupp" />
+    <result column="F_LOGVER" jdbcType="INTEGER" property="fLogver" />
+    <result column="F_SORTIDX" jdbcType="INTEGER" property="fSortidx" />
+    <result column="F_REQWH" jdbcType="VARCHAR" property="fReqwh" />
+    <result column="F_ACKWH" jdbcType="VARCHAR" property="fAckwh" />
+    <result column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_SDATE" jdbcType="VARCHAR" property="fSdate" />
+    <result column="F_FLAG1" jdbcType="VARCHAR" property="fFlag1" />
+    <result column="F_FLAG2" jdbcType="VARCHAR" property="fFlag2" />
+    <result column="F_FLAG3" jdbcType="VARCHAR" property="fFlag3" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+    <result column="F_PAD2" jdbcType="VARCHAR" property="fPad2" />
+    <result column="F_PAD3" jdbcType="VARCHAR" property="fPad3" />
+    <result column="F_PAD4" jdbcType="VARCHAR" property="fPad4" />
+    <result column="F_REASON" jdbcType="VARCHAR" property="fReason" />
+    <result column="F_BFWS" jdbcType="VARCHAR" property="fBfws" />
+    <result column="F_TERM" jdbcType="VARCHAR" property="fTerm" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_devdsc (F_ASSERTS, F_ID, F_NAME, 
+      F_INST, F_INSTADDR, F_DEPT, 
+      F_DEPT1, F_DEPT3, F_ZCID, 
+      F_OPERATOR, F_ADMIN, F_ADMIN2, 
+      F_ADMIN3, F_USESTAT, F_ABIS, 
+      F_IP, F_PORT, F_LOCID, 
+      F_COM, F_SPECIALCD, F_MAC, 
+      F_STYLE, F_INSTSTYLE, F_AREA, 
+      F_FUNCAREA, F_USETYPE, F_TYPE, 
+      F_MARK, F_SPC, F_UPS, 
+      F_PC, F_BOX, F_MBOX, F_RESTIME, 
+      F_MONEYDEV, F_FACID, F_ISPID, 
+      F_BUYHT, F_ADMHT, F_SOFTID, 
+      F_CURVER, F_LVERSION, F_LVERDATE, 
+      F_CODE, F_DTARRIV, F_DTIMAX, 
+      F_DTOPEN, F_DTCLOSE, F_DTBX1, 
+      F_DTBX2, F_DTREST, F_WORK1, 
+      F_WORK2, F_WORKDX, F_DCOST, 
+      F_SEARCH, F_MAPID, F_MAPX, 
+      F_MAPY, F_GETDATA, F_COLTP, 
+      F_VIDID, F_LASTTX, F_LASTTS, 
+      F_LASTST, F_FTXSUPP, F_LOGVER, 
+      F_SORTIDX, F_REQWH, F_ACKWH, 
+      F_DATE, F_SDATE, F_FLAG1, 
+      F_FLAG2, F_FLAG3, F_PAD1, 
+      F_PAD2, F_PAD3, F_PAD4, 
+      F_REASON, F_BFWS, F_TERM
+      )
+    values (#{fAsserts,jdbcType=VARCHAR}, #{fId,jdbcType=VARCHAR}, #{fName,jdbcType=VARCHAR}, 
+      #{fInst,jdbcType=VARCHAR}, #{fInstaddr,jdbcType=VARCHAR}, #{fDept,jdbcType=VARCHAR}, 
+      #{fDept1,jdbcType=VARCHAR}, #{fDept3,jdbcType=VARCHAR}, #{fZcid,jdbcType=VARCHAR}, 
+      #{fOperator,jdbcType=VARCHAR}, #{fAdmin,jdbcType=VARCHAR}, #{fAdmin2,jdbcType=VARCHAR}, 
+      #{fAdmin3,jdbcType=VARCHAR}, #{fUsestat,jdbcType=VARCHAR}, #{fAbis,jdbcType=VARCHAR}, 
+      #{fIp,jdbcType=VARCHAR}, #{fPort,jdbcType=INTEGER}, #{fLocid,jdbcType=VARCHAR}, 
+      #{fCom,jdbcType=VARCHAR}, #{fSpecialcd,jdbcType=VARCHAR}, #{fMac,jdbcType=VARCHAR}, 
+      #{fStyle,jdbcType=VARCHAR}, #{fInststyle,jdbcType=VARCHAR}, #{fArea,jdbcType=VARCHAR}, 
+      #{fFuncarea,jdbcType=VARCHAR}, #{fUsetype,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR}, 
+      #{fMark,jdbcType=VARCHAR}, #{fSpc,jdbcType=VARCHAR}, #{fUps,jdbcType=VARCHAR}, 
+      #{fPc,jdbcType=VARCHAR}, #{fBox,jdbcType=INTEGER}, #{fMbox,jdbcType=INTEGER}, #{fRestime,jdbcType=INTEGER}, 
+      #{fMoneydev,jdbcType=VARCHAR}, #{fFacid,jdbcType=VARCHAR}, #{fIspid,jdbcType=VARCHAR}, 
+      #{fBuyht,jdbcType=VARCHAR}, #{fAdmht,jdbcType=VARCHAR}, #{fSoftid,jdbcType=VARCHAR}, 
+      #{fCurver,jdbcType=VARCHAR}, #{fLversion,jdbcType=VARCHAR}, #{fLverdate,jdbcType=VARCHAR}, 
+      #{fCode,jdbcType=VARCHAR}, #{fDtarriv,jdbcType=VARCHAR}, #{fDtimax,jdbcType=VARCHAR}, 
+      #{fDtopen,jdbcType=VARCHAR}, #{fDtclose,jdbcType=VARCHAR}, #{fDtbx1,jdbcType=VARCHAR}, 
+      #{fDtbx2,jdbcType=VARCHAR}, #{fDtrest,jdbcType=VARCHAR}, #{fWork1,jdbcType=VARCHAR}, 
+      #{fWork2,jdbcType=VARCHAR}, #{fWorkdx,jdbcType=DECIMAL}, #{fDcost,jdbcType=INTEGER}, 
+      #{fSearch,jdbcType=VARCHAR}, #{fMapid,jdbcType=INTEGER}, #{fMapx,jdbcType=INTEGER}, 
+      #{fMapy,jdbcType=INTEGER}, #{fGetdata,jdbcType=VARCHAR}, #{fColtp,jdbcType=VARCHAR}, 
+      #{fVidid,jdbcType=VARCHAR}, #{fLasttx,jdbcType=VARCHAR}, #{fLastts,jdbcType=VARCHAR}, 
+      #{fLastst,jdbcType=VARCHAR}, #{fFtxsupp,jdbcType=VARCHAR}, #{fLogver,jdbcType=INTEGER}, 
+      #{fSortidx,jdbcType=INTEGER}, #{fReqwh,jdbcType=VARCHAR}, #{fAckwh,jdbcType=VARCHAR}, 
+      #{fDate,jdbcType=VARCHAR}, #{fSdate,jdbcType=VARCHAR}, #{fFlag1,jdbcType=VARCHAR}, 
+      #{fFlag2,jdbcType=VARCHAR}, #{fFlag3,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}, 
+      #{fPad2,jdbcType=VARCHAR}, #{fPad3,jdbcType=VARCHAR}, #{fPad4,jdbcType=VARCHAR}, 
+      #{fReason,jdbcType=VARCHAR}, #{fBfws,jdbcType=VARCHAR}, #{fTerm,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_devdsc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fAsserts != null">
+        F_ASSERTS,
+      </if>
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fInst != null">
+        F_INST,
+      </if>
+      <if test="fInstaddr != null">
+        F_INSTADDR,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fDept1 != null">
+        F_DEPT1,
+      </if>
+      <if test="fDept3 != null">
+        F_DEPT3,
+      </if>
+      <if test="fZcid != null">
+        F_ZCID,
+      </if>
+      <if test="fOperator != null">
+        F_OPERATOR,
+      </if>
+      <if test="fAdmin != null">
+        F_ADMIN,
+      </if>
+      <if test="fAdmin2 != null">
+        F_ADMIN2,
+      </if>
+      <if test="fAdmin3 != null">
+        F_ADMIN3,
+      </if>
+      <if test="fUsestat != null">
+        F_USESTAT,
+      </if>
+      <if test="fAbis != null">
+        F_ABIS,
+      </if>
+      <if test="fIp != null">
+        F_IP,
+      </if>
+      <if test="fPort != null">
+        F_PORT,
+      </if>
+      <if test="fLocid != null">
+        F_LOCID,
+      </if>
+      <if test="fCom != null">
+        F_COM,
+      </if>
+      <if test="fSpecialcd != null">
+        F_SPECIALCD,
+      </if>
+      <if test="fMac != null">
+        F_MAC,
+      </if>
+      <if test="fStyle != null">
+        F_STYLE,
+      </if>
+      <if test="fInststyle != null">
+        F_INSTSTYLE,
+      </if>
+      <if test="fArea != null">
+        F_AREA,
+      </if>
+      <if test="fFuncarea != null">
+        F_FUNCAREA,
+      </if>
+      <if test="fUsetype != null">
+        F_USETYPE,
+      </if>
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fMark != null">
+        F_MARK,
+      </if>
+      <if test="fSpc != null">
+        F_SPC,
+      </if>
+      <if test="fUps != null">
+        F_UPS,
+      </if>
+      <if test="fPc != null">
+        F_PC,
+      </if>
+      <if test="fBox != null">
+        F_BOX,
+      </if>
+      <if test="fMbox != null">
+        F_MBOX,
+      </if>
+      <if test="fRestime != null">
+        F_RESTIME,
+      </if>
+      <if test="fMoneydev != null">
+        F_MONEYDEV,
+      </if>
+      <if test="fFacid != null">
+        F_FACID,
+      </if>
+      <if test="fIspid != null">
+        F_ISPID,
+      </if>
+      <if test="fBuyht != null">
+        F_BUYHT,
+      </if>
+      <if test="fAdmht != null">
+        F_ADMHT,
+      </if>
+      <if test="fSoftid != null">
+        F_SOFTID,
+      </if>
+      <if test="fCurver != null">
+        F_CURVER,
+      </if>
+      <if test="fLversion != null">
+        F_LVERSION,
+      </if>
+      <if test="fLverdate != null">
+        F_LVERDATE,
+      </if>
+      <if test="fCode != null">
+        F_CODE,
+      </if>
+      <if test="fDtarriv != null">
+        F_DTARRIV,
+      </if>
+      <if test="fDtimax != null">
+        F_DTIMAX,
+      </if>
+      <if test="fDtopen != null">
+        F_DTOPEN,
+      </if>
+      <if test="fDtclose != null">
+        F_DTCLOSE,
+      </if>
+      <if test="fDtbx1 != null">
+        F_DTBX1,
+      </if>
+      <if test="fDtbx2 != null">
+        F_DTBX2,
+      </if>
+      <if test="fDtrest != null">
+        F_DTREST,
+      </if>
+      <if test="fWork1 != null">
+        F_WORK1,
+      </if>
+      <if test="fWork2 != null">
+        F_WORK2,
+      </if>
+      <if test="fWorkdx != null">
+        F_WORKDX,
+      </if>
+      <if test="fDcost != null">
+        F_DCOST,
+      </if>
+      <if test="fSearch != null">
+        F_SEARCH,
+      </if>
+      <if test="fMapid != null">
+        F_MAPID,
+      </if>
+      <if test="fMapx != null">
+        F_MAPX,
+      </if>
+      <if test="fMapy != null">
+        F_MAPY,
+      </if>
+      <if test="fGetdata != null">
+        F_GETDATA,
+      </if>
+      <if test="fColtp != null">
+        F_COLTP,
+      </if>
+      <if test="fVidid != null">
+        F_VIDID,
+      </if>
+      <if test="fLasttx != null">
+        F_LASTTX,
+      </if>
+      <if test="fLastts != null">
+        F_LASTTS,
+      </if>
+      <if test="fLastst != null">
+        F_LASTST,
+      </if>
+      <if test="fFtxsupp != null">
+        F_FTXSUPP,
+      </if>
+      <if test="fLogver != null">
+        F_LOGVER,
+      </if>
+      <if test="fSortidx != null">
+        F_SORTIDX,
+      </if>
+      <if test="fReqwh != null">
+        F_REQWH,
+      </if>
+      <if test="fAckwh != null">
+        F_ACKWH,
+      </if>
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fSdate != null">
+        F_SDATE,
+      </if>
+      <if test="fFlag1 != null">
+        F_FLAG1,
+      </if>
+      <if test="fFlag2 != null">
+        F_FLAG2,
+      </if>
+      <if test="fFlag3 != null">
+        F_FLAG3,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2,
+      </if>
+      <if test="fPad3 != null">
+        F_PAD3,
+      </if>
+      <if test="fPad4 != null">
+        F_PAD4,
+      </if>
+      <if test="fReason != null">
+        F_REASON,
+      </if>
+      <if test="fBfws != null">
+        F_BFWS,
+      </if>
+      <if test="fTerm != null">
+        F_TERM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fAsserts != null">
+        #{fAsserts,jdbcType=VARCHAR},
+      </if>
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fInst != null">
+        #{fInst,jdbcType=VARCHAR},
+      </if>
+      <if test="fInstaddr != null">
+        #{fInstaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept1 != null">
+        #{fDept1,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept3 != null">
+        #{fDept3,jdbcType=VARCHAR},
+      </if>
+      <if test="fZcid != null">
+        #{fZcid,jdbcType=VARCHAR},
+      </if>
+      <if test="fOperator != null">
+        #{fOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="fAdmin != null">
+        #{fAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="fAdmin2 != null">
+        #{fAdmin2,jdbcType=VARCHAR},
+      </if>
+      <if test="fAdmin3 != null">
+        #{fAdmin3,jdbcType=VARCHAR},
+      </if>
+      <if test="fUsestat != null">
+        #{fUsestat,jdbcType=VARCHAR},
+      </if>
+      <if test="fAbis != null">
+        #{fAbis,jdbcType=VARCHAR},
+      </if>
+      <if test="fIp != null">
+        #{fIp,jdbcType=VARCHAR},
+      </if>
+      <if test="fPort != null">
+        #{fPort,jdbcType=INTEGER},
+      </if>
+      <if test="fLocid != null">
+        #{fLocid,jdbcType=VARCHAR},
+      </if>
+      <if test="fCom != null">
+        #{fCom,jdbcType=VARCHAR},
+      </if>
+      <if test="fSpecialcd != null">
+        #{fSpecialcd,jdbcType=VARCHAR},
+      </if>
+      <if test="fMac != null">
+        #{fMac,jdbcType=VARCHAR},
+      </if>
+      <if test="fStyle != null">
+        #{fStyle,jdbcType=VARCHAR},
+      </if>
+      <if test="fInststyle != null">
+        #{fInststyle,jdbcType=VARCHAR},
+      </if>
+      <if test="fArea != null">
+        #{fArea,jdbcType=VARCHAR},
+      </if>
+      <if test="fFuncarea != null">
+        #{fFuncarea,jdbcType=VARCHAR},
+      </if>
+      <if test="fUsetype != null">
+        #{fUsetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fMark != null">
+        #{fMark,jdbcType=VARCHAR},
+      </if>
+      <if test="fSpc != null">
+        #{fSpc,jdbcType=VARCHAR},
+      </if>
+      <if test="fUps != null">
+        #{fUps,jdbcType=VARCHAR},
+      </if>
+      <if test="fPc != null">
+        #{fPc,jdbcType=VARCHAR},
+      </if>
+      <if test="fBox != null">
+        #{fBox,jdbcType=INTEGER},
+      </if>
+      <if test="fMbox != null">
+        #{fMbox,jdbcType=INTEGER},
+      </if>
+      <if test="fRestime != null">
+        #{fRestime,jdbcType=INTEGER},
+      </if>
+      <if test="fMoneydev != null">
+        #{fMoneydev,jdbcType=VARCHAR},
+      </if>
+      <if test="fFacid != null">
+        #{fFacid,jdbcType=VARCHAR},
+      </if>
+      <if test="fIspid != null">
+        #{fIspid,jdbcType=VARCHAR},
+      </if>
+      <if test="fBuyht != null">
+        #{fBuyht,jdbcType=VARCHAR},
+      </if>
+      <if test="fAdmht != null">
+        #{fAdmht,jdbcType=VARCHAR},
+      </if>
+      <if test="fSoftid != null">
+        #{fSoftid,jdbcType=VARCHAR},
+      </if>
+      <if test="fCurver != null">
+        #{fCurver,jdbcType=VARCHAR},
+      </if>
+      <if test="fLversion != null">
+        #{fLversion,jdbcType=VARCHAR},
+      </if>
+      <if test="fLverdate != null">
+        #{fLverdate,jdbcType=VARCHAR},
+      </if>
+      <if test="fCode != null">
+        #{fCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fDtarriv != null">
+        #{fDtarriv,jdbcType=VARCHAR},
+      </if>
+      <if test="fDtimax != null">
+        #{fDtimax,jdbcType=VARCHAR},
+      </if>
+      <if test="fDtopen != null">
+        #{fDtopen,jdbcType=VARCHAR},
+      </if>
+      <if test="fDtclose != null">
+        #{fDtclose,jdbcType=VARCHAR},
+      </if>
+      <if test="fDtbx1 != null">
+        #{fDtbx1,jdbcType=VARCHAR},
+      </if>
+      <if test="fDtbx2 != null">
+        #{fDtbx2,jdbcType=VARCHAR},
+      </if>
+      <if test="fDtrest != null">
+        #{fDtrest,jdbcType=VARCHAR},
+      </if>
+      <if test="fWork1 != null">
+        #{fWork1,jdbcType=VARCHAR},
+      </if>
+      <if test="fWork2 != null">
+        #{fWork2,jdbcType=VARCHAR},
+      </if>
+      <if test="fWorkdx != null">
+        #{fWorkdx,jdbcType=DECIMAL},
+      </if>
+      <if test="fDcost != null">
+        #{fDcost,jdbcType=INTEGER},
+      </if>
+      <if test="fSearch != null">
+        #{fSearch,jdbcType=VARCHAR},
+      </if>
+      <if test="fMapid != null">
+        #{fMapid,jdbcType=INTEGER},
+      </if>
+      <if test="fMapx != null">
+        #{fMapx,jdbcType=INTEGER},
+      </if>
+      <if test="fMapy != null">
+        #{fMapy,jdbcType=INTEGER},
+      </if>
+      <if test="fGetdata != null">
+        #{fGetdata,jdbcType=VARCHAR},
+      </if>
+      <if test="fColtp != null">
+        #{fColtp,jdbcType=VARCHAR},
+      </if>
+      <if test="fVidid != null">
+        #{fVidid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLasttx != null">
+        #{fLasttx,jdbcType=VARCHAR},
+      </if>
+      <if test="fLastts != null">
+        #{fLastts,jdbcType=VARCHAR},
+      </if>
+      <if test="fLastst != null">
+        #{fLastst,jdbcType=VARCHAR},
+      </if>
+      <if test="fFtxsupp != null">
+        #{fFtxsupp,jdbcType=VARCHAR},
+      </if>
+      <if test="fLogver != null">
+        #{fLogver,jdbcType=INTEGER},
+      </if>
+      <if test="fSortidx != null">
+        #{fSortidx,jdbcType=INTEGER},
+      </if>
+      <if test="fReqwh != null">
+        #{fReqwh,jdbcType=VARCHAR},
+      </if>
+      <if test="fAckwh != null">
+        #{fAckwh,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fSdate != null">
+        #{fSdate,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag1 != null">
+        #{fFlag1,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag2 != null">
+        #{fFlag2,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag3 != null">
+        #{fFlag3,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad2 != null">
+        #{fPad2,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad3 != null">
+        #{fPad3,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad4 != null">
+        #{fPad4,jdbcType=VARCHAR},
+      </if>
+      <if test="fReason != null">
+        #{fReason,jdbcType=VARCHAR},
+      </if>
+      <if test="fBfws != null">
+        #{fBfws,jdbcType=VARCHAR},
+      </if>
+      <if test="fTerm != null">
+        #{fTerm,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

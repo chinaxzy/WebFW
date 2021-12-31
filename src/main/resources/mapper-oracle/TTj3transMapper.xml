@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tj3trans">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_TRCD" jdbcType="VARCHAR" property="fTrcd" />
+    <result column="F_FLAG" jdbcType="VARCHAR" property="fFlag" />
+    <result column="F_SUC_N" jdbcType="INTEGER" property="fSucN" />
+    <result column="F_SUC_M" jdbcType="DECIMAL" property="fSucM" />
+    <result column="F_FAL_N" jdbcType="INTEGER" property="fFalN" />
+    <result column="F_FAL_M" jdbcType="DECIMAL" property="fFalM" />
+    <result column="F_PROFIT" jdbcType="DECIMAL" property="fProfit" />
+    <result column="F_PAD_N" jdbcType="INTEGER" property="fPadN" />
+    <result column="F_PAD_M" jdbcType="DECIMAL" property="fPadM" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_tj3trans (F_DATE, F_DEVID, F_DEPT, 
+      F_TRCD, F_FLAG, F_SUC_N, 
+      F_SUC_M, F_FAL_N, F_FAL_M, 
+      F_PROFIT, F_PAD_N, F_PAD_M
+      )
+    values (#{fDate,jdbcType=VARCHAR}, #{fDevid,jdbcType=VARCHAR}, #{fDept,jdbcType=VARCHAR}, 
+      #{fTrcd,jdbcType=VARCHAR}, #{fFlag,jdbcType=VARCHAR}, #{fSucN,jdbcType=INTEGER}, 
+      #{fSucM,jdbcType=DECIMAL}, #{fFalN,jdbcType=INTEGER}, #{fFalM,jdbcType=DECIMAL}, 
+      #{fProfit,jdbcType=DECIMAL}, #{fPadN,jdbcType=INTEGER}, #{fPadM,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_tj3trans
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fTrcd != null">
+        F_TRCD,
+      </if>
+      <if test="fFlag != null">
+        F_FLAG,
+      </if>
+      <if test="fSucN != null">
+        F_SUC_N,
+      </if>
+      <if test="fSucM != null">
+        F_SUC_M,
+      </if>
+      <if test="fFalN != null">
+        F_FAL_N,
+      </if>
+      <if test="fFalM != null">
+        F_FAL_M,
+      </if>
+      <if test="fProfit != null">
+        F_PROFIT,
+      </if>
+      <if test="fPadN != null">
+        F_PAD_N,
+      </if>
+      <if test="fPadM != null">
+        F_PAD_M,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fTrcd != null">
+        #{fTrcd,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag != null">
+        #{fFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="fSucN != null">
+        #{fSucN,jdbcType=INTEGER},
+      </if>
+      <if test="fSucM != null">
+        #{fSucM,jdbcType=DECIMAL},
+      </if>
+      <if test="fFalN != null">
+        #{fFalN,jdbcType=INTEGER},
+      </if>
+      <if test="fFalM != null">
+        #{fFalM,jdbcType=DECIMAL},
+      </if>
+      <if test="fProfit != null">
+        #{fProfit,jdbcType=DECIMAL},
+      </if>
+      <if test="fPadN != null">
+        #{fPadN,jdbcType=INTEGER},
+      </if>
+      <if test="fPadM != null">
+        #{fPadM,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

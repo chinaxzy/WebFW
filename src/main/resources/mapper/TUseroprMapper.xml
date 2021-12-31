@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="useropr">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_USRID" jdbcType="VARCHAR" property="fUsrid" />
+    <result column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_TIME" jdbcType="VARCHAR" property="fTime" />
+    <result column="F_OPR" jdbcType="VARCHAR" property="fOpr" />
+    <result column="F_IP" jdbcType="VARCHAR" property="fIp" />
+    <result column="F_DATA" jdbcType="VARCHAR" property="fData" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_useropr (F_USRID, F_DATE, F_TIME, 
+      F_OPR, F_IP, F_DATA)
+    values (#{fUsrid,jdbcType=VARCHAR}, #{fDate,jdbcType=VARCHAR}, #{fTime,jdbcType=VARCHAR}, 
+      #{fOpr,jdbcType=VARCHAR}, #{fIp,jdbcType=VARCHAR}, #{fData,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_useropr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fUsrid != null">
+        F_USRID,
+      </if>
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fOpr != null">
+        F_OPR,
+      </if>
+      <if test="fIp != null">
+        F_IP,
+      </if>
+      <if test="fData != null">
+        F_DATA,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fUsrid != null">
+        #{fUsrid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fOpr != null">
+        #{fOpr,jdbcType=VARCHAR},
+      </if>
+      <if test="fIp != null">
+        #{fIp,jdbcType=VARCHAR},
+      </if>
+      <if test="fData != null">
+        #{fData,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

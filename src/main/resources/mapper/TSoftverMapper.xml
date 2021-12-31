@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="softver">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_VER" jdbcType="CHAR" property="fVer" />
+    <result column="F_PKGFMT" jdbcType="INTEGER" property="fPkgfmt" />
+    <result column="F_AREAIDX" jdbcType="INTEGER" property="fAreaidx" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_VER, F_PKGFMT, F_AREAIDX, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_softver
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_softver
+    where F_ID = #{fId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_softver (F_ID, F_VER, F_PKGFMT, 
+      F_AREAIDX, F_PAD1)
+    values (#{fId,jdbcType=CHAR}, #{fVer,jdbcType=CHAR}, #{fPkgfmt,jdbcType=INTEGER}, 
+      #{fAreaidx,jdbcType=INTEGER}, #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_softver
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fVer != null">
+        F_VER,
+      </if>
+      <if test="fPkgfmt != null">
+        F_PKGFMT,
+      </if>
+      <if test="fAreaidx != null">
+        F_AREAIDX,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fVer != null">
+        #{fVer,jdbcType=CHAR},
+      </if>
+      <if test="fPkgfmt != null">
+        #{fPkgfmt,jdbcType=INTEGER},
+      </if>
+      <if test="fAreaidx != null">
+        #{fAreaidx,jdbcType=INTEGER},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_softver
+    <set>
+      <if test="fVer != null">
+        F_VER = #{fVer,jdbcType=CHAR},
+      </if>
+      <if test="fPkgfmt != null">
+        F_PKGFMT = #{fPkgfmt,jdbcType=INTEGER},
+      </if>
+      <if test="fAreaidx != null">
+        F_AREAIDX = #{fAreaidx,jdbcType=INTEGER},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_softver
+    set F_VER = #{fVer,jdbcType=CHAR},
+      F_PKGFMT = #{fPkgfmt,jdbcType=INTEGER},
+      F_AREAIDX = #{fAreaidx,jdbcType=INTEGER},
+      F_PAD1 = #{fPad1,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+
+</mapper>

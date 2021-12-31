@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userrole">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ROLEID" jdbcType="CHAR" property="fRoleid" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_LEVEL" jdbcType="CHAR" property="fLevel" />
+    <result column="F_WEBRIGHT" jdbcType="VARCHAR" property="fWebright" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+
+    <result column="F_ID" jdbcType="CHAR" property="fId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ROLEID, F_NAME, F_LEVEL, F_WEBRIGHT, F_PAD1
+  </sql>
+
+  <select id="selectRoleByUser" parameterType="map" resultMap="BaseResultMap">
+    SELECT *
+    FROM t_userrole
+    WHERE F_LEVEL &lt;= (
+      SELECT F_LEVEL FROM t_branch WHERE F_ID=(
+        SELECT F_DEPT
+        FROM t_users WHERE F_ID LIKE #{fUserid}||'%'
+      )
+    )
+  </select>
+
+  <!--    LIKE TO_CHAR(#{fId,jdbcType=CHAR})||'%'-->
+  <select id="selectRoleInfoByUser" parameterType="map" resultMap="BaseResultMap">
+    SELECT b.F_ID,a.*
+    FROM t_userrole a,t_users b
+    WHERE a.F_ROLEID = b.F_PART
+    AND b.F_ID = #{fId}
+
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_userrole
+    <where>
+      <if test="fRoleid != null">
+        F_ROLEID = #{fRoleid,jdbcType=CHAR}
+      </if>
+      <if test="fLevel != null">
+        AND F_LEVEL &lt;= #{fLevel}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_userrole
+    where F_ROLEID = #{fRoleid,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_userrole (F_ROLEID, F_NAME, F_LEVEL, 
+      F_WEBRIGHT, F_PAD1)
+    values (#{fRoleid,jdbcType=CHAR}, #{fName,jdbcType=CHAR}, #{fLevel,jdbcType=CHAR}, 
+      #{fWebright,jdbcType=VARCHAR}, #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_userrole
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fRoleid != null">
+        F_ROLEID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL,
+      </if>
+      <if test="fWebright != null">
+        F_WEBRIGHT,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fRoleid != null">
+        #{fRoleid,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        #{fLevel,jdbcType=CHAR},
+      </if>
+      <if test="fWebright != null">
+        #{fWebright,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_userrole
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL = #{fLevel,jdbcType=CHAR},
+      </if>
+      <if test="fWebright != null">
+        F_WEBRIGHT = #{fWebright,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ROLEID = #{fRoleid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_userrole
+    set F_NAME = #{fName,jdbcType=CHAR},
+      F_LEVEL = #{fLevel,jdbcType=CHAR},
+      F_WEBRIGHT = #{fWebright,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR}
+    where F_ROLEID = #{fRoleid,jdbcType=CHAR}
+  </update>
+
+</mapper>

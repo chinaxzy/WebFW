@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dept">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_DEPT1" jdbcType="VARCHAR" property="fDept1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_dept (F_DEVID, F_DEPT, F_DEPT1
+      )
+    values (#{fDevid,jdbcType=VARCHAR}, #{fDept,jdbcType=VARCHAR}, #{fDept1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_dept
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fDept1 != null">
+        F_DEPT1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept1 != null">
+        #{fDept1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_PASSWD" jdbcType="VARCHAR" property="fPasswd" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_ENDDATE" jdbcType="VARCHAR" property="fEnddate" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+    <result column="WDNAME" jdbcType="VARCHAR" property="fWdname" />
+    <result column="ZHNAME" jdbcType="VARCHAR" property="fZhname" />
+    <result column="FHNAME" jdbcType="VARCHAR" property="fFhname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_PASSWD, F_DEPT, F_ENDDATE, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select
+    A.F_ID, A.F_NAME, A.F_DEPT,  A.F_PAD1,A.F_PASSWD,
+    CONVERT(CONCAT(SUBSTR(A.F_ENDDATE,1,4),'-',SUBSTR(A.F_ENDDATE,5,2),'-',SUBSTR(A.F_ENDDATE,7,2)),CHAR) F_ENDDATE,
+    B.F_NAME WDNAME,
+    C.F_NAME ZHNAME,
+    D.F_NAME FHNAME
+    from t_user A,
+    t_branch B,
+    t_branch C,
+    t_branch D
+    <where>
+      <if test="fId != null">
+        A.F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+      <if test="fName != null">
+        and A.F_NAME = #{fName}
+      </if>
+      <if test="fDeptid != null">
+        AND B.F_DEPTID LIKE concat(#{fDeptid},"%")
+      </if>
+      <if test=" 1==1">
+        AND A.F_DEPT=B.F_ID
+        AND B.F_DEPT=C.F_ID
+        AND C.F_DEPT=D.F_ID
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_user
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_user (F_ID, F_NAME, F_PASSWD, 
+      F_DEPT, F_ENDDATE, F_PAD1
+      )
+    values (#{fId,jdbcType=VARCHAR}, #{fName,jdbcType=VARCHAR}, #{fPasswd,jdbcType=VARCHAR}, 
+      #{fDept,jdbcType=VARCHAR}, #{fEnddate,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fPasswd != null">
+        F_PASSWD,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fEnddate != null">
+        F_ENDDATE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fPasswd != null">
+        #{fPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fEnddate != null">
+        #{fEnddate,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_user
+    <set>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fPasswd != null">
+        F_PASSWD = #{fPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fEnddate != null">
+        F_ENDDATE = #{fEnddate,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_ID = #{ofId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_user
+    set F_NAME = #{fName,jdbcType=VARCHAR},
+      F_PASSWD = #{fPasswd,jdbcType=VARCHAR},
+      F_DEPT = #{fDept,jdbcType=VARCHAR},
+      F_ENDDATE = #{fEnddate,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+</mapper>

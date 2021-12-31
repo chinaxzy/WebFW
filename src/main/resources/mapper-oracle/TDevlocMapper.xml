@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devloc">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_DEPT" jdbcType="CHAR" property="fDept" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_ADDR" jdbcType="CHAR" property="fAddr" />
+    <result column="F_WORK1" jdbcType="CHAR" property="fWork1" />
+    <result column="F_WORK2" jdbcType="CHAR" property="fWork2" />
+    <result column="F_SELF" jdbcType="CHAR" property="fSelf" />
+    <result column="F_STYLE" jdbcType="CHAR" property="fStyle" />
+    <result column="F_LOCX" jdbcType="CHAR" property="fLocx" />
+    <result column="F_LOCY" jdbcType="CHAR" property="fLocy" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_DEPT, F_NAME, F_ADDR, F_WORK1, F_WORK2, F_SELF, F_STYLE, F_LOCX, F_LOCY, 
+    F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_devloc
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_devloc
+    where F_ID = #{fId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_devloc (F_ID, F_DEPT, F_NAME, F_ADDR, 
+      F_WORK1, F_WORK2, F_SELF, F_STYLE, 
+      F_LOCX, F_LOCY, F_PAD1)
+    values (#{fId,jdbcType=CHAR}, #{fDept,jdbcType=CHAR}, #{fName,jdbcType=CHAR}, #{fAddr,jdbcType=CHAR}, 
+      #{fWork1,jdbcType=CHAR}, #{fWork2,jdbcType=CHAR}, #{fSelf,jdbcType=CHAR}, #{fStyle,jdbcType=CHAR}, 
+      #{fLocx,jdbcType=CHAR}, #{fLocy,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_devloc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fAddr != null">
+        F_ADDR,
+      </if>
+      <if test="fWork1 != null">
+        F_WORK1,
+      </if>
+      <if test="fWork2 != null">
+        F_WORK2,
+      </if>
+      <if test="fSelf != null">
+        F_SELF,
+      </if>
+      <if test="fStyle != null">
+        F_STYLE,
+      </if>
+      <if test="fLocx != null">
+        F_LOCX,
+      </if>
+      <if test="fLocy != null">
+        F_LOCY,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fAddr != null">
+        #{fAddr,jdbcType=CHAR},
+      </if>
+      <if test="fWork1 != null">
+        #{fWork1,jdbcType=CHAR},
+      </if>
+      <if test="fWork2 != null">
+        #{fWork2,jdbcType=CHAR},
+      </if>
+      <if test="fSelf != null">
+        #{fSelf,jdbcType=CHAR},
+      </if>
+      <if test="fStyle != null">
+        #{fStyle,jdbcType=CHAR},
+      </if>
+      <if test="fLocx != null">
+        #{fLocx,jdbcType=CHAR},
+      </if>
+      <if test="fLocy != null">
+        #{fLocy,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_devloc
+    <set>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fAddr != null">
+        F_ADDR = #{fAddr,jdbcType=CHAR},
+      </if>
+      <if test="fWork1 != null">
+        F_WORK1 = #{fWork1,jdbcType=CHAR},
+      </if>
+      <if test="fWork2 != null">
+        F_WORK2 = #{fWork2,jdbcType=CHAR},
+      </if>
+      <if test="fSelf != null">
+        F_SELF = #{fSelf,jdbcType=CHAR},
+      </if>
+      <if test="fStyle != null">
+        F_STYLE = #{fStyle,jdbcType=CHAR},
+      </if>
+      <if test="fLocx != null">
+        F_LOCX = #{fLocx,jdbcType=CHAR},
+      </if>
+      <if test="fLocy != null">
+        F_LOCY = #{fLocy,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_devloc
+    set F_DEPT = #{fDept,jdbcType=CHAR},
+      F_NAME = #{fName,jdbcType=CHAR},
+      F_ADDR = #{fAddr,jdbcType=CHAR},
+      F_WORK1 = #{fWork1,jdbcType=CHAR},
+      F_WORK2 = #{fWork2,jdbcType=CHAR},
+      F_SELF = #{fSelf,jdbcType=CHAR},
+      F_STYLE = #{fStyle,jdbcType=CHAR},
+      F_LOCX = #{fLocx,jdbcType=CHAR},
+      F_LOCY = #{fLocy,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+
+</mapper>

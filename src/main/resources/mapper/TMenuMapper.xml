@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="menu">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_PID" jdbcType="VARCHAR" property="fPid" />
+    <result column="F_LAYER" jdbcType="VARCHAR" property="fLayer" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_TYPE" jdbcType="VARCHAR" property="fType" />
+    <result column="F_ORDER" jdbcType="INTEGER" property="fOrder" />
+    <result column="F_NEEDCARD" jdbcType="VARCHAR" property="fNeedcard" />
+    <result column="F_ACTIVE" jdbcType="VARCHAR" property="fActive" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+    <result column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_CHECKFLAG" jdbcType="VARCHAR" property="checkFlag" />
+    <result column="F_DEVTYPE" jdbcType="VARCHAR" property="fDevtype" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_PID, F_LAYER, F_NAME, F_TYPE, F_ORDER, F_NEEDCARD, F_ACTIVE, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_menu
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+    </where>
+    ORDER BY F_ID
+  </select>
+
+  <select id="selectByDev" parameterType="map" resultMap="BaseResultMap">
+
+    SELECT a.F_DEVID, b.*,
+      CASE WHEN a.F_DEVID IS NOT NULL AND a.F_DEVID != '' THEN 1 ELSE 0 END checkFlag
+    FROM t_menu b LEFT JOIN t_devtx a ON a.F_ID = b.F_ID
+    <if test="fDevid != null">
+      AND a.F_DEVID = #{fDevid}
+    </if>
+    <where>
+      <if test="fPid != null">
+        AND b.F_PID = #{fPid}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByDevtype" parameterType="map" resultMap="BaseResultMap">
+
+    SELECT b.*,a.F_TYPE fDevtype,
+      CASE WHEN a.F_TYPE IS NOT NULL AND a.F_TYPE != '' THEN 1 ELSE 0 END checkFlag
+    FROM  t_menu b LEFT JOIN t_devtypetx a ON a.F_ID = b.F_ID
+    <if test="fDevtype != null">
+      and a.F_TYPE = #{fDevtype}
+    </if>
+    <where>
+      <if test="fPid != null">
+        AND b.F_PID = #{fPid}
+      </if>
+    </where>
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_menu
+    where F_ID = #{fId,jdbcType=VARCHAR} AND F_PID = #{fPid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_menu (F_ID, F_PID, F_LAYER, 
+      F_NAME, F_TYPE, F_ORDER, 
+      F_NEEDCARD, F_ACTIVE, F_PAD1
+      )
+    values (#{fId,jdbcType=VARCHAR}, #{fPid,jdbcType=VARCHAR}, #{fLayer,jdbcType=VARCHAR}, 
+      #{fName,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR}, #{fOrder,jdbcType=INTEGER}, 
+      #{fNeedcard,jdbcType=VARCHAR}, #{fActive,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fPid != null">
+        F_PID,
+      </if>
+      <if test="fLayer != null">
+        F_LAYER,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fOrder != null">
+        F_ORDER,
+      </if>
+      <if test="fNeedcard != null">
+        F_NEEDCARD,
+      </if>
+      <if test="fActive != null">
+        F_ACTIVE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fPid != null">
+        #{fPid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLayer != null">
+        #{fLayer,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrder != null">
+        #{fOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fNeedcard != null">
+        #{fNeedcard,jdbcType=VARCHAR},
+      </if>
+      <if test="fActive != null">
+        #{fActive,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_menu
+    <set>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fPid != null">
+        F_PID = #{fPid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLayer != null">
+        F_LAYER = #{fLayer,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null">
+        F_TYPE = #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrder != null">
+        F_ORDER = #{fOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fNeedcard != null">
+        F_NEEDCARD = #{fNeedcard,jdbcType=VARCHAR},
+      </if>
+      <if test="fActive != null">
+        F_ACTIVE = #{fActive,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_ID = #{ofId,jdbcType=VARCHAR} AND F_PID = #{ofPid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_menu
+    set F_PID = #{fPid,jdbcType=VARCHAR},
+      F_LAYER = #{fLayer,jdbcType=VARCHAR},
+      F_NAME = #{fName,jdbcType=VARCHAR},
+      F_TYPE = #{fType,jdbcType=VARCHAR},
+      F_ORDER = #{fOrder,jdbcType=INTEGER},
+      F_NEEDCARD = #{fNeedcard,jdbcType=VARCHAR},
+      F_ACTIVE = #{fActive,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="states">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_STATEID" jdbcType="INTEGER" property="fStateid" />
+    <result column="F_VALUE" jdbcType="INTEGER" property="fValue" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_TODO" jdbcType="CHAR" property="fTodo" />
+    <result column="F_JXINTVAL" jdbcType="INTEGER" property="fJxintval" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+    <result column="F_COLOR" jdbcType="CHAR" property="fColor" />
+
+  </resultMap>
+
+  <select id="selectStatus" parameterType="map" resultMap="BaseResultMap">
+    select F_VALUE,F_NAME,F_PAD1 AS F_COLOR FROM t_states WHERE F_STATEID=2001 ORDER BY F_VALUE
+  </select>
+
+  <insert id="insert" parameterType="map">
+    insert into t_states (F_STATEID, F_VALUE, F_NAME, 
+      F_TODO, F_JXINTVAL, F_PAD1)
+    values (#{fStateid,jdbcType=INTEGER}, #{fValue,jdbcType=INTEGER}, #{fName,jdbcType=CHAR}, 
+      #{fTodo,jdbcType=CHAR}, #{fJxintval,jdbcType=INTEGER}, #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_states
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fStateid != null">
+        F_STATEID,
+      </if>
+      <if test="fValue != null">
+        F_VALUE,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fTodo != null">
+        F_TODO,
+      </if>
+      <if test="fJxintval != null">
+        F_JXINTVAL,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fStateid != null">
+        #{fStateid,jdbcType=INTEGER},
+      </if>
+      <if test="fValue != null">
+        #{fValue,jdbcType=INTEGER},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fTodo != null">
+        #{fTodo,jdbcType=CHAR},
+      </if>
+      <if test="fJxintval != null">
+        #{fJxintval,jdbcType=INTEGER},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

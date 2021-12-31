@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="1 seconds" debug="false">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <property name="LOG_FILE" value="logs/log"/>
+    <property name="PARAM_FILE" value="logs/param"/>
+    <property name="MYBATIS_FILE" value="logs/mybatis"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+
+    <appender name="TIME_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<file>logs/log.log</file>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 50MB -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>365</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="TIME_FILE_PARAM" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<file>logs/log.log</file>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${PARAM_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 50MB -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>365</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="TIME_FILE_MYBATIS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<file>logs/log.log</file>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>${MYBATIS_FILE}.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 50MB -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 30 days' worth of history -->
+            <maxHistory>365</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="TIME_FILE"/>
+    </root>
+
+    <logger name="org.springframework.web" level="DEBUG">
+        <appender-ref ref="TIME_FILE"/>
+    </logger>
+    <logger name="com.jeremy" level="all">
+        <appender-ref ref="TIME_FILE_PARAM"/>
+    </logger>
+    <logger name="org.mybatis" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="addcard" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="branch" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="clear" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="codes" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="count" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="defdev" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="deptflag" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="dept" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="deptpmenu" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="devisp" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="dev" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="devmenu" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="devstate" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="devtype" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="discard" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="events" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="factory" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="holiday" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="lineup" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="menuauth" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="menu" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="mtrans" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="order" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="ordertime" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="params" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="pmenu" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="queuetype" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="runBranch" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="runSingle" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="soft" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="softpath" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="softver" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="spcact" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="statecat" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="states" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="swallowCard" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="syscfg" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="test" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="tj2trans" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="todo" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="useropr" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="userrole" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="users" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="webmenu" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="wind" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="windquetype" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="mtrans" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+    <logger name="user" level="all">
+        <appender-ref ref="TIME_FILE_MYBATIS"/>
+    </logger>
+
+</configuration>

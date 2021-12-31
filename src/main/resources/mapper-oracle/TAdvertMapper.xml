@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="advert">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_WAIT" jdbcType="VARCHAR" property="fWait" />
+    <result column="F_DATE1" jdbcType="VARCHAR" property="fDate1" />
+    <result column="F_DATE2" jdbcType="VARCHAR" property="fDate2" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_OLDNAME" jdbcType="VARCHAR" property="fOldname" />
+    <result column="F_PATH" jdbcType="VARCHAR" property="fPath" />
+    <result column="F_FLAG" jdbcType="VARCHAR" property="fFlag" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_DEPT, F_WAIT, F_DATE1, F_DATE2, F_NAME, F_OLDNAME, F_PATH, F_FLAG, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_advert
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_advert
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_advert (F_ID, F_DEPT, F_WAIT, 
+      F_DATE1, F_DATE2, F_NAME, 
+      F_OLDNAME, F_PATH, F_FLAG, 
+      F_PAD1)
+    values (#{fId,jdbcType=VARCHAR}, #{fDept,jdbcType=VARCHAR}, #{fWait,jdbcType=VARCHAR}, 
+      #{fDate1,jdbcType=VARCHAR}, #{fDate2,jdbcType=VARCHAR}, #{fName,jdbcType=VARCHAR}, 
+      #{fOldname,jdbcType=VARCHAR}, #{fPath,jdbcType=VARCHAR}, #{fFlag,jdbcType=VARCHAR}, 
+      #{fPad1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_advert
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fWait != null">
+        F_WAIT,
+      </if>
+      <if test="fDate1 != null">
+        F_DATE1,
+      </if>
+      <if test="fDate2 != null">
+        F_DATE2,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fOldname != null">
+        F_OLDNAME,
+      </if>
+      <if test="fPath != null">
+        F_PATH,
+      </if>
+      <if test="fFlag != null">
+        F_FLAG,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fWait != null">
+        #{fWait,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate1 != null">
+        #{fDate1,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate2 != null">
+        #{fDate2,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldname != null">
+        #{fOldname,jdbcType=VARCHAR},
+      </if>
+      <if test="fPath != null">
+        #{fPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag != null">
+        #{fFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_advert
+    <set>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fWait != null">
+        F_WAIT = #{fWait,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate1 != null">
+        F_DATE1 = #{fDate1,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate2 != null">
+        F_DATE2 = #{fDate2,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fOldname != null">
+        F_OLDNAME = #{fOldname,jdbcType=VARCHAR},
+      </if>
+      <if test="fPath != null">
+        F_PATH = #{fPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag != null">
+        F_FLAG = #{fFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_advert
+    set F_DEPT = #{fDept,jdbcType=VARCHAR},
+      F_WAIT = #{fWait,jdbcType=VARCHAR},
+      F_DATE1 = #{fDate1,jdbcType=VARCHAR},
+      F_DATE2 = #{fDate2,jdbcType=VARCHAR},
+      F_NAME = #{fName,jdbcType=VARCHAR},
+      F_OLDNAME = #{fOldname,jdbcType=VARCHAR},
+      F_PATH = #{fPath,jdbcType=VARCHAR},
+      F_FLAG = #{fFlag,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mac">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_MAC" jdbcType="CHAR" property="fMac" />
+    <result column="F_PATH" jdbcType="CHAR" property="fPath" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_MAC, F_PATH, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_mac
+    <where>
+      <if test="fMac != null">
+        F_MAC = #{fMac,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_mac
+    where F_MAC = #{fMac,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_mac (F_MAC, F_PATH, F_PAD1)
+    values (#{fMac,jdbcType=CHAR}, #{fPath,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_mac
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fMac != null">
+        F_MAC,
+      </if>
+      <if test="fPath != null">
+        F_PATH,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fMac != null">
+        #{fMac,jdbcType=CHAR},
+      </if>
+      <if test="fPath != null">
+        #{fPath,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_mac
+    <set>
+      <if test="fPath != null">
+        F_PATH = #{fPath,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_MAC = #{fMac,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_mac
+    set F_PATH = #{fPath,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR}
+    where F_MAC = #{fMac,jdbcType=CHAR}
+  </update>
+
+</mapper>

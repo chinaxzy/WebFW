@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tj1kj">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DATE" jdbcType="CHAR" property="fDate" />
+    <result column="F_DEVID" jdbcType="CHAR" property="fDevid" />
+    <result column="F_ASSERTS" jdbcType="CHAR" property="fAsserts" />
+    <result column="F_DEPT" jdbcType="CHAR" property="fDept" />
+    <result column="F_DEPT1" jdbcType="CHAR" property="fDept1" />
+    <result column="F_DEPT3" jdbcType="CHAR" property="fDept3" />
+    <result column="F_LOGVER" jdbcType="INTEGER" property="fLogver" />
+    <result column="F_TKJALL" jdbcType="INTEGER" property="fTkjall" />
+    <result column="F_TKJ0" jdbcType="INTEGER" property="fTkj0" />
+    <result column="F_TKJ1" jdbcType="INTEGER" property="fTkj1" />
+    <result column="F_TKJ2" jdbcType="INTEGER" property="fTkj2" />
+    <result column="F_TKJ3" jdbcType="INTEGER" property="fTkj3" />
+    <result column="F_TKJ4" jdbcType="INTEGER" property="fTkj4" />
+    <result column="F_TKJ5" jdbcType="INTEGER" property="fTkj5" />
+    <result column="F_TKJ6" jdbcType="INTEGER" property="fTkj6" />
+    <result column="F_TKJ7" jdbcType="INTEGER" property="fTkj7" />
+    <result column="F_TKJ8" jdbcType="INTEGER" property="fTkj8" />
+    <result column="F_TKJ9" jdbcType="INTEGER" property="fTkj9" />
+    <result column="F_TKJNOR" jdbcType="INTEGER" property="fTkjnor" />
+    <result column="F_TKADM" jdbcType="INTEGER" property="fTkadm" />
+    <result column="F_TKJBAD" jdbcType="INTEGER" property="fTkjbad" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_tj1kj (F_DATE, F_DEVID, F_ASSERTS, 
+      F_DEPT, F_DEPT1, F_DEPT3, F_LOGVER, 
+      F_TKJALL, F_TKJ0, F_TKJ1, 
+      F_TKJ2, F_TKJ3, F_TKJ4, 
+      F_TKJ5, F_TKJ6, F_TKJ7, 
+      F_TKJ8, F_TKJ9, F_TKJNOR, 
+      F_TKADM, F_TKJBAD)
+    values (#{fDate,jdbcType=CHAR}, #{fDevid,jdbcType=CHAR}, #{fAsserts,jdbcType=CHAR}, 
+      #{fDept,jdbcType=CHAR}, #{fDept1,jdbcType=CHAR}, #{fDept3,jdbcType=CHAR}, #{fLogver,jdbcType=INTEGER}, 
+      #{fTkjall,jdbcType=INTEGER}, #{fTkj0,jdbcType=INTEGER}, #{fTkj1,jdbcType=INTEGER}, 
+      #{fTkj2,jdbcType=INTEGER}, #{fTkj3,jdbcType=INTEGER}, #{fTkj4,jdbcType=INTEGER}, 
+      #{fTkj5,jdbcType=INTEGER}, #{fTkj6,jdbcType=INTEGER}, #{fTkj7,jdbcType=INTEGER}, 
+      #{fTkj8,jdbcType=INTEGER}, #{fTkj9,jdbcType=INTEGER}, #{fTkjnor,jdbcType=INTEGER}, 
+      #{fTkadm,jdbcType=INTEGER}, #{fTkjbad,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_tj1kj
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fAsserts != null">
+        F_ASSERTS,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fDept1 != null">
+        F_DEPT1,
+      </if>
+      <if test="fDept3 != null">
+        F_DEPT3,
+      </if>
+      <if test="fLogver != null">
+        F_LOGVER,
+      </if>
+      <if test="fTkjall != null">
+        F_TKJALL,
+      </if>
+      <if test="fTkj0 != null">
+        F_TKJ0,
+      </if>
+      <if test="fTkj1 != null">
+        F_TKJ1,
+      </if>
+      <if test="fTkj2 != null">
+        F_TKJ2,
+      </if>
+      <if test="fTkj3 != null">
+        F_TKJ3,
+      </if>
+      <if test="fTkj4 != null">
+        F_TKJ4,
+      </if>
+      <if test="fTkj5 != null">
+        F_TKJ5,
+      </if>
+      <if test="fTkj6 != null">
+        F_TKJ6,
+      </if>
+      <if test="fTkj7 != null">
+        F_TKJ7,
+      </if>
+      <if test="fTkj8 != null">
+        F_TKJ8,
+      </if>
+      <if test="fTkj9 != null">
+        F_TKJ9,
+      </if>
+      <if test="fTkjnor != null">
+        F_TKJNOR,
+      </if>
+      <if test="fTkadm != null">
+        F_TKADM,
+      </if>
+      <if test="fTkjbad != null">
+        F_TKJBAD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        #{fDate,jdbcType=CHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fAsserts != null">
+        #{fAsserts,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fDept1 != null">
+        #{fDept1,jdbcType=CHAR},
+      </if>
+      <if test="fDept3 != null">
+        #{fDept3,jdbcType=CHAR},
+      </if>
+      <if test="fLogver != null">
+        #{fLogver,jdbcType=INTEGER},
+      </if>
+      <if test="fTkjall != null">
+        #{fTkjall,jdbcType=INTEGER},
+      </if>
+      <if test="fTkj0 != null">
+        #{fTkj0,jdbcType=INTEGER},
+      </if>
+      <if test="fTkj1 != null">
+        #{fTkj1,jdbcType=INTEGER},
+      </if>
+      <if test="fTkj2 != null">
+        #{fTkj2,jdbcType=INTEGER},
+      </if>
+      <if test="fTkj3 != null">
+        #{fTkj3,jdbcType=INTEGER},
+      </if>
+      <if test="fTkj4 != null">
+        #{fTkj4,jdbcType=INTEGER},
+      </if>
+      <if test="fTkj5 != null">
+        #{fTkj5,jdbcType=INTEGER},
+      </if>
+      <if test="fTkj6 != null">
+        #{fTkj6,jdbcType=INTEGER},
+      </if>
+      <if test="fTkj7 != null">
+        #{fTkj7,jdbcType=INTEGER},
+      </if>
+      <if test="fTkj8 != null">
+        #{fTkj8,jdbcType=INTEGER},
+      </if>
+      <if test="fTkj9 != null">
+        #{fTkj9,jdbcType=INTEGER},
+      </if>
+      <if test="fTkjnor != null">
+        #{fTkjnor,jdbcType=INTEGER},
+      </if>
+      <if test="fTkadm != null">
+        #{fTkadm,jdbcType=INTEGER},
+      </if>
+      <if test="fTkjbad != null">
+        #{fTkjbad,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="events">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_TSTART" jdbcType="CHAR" property="fTstart" />
+    <result column="F_TSTART_T" jdbcType="CHAR" property="fTstartT" />
+    <result column="F_LEVEL" jdbcType="CHAR" property="fLevel" />
+    <result column="F_DOUP" jdbcType="CHAR" property="fDoup" />
+    <result column="F_NEXTID" jdbcType="CHAR" property="fNextid" />
+    <result column="F_PREVID" jdbcType="CHAR" property="fPrevid" />
+    <result column="F_DEVID" jdbcType="CHAR" property="fDevid" />
+    <result column="F_ASSERTS" jdbcType="CHAR" property="fAsserts" />
+    <result column="F_DEPT" jdbcType="CHAR" property="fDept" />
+    <result column="F_DEPT1" jdbcType="CHAR" property="fDept1" />
+    <result column="F_DEPT3" jdbcType="CHAR" property="fDept3" />
+    <result column="F_LOGVER" jdbcType="INTEGER" property="fLogver" />
+    <result column="F_STATEID" jdbcType="INTEGER" property="fStateid" />
+    <result column="F_VALUE" jdbcType="INTEGER" property="fValue" />
+    <result column="F_FROM" jdbcType="CHAR" property="fFrom" />
+    <result column="F_FROMTYPE" jdbcType="INTEGER" property="fFromtype" />
+    <result column="F_TO" jdbcType="CHAR" property="fTo" />
+    <result column="F_TOTYPE" jdbcType="CHAR" property="fTotype" />
+    <result column="F_TO2" jdbcType="CHAR" property="fTo2" />
+    <result column="F_BROAD" jdbcType="CHAR" property="fBroad" />
+    <result column="F_DOIT" jdbcType="CHAR" property="fDoit" />
+    <result column="F_RULE" jdbcType="CHAR" property="fRule" />
+    <result column="F_RULESTEP" jdbcType="CHAR" property="fRulestep" />
+    <result column="F_TPOLL" jdbcType="CHAR" property="fTpoll" />
+    <result column="F_TITLE" jdbcType="CHAR" property="fTitle" />
+    <result column="F_PHASE" jdbcType="CHAR" property="fPhase" />
+    <result column="F_JX_START" jdbcType="CHAR" property="fJxStart" />
+    <result column="F_JX_UP" jdbcType="INTEGER" property="fJxUp" />
+    <result column="F_JX_REAL" jdbcType="CHAR" property="fJxReal" />
+    <result column="F_JX_LONG" jdbcType="INTEGER" property="fJxLong" />
+    <result column="F_DD_STEP" jdbcType="INTEGER" property="fDdStep" />
+    <result column="F_DD_ACK" jdbcType="CHAR" property="fDdAck" />
+    <result column="F_DD_UP" jdbcType="INTEGER" property="fDdUp" />
+    <result column="F_DD_REAL" jdbcType="CHAR" property="fDdReal" />
+    <result column="F_DD_LONG" jdbcType="INTEGER" property="fDdLong" />
+    <result column="F_EV_STEP" jdbcType="INTEGER" property="fEvStep" />
+    <result column="F_EV_ACK" jdbcType="CHAR" property="fEvAck" />
+    <result column="F_EV_UP" jdbcType="INTEGER" property="fEvUp" />
+    <result column="F_EV_REAL" jdbcType="CHAR" property="fEvReal" />
+    <result column="F_EV_lONG" jdbcType="INTEGER" property="fEvLong" />
+    <result column="F_TL_TOTAL" jdbcType="INTEGER" property="fTlTotal" />
+    <result column="F_PRCED" jdbcType="CHAR" property="fPrced" />
+    <result column="F_ACTIVE" jdbcType="CHAR" property="fActive" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_TSTART, F_TSTART_T, F_LEVEL, F_DOUP, F_NEXTID, F_PREVID, F_DEVID, F_ASSERTS, 
+    F_DEPT, F_DEPT1, F_DEPT3, F_LOGVER, F_STATEID, F_VALUE, F_FROM, F_FROMTYPE, F_TO, 
+    F_TOTYPE, F_TO2, F_BROAD, F_DOIT, F_RULE, F_RULESTEP, F_TPOLL, F_TITLE, F_PHASE, 
+    F_JX_START, F_JX_UP, F_JX_REAL, F_JX_LONG, F_DD_STEP, F_DD_ACK, F_DD_UP, F_DD_REAL, 
+    F_DD_LONG, F_EV_STEP, F_EV_ACK, F_EV_UP, F_EV_REAL, F_EV_lONG, F_TL_TOTAL, F_PRCED, 
+    F_ACTIVE, F_PAD1
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_events
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_events
+    where F_ID = #{fId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_events (F_ID, F_TSTART, F_TSTART_T, 
+      F_LEVEL, F_DOUP, F_NEXTID, F_PREVID, 
+      F_DEVID, F_ASSERTS, F_DEPT, F_DEPT1, 
+      F_DEPT3, F_LOGVER, F_STATEID, 
+      F_VALUE, F_FROM, F_FROMTYPE, 
+      F_TO, F_TOTYPE, F_TO2, F_BROAD, 
+      F_DOIT, F_RULE, F_RULESTEP, F_TPOLL, 
+      F_TITLE, F_PHASE, F_JX_START, F_JX_UP, 
+      F_JX_REAL, F_JX_LONG, F_DD_STEP, 
+      F_DD_ACK, F_DD_UP, F_DD_REAL, F_DD_LONG, 
+      F_EV_STEP, F_EV_ACK, F_EV_UP, 
+      F_EV_REAL, F_EV_lONG, F_TL_TOTAL, 
+      F_PRCED, F_ACTIVE, F_PAD1)
+    values (#{fId,jdbcType=CHAR}, #{fTstart,jdbcType=CHAR}, #{fTstartT,jdbcType=CHAR}, 
+      #{fLevel,jdbcType=CHAR}, #{fDoup,jdbcType=CHAR}, #{fNextid,jdbcType=CHAR}, #{fPrevid,jdbcType=CHAR}, 
+      #{fDevid,jdbcType=CHAR}, #{fAsserts,jdbcType=CHAR}, #{fDept,jdbcType=CHAR}, #{fDept1,jdbcType=CHAR}, 
+      #{fDept3,jdbcType=CHAR}, #{fLogver,jdbcType=INTEGER}, #{fStateid,jdbcType=INTEGER}, 
+      #{fValue,jdbcType=INTEGER}, #{fFrom,jdbcType=CHAR}, #{fFromtype,jdbcType=INTEGER}, 
+      #{fTo,jdbcType=CHAR}, #{fTotype,jdbcType=CHAR}, #{fTo2,jdbcType=CHAR}, #{fBroad,jdbcType=CHAR}, 
+      #{fDoit,jdbcType=CHAR}, #{fRule,jdbcType=CHAR}, #{fRulestep,jdbcType=CHAR}, #{fTpoll,jdbcType=CHAR}, 
+      #{fTitle,jdbcType=CHAR}, #{fPhase,jdbcType=CHAR}, #{fJxStart,jdbcType=CHAR}, #{fJxUp,jdbcType=INTEGER}, 
+      #{fJxReal,jdbcType=CHAR}, #{fJxLong,jdbcType=INTEGER}, #{fDdStep,jdbcType=INTEGER}, 
+      #{fDdAck,jdbcType=CHAR}, #{fDdUp,jdbcType=INTEGER}, #{fDdReal,jdbcType=CHAR}, #{fDdLong,jdbcType=INTEGER}, 
+      #{fEvStep,jdbcType=INTEGER}, #{fEvAck,jdbcType=CHAR}, #{fEvUp,jdbcType=INTEGER}, 
+      #{fEvReal,jdbcType=CHAR}, #{fEvLong,jdbcType=INTEGER}, #{fTlTotal,jdbcType=INTEGER}, 
+      #{fPrced,jdbcType=CHAR}, #{fActive,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_events
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fTstart != null">
+        F_TSTART,
+      </if>
+      <if test="fTstartT != null">
+        F_TSTART_T,
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL,
+      </if>
+      <if test="fDoup != null">
+        F_DOUP,
+      </if>
+      <if test="fNextid != null">
+        F_NEXTID,
+      </if>
+      <if test="fPrevid != null">
+        F_PREVID,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fAsserts != null">
+        F_ASSERTS,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fDept1 != null">
+        F_DEPT1,
+      </if>
+      <if test="fDept3 != null">
+        F_DEPT3,
+      </if>
+      <if test="fLogver != null">
+        F_LOGVER,
+      </if>
+      <if test="fStateid != null">
+        F_STATEID,
+      </if>
+      <if test="fValue != null">
+        F_VALUE,
+      </if>
+      <if test="fFrom != null">
+        F_FROM,
+      </if>
+      <if test="fFromtype != null">
+        F_FROMTYPE,
+      </if>
+      <if test="fTo != null">
+        F_TO,
+      </if>
+      <if test="fTotype != null">
+        F_TOTYPE,
+      </if>
+      <if test="fTo2 != null">
+        F_TO2,
+      </if>
+      <if test="fBroad != null">
+        F_BROAD,
+      </if>
+      <if test="fDoit != null">
+        F_DOIT,
+      </if>
+      <if test="fRule != null">
+        F_RULE,
+      </if>
+      <if test="fRulestep != null">
+        F_RULESTEP,
+      </if>
+      <if test="fTpoll != null">
+        F_TPOLL,
+      </if>
+      <if test="fTitle != null">
+        F_TITLE,
+      </if>
+      <if test="fPhase != null">
+        F_PHASE,
+      </if>
+      <if test="fJxStart != null">
+        F_JX_START,
+      </if>
+      <if test="fJxUp != null">
+        F_JX_UP,
+      </if>
+      <if test="fJxReal != null">
+        F_JX_REAL,
+      </if>
+      <if test="fJxLong != null">
+        F_JX_LONG,
+      </if>
+      <if test="fDdStep != null">
+        F_DD_STEP,
+      </if>
+      <if test="fDdAck != null">
+        F_DD_ACK,
+      </if>
+      <if test="fDdUp != null">
+        F_DD_UP,
+      </if>
+      <if test="fDdReal != null">
+        F_DD_REAL,
+      </if>
+      <if test="fDdLong != null">
+        F_DD_LONG,
+      </if>
+      <if test="fEvStep != null">
+        F_EV_STEP,
+      </if>
+      <if test="fEvAck != null">
+        F_EV_ACK,
+      </if>
+      <if test="fEvUp != null">
+        F_EV_UP,
+      </if>
+      <if test="fEvReal != null">
+        F_EV_REAL,
+      </if>
+      <if test="fEvLong != null">
+        F_EV_lONG,
+      </if>
+      <if test="fTlTotal != null">
+        F_TL_TOTAL,
+      </if>
+      <if test="fPrced != null">
+        F_PRCED,
+      </if>
+      <if test="fActive != null">
+        F_ACTIVE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fTstart != null">
+        #{fTstart,jdbcType=CHAR},
+      </if>
+      <if test="fTstartT != null">
+        #{fTstartT,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        #{fLevel,jdbcType=CHAR},
+      </if>
+      <if test="fDoup != null">
+        #{fDoup,jdbcType=CHAR},
+      </if>
+      <if test="fNextid != null">
+        #{fNextid,jdbcType=CHAR},
+      </if>
+      <if test="fPrevid != null">
+        #{fPrevid,jdbcType=CHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fAsserts != null">
+        #{fAsserts,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fDept1 != null">
+        #{fDept1,jdbcType=CHAR},
+      </if>
+      <if test="fDept3 != null">
+        #{fDept3,jdbcType=CHAR},
+      </if>
+      <if test="fLogver != null">
+        #{fLogver,jdbcType=INTEGER},
+      </if>
+      <if test="fStateid != null">
+        #{fStateid,jdbcType=INTEGER},
+      </if>
+      <if test="fValue != null">
+        #{fValue,jdbcType=INTEGER},
+      </if>
+      <if test="fFrom != null">
+        #{fFrom,jdbcType=CHAR},
+      </if>
+      <if test="fFromtype != null">
+        #{fFromtype,jdbcType=INTEGER},
+      </if>
+      <if test="fTo != null">
+        #{fTo,jdbcType=CHAR},
+      </if>
+      <if test="fTotype != null">
+        #{fTotype,jdbcType=CHAR},
+      </if>
+      <if test="fTo2 != null">
+        #{fTo2,jdbcType=CHAR},
+      </if>
+      <if test="fBroad != null">
+        #{fBroad,jdbcType=CHAR},
+      </if>
+      <if test="fDoit != null">
+        #{fDoit,jdbcType=CHAR},
+      </if>
+      <if test="fRule != null">
+        #{fRule,jdbcType=CHAR},
+      </if>
+      <if test="fRulestep != null">
+        #{fRulestep,jdbcType=CHAR},
+      </if>
+      <if test="fTpoll != null">
+        #{fTpoll,jdbcType=CHAR},
+      </if>
+      <if test="fTitle != null">
+        #{fTitle,jdbcType=CHAR},
+      </if>
+      <if test="fPhase != null">
+        #{fPhase,jdbcType=CHAR},
+      </if>
+      <if test="fJxStart != null">
+        #{fJxStart,jdbcType=CHAR},
+      </if>
+      <if test="fJxUp != null">
+        #{fJxUp,jdbcType=INTEGER},
+      </if>
+      <if test="fJxReal != null">
+        #{fJxReal,jdbcType=CHAR},
+      </if>
+      <if test="fJxLong != null">
+        #{fJxLong,jdbcType=INTEGER},
+      </if>
+      <if test="fDdStep != null">
+        #{fDdStep,jdbcType=INTEGER},
+      </if>
+      <if test="fDdAck != null">
+        #{fDdAck,jdbcType=CHAR},
+      </if>
+      <if test="fDdUp != null">
+        #{fDdUp,jdbcType=INTEGER},
+      </if>
+      <if test="fDdReal != null">
+        #{fDdReal,jdbcType=CHAR},
+      </if>
+      <if test="fDdLong != null">
+        #{fDdLong,jdbcType=INTEGER},
+      </if>
+      <if test="fEvStep != null">
+        #{fEvStep,jdbcType=INTEGER},
+      </if>
+      <if test="fEvAck != null">
+        #{fEvAck,jdbcType=CHAR},
+      </if>
+      <if test="fEvUp != null">
+        #{fEvUp,jdbcType=INTEGER},
+      </if>
+      <if test="fEvReal != null">
+        #{fEvReal,jdbcType=CHAR},
+      </if>
+      <if test="fEvLong != null">
+        #{fEvLong,jdbcType=INTEGER},
+      </if>
+      <if test="fTlTotal != null">
+        #{fTlTotal,jdbcType=INTEGER},
+      </if>
+      <if test="fPrced != null">
+        #{fPrced,jdbcType=CHAR},
+      </if>
+      <if test="fActive != null">
+        #{fActive,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_events
+    <set>
+      <if test="fTstart != null">
+        F_TSTART = #{fTstart,jdbcType=CHAR},
+      </if>
+      <if test="fTstartT != null">
+        F_TSTART_T = #{fTstartT,jdbcType=CHAR},
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL = #{fLevel,jdbcType=CHAR},
+      </if>
+      <if test="fDoup != null">
+        F_DOUP = #{fDoup,jdbcType=CHAR},
+      </if>
+      <if test="fNextid != null">
+        F_NEXTID = #{fNextid,jdbcType=CHAR},
+      </if>
+      <if test="fPrevid != null">
+        F_PREVID = #{fPrevid,jdbcType=CHAR},
+      </if>
+      <if test="fDevid != null">
+        F_DEVID = #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fAsserts != null">
+        F_ASSERTS = #{fAsserts,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fDept1 != null">
+        F_DEPT1 = #{fDept1,jdbcType=CHAR},
+      </if>
+      <if test="fDept3 != null">
+        F_DEPT3 = #{fDept3,jdbcType=CHAR},
+      </if>
+      <if test="fLogver != null">
+        F_LOGVER = #{fLogver,jdbcType=INTEGER},
+      </if>
+      <if test="fStateid != null">
+        F_STATEID = #{fStateid,jdbcType=INTEGER},
+      </if>
+      <if test="fValue != null">
+        F_VALUE = #{fValue,jdbcType=INTEGER},
+      </if>
+      <if test="fFrom != null">
+        F_FROM = #{fFrom,jdbcType=CHAR},
+      </if>
+      <if test="fFromtype != null">
+        F_FROMTYPE = #{fFromtype,jdbcType=INTEGER},
+      </if>
+      <if test="fTo != null">
+        F_TO = #{fTo,jdbcType=CHAR},
+      </if>
+      <if test="fTotype != null">
+        F_TOTYPE = #{fTotype,jdbcType=CHAR},
+      </if>
+      <if test="fTo2 != null">
+        F_TO2 = #{fTo2,jdbcType=CHAR},
+      </if>
+      <if test="fBroad != null">
+        F_BROAD = #{fBroad,jdbcType=CHAR},
+      </if>
+      <if test="fDoit != null">
+        F_DOIT = #{fDoit,jdbcType=CHAR},
+      </if>
+      <if test="fRule != null">
+        F_RULE = #{fRule,jdbcType=CHAR},
+      </if>
+      <if test="fRulestep != null">
+        F_RULESTEP = #{fRulestep,jdbcType=CHAR},
+      </if>
+      <if test="fTpoll != null">
+        F_TPOLL = #{fTpoll,jdbcType=CHAR},
+      </if>
+      <if test="fTitle != null">
+        F_TITLE = #{fTitle,jdbcType=CHAR},
+      </if>
+      <if test="fPhase != null">
+        F_PHASE = #{fPhase,jdbcType=CHAR},
+      </if>
+      <if test="fJxStart != null">
+        F_JX_START = #{fJxStart,jdbcType=CHAR},
+      </if>
+      <if test="fJxUp != null">
+        F_JX_UP = #{fJxUp,jdbcType=INTEGER},
+      </if>
+      <if test="fJxReal != null">
+        F_JX_REAL = #{fJxReal,jdbcType=CHAR},
+      </if>
+      <if test="fJxLong != null">
+        F_JX_LONG = #{fJxLong,jdbcType=INTEGER},
+      </if>
+      <if test="fDdStep != null">
+        F_DD_STEP = #{fDdStep,jdbcType=INTEGER},
+      </if>
+      <if test="fDdAck != null">
+        F_DD_ACK = #{fDdAck,jdbcType=CHAR},
+      </if>
+      <if test="fDdUp != null">
+        F_DD_UP = #{fDdUp,jdbcType=INTEGER},
+      </if>
+      <if test="fDdReal != null">
+        F_DD_REAL = #{fDdReal,jdbcType=CHAR},
+      </if>
+      <if test="fDdLong != null">
+        F_DD_LONG = #{fDdLong,jdbcType=INTEGER},
+      </if>
+      <if test="fEvStep != null">
+        F_EV_STEP = #{fEvStep,jdbcType=INTEGER},
+      </if>
+      <if test="fEvAck != null">
+        F_EV_ACK = #{fEvAck,jdbcType=CHAR},
+      </if>
+      <if test="fEvUp != null">
+        F_EV_UP = #{fEvUp,jdbcType=INTEGER},
+      </if>
+      <if test="fEvReal != null">
+        F_EV_REAL = #{fEvReal,jdbcType=CHAR},
+      </if>
+      <if test="fEvLong != null">
+        F_EV_lONG = #{fEvLong,jdbcType=INTEGER},
+      </if>
+      <if test="fTlTotal != null">
+        F_TL_TOTAL = #{fTlTotal,jdbcType=INTEGER},
+      </if>
+      <if test="fPrced != null">
+        F_PRCED = #{fPrced,jdbcType=CHAR},
+      </if>
+      <if test="fActive != null">
+        F_ACTIVE = #{fActive,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_events
+    set F_TSTART = #{fTstart,jdbcType=CHAR},
+      F_TSTART_T = #{fTstartT,jdbcType=CHAR},
+      F_LEVEL = #{fLevel,jdbcType=CHAR},
+      F_DOUP = #{fDoup,jdbcType=CHAR},
+      F_NEXTID = #{fNextid,jdbcType=CHAR},
+      F_PREVID = #{fPrevid,jdbcType=CHAR},
+      F_DEVID = #{fDevid,jdbcType=CHAR},
+      F_ASSERTS = #{fAsserts,jdbcType=CHAR},
+      F_DEPT = #{fDept,jdbcType=CHAR},
+      F_DEPT1 = #{fDept1,jdbcType=CHAR},
+      F_DEPT3 = #{fDept3,jdbcType=CHAR},
+      F_LOGVER = #{fLogver,jdbcType=INTEGER},
+      F_STATEID = #{fStateid,jdbcType=INTEGER},
+      F_VALUE = #{fValue,jdbcType=INTEGER},
+      F_FROM = #{fFrom,jdbcType=CHAR},
+      F_FROMTYPE = #{fFromtype,jdbcType=INTEGER},
+      F_TO = #{fTo,jdbcType=CHAR},
+      F_TOTYPE = #{fTotype,jdbcType=CHAR},
+      F_TO2 = #{fTo2,jdbcType=CHAR},
+      F_BROAD = #{fBroad,jdbcType=CHAR},
+      F_DOIT = #{fDoit,jdbcType=CHAR},
+      F_RULE = #{fRule,jdbcType=CHAR},
+      F_RULESTEP = #{fRulestep,jdbcType=CHAR},
+      F_TPOLL = #{fTpoll,jdbcType=CHAR},
+      F_TITLE = #{fTitle,jdbcType=CHAR},
+      F_PHASE = #{fPhase,jdbcType=CHAR},
+      F_JX_START = #{fJxStart,jdbcType=CHAR},
+      F_JX_UP = #{fJxUp,jdbcType=INTEGER},
+      F_JX_REAL = #{fJxReal,jdbcType=CHAR},
+      F_JX_LONG = #{fJxLong,jdbcType=INTEGER},
+      F_DD_STEP = #{fDdStep,jdbcType=INTEGER},
+      F_DD_ACK = #{fDdAck,jdbcType=CHAR},
+      F_DD_UP = #{fDdUp,jdbcType=INTEGER},
+      F_DD_REAL = #{fDdReal,jdbcType=CHAR},
+      F_DD_LONG = #{fDdLong,jdbcType=INTEGER},
+      F_EV_STEP = #{fEvStep,jdbcType=INTEGER},
+      F_EV_ACK = #{fEvAck,jdbcType=CHAR},
+      F_EV_UP = #{fEvUp,jdbcType=INTEGER},
+      F_EV_REAL = #{fEvReal,jdbcType=CHAR},
+      F_EV_lONG = #{fEvLong,jdbcType=INTEGER},
+      F_TL_TOTAL = #{fTlTotal,jdbcType=INTEGER},
+      F_PRCED = #{fPrced,jdbcType=CHAR},
+      F_ACTIVE = #{fActive,jdbcType=CHAR},
+      F_PAD1 = #{fPad1,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+
+</mapper>

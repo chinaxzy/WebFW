@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_SID" jdbcType="VARCHAR" property="fSid" />
+    <result column="F_PASSWORD" jdbcType="VARCHAR" property="fPassword" />
+    <result column="F_RIGHT" jdbcType="VARCHAR" property="fRight" />
+    <result column="F_STATUS" jdbcType="VARCHAR" property="fStatus" />
+    <result column="F_TEL" jdbcType="VARCHAR" property="fTel" />
+    <result column="F_FINGER1" jdbcType="VARCHAR" property="fFinger1" />
+    <result column="F_FINGER2" jdbcType="VARCHAR" property="fFinger2" />
+    <result column="F_FINGER3" jdbcType="VARCHAR" property="fFinger3" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+
+    <result column="WDNAME" jdbcType="VARCHAR" property="fWdname" />
+    <result column="ZHNAME" jdbcType="VARCHAR" property="fZhname" />
+    <result column="FHNAME" jdbcType="VARCHAR" property="fFhname" />
+
+    <result column="F_STATUS_NAME" jdbcType="VARCHAR" property="fStatusname" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    A.F_ID, A.F_DEPT, A.F_NAME, F_SID, F_PASSWORD, F_RIGHT, F_STATUS, A.F_TEL, F_FINGER1, F_FINGER2,
+    F_FINGER3
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />,
+    B.F_NAME WDNAME,C.F_NAME ZHNAME,D.F_NAME FHNAME,
+    CASE A.F_STATUS WHEN 'N' THEN '正常' WHEN 'C' THEN '停用' ELSE '' END F_STATUS_NAME
+    from T_ADMIN A
+    LEFT JOIN t_branch B ON A.F_DEPT=B.F_ID
+    LEFT JOIN t_branch C ON B.F_DEPT=C.F_ID
+    LEFT JOIN t_branch D ON C.F_DEPT=D.F_ID
+    <where>
+      <if test="fId != null">
+        A.F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from T_ADMIN
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into T_ADMIN (F_ID, F_DEPT, F_NAME, 
+      F_SID, F_PASSWORD, F_RIGHT, 
+      F_STATUS, F_TEL, F_FINGER1, 
+      F_FINGER2, F_FINGER3, F_PAD1
+      )
+    values (#{fId,jdbcType=VARCHAR}, #{fDept,jdbcType=VARCHAR}, #{fName,jdbcType=VARCHAR}, 
+      #{fSid,jdbcType=VARCHAR}, #{fPassword,jdbcType=VARCHAR}, #{fRight,jdbcType=VARCHAR}, 
+      #{fStatus,jdbcType=VARCHAR}, #{fTel,jdbcType=VARCHAR}, #{fFinger1,jdbcType=VARCHAR}, 
+      #{fFinger2,jdbcType=VARCHAR}, #{fFinger3,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into T_ADMIN
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fSid != null">
+        F_SID,
+      </if>
+      <if test="fPassword != null">
+        F_PASSWORD,
+      </if>
+      <if test="fRight != null">
+        F_RIGHT,
+      </if>
+      <if test="fStatus != null">
+        F_STATUS,
+      </if>
+      <if test="fTel != null">
+        F_TEL,
+      </if>
+      <if test="fFinger1 != null">
+        F_FINGER1,
+      </if>
+      <if test="fFinger2 != null">
+        F_FINGER2,
+      </if>
+      <if test="fFinger3 != null">
+        F_FINGER3,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fSid != null">
+        #{fSid,jdbcType=VARCHAR},
+      </if>
+      <if test="fPassword != null">
+        #{fPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fRight != null">
+        #{fRight,jdbcType=VARCHAR},
+      </if>
+      <if test="fStatus != null">
+        #{fStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fTel != null">
+        #{fTel,jdbcType=VARCHAR},
+      </if>
+      <if test="fFinger1 != null">
+        #{fFinger1,jdbcType=VARCHAR},
+      </if>
+      <if test="fFinger2 != null">
+        #{fFinger2,jdbcType=VARCHAR},
+      </if>
+      <if test="fFinger3 != null">
+        #{fFinger3,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update T_ADMIN
+    <set>
+      <if test="fId != null">
+        F_ID = #{fId},
+      </if>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fSid != null">
+        F_SID = #{fSid,jdbcType=VARCHAR},
+      </if>
+      <if test="fPassword != null">
+        F_PASSWORD = #{fPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fRight != null">
+        F_RIGHT = #{fRight,jdbcType=VARCHAR},
+      </if>
+      <if test="fStatus != null">
+        F_STATUS = #{fStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fTel != null">
+        F_TEL = #{fTel,jdbcType=VARCHAR},
+      </if>
+      <if test="fFinger1 != null">
+        F_FINGER1 = #{fFinger1,jdbcType=VARCHAR},
+      </if>
+      <if test="fFinger2 != null">
+        F_FINGER2 = #{fFinger2,jdbcType=VARCHAR},
+      </if>
+      <if test="fFinger3 != null">
+        F_FINGER3 = #{fFinger3,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_ID = #{ofId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update T_ADMIN
+    set F_DEPT = #{fDept,jdbcType=VARCHAR},
+      F_NAME = #{fName,jdbcType=VARCHAR},
+      F_SID = #{fSid,jdbcType=VARCHAR},
+      F_PASSWORD = #{fPassword,jdbcType=VARCHAR},
+      F_RIGHT = #{fRight,jdbcType=VARCHAR},
+      F_STATUS = #{fStatus,jdbcType=VARCHAR},
+      F_TEL = #{fTel,jdbcType=VARCHAR},
+      F_FINGER1 = #{fFinger1,jdbcType=VARCHAR},
+      F_FINGER2 = #{fFinger2,jdbcType=VARCHAR},
+      F_FINGER3 = #{fFinger3,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

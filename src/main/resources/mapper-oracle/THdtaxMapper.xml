@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hdtax">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_ACNO" jdbcType="VARCHAR" property="fAcno" />
+    <result column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_LSH" jdbcType="VARCHAR" property="fLsh" />
+    <result column="F_DATE1" jdbcType="VARCHAR" property="fDate1" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_BANK" jdbcType="VARCHAR" property="fBank" />
+    <result column="F_CORP" jdbcType="VARCHAR" property="fCorp" />
+    <result column="F_TAXORG" jdbcType="VARCHAR" property="fTaxorg" />
+    <result column="F_BANK2" jdbcType="VARCHAR" property="fBank2" />
+    <result column="F_AMT" jdbcType="DECIMAL" property="fAmt" />
+    <result column="F_RMB" jdbcType="VARCHAR" property="fRmb" />
+    <result column="F_VOUNO" jdbcType="VARCHAR" property="fVouno" />
+    <result column="F_TAX" jdbcType="VARCHAR" property="fTax" />
+    <result column="F_PRD" jdbcType="VARCHAR" property="fPrd" />
+    <result column="F_RAMT" jdbcType="VARCHAR" property="fRamt" />
+    <result column="F_PRT" jdbcType="INTEGER" property="fPrt" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_hdtax (F_ACNO, F_DATE, F_LSH, 
+      F_DATE1, F_NAME, F_BANK, 
+      F_CORP, F_TAXORG, F_BANK2, 
+      F_AMT, F_RMB, F_VOUNO, 
+      F_TAX, F_PRD, F_RAMT, 
+      F_PRT, F_PAD1)
+    values (#{fAcno,jdbcType=VARCHAR}, #{fDate,jdbcType=VARCHAR}, #{fLsh,jdbcType=VARCHAR}, 
+      #{fDate1,jdbcType=VARCHAR}, #{fName,jdbcType=VARCHAR}, #{fBank,jdbcType=VARCHAR}, 
+      #{fCorp,jdbcType=VARCHAR}, #{fTaxorg,jdbcType=VARCHAR}, #{fBank2,jdbcType=VARCHAR}, 
+      #{fAmt,jdbcType=DECIMAL}, #{fRmb,jdbcType=VARCHAR}, #{fVouno,jdbcType=VARCHAR}, 
+      #{fTax,jdbcType=VARCHAR}, #{fPrd,jdbcType=VARCHAR}, #{fRamt,jdbcType=VARCHAR}, 
+      #{fPrt,jdbcType=INTEGER}, #{fPad1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_hdtax
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fAcno != null">
+        F_ACNO,
+      </if>
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fLsh != null">
+        F_LSH,
+      </if>
+      <if test="fDate1 != null">
+        F_DATE1,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fBank != null">
+        F_BANK,
+      </if>
+      <if test="fCorp != null">
+        F_CORP,
+      </if>
+      <if test="fTaxorg != null">
+        F_TAXORG,
+      </if>
+      <if test="fBank2 != null">
+        F_BANK2,
+      </if>
+      <if test="fAmt != null">
+        F_AMT,
+      </if>
+      <if test="fRmb != null">
+        F_RMB,
+      </if>
+      <if test="fVouno != null">
+        F_VOUNO,
+      </if>
+      <if test="fTax != null">
+        F_TAX,
+      </if>
+      <if test="fPrd != null">
+        F_PRD,
+      </if>
+      <if test="fRamt != null">
+        F_RAMT,
+      </if>
+      <if test="fPrt != null">
+        F_PRT,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fAcno != null">
+        #{fAcno,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fLsh != null">
+        #{fLsh,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate1 != null">
+        #{fDate1,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fBank != null">
+        #{fBank,jdbcType=VARCHAR},
+      </if>
+      <if test="fCorp != null">
+        #{fCorp,jdbcType=VARCHAR},
+      </if>
+      <if test="fTaxorg != null">
+        #{fTaxorg,jdbcType=VARCHAR},
+      </if>
+      <if test="fBank2 != null">
+        #{fBank2,jdbcType=VARCHAR},
+      </if>
+      <if test="fAmt != null">
+        #{fAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="fRmb != null">
+        #{fRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="fVouno != null">
+        #{fVouno,jdbcType=VARCHAR},
+      </if>
+      <if test="fTax != null">
+        #{fTax,jdbcType=VARCHAR},
+      </if>
+      <if test="fPrd != null">
+        #{fPrd,jdbcType=VARCHAR},
+      </if>
+      <if test="fRamt != null">
+        #{fRamt,jdbcType=VARCHAR},
+      </if>
+      <if test="fPrt != null">
+        #{fPrt,jdbcType=INTEGER},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

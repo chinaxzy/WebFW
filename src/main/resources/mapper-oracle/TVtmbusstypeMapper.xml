@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vtmbusstype">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_LARGETYPE" jdbcType="VARCHAR" property="fLargetype" />
+    <result column="F_MEDIUM" jdbcType="VARCHAR" property="fMedium" />
+    <result column="F_SMALL" jdbcType="VARCHAR" property="fSmall" />
+    <result column="F_REQENDTYPE" jdbcType="VARCHAR" property="fReqendtype" />
+    <result column="F_REFERENCETYPE" jdbcType="VARCHAR" property="fReferencetype" />
+    <result column="F_LEVEL" jdbcType="VARCHAR" property="fLevel" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_vtmbusstype (F_ID, F_NAME, F_LARGETYPE, 
+      F_MEDIUM, F_SMALL, F_REQENDTYPE, 
+      F_REFERENCETYPE, F_LEVEL)
+    values (#{fId,jdbcType=VARCHAR}, #{fName,jdbcType=VARCHAR}, #{fLargetype,jdbcType=VARCHAR}, 
+      #{fMedium,jdbcType=VARCHAR}, #{fSmall,jdbcType=VARCHAR}, #{fReqendtype,jdbcType=VARCHAR}, 
+      #{fReferencetype,jdbcType=VARCHAR}, #{fLevel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_vtmbusstype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fLargetype != null">
+        F_LARGETYPE,
+      </if>
+      <if test="fMedium != null">
+        F_MEDIUM,
+      </if>
+      <if test="fSmall != null">
+        F_SMALL,
+      </if>
+      <if test="fReqendtype != null">
+        F_REQENDTYPE,
+      </if>
+      <if test="fReferencetype != null">
+        F_REFERENCETYPE,
+      </if>
+      <if test="fLevel != null">
+        F_LEVEL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fLargetype != null">
+        #{fLargetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fMedium != null">
+        #{fMedium,jdbcType=VARCHAR},
+      </if>
+      <if test="fSmall != null">
+        #{fSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="fReqendtype != null">
+        #{fReqendtype,jdbcType=VARCHAR},
+      </if>
+      <if test="fReferencetype != null">
+        #{fReferencetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fLevel != null">
+        #{fLevel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

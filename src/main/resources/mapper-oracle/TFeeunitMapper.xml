@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="feeunit">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_FEETYPE" jdbcType="CHAR" property="fFeetype" />
+    <result column="F_CITYID" jdbcType="CHAR" property="fCityid" />
+    <result column="F_AREAID" jdbcType="CHAR" property="fAreaid" />
+    <result column="F_UNITID" jdbcType="CHAR" property="fUnitid" />
+    <result column="F_UNITNAME" jdbcType="CHAR" property="fUnitname" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_feeunit (F_FEETYPE, F_CITYID, F_AREAID, 
+      F_UNITID, F_UNITNAME, F_PAD1)
+    values (#{fFeetype,jdbcType=CHAR}, #{fCityid,jdbcType=CHAR}, #{fAreaid,jdbcType=CHAR}, 
+      #{fUnitid,jdbcType=CHAR}, #{fUnitname,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_feeunit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fFeetype != null">
+        F_FEETYPE,
+      </if>
+      <if test="fCityid != null">
+        F_CITYID,
+      </if>
+      <if test="fAreaid != null">
+        F_AREAID,
+      </if>
+      <if test="fUnitid != null">
+        F_UNITID,
+      </if>
+      <if test="fUnitname != null">
+        F_UNITNAME,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fFeetype != null">
+        #{fFeetype,jdbcType=CHAR},
+      </if>
+      <if test="fCityid != null">
+        #{fCityid,jdbcType=CHAR},
+      </if>
+      <if test="fAreaid != null">
+        #{fAreaid,jdbcType=CHAR},
+      </if>
+      <if test="fUnitid != null">
+        #{fUnitid,jdbcType=CHAR},
+      </if>
+      <if test="fUnitname != null">
+        #{fUnitname,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

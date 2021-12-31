@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cashdetail">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_DEVLS" jdbcType="VARCHAR" property="fDevls" />
+    <result column="F_MBOXNO" jdbcType="INTEGER" property="fMboxno" />
+    <result column="F_MBOXTP" jdbcType="VARCHAR" property="fMboxtp" />
+    <result column="F_MBOXME" jdbcType="INTEGER" property="fMboxme" />
+    <result column="F_CASHFLAG" jdbcType="VARCHAR" property="fCashflag" />
+    <result column="F_CASHCNT" jdbcType="INTEGER" property="fCashcnt" />
+    <result column="F_CASHAMT" jdbcType="DECIMAL" property="fCashamt" />
+    <result column="F_REASON" jdbcType="VARCHAR" property="fReason" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_cashdetail (F_DATE, F_DEVID, F_DEVLS, 
+      F_MBOXNO, F_MBOXTP, F_MBOXME, 
+      F_CASHFLAG, F_CASHCNT, F_CASHAMT, 
+      F_REASON, F_PAD1)
+    values (#{fDate,jdbcType=VARCHAR}, #{fDevid,jdbcType=VARCHAR}, #{fDevls,jdbcType=VARCHAR}, 
+      #{fMboxno,jdbcType=INTEGER}, #{fMboxtp,jdbcType=VARCHAR}, #{fMboxme,jdbcType=INTEGER}, 
+      #{fCashflag,jdbcType=VARCHAR}, #{fCashcnt,jdbcType=INTEGER}, #{fCashamt,jdbcType=DECIMAL}, 
+      #{fReason,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_cashdetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fDevls != null">
+        F_DEVLS,
+      </if>
+      <if test="fMboxno != null">
+        F_MBOXNO,
+      </if>
+      <if test="fMboxtp != null">
+        F_MBOXTP,
+      </if>
+      <if test="fMboxme != null">
+        F_MBOXME,
+      </if>
+      <if test="fCashflag != null">
+        F_CASHFLAG,
+      </if>
+      <if test="fCashcnt != null">
+        F_CASHCNT,
+      </if>
+      <if test="fCashamt != null">
+        F_CASHAMT,
+      </if>
+      <if test="fReason != null">
+        F_REASON,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevls != null">
+        #{fDevls,jdbcType=VARCHAR},
+      </if>
+      <if test="fMboxno != null">
+        #{fMboxno,jdbcType=INTEGER},
+      </if>
+      <if test="fMboxtp != null">
+        #{fMboxtp,jdbcType=VARCHAR},
+      </if>
+      <if test="fMboxme != null">
+        #{fMboxme,jdbcType=INTEGER},
+      </if>
+      <if test="fCashflag != null">
+        #{fCashflag,jdbcType=VARCHAR},
+      </if>
+      <if test="fCashcnt != null">
+        #{fCashcnt,jdbcType=INTEGER},
+      </if>
+      <if test="fCashamt != null">
+        #{fCashamt,jdbcType=DECIMAL},
+      </if>
+      <if test="fReason != null">
+        #{fReason,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

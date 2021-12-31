@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="todov1">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_ID" jdbcType="INTEGER" property="fId" />
+    <result column="F_PARID" jdbcType="INTEGER" property="fParid" />
+    <result column="F_ACTION" jdbcType="INTEGER" property="fAction" />
+    <result column="F_ACTNAME" jdbcType="CHAR" property="fActname" />
+    <result column="F_CLIATTR" jdbcType="CHAR" property="fCliattr" />
+    <result column="F_DTIME" jdbcType="CHAR" property="fDtime" />
+    <result column="F_DEVID" jdbcType="CHAR" property="fDevid" />
+    <result column="F_SOFTID" jdbcType="CHAR" property="fSoftid" />
+    <result column="F_FILE" jdbcType="CHAR" property="fFile" />
+    <result column="F_ZIPFG" jdbcType="CHAR" property="fZipfg" />
+    <result column="F_PARAM" jdbcType="CHAR" property="fParam" />
+    <result column="F_DEFTIME" jdbcType="CHAR" property="fDeftime" />
+    <result column="F_DEFMAN" jdbcType="CHAR" property="fDefman" />
+    <result column="F_TRYTIME" jdbcType="INTEGER" property="fTrytime" />
+    <result column="F_TRYMAX" jdbcType="INTEGER" property="fTrymax" />
+    <result column="F_DONE" jdbcType="CHAR" property="fDone" />
+    <result column="F_RCINFO" jdbcType="CHAR" property="fRcinfo" />
+    <result column="F_DONETIME" jdbcType="CHAR" property="fDonetime" />
+    <result column="F_NEXTTIME" jdbcType="CHAR" property="fNexttime" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="map">
+    <result column="F_JSCRIPT" jdbcType="LONGVARBINARY" property="fJscript" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+    F_JSCRIPT
+  </sql>
+  <insert id="insert" parameterType="map">
+    insert into t_todo_v1 (F_ID, F_PARID, F_ACTION, 
+      F_ACTNAME, F_CLIATTR, F_DTIME, 
+      F_DEVID, F_SOFTID, F_FILE, F_ZIPFG, 
+      F_PARAM, F_DEFTIME, F_DEFMAN, F_TRYTIME, 
+      F_TRYMAX, F_DONE, F_RCINFO, 
+      F_DONETIME, F_NEXTTIME, F_PAD1, 
+      F_JSCRIPT)
+    values (#{fId,jdbcType=INTEGER}, #{fParid,jdbcType=INTEGER}, #{fAction,jdbcType=INTEGER}, 
+      #{fActname,jdbcType=CHAR}, #{fCliattr,jdbcType=CHAR}, #{fDtime,jdbcType=CHAR}, 
+      #{fDevid,jdbcType=CHAR}, #{fSoftid,jdbcType=CHAR}, #{fFile,jdbcType=CHAR}, #{fZipfg,jdbcType=CHAR}, 
+      #{fParam,jdbcType=CHAR}, #{fDeftime,jdbcType=CHAR}, #{fDefman,jdbcType=CHAR}, #{fTrytime,jdbcType=INTEGER}, 
+      #{fTrymax,jdbcType=INTEGER}, #{fDone,jdbcType=CHAR}, #{fRcinfo,jdbcType=CHAR}, 
+      #{fDonetime,jdbcType=CHAR}, #{fNexttime,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR}, 
+      #{fJscript,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_todo_v1
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fParid != null">
+        F_PARID,
+      </if>
+      <if test="fAction != null">
+        F_ACTION,
+      </if>
+      <if test="fActname != null">
+        F_ACTNAME,
+      </if>
+      <if test="fCliattr != null">
+        F_CLIATTR,
+      </if>
+      <if test="fDtime != null">
+        F_DTIME,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fSoftid != null">
+        F_SOFTID,
+      </if>
+      <if test="fFile != null">
+        F_FILE,
+      </if>
+      <if test="fZipfg != null">
+        F_ZIPFG,
+      </if>
+      <if test="fParam != null">
+        F_PARAM,
+      </if>
+      <if test="fDeftime != null">
+        F_DEFTIME,
+      </if>
+      <if test="fDefman != null">
+        F_DEFMAN,
+      </if>
+      <if test="fTrytime != null">
+        F_TRYTIME,
+      </if>
+      <if test="fTrymax != null">
+        F_TRYMAX,
+      </if>
+      <if test="fDone != null">
+        F_DONE,
+      </if>
+      <if test="fRcinfo != null">
+        F_RCINFO,
+      </if>
+      <if test="fDonetime != null">
+        F_DONETIME,
+      </if>
+      <if test="fNexttime != null">
+        F_NEXTTIME,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fJscript != null">
+        F_JSCRIPT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=INTEGER},
+      </if>
+      <if test="fParid != null">
+        #{fParid,jdbcType=INTEGER},
+      </if>
+      <if test="fAction != null">
+        #{fAction,jdbcType=INTEGER},
+      </if>
+      <if test="fActname != null">
+        #{fActname,jdbcType=CHAR},
+      </if>
+      <if test="fCliattr != null">
+        #{fCliattr,jdbcType=CHAR},
+      </if>
+      <if test="fDtime != null">
+        #{fDtime,jdbcType=CHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fSoftid != null">
+        #{fSoftid,jdbcType=CHAR},
+      </if>
+      <if test="fFile != null">
+        #{fFile,jdbcType=CHAR},
+      </if>
+      <if test="fZipfg != null">
+        #{fZipfg,jdbcType=CHAR},
+      </if>
+      <if test="fParam != null">
+        #{fParam,jdbcType=CHAR},
+      </if>
+      <if test="fDeftime != null">
+        #{fDeftime,jdbcType=CHAR},
+      </if>
+      <if test="fDefman != null">
+        #{fDefman,jdbcType=CHAR},
+      </if>
+      <if test="fTrytime != null">
+        #{fTrytime,jdbcType=INTEGER},
+      </if>
+      <if test="fTrymax != null">
+        #{fTrymax,jdbcType=INTEGER},
+      </if>
+      <if test="fDone != null">
+        #{fDone,jdbcType=CHAR},
+      </if>
+      <if test="fRcinfo != null">
+        #{fRcinfo,jdbcType=CHAR},
+      </if>
+      <if test="fDonetime != null">
+        #{fDonetime,jdbcType=CHAR},
+      </if>
+      <if test="fNexttime != null">
+        #{fNexttime,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fJscript != null">
+        #{fJscript,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

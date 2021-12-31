@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devv">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="f_devid" jdbcType="CHAR" property="fDevid" />
+    <result column="f_devname" jdbcType="VARCHAR" property="fDevname" />
+    <result column="f_asserts" jdbcType="CHAR" property="fAsserts" />
+    <result column="f_style" jdbcType="CHAR" property="fStyle" />
+    <result column="f_instaddr" jdbcType="CHAR" property="fInstaddr" />
+    <result column="f_area" jdbcType="CHAR" property="fArea" />
+    <result column="f_funcarea" jdbcType="CHAR" property="fFuncarea" />
+    <result column="f_type" jdbcType="CHAR" property="fType" />
+    <result column="f_moneydev" jdbcType="CHAR" property="fMoneydev" />
+    <result column="f_mark" jdbcType="CHAR" property="fMark" />
+    <result column="f_spc" jdbcType="CHAR" property="fSpc" />
+    <result column="f_operator" jdbcType="CHAR" property="fOperator" />
+    <result column="f_admin" jdbcType="CHAR" property="fAdmin" />
+    <result column="f_facid" jdbcType="CHAR" property="fFacid" />
+    <result column="f_ispid" jdbcType="CHAR" property="fIspid" />
+    <result column="f_dtarriv" jdbcType="CHAR" property="fDtarriv" />
+    <result column="f_dtimax" jdbcType="CHAR" property="fDtimax" />
+    <result column="f_dtopen" jdbcType="CHAR" property="fDtopen" />
+    <result column="f_dtclose" jdbcType="CHAR" property="fDtclose" />
+    <result column="f_wdid" jdbcType="CHAR" property="fWdid" />
+    <result column="f_wdname" jdbcType="CHAR" property="fWdname" />
+    <result column="f_deptid" jdbcType="CHAR" property="fDeptid" />
+    <result column="f_zhid" jdbcType="CHAR" property="fZhid" />
+    <result column="f_zhname" jdbcType="CHAR" property="fZhname" />
+    <result column="f_fhid" jdbcType="CHAR" property="fFhid" />
+    <result column="f_fhname" jdbcType="CHAR" property="fFhname" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_dev_v (f_devid, f_devname, f_asserts, 
+      f_style, f_instaddr, f_area, f_funcarea, 
+      f_type, f_moneydev, f_mark, f_spc, 
+      f_operator, f_admin, f_facid, f_ispid, 
+      f_dtarriv, f_dtimax, f_dtopen, 
+      f_dtclose, f_wdid, f_wdname, f_deptid, 
+      f_zhid, f_zhname, f_fhid, f_fhname
+      )
+    values (#{fDevid,jdbcType=CHAR}, #{fDevname,jdbcType=VARCHAR}, #{fAsserts,jdbcType=CHAR}, 
+      #{fStyle,jdbcType=CHAR}, #{fInstaddr,jdbcType=CHAR}, #{fArea,jdbcType=CHAR}, #{fFuncarea,jdbcType=CHAR}, 
+      #{fType,jdbcType=CHAR}, #{fMoneydev,jdbcType=CHAR}, #{fMark,jdbcType=CHAR}, #{fSpc,jdbcType=CHAR}, 
+      #{fOperator,jdbcType=CHAR}, #{fAdmin,jdbcType=CHAR}, #{fFacid,jdbcType=CHAR}, #{fIspid,jdbcType=CHAR}, 
+      #{fDtarriv,jdbcType=CHAR}, #{fDtimax,jdbcType=CHAR}, #{fDtopen,jdbcType=CHAR}, 
+      #{fDtclose,jdbcType=CHAR}, #{fWdid,jdbcType=CHAR}, #{fWdname,jdbcType=CHAR}, #{fDeptid,jdbcType=CHAR}, 
+      #{fZhid,jdbcType=CHAR}, #{fZhname,jdbcType=CHAR}, #{fFhid,jdbcType=CHAR}, #{fFhname,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_dev_v
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        f_devid,
+      </if>
+      <if test="fDevname != null">
+        f_devname,
+      </if>
+      <if test="fAsserts != null">
+        f_asserts,
+      </if>
+      <if test="fStyle != null">
+        f_style,
+      </if>
+      <if test="fInstaddr != null">
+        f_instaddr,
+      </if>
+      <if test="fArea != null">
+        f_area,
+      </if>
+      <if test="fFuncarea != null">
+        f_funcarea,
+      </if>
+      <if test="fType != null">
+        f_type,
+      </if>
+      <if test="fMoneydev != null">
+        f_moneydev,
+      </if>
+      <if test="fMark != null">
+        f_mark,
+      </if>
+      <if test="fSpc != null">
+        f_spc,
+      </if>
+      <if test="fOperator != null">
+        f_operator,
+      </if>
+      <if test="fAdmin != null">
+        f_admin,
+      </if>
+      <if test="fFacid != null">
+        f_facid,
+      </if>
+      <if test="fIspid != null">
+        f_ispid,
+      </if>
+      <if test="fDtarriv != null">
+        f_dtarriv,
+      </if>
+      <if test="fDtimax != null">
+        f_dtimax,
+      </if>
+      <if test="fDtopen != null">
+        f_dtopen,
+      </if>
+      <if test="fDtclose != null">
+        f_dtclose,
+      </if>
+      <if test="fWdid != null">
+        f_wdid,
+      </if>
+      <if test="fWdname != null">
+        f_wdname,
+      </if>
+      <if test="fDeptid != null">
+        f_deptid,
+      </if>
+      <if test="fZhid != null">
+        f_zhid,
+      </if>
+      <if test="fZhname != null">
+        f_zhname,
+      </if>
+      <if test="fFhid != null">
+        f_fhid,
+      </if>
+      <if test="fFhname != null">
+        f_fhname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fDevname != null">
+        #{fDevname,jdbcType=VARCHAR},
+      </if>
+      <if test="fAsserts != null">
+        #{fAsserts,jdbcType=CHAR},
+      </if>
+      <if test="fStyle != null">
+        #{fStyle,jdbcType=CHAR},
+      </if>
+      <if test="fInstaddr != null">
+        #{fInstaddr,jdbcType=CHAR},
+      </if>
+      <if test="fArea != null">
+        #{fArea,jdbcType=CHAR},
+      </if>
+      <if test="fFuncarea != null">
+        #{fFuncarea,jdbcType=CHAR},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fMoneydev != null">
+        #{fMoneydev,jdbcType=CHAR},
+      </if>
+      <if test="fMark != null">
+        #{fMark,jdbcType=CHAR},
+      </if>
+      <if test="fSpc != null">
+        #{fSpc,jdbcType=CHAR},
+      </if>
+      <if test="fOperator != null">
+        #{fOperator,jdbcType=CHAR},
+      </if>
+      <if test="fAdmin != null">
+        #{fAdmin,jdbcType=CHAR},
+      </if>
+      <if test="fFacid != null">
+        #{fFacid,jdbcType=CHAR},
+      </if>
+      <if test="fIspid != null">
+        #{fIspid,jdbcType=CHAR},
+      </if>
+      <if test="fDtarriv != null">
+        #{fDtarriv,jdbcType=CHAR},
+      </if>
+      <if test="fDtimax != null">
+        #{fDtimax,jdbcType=CHAR},
+      </if>
+      <if test="fDtopen != null">
+        #{fDtopen,jdbcType=CHAR},
+      </if>
+      <if test="fDtclose != null">
+        #{fDtclose,jdbcType=CHAR},
+      </if>
+      <if test="fWdid != null">
+        #{fWdid,jdbcType=CHAR},
+      </if>
+      <if test="fWdname != null">
+        #{fWdname,jdbcType=CHAR},
+      </if>
+      <if test="fDeptid != null">
+        #{fDeptid,jdbcType=CHAR},
+      </if>
+      <if test="fZhid != null">
+        #{fZhid,jdbcType=CHAR},
+      </if>
+      <if test="fZhname != null">
+        #{fZhname,jdbcType=CHAR},
+      </if>
+      <if test="fFhid != null">
+        #{fFhid,jdbcType=CHAR},
+      </if>
+      <if test="fFhname != null">
+        #{fFhname,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

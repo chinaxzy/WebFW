@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="addcard">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DATE" jdbcType="CHAR" property="fDate" />
+    <result column="F_TIME" jdbcType="CHAR" property="fTime" />
+    <result column="F_DEVID" jdbcType="CHAR" property="fDevid" />
+    <result column="F_DEPT" jdbcType="CHAR" property="fDept" />
+    <result column="F_COUNT" jdbcType="INTEGER" property="fCount" />
+    <result column="F_DEVLS" jdbcType="CHAR" property="fDevls" />
+    <result column="F_OPERATOR" jdbcType="CHAR" property="fOperator" />
+    <result column="F_RETNO" jdbcType="CHAR" property="fRetno" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+    <result column="F_START" jdbcType="CHAR" property="fStart" />
+    <result column="F_END" jdbcType="CHAR" property="fEnd" />
+    <result column="F_MEMO" jdbcType="VARCHAR" property="fMemo" />
+    <result column="F_BOXNO" jdbcType="VARCHAR" property="fBoxno" />
+    <result column="F_PZFLAG" jdbcType="VARCHAR" property="fPzflag" />
+    <result column="F_TERM" jdbcType="VARCHAR" property="fTerm" />
+    <result column="F_PRINT" jdbcType="INTEGER" property="fPrint" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_addcard (F_DATE, F_TIME, F_DEVID, 
+      F_DEPT, F_COUNT, F_DEVLS, F_OPERATOR, 
+      F_RETNO, F_PAD1, F_START, F_END, 
+      F_MEMO, F_BOXNO, F_PZFLAG, 
+      F_TERM, F_PRINT)
+    values (#{fDate,jdbcType=CHAR}, #{fTime,jdbcType=CHAR}, #{fDevid,jdbcType=CHAR}, 
+      #{fDept,jdbcType=CHAR}, #{fCount,jdbcType=INTEGER}, #{fDevls,jdbcType=CHAR}, #{fOperator,jdbcType=CHAR}, 
+      #{fRetno,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR}, #{fStart,jdbcType=CHAR}, #{fEnd,jdbcType=CHAR}, 
+      #{fMemo,jdbcType=VARCHAR}, #{fBoxno,jdbcType=VARCHAR}, #{fPzflag,jdbcType=VARCHAR}, 
+      #{fTerm,jdbcType=VARCHAR}, #{fPrint,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_addcard
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fCount != null">
+        F_COUNT,
+      </if>
+      <if test="fDevls != null">
+        F_DEVLS,
+      </if>
+      <if test="fOperator != null">
+        F_OPERATOR,
+      </if>
+      <if test="fRetno != null">
+        F_RETNO,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fStart != null">
+        F_START,
+      </if>
+      <if test="fEnd != null">
+        F_END,
+      </if>
+      <if test="fMemo != null">
+        F_MEMO,
+      </if>
+      <if test="fBoxno != null">
+        F_BOXNO,
+      </if>
+      <if test="fPzflag != null">
+        F_PZFLAG,
+      </if>
+      <if test="fTerm != null">
+        F_TERM,
+      </if>
+      <if test="fPrint != null">
+        F_PRINT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        #{fDate,jdbcType=CHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=CHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fCount != null">
+        #{fCount,jdbcType=INTEGER},
+      </if>
+      <if test="fDevls != null">
+        #{fDevls,jdbcType=CHAR},
+      </if>
+      <if test="fOperator != null">
+        #{fOperator,jdbcType=CHAR},
+      </if>
+      <if test="fRetno != null">
+        #{fRetno,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fStart != null">
+        #{fStart,jdbcType=CHAR},
+      </if>
+      <if test="fEnd != null">
+        #{fEnd,jdbcType=CHAR},
+      </if>
+      <if test="fMemo != null">
+        #{fMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="fBoxno != null">
+        #{fBoxno,jdbcType=VARCHAR},
+      </if>
+      <if test="fPzflag != null">
+        #{fPzflag,jdbcType=VARCHAR},
+      </if>
+      <if test="fTerm != null">
+        #{fTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="fPrint != null">
+        #{fPrint,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

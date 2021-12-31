@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cbsrt201312">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="rtfrtype" jdbcType="CHAR" property="rtfrtype" />
+    <id column="rtmtdate" jdbcType="CHAR" property="rtmtdate" />
+    <id column="rtmtbank" jdbcType="CHAR" property="rtmtbank" />
+    <id column="rtaccno" jdbcType="CHAR" property="rtaccno" />
+    <id column="rtno" jdbcType="INTEGER" property="rtno" />
+    <result column="rtprint" jdbcType="CHAR" property="rtprint" />
+    <result column="rtprintcnt" jdbcType="INTEGER" property="rtprintcnt" />
+    <result column="rthdgno" jdbcType="CHAR" property="rthdgno" />
+    <result column="rtteller" jdbcType="CHAR" property="rtteller" />
+    <result column="rtdamt" jdbcType="DECIMAL" property="rtdamt" />
+    <result column="rtpayaccno" jdbcType="CHAR" property="rtpayaccno" />
+    <result column="rtpayname" jdbcType="CHAR" property="rtpayname" />
+    <result column="rtpaybank" jdbcType="CHAR" property="rtpaybank" />
+    <result column="rtrcvaccno" jdbcType="CHAR" property="rtrcvaccno" />
+    <result column="rtrcvname" jdbcType="CHAR" property="rtrcvname" />
+    <result column="rtrcvbank" jdbcType="CHAR" property="rtrcvbank" />
+    <result column="rtamt" jdbcType="CHAR" property="rtamt" />
+    <result column="rtcamt" jdbcType="CHAR" property="rtcamt" />
+    <result column="rttransdate" jdbcType="CHAR" property="rttransdate" />
+    <result column="rtprivate1" jdbcType="CHAR" property="rtprivate1" />
+    <result column="rtprivate2" jdbcType="CHAR" property="rtprivate2" />
+    <result column="rtprivate3" jdbcType="CHAR" property="rtprivate3" />
+    <result column="rtprivate4" jdbcType="CHAR" property="rtprivate4" />
+    <result column="rtprivate5" jdbcType="CHAR" property="rtprivate5" />
+    <result column="rtprivate6" jdbcType="CHAR" property="rtprivate6" />
+    <result column="rtprivate7" jdbcType="CHAR" property="rtprivate7" />
+    <result column="rtprivate8" jdbcType="CHAR" property="rtprivate8" />
+    <result column="rtprivate9" jdbcType="CHAR" property="rtprivate9" />
+    <result column="rtprivate10" jdbcType="CHAR" property="rtprivate10" />
+    <result column="rtreserved1" jdbcType="CHAR" property="rtreserved1" />
+    <result column="rtreserved2" jdbcType="CHAR" property="rtreserved2" />
+    <result column="rtreserved3" jdbcType="CHAR" property="rtreserved3" />
+    <result column="rtreserved4" jdbcType="CHAR" property="rtreserved4" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rtfrtype, rtmtdate, rtmtbank, rtaccno, rtno, rtprint, rtprintcnt, rthdgno, rtteller, 
+    rtdamt, rtpayaccno, rtpayname, rtpaybank, rtrcvaccno, rtrcvname, rtrcvbank, rtamt, 
+    rtcamt, rttransdate, rtprivate1, rtprivate2, rtprivate3, rtprivate4, rtprivate5, 
+    rtprivate6, rtprivate7, rtprivate8, rtprivate9, rtprivate10, rtreserved1, rtreserved2, 
+    rtreserved3, rtreserved4
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_cbsrt_201312
+    where rtfrtype = #{rtfrtype,jdbcType=CHAR}
+      and rtmtdate = #{rtmtdate,jdbcType=CHAR}
+      and rtmtbank = #{rtmtbank,jdbcType=CHAR}
+      and rtaccno = #{rtaccno,jdbcType=CHAR}
+      and rtno = #{rtno,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_cbsrt_201312
+    where rtfrtype = #{rtfrtype,jdbcType=CHAR}
+      and rtmtdate = #{rtmtdate,jdbcType=CHAR}
+      and rtmtbank = #{rtmtbank,jdbcType=CHAR}
+      and rtaccno = #{rtaccno,jdbcType=CHAR}
+      and rtno = #{rtno,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_cbsrt_201312 (rtfrtype, rtmtdate, rtmtbank, 
+      rtaccno, rtno, rtprint, rtprintcnt, 
+      rthdgno, rtteller, rtdamt, 
+      rtpayaccno, rtpayname, rtpaybank, 
+      rtrcvaccno, rtrcvname, rtrcvbank, 
+      rtamt, rtcamt, rttransdate, 
+      rtprivate1, rtprivate2, rtprivate3, 
+      rtprivate4, rtprivate5, rtprivate6, 
+      rtprivate7, rtprivate8, rtprivate9, 
+      rtprivate10, rtreserved1, rtreserved2, 
+      rtreserved3, rtreserved4)
+    values (#{rtfrtype,jdbcType=CHAR}, #{rtmtdate,jdbcType=CHAR}, #{rtmtbank,jdbcType=CHAR}, 
+      #{rtaccno,jdbcType=CHAR}, #{rtno,jdbcType=INTEGER}, #{rtprint,jdbcType=CHAR}, #{rtprintcnt,jdbcType=INTEGER}, 
+      #{rthdgno,jdbcType=CHAR}, #{rtteller,jdbcType=CHAR}, #{rtdamt,jdbcType=DECIMAL}, 
+      #{rtpayaccno,jdbcType=CHAR}, #{rtpayname,jdbcType=CHAR}, #{rtpaybank,jdbcType=CHAR}, 
+      #{rtrcvaccno,jdbcType=CHAR}, #{rtrcvname,jdbcType=CHAR}, #{rtrcvbank,jdbcType=CHAR}, 
+      #{rtamt,jdbcType=CHAR}, #{rtcamt,jdbcType=CHAR}, #{rttransdate,jdbcType=CHAR}, 
+      #{rtprivate1,jdbcType=CHAR}, #{rtprivate2,jdbcType=CHAR}, #{rtprivate3,jdbcType=CHAR}, 
+      #{rtprivate4,jdbcType=CHAR}, #{rtprivate5,jdbcType=CHAR}, #{rtprivate6,jdbcType=CHAR}, 
+      #{rtprivate7,jdbcType=CHAR}, #{rtprivate8,jdbcType=CHAR}, #{rtprivate9,jdbcType=CHAR}, 
+      #{rtprivate10,jdbcType=CHAR}, #{rtreserved1,jdbcType=CHAR}, #{rtreserved2,jdbcType=CHAR}, 
+      #{rtreserved3,jdbcType=CHAR}, #{rtreserved4,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_cbsrt_201312
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rtfrtype != null">
+        rtfrtype,
+      </if>
+      <if test="rtmtdate != null">
+        rtmtdate,
+      </if>
+      <if test="rtmtbank != null">
+        rtmtbank,
+      </if>
+      <if test="rtaccno != null">
+        rtaccno,
+      </if>
+      <if test="rtno != null">
+        rtno,
+      </if>
+      <if test="rtprint != null">
+        rtprint,
+      </if>
+      <if test="rtprintcnt != null">
+        rtprintcnt,
+      </if>
+      <if test="rthdgno != null">
+        rthdgno,
+      </if>
+      <if test="rtteller != null">
+        rtteller,
+      </if>
+      <if test="rtdamt != null">
+        rtdamt,
+      </if>
+      <if test="rtpayaccno != null">
+        rtpayaccno,
+      </if>
+      <if test="rtpayname != null">
+        rtpayname,
+      </if>
+      <if test="rtpaybank != null">
+        rtpaybank,
+      </if>
+      <if test="rtrcvaccno != null">
+        rtrcvaccno,
+      </if>
+      <if test="rtrcvname != null">
+        rtrcvname,
+      </if>
+      <if test="rtrcvbank != null">
+        rtrcvbank,
+      </if>
+      <if test="rtamt != null">
+        rtamt,
+      </if>
+      <if test="rtcamt != null">
+        rtcamt,
+      </if>
+      <if test="rttransdate != null">
+        rttransdate,
+      </if>
+      <if test="rtprivate1 != null">
+        rtprivate1,
+      </if>
+      <if test="rtprivate2 != null">
+        rtprivate2,
+      </if>
+      <if test="rtprivate3 != null">
+        rtprivate3,
+      </if>
+      <if test="rtprivate4 != null">
+        rtprivate4,
+      </if>
+      <if test="rtprivate5 != null">
+        rtprivate5,
+      </if>
+      <if test="rtprivate6 != null">
+        rtprivate6,
+      </if>
+      <if test="rtprivate7 != null">
+        rtprivate7,
+      </if>
+      <if test="rtprivate8 != null">
+        rtprivate8,
+      </if>
+      <if test="rtprivate9 != null">
+        rtprivate9,
+      </if>
+      <if test="rtprivate10 != null">
+        rtprivate10,
+      </if>
+      <if test="rtreserved1 != null">
+        rtreserved1,
+      </if>
+      <if test="rtreserved2 != null">
+        rtreserved2,
+      </if>
+      <if test="rtreserved3 != null">
+        rtreserved3,
+      </if>
+      <if test="rtreserved4 != null">
+        rtreserved4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rtfrtype != null">
+        #{rtfrtype,jdbcType=CHAR},
+      </if>
+      <if test="rtmtdate != null">
+        #{rtmtdate,jdbcType=CHAR},
+      </if>
+      <if test="rtmtbank != null">
+        #{rtmtbank,jdbcType=CHAR},
+      </if>
+      <if test="rtaccno != null">
+        #{rtaccno,jdbcType=CHAR},
+      </if>
+      <if test="rtno != null">
+        #{rtno,jdbcType=INTEGER},
+      </if>
+      <if test="rtprint != null">
+        #{rtprint,jdbcType=CHAR},
+      </if>
+      <if test="rtprintcnt != null">
+        #{rtprintcnt,jdbcType=INTEGER},
+      </if>
+      <if test="rthdgno != null">
+        #{rthdgno,jdbcType=CHAR},
+      </if>
+      <if test="rtteller != null">
+        #{rtteller,jdbcType=CHAR},
+      </if>
+      <if test="rtdamt != null">
+        #{rtdamt,jdbcType=DECIMAL},
+      </if>
+      <if test="rtpayaccno != null">
+        #{rtpayaccno,jdbcType=CHAR},
+      </if>
+      <if test="rtpayname != null">
+        #{rtpayname,jdbcType=CHAR},
+      </if>
+      <if test="rtpaybank != null">
+        #{rtpaybank,jdbcType=CHAR},
+      </if>
+      <if test="rtrcvaccno != null">
+        #{rtrcvaccno,jdbcType=CHAR},
+      </if>
+      <if test="rtrcvname != null">
+        #{rtrcvname,jdbcType=CHAR},
+      </if>
+      <if test="rtrcvbank != null">
+        #{rtrcvbank,jdbcType=CHAR},
+      </if>
+      <if test="rtamt != null">
+        #{rtamt,jdbcType=CHAR},
+      </if>
+      <if test="rtcamt != null">
+        #{rtcamt,jdbcType=CHAR},
+      </if>
+      <if test="rttransdate != null">
+        #{rttransdate,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate1 != null">
+        #{rtprivate1,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate2 != null">
+        #{rtprivate2,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate3 != null">
+        #{rtprivate3,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate4 != null">
+        #{rtprivate4,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate5 != null">
+        #{rtprivate5,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate6 != null">
+        #{rtprivate6,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate7 != null">
+        #{rtprivate7,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate8 != null">
+        #{rtprivate8,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate9 != null">
+        #{rtprivate9,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate10 != null">
+        #{rtprivate10,jdbcType=CHAR},
+      </if>
+      <if test="rtreserved1 != null">
+        #{rtreserved1,jdbcType=CHAR},
+      </if>
+      <if test="rtreserved2 != null">
+        #{rtreserved2,jdbcType=CHAR},
+      </if>
+      <if test="rtreserved3 != null">
+        #{rtreserved3,jdbcType=CHAR},
+      </if>
+      <if test="rtreserved4 != null">
+        #{rtreserved4,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_cbsrt_201312
+    <set>
+      <if test="rtprint != null">
+        rtprint = #{rtprint,jdbcType=CHAR},
+      </if>
+      <if test="rtprintcnt != null">
+        rtprintcnt = #{rtprintcnt,jdbcType=INTEGER},
+      </if>
+      <if test="rthdgno != null">
+        rthdgno = #{rthdgno,jdbcType=CHAR},
+      </if>
+      <if test="rtteller != null">
+        rtteller = #{rtteller,jdbcType=CHAR},
+      </if>
+      <if test="rtdamt != null">
+        rtdamt = #{rtdamt,jdbcType=DECIMAL},
+      </if>
+      <if test="rtpayaccno != null">
+        rtpayaccno = #{rtpayaccno,jdbcType=CHAR},
+      </if>
+      <if test="rtpayname != null">
+        rtpayname = #{rtpayname,jdbcType=CHAR},
+      </if>
+      <if test="rtpaybank != null">
+        rtpaybank = #{rtpaybank,jdbcType=CHAR},
+      </if>
+      <if test="rtrcvaccno != null">
+        rtrcvaccno = #{rtrcvaccno,jdbcType=CHAR},
+      </if>
+      <if test="rtrcvname != null">
+        rtrcvname = #{rtrcvname,jdbcType=CHAR},
+      </if>
+      <if test="rtrcvbank != null">
+        rtrcvbank = #{rtrcvbank,jdbcType=CHAR},
+      </if>
+      <if test="rtamt != null">
+        rtamt = #{rtamt,jdbcType=CHAR},
+      </if>
+      <if test="rtcamt != null">
+        rtcamt = #{rtcamt,jdbcType=CHAR},
+      </if>
+      <if test="rttransdate != null">
+        rttransdate = #{rttransdate,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate1 != null">
+        rtprivate1 = #{rtprivate1,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate2 != null">
+        rtprivate2 = #{rtprivate2,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate3 != null">
+        rtprivate3 = #{rtprivate3,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate4 != null">
+        rtprivate4 = #{rtprivate4,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate5 != null">
+        rtprivate5 = #{rtprivate5,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate6 != null">
+        rtprivate6 = #{rtprivate6,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate7 != null">
+        rtprivate7 = #{rtprivate7,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate8 != null">
+        rtprivate8 = #{rtprivate8,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate9 != null">
+        rtprivate9 = #{rtprivate9,jdbcType=CHAR},
+      </if>
+      <if test="rtprivate10 != null">
+        rtprivate10 = #{rtprivate10,jdbcType=CHAR},
+      </if>
+      <if test="rtreserved1 != null">
+        rtreserved1 = #{rtreserved1,jdbcType=CHAR},
+      </if>
+      <if test="rtreserved2 != null">
+        rtreserved2 = #{rtreserved2,jdbcType=CHAR},
+      </if>
+      <if test="rtreserved3 != null">
+        rtreserved3 = #{rtreserved3,jdbcType=CHAR},
+      </if>
+      <if test="rtreserved4 != null">
+        rtreserved4 = #{rtreserved4,jdbcType=CHAR},
+      </if>
+    </set>
+    where rtfrtype = #{rtfrtype,jdbcType=CHAR}
+      and rtmtdate = #{rtmtdate,jdbcType=CHAR}
+      and rtmtbank = #{rtmtbank,jdbcType=CHAR}
+      and rtaccno = #{rtaccno,jdbcType=CHAR}
+      and rtno = #{rtno,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_cbsrt_201312
+    set rtprint = #{rtprint,jdbcType=CHAR},
+      rtprintcnt = #{rtprintcnt,jdbcType=INTEGER},
+      rthdgno = #{rthdgno,jdbcType=CHAR},
+      rtteller = #{rtteller,jdbcType=CHAR},
+      rtdamt = #{rtdamt,jdbcType=DECIMAL},
+      rtpayaccno = #{rtpayaccno,jdbcType=CHAR},
+      rtpayname = #{rtpayname,jdbcType=CHAR},
+      rtpaybank = #{rtpaybank,jdbcType=CHAR},
+      rtrcvaccno = #{rtrcvaccno,jdbcType=CHAR},
+      rtrcvname = #{rtrcvname,jdbcType=CHAR},
+      rtrcvbank = #{rtrcvbank,jdbcType=CHAR},
+      rtamt = #{rtamt,jdbcType=CHAR},
+      rtcamt = #{rtcamt,jdbcType=CHAR},
+      rttransdate = #{rttransdate,jdbcType=CHAR},
+      rtprivate1 = #{rtprivate1,jdbcType=CHAR},
+      rtprivate2 = #{rtprivate2,jdbcType=CHAR},
+      rtprivate3 = #{rtprivate3,jdbcType=CHAR},
+      rtprivate4 = #{rtprivate4,jdbcType=CHAR},
+      rtprivate5 = #{rtprivate5,jdbcType=CHAR},
+      rtprivate6 = #{rtprivate6,jdbcType=CHAR},
+      rtprivate7 = #{rtprivate7,jdbcType=CHAR},
+      rtprivate8 = #{rtprivate8,jdbcType=CHAR},
+      rtprivate9 = #{rtprivate9,jdbcType=CHAR},
+      rtprivate10 = #{rtprivate10,jdbcType=CHAR},
+      rtreserved1 = #{rtreserved1,jdbcType=CHAR},
+      rtreserved2 = #{rtreserved2,jdbcType=CHAR},
+      rtreserved3 = #{rtreserved3,jdbcType=CHAR},
+      rtreserved4 = #{rtreserved4,jdbcType=CHAR}
+    where rtfrtype = #{rtfrtype,jdbcType=CHAR}
+      and rtmtdate = #{rtmtdate,jdbcType=CHAR}
+      and rtmtbank = #{rtmtbank,jdbcType=CHAR}
+      and rtaccno = #{rtaccno,jdbcType=CHAR}
+      and rtno = #{rtno,jdbcType=INTEGER}
+  </update>
+
+</mapper>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pmenu">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_PID" jdbcType="VARCHAR" property="fPid" />
+    <result column="F_LAYER" jdbcType="VARCHAR" property="fLayer" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_TYPE" jdbcType="VARCHAR" property="fType" />
+    <result column="F_ORDER" jdbcType="INTEGER" property="fOrder" />
+    <result column="F_QUETYPE" jdbcType="VARCHAR" property="fQuetype" />
+    <result column="F_ACTIVE" jdbcType="VARCHAR" property="fActive" />
+
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="aF_ID" jdbcType="VARCHAR" property="afId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_PID, F_LAYER, F_NAME, F_TYPE, F_ORDER, F_QUETYPE, F_ACTIVE, F_PAD1
+  </sql>
+
+  <sql id="PMenu_Column_List">
+    F_DEPT,F_ID, F_PID, F_LAYER, F_NAME, F_TYPE, F_ORDER, F_QUETYPE, F_ACTIVE
+  </sql>
+
+  <select id="selectSimplePMenu" parameterType="map" resultMap="BaseResultMap">
+    select
+      F_DEPT,a.F_ID id, F_LAYER, F_NAME, F_TYPE, F_ORDER, F_ACTIVE,
+      CASE F_PID
+      WHEN '####' THEN ''
+      ELSE F_PID END parent,
+
+      CASE a.F_QUETYPE
+      WHEN '' THEN b.F_QUETYPE
+      WHEN NULL THEN b.F_QUETYPE
+      ELSE a.F_QUETYPE END F_QUETYPE,
+
+      CASE F_TYPE
+      WHEN '0' THEN '业务流程选择'
+      WHEN '1' THEN '触发交易流程'
+      ELSE '' END fTypename,
+
+      CASE F_ACTIVE
+      WHEN '1' THEN '有效'
+      WHEN '0' THEN '无效'
+      ELSE '' END fActivename
+    from t_deptpmenu a,t_pmenu b
+    <where>
+      a.F_ID = b.F_ID
+      <if test="fDept != null">
+        AND a.F_DEPT = #{fDept}
+      </if>
+      <if test="fPid != null">
+        AND b.F_PID = #{fPid}
+      </if>
+      <if test="fId != null">
+        AND b.F_ID = #{fId}
+      </if>
+      <if test="fLayer != null">
+        AND b.F_LAYER = #{fLayer}
+      </if>
+    </where>
+      ORDER BY b.F_ORDER
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+
+    SELECT a.F_ID, a.F_PID, a.F_LAYER, a.F_NAME, a.F_TYPE, a.F_ORDER, a.F_ACTIVE, a.F_PAD1,
+    <if test="fDept != null and fDept != ''">
+      CASE WHEN F_DEPT IS NULL THEN 0 ELSE 1 END fCheck,
+    </if>
+
+    <if test="fDept != null and fDept != ''">
+      CASE
+      WHEN b.F_QUETYPE IS NULL
+      THEN a.F_QUETYPE
+      WHEN b.F_QUETYPE = ''
+      THEN b.F_QUETYPE
+      ELSE b.F_QUETYPE END F_QUETYPE,
+    </if>
+
+    CASE F_TYPE
+    WHEN '0' THEN '业务流程选择'
+    WHEN '1' THEN '触发交易流程'
+    ELSE '' END fTypename,
+
+    CASE F_ACTIVE
+    WHEN '1' THEN '有效'
+    WHEN '0' THEN '无效'
+    ELSE '' END fActivename
+
+    FROM t_pmenu a
+    <if test="fDept != null and fDept != ''">
+      LEFT JOIN t_deptpmenu b ON a.F_ID = b.F_ID AND F_DEPT = #{fDept}
+    </if>
+
+    <where>
+      F_ACTIVE = '1'
+      <if test="fPid != null">
+        AND F_PID = #{fPid}
+      </if>
+      <if test="fId != null">
+        AND b.F_ID = #{fId}
+      </if>
+
+    </where>
+    ORDER BY F_ORDER
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_pmenu
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_pmenu (F_ID, F_PID, F_LAYER, 
+      F_NAME, F_TYPE, F_ORDER, 
+      F_QUETYPE, F_ACTIVE, F_PAD1
+      )
+    values (#{fId,jdbcType=VARCHAR}, #{fPid,jdbcType=VARCHAR}, #{fLayer,jdbcType=VARCHAR}, 
+      #{fName,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR}, #{fOrder,jdbcType=INTEGER}, 
+      #{fQuetype,jdbcType=VARCHAR}, #{fActive,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_pmenu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fPid != null">
+        F_PID,
+      </if>
+      <if test="fLayer != null">
+        F_LAYER,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fOrder != null">
+        F_ORDER,
+      </if>
+      <if test="fQuetype != null">
+        F_QUETYPE,
+      </if>
+      <if test="fActive != null">
+        F_ACTIVE,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fPid != null">
+        #{fPid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLayer != null">
+        #{fLayer,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrder != null">
+        #{fOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fQuetype != null">
+        #{fQuetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fActive != null">
+        #{fActive,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_pmenu
+    <set>
+        <if test="fId != null">
+            F_ID = #{fId,jdbcType=VARCHAR},
+        </if>
+      <if test="fPid != null">
+        F_PID = #{fPid,jdbcType=VARCHAR},
+      </if>
+      <if test="fLayer != null">
+        F_LAYER = #{fLayer,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null">
+        F_TYPE = #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrder != null">
+        F_ORDER = #{fOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fQuetype != null">
+        F_QUETYPE = #{fQuetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fActive != null">
+        F_ACTIVE = #{fActive,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_ID = #{ofId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_pmenu
+    set F_PID = #{fPid,jdbcType=VARCHAR},
+      F_LAYER = #{fLayer,jdbcType=VARCHAR},
+      F_NAME = #{fName,jdbcType=VARCHAR},
+      F_TYPE = #{fType,jdbcType=VARCHAR},
+      F_ORDER = #{fOrder,jdbcType=INTEGER},
+      F_QUETYPE = #{fQuetype,jdbcType=VARCHAR},
+      F_ACTIVE = #{fActive,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

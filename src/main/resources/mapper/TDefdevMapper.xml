@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="defdev">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DEVTYPE" jdbcType="CHAR" property="fDevtype" />
+    <result column="F_MARK" jdbcType="CHAR" property="fMark" />
+    <result column="F_SPC" jdbcType="CHAR" property="fSpc" />
+    <result column="F_FACID" jdbcType="CHAR" property="fFacid" />
+    <result column="F_DEFVAL" jdbcType="CHAR" property="fDefval" />
+    <result column="F_ERRAFX" jdbcType="CHAR" property="fErrafx" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+
+    <result column="F_FACNAME" jdbcType="CHAR" property="fFacname" />
+    <result column="F_SCRNTP" jdbcType="CHAR" property="fScrntp" />
+  </resultMap>
+
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select *
+    from t_defdev
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=CHAR}
+      </if>
+      <if test="fDevtype != null">
+        AND F_DEVTYPE  = #{fDevtype}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectMark" parameterType="map" resultMap="BaseResultMap">
+    select DISTINCT F_MARK
+    from t_defdev
+    <where>
+      <if test="fDevtype != null">
+        F_DEVTYPE = #{fDevtype,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectSpc" parameterType="map" resultMap="BaseResultMap">
+    SELECT DISTINCT F_SPC FROM t_defdev
+    <where>
+      <if test="fDevtype != null">
+        F_DEVTYPE = #{fDevtype,jdbcType=CHAR}
+      </if>
+      <if test="fMark != null">
+        AND F_MARK = #{fMark,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectDefdevByType" parameterType="map" resultMap="BaseResultMap">
+    SELECT
+      A.*,
+      B.F_NAME F_FACNAME
+    FROM t_defdev A LEFT OUTER JOIN t_factory B ON A.F_FACID = B.F_ID
+    <where>
+      <if test="fDevtype != null and fDevtype != ''">
+        F_DEVTYPE  = #{fDevtype}
+      </if>
+    </where>
+    ORDER BY A.F_DEVTYPE, A.F_MARK, A.F_SPC
+  </select>
+
+  <insert id="insert" parameterType="map">
+    insert into t_defdev (F_DEVTYPE, F_MARK, F_SPC, 
+      F_FACID, F_DEFVAL, F_ERRAFX, F_PAD1
+      )
+    values (#{fDevtype,jdbcType=CHAR}, #{fMark,jdbcType=CHAR}, #{fSpc,jdbcType=CHAR}, 
+      #{fFacid,jdbcType=CHAR}, #{fDefval,jdbcType=CHAR}, #{fErrafx,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_defdev
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDevtype != null">
+        F_DEVTYPE,
+      </if>
+      <if test="fMark != null">
+        F_MARK,
+      </if>
+      <if test="fSpc != null">
+        F_SPC,
+      </if>
+      <if test="fFacid != null">
+        F_FACID,
+      </if>
+      <if test="fDefval != null">
+        F_DEFVAL,
+      </if>
+      <if test="fErrafx != null">
+        F_ERRAFX,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fScrntp != null">
+        F_SCRNTP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDevtype != null">
+        #{fDevtype,jdbcType=CHAR},
+      </if>
+      <if test="fMark != null">
+        #{fMark,jdbcType=CHAR},
+      </if>
+      <if test="fSpc != null">
+        #{fSpc,jdbcType=CHAR},
+      </if>
+      <if test="fFacid != null">
+        #{fFacid,jdbcType=CHAR},
+      </if>
+      <if test="fDefval != null">
+        #{fDefval,jdbcType=CHAR},
+      </if>
+      <if test="fErrafx != null">
+        #{fErrafx,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fScrntp != null">
+        #{fScrntp},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByUniqueKey" parameterType="map">
+    UPDATE t_defdev
+    <set>
+      <if test="fDevtype != null">
+        F_DEVTYPE = #{fDevtype,jdbcType=CHAR},
+      </if>
+      <if test="fMark != null">
+        F_MARK = #{fMark,jdbcType=CHAR},
+      </if>
+      <if test="fSpc != null">
+        F_SPC = #{fSpc,jdbcType=CHAR},
+      </if>
+      <if test="fDefval != null">
+        F_DEFVAL = #{fDefval,jdbcType=CHAR},
+      </if>
+      <if test="fFacid != null">
+        F_FACID = #{fFacid,jdbcType=CHAR},
+      </if>
+      <if test="fScrntp != null">
+        F_SCRNTP = #{fScrntp},
+      </if>
+    </set>
+    WHERE F_DEVTYPE = #{ofDevtype}
+    AND  F_MARK= #{ofMark}
+    AND F_SPC= #{ofSpc}
+  </update>
+
+  <delete id="deleteByUniqueKey" parameterType="map">
+    DELETE FROM t_defdev
+    WHERE F_DEVTYPE=#{fDevtype} AND F_MARK=#{fMark} AND F_SPC=#{fSpc}
+  </delete>
+</mapper>

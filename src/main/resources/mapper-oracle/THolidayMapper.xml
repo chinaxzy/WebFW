@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="holiday">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_TYPE" jdbcType="VARCHAR" property="fType" />
+    <id column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_OPEN" jdbcType="VARCHAR" property="fOpen" />
+    <result column="F_CONFLICT" jdbcType="VARCHAR" property="fConflict" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_TYPE, F_DATE, F_OPEN, F_CONFLICT, F_PAD1
+  </sql>
+
+  <select id="selectCount" parameterType="map" resultType="int">
+    SELECT COUNT(*)
+    FROM t_holiday
+    <where>
+      <if test="fType != null">
+        F_TYPE = #{fType,jdbcType=VARCHAR}
+      </if>
+      <if test="fDate != null">
+        and F_DATE = #{fDate}
+      </if>
+    </where>
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    SELECT a.F_TYPE,a.F_DATE,CASE WHEN a.F_TYPE='FD' THEN substr(a.F_DATE,1,4)||'-'||substr(a.F_DATE,5,2)||'-'||substr(a.F_DATE,7,2)
+    WHEN a.F_TYPE='GD' THEN substr(a.F_DATE,1,2)||'-'||substr(a.F_DATE,3,2)
+    WHEN a.F_TYPE='WK' AND a.F_DATE = '0' THEN '星期日'
+    WHEN a.F_TYPE='WK' AND a.F_DATE = '1' THEN '星期一'
+    WHEN a.F_TYPE='WK' AND a.F_DATE = '2' THEN '星期二'
+    WHEN a.F_TYPE='WK' AND a.F_DATE = '3' THEN '星期三'
+    WHEN a.F_TYPE='WK' AND a.F_DATE = '4' THEN '星期四'
+    WHEN a.F_TYPE='WK' AND a.F_DATE = '5' THEN '星期五'
+    WHEN a.F_TYPE='WK' AND a.F_DATE = '6' THEN '星期六'
+    ELSE '' END fDatename,
+    CASE a.F_OPEN WHEN 1 THEN '营业' WHEN 0 THEN '不营业' ELSE '' END fOpenname,
+    CASE a.F_TYPE WHEN 'FD' THEN '特殊日期'
+                  WHEN 'GD' THEN '通用日期'
+                  WHEN 'WK' THEN '星期'
+                  ELSE '' END fTypename
+    FROM (
+    SELECT F_TYPE,F_DATE,F_OPEN,CASE F_OPEN WHEN 1 THEN '营业' WHEN 0 THEN '不营业' ELSE '' END fOpenname
+    FROM t_holiday
+    <where>
+      <if test="fType != null">
+        F_TYPE = #{fType}
+      </if>
+    </where>) a
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_holiday
+    where F_TYPE = #{fType,jdbcType=VARCHAR}
+      and F_DATE = #{fDate,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_holiday (F_TYPE, F_DATE, F_OPEN, 
+      F_CONFLICT, F_PAD1)
+    values (#{fType,jdbcType=VARCHAR}, #{fDate,jdbcType=VARCHAR}, #{fOpen,jdbcType=VARCHAR}, 
+      #{fConflict,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_holiday
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fOpen != null">
+        F_OPEN,
+      </if>
+      <if test="fConflict != null">
+        F_CONFLICT,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fType != null">
+        #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fOpen != null">
+        #{fOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="fConflict != null">
+        #{fConflict,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_holiday
+    <set>
+      <if test="fOpen != null">
+        F_OPEN = #{fOpen,jdbcType=VARCHAR},
+      </if>
+      <if test="fConflict != null">
+        F_CONFLICT = #{fConflict,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_TYPE = #{fType,jdbcType=VARCHAR}
+      and F_DATE = #{fDate,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_holiday
+    set F_OPEN = #{fOpen,jdbcType=VARCHAR},
+      F_CONFLICT = #{fConflict,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_TYPE = #{fType,jdbcType=VARCHAR}
+      and F_DATE = #{fDate,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

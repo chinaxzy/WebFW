@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="statelog">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DATE" jdbcType="CHAR" property="fDate" />
+    <result column="F_TIME" jdbcType="CHAR" property="fTime" />
+    <result column="F_DEVID" jdbcType="CHAR" property="fDevid" />
+    <result column="F_STATEID" jdbcType="INTEGER" property="fStateid" />
+    <result column="F_ASSERTS" jdbcType="CHAR" property="fAsserts" />
+    <result column="F_LOGVER" jdbcType="INTEGER" property="fLogver" />
+    <result column="F_VALUE" jdbcType="INTEGER" property="fValue" />
+    <result column="F_COUNT" jdbcType="INTEGER" property="fCount" />
+    <result column="F_AMT" jdbcType="DOUBLE" property="fAmt" />
+    <result column="F_TIME2" jdbcType="CHAR" property="fTime2" />
+    <result column="F_ERR" jdbcType="CHAR" property="fErr" />
+    <result column="F_RESN" jdbcType="CHAR" property="fResn" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_statelog (F_DATE, F_TIME, F_DEVID, 
+      F_STATEID, F_ASSERTS, F_LOGVER, 
+      F_VALUE, F_COUNT, F_AMT, 
+      F_TIME2, F_ERR, F_RESN, F_PAD1
+      )
+    values (#{fDate,jdbcType=CHAR}, #{fTime,jdbcType=CHAR}, #{fDevid,jdbcType=CHAR}, 
+      #{fStateid,jdbcType=INTEGER}, #{fAsserts,jdbcType=CHAR}, #{fLogver,jdbcType=INTEGER}, 
+      #{fValue,jdbcType=INTEGER}, #{fCount,jdbcType=INTEGER}, #{fAmt,jdbcType=DOUBLE}, 
+      #{fTime2,jdbcType=CHAR}, #{fErr,jdbcType=CHAR}, #{fResn,jdbcType=CHAR}, #{fPad1,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_statelog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fStateid != null">
+        F_STATEID,
+      </if>
+      <if test="fAsserts != null">
+        F_ASSERTS,
+      </if>
+      <if test="fLogver != null">
+        F_LOGVER,
+      </if>
+      <if test="fValue != null">
+        F_VALUE,
+      </if>
+      <if test="fCount != null">
+        F_COUNT,
+      </if>
+      <if test="fAmt != null">
+        F_AMT,
+      </if>
+      <if test="fTime2 != null">
+        F_TIME2,
+      </if>
+      <if test="fErr != null">
+        F_ERR,
+      </if>
+      <if test="fResn != null">
+        F_RESN,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        #{fDate,jdbcType=CHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=CHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=CHAR},
+      </if>
+      <if test="fStateid != null">
+        #{fStateid,jdbcType=INTEGER},
+      </if>
+      <if test="fAsserts != null">
+        #{fAsserts,jdbcType=CHAR},
+      </if>
+      <if test="fLogver != null">
+        #{fLogver,jdbcType=INTEGER},
+      </if>
+      <if test="fValue != null">
+        #{fValue,jdbcType=INTEGER},
+      </if>
+      <if test="fCount != null">
+        #{fCount,jdbcType=INTEGER},
+      </if>
+      <if test="fAmt != null">
+        #{fAmt,jdbcType=DOUBLE},
+      </if>
+      <if test="fTime2 != null">
+        #{fTime2,jdbcType=CHAR},
+      </if>
+      <if test="fErr != null">
+        #{fErr,jdbcType=CHAR},
+      </if>
+      <if test="fResn != null">
+        #{fResn,jdbcType=CHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

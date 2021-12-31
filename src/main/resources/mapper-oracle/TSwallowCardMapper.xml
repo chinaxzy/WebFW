@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="swallowcard">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_TERMINAL_ID" jdbcType="VARCHAR" property="fTerminalId" />
+    <result column="F_TERMINAL_NAME" jdbcType="VARCHAR" property="fTerminalName" />
+    <result column="F_ATMC_SERIAL_NUM" jdbcType="VARCHAR" property="fAtmcSerialNum" />
+    <result column="F_HOST_SERIAL_NUM" jdbcType="VARCHAR" property="fHostSerialNum" />
+    <result column="F_TUNKA_DATE" jdbcType="VARCHAR" property="fTunkaDate" />
+    <result column="F_TUNKA_TIME" jdbcType="VARCHAR" property="fTunkaTime" />
+    <result column="F_CARD_NUM" jdbcType="VARCHAR" property="fCardNum" />
+    <result column="F_TUNKA_REASON" jdbcType="VARCHAR" property="fTunkaReason" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_swallow_card (F_TERMINAL_ID, F_TERMINAL_NAME, F_ATMC_SERIAL_NUM, 
+      F_HOST_SERIAL_NUM, F_TUNKA_DATE, F_TUNKA_TIME, 
+      F_CARD_NUM, F_TUNKA_REASON)
+    values (#{fTerminalId,jdbcType=VARCHAR}, #{fTerminalName,jdbcType=VARCHAR}, #{fAtmcSerialNum,jdbcType=VARCHAR}, 
+      #{fHostSerialNum,jdbcType=VARCHAR}, #{fTunkaDate,jdbcType=VARCHAR}, #{fTunkaTime,jdbcType=VARCHAR}, 
+      #{fCardNum,jdbcType=VARCHAR}, #{fTunkaReason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_swallow_card
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fTerminalId != null">
+        F_TERMINAL_ID,
+      </if>
+      <if test="fTerminalName != null">
+        F_TERMINAL_NAME,
+      </if>
+      <if test="fAtmcSerialNum != null">
+        F_ATMC_SERIAL_NUM,
+      </if>
+      <if test="fHostSerialNum != null">
+        F_HOST_SERIAL_NUM,
+      </if>
+      <if test="fTunkaDate != null">
+        F_TUNKA_DATE,
+      </if>
+      <if test="fTunkaTime != null">
+        F_TUNKA_TIME,
+      </if>
+      <if test="fCardNum != null">
+        F_CARD_NUM,
+      </if>
+      <if test="fTunkaReason != null">
+        F_TUNKA_REASON,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fTerminalId != null">
+        #{fTerminalId,jdbcType=VARCHAR},
+      </if>
+      <if test="fTerminalName != null">
+        #{fTerminalName,jdbcType=VARCHAR},
+      </if>
+      <if test="fAtmcSerialNum != null">
+        #{fAtmcSerialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fHostSerialNum != null">
+        #{fHostSerialNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fTunkaDate != null">
+        #{fTunkaDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fTunkaTime != null">
+        #{fTunkaTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fCardNum != null">
+        #{fCardNum,jdbcType=VARCHAR},
+      </if>
+      <if test="fTunkaReason != null">
+        #{fTunkaReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="addcash">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <id column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <id column="F_DEVLS" jdbcType="VARCHAR" property="fDevls" />
+    <result column="F_TIME" jdbcType="VARCHAR" property="fTime" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_TRAM" jdbcType="DECIMAL" property="fTram" />
+    <result column="F_OPERATOR" jdbcType="VARCHAR" property="fOperator" />
+    <result column="F_RETNO" jdbcType="VARCHAR" property="fRetno" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+    <result column="WDNAME" jdbcType="VARCHAR" property="fWdname" />
+    <result column="ZHNAME" jdbcType="VARCHAR" property="fZhname" />
+    <result column="FHNAME" jdbcType="VARCHAR" property="fFhname" />
+
+    <result column="F_CASHAMT" jdbcType="VARCHAR" property="fCashamt" />
+    <result column="F_CASHCNT" jdbcType="VARCHAR" property="fCashcnt" />
+    <result column="CXME" jdbcType="VARCHAR" property="cxme" />
+    <result column="F_REASON" jdbcType="VARCHAR" property="fReason" />
+    <result column="COLOR" jdbcType="VARCHAR" property="color" />
+    <result column="F_MBOXNO" jdbcType="VARCHAR" property="fMboxno" />
+    <result column="BZ" jdbcType="VARCHAR" property="bz" />
+    <result column="CXLX" jdbcType="VARCHAR" property="cxlx" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_DATE, F_DEVID, F_DEVLS, F_TIME, F_DEPT, F_TRAM, F_OPERATOR, F_RETNO, F_PAD1
+  </sql>
+
+
+  <select id="selectAddcashDetail" parameterType="map" resultMap="BaseResultMap">
+    SELECT A.F_MBOXNO,
+    CASE  WHEN A.F_MBOXTP='0' THEN '废钞箱'
+    WHEN A.F_MBOXTP='1' THEN '取款钞箱'
+    WHEN A.F_MBOXTP='2' THEN '存款钞箱'
+    WHEN A.F_MBOXTP='3' THEN '循环钞箱'
+    WHEN A.F_MBOXTP='4' THEN '回收钞箱'
+    WHEN A.F_MBOXTP='A' THEN '纸币出钞箱'
+    WHEN A.F_MBOXTP='B' THEN '纸币入钞箱'
+    WHEN A.F_MBOXTP='C' THEN '纸币循环箱'
+    WHEN A.F_MBOXTP='D' THEN '纸币回收箱'
+    WHEN A.F_MBOXTP='a' THEN '硬币出钞箱'
+    WHEN A.F_MBOXTP='b' THEN '硬币入钞箱'
+    WHEN A.F_MBOXTP='c' THEN '硬币循环箱'
+    WHEN A.F_MBOXTP='d' THEN '硬币回收箱'
+    WHEN A.F_MBOXTP='e' THEN '硬币卷箱'
+    WHEN A.F_MBOXTP='f' THEN '硬币卷回收箱'
+    ELSE '' END CXLX,
+    CASE WHEN A.F_MBOXME=10000 THEN '100元'
+    WHEN A.F_MBOXME=5000 THEN '50元'
+    WHEN A.F_MBOXME=1000 THEN '10元'
+    WHEN A.F_MBOXME=500 THEN '5元'
+    WHEN A.F_MBOXME=100 THEN '1元'
+    WHEN A.F_MBOXME=50 THEN '5角'
+    WHEN A.F_MBOXME=10 THEN '1角'
+    WHEN A.F_MBOXME=0 THEN '无' ELSE '' END CXME,
+    A.F_CASHCNT,A.F_CASHAMT,
+    CASE WHEN A.F_CASHFLAG='0' THEN '出钞'
+    WHEN A.F_CASHFLAG='1' THEN '入钞'
+    WHEN A.F_CASHFLAG='2' THEN '回钞'
+    ELSE '' END BZ,
+    B.F_NAME F_REASON,
+    CASE WHEN A.F_CASHFLAG='0' THEN 'color:blue'
+    WHEN A.F_CASHFLAG='1' THEN 'color:black'
+    WHEN A.F_CASHFLAG='2' THEN 'color:red'
+    ELSE '' END COLOR
+    FROM t_cashdetail A
+    LEFT OUTER JOIN t_codes B ON A.F_REASON=B.F_ID AND B.F_CATID='HC'
+    <where>
+      <if test="fDate != null">
+        A.F_DATE=#{fDate}
+      </if>
+      <if test="fDevid != null">
+        AND A.F_DEVID=#{fDevid}
+      </if>
+      <if test="fDevls != null">
+        AND A.F_DEVLS=#{fDevls}
+      </if>
+    </where>
+    ORDER BY A.F_MBOXNO
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select
+    a.F_DEVID, a.F_DEVLS, a.F_DEPT, a.F_TRAM, a.F_OPERATOR, a.F_RETNO, a.F_PAD1,
+    concat(substr(a.F_DATE,1,4),'-',substr(a.F_DATE,5,2),'-',substr(a.F_DATE,7,2)) F_DATE,
+    concat(substr(a.F_TIME,1,2),':',substr(a.F_TIME,3,2),':',substr(a.F_TIME,5,2)) F_TIME,
+    CASE WHEN a.F_RETNO IN ('00','0000','成功') THEN '成功'
+    ELSE '失败' END AS result,
+    B.F_NAME WDNAME,
+    C.F_NAME ZHNAME,
+    D.F_NAME FHNAME
+    from t_addcash a,
+    t_branch B,
+    t_branch C,
+    t_branch D
+    <where>
+      <if test="fDate != null">
+        F_DATE = #{fDate,jdbcType=VARCHAR}
+      </if>
+      <if test="fDateStart != null and fDateEnd != null">
+        F_DATE BETWEEN #{fDateStart,jdbcType=VARCHAR} AND #{fDateEnd,jdbcType=VARCHAR}
+      </if>
+      <if test="fDevid != null">
+        and F_DEVID = #{fDevid,jdbcType=VARCHAR}
+      </if>
+      <if test="fDevls != null">
+        and F_DEVLS = #{fDevls,jdbcType=VARCHAR}
+      </if>
+      <if test=" 1==1">
+        AND a.F_DEPT=B.F_ID
+        AND B.F_DEPT=C.F_ID
+        AND C.F_DEPT=D.F_ID
+      </if>
+      <if test="deptid != null">
+        AND B.F_DEPTID LIKE CONCAT(#{deptid},'%')
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_addcash
+    where F_DATE = #{fDate,jdbcType=VARCHAR}
+      and F_DEVID = #{fDevid,jdbcType=VARCHAR}
+      and F_DEVLS = #{fDevls,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_addcash (F_DATE, F_DEVID, F_DEVLS, 
+      F_TIME, F_DEPT, F_TRAM, 
+      F_OPERATOR, F_RETNO, F_PAD1
+      )
+    values (#{fDate,jdbcType=VARCHAR}, #{fDevid,jdbcType=VARCHAR}, #{fDevls,jdbcType=VARCHAR}, 
+      #{fTime,jdbcType=VARCHAR}, #{fDept,jdbcType=VARCHAR}, #{fTram,jdbcType=DECIMAL}, 
+      #{fOperator,jdbcType=VARCHAR}, #{fRetno,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_addcash
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fDevls != null">
+        F_DEVLS,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fTram != null">
+        F_TRAM,
+      </if>
+      <if test="fOperator != null">
+        F_OPERATOR,
+      </if>
+      <if test="fRetno != null">
+        F_RETNO,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevls != null">
+        #{fDevls,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fTram != null">
+        #{fTram,jdbcType=DECIMAL},
+      </if>
+      <if test="fOperator != null">
+        #{fOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="fRetno != null">
+        #{fRetno,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_addcash
+    <set>
+      <if test="fTime != null">
+        F_TIME = #{fTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fTram != null">
+        F_TRAM = #{fTram,jdbcType=DECIMAL},
+      </if>
+      <if test="fOperator != null">
+        F_OPERATOR = #{fOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="fRetno != null">
+        F_RETNO = #{fRetno,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_DATE = #{fDate,jdbcType=VARCHAR}
+      and F_DEVID = #{fDevid,jdbcType=VARCHAR}
+      and F_DEVLS = #{fDevls,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_addcash
+    set F_TIME = #{fTime,jdbcType=VARCHAR},
+      F_DEPT = #{fDept,jdbcType=VARCHAR},
+      F_TRAM = #{fTram,jdbcType=DECIMAL},
+      F_OPERATOR = #{fOperator,jdbcType=VARCHAR},
+      F_RETNO = #{fRetno,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR}
+    where F_DATE = #{fDate,jdbcType=VARCHAR}
+      and F_DEVID = #{fDevid,jdbcType=VARCHAR}
+      and F_DEVLS = #{fDevls,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

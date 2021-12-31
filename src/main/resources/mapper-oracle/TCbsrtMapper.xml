@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cbsrt">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_TYPE" jdbcType="VARCHAR" property="fType" />
+    <result column="F_ACNO" jdbcType="VARCHAR" property="fAcno" />
+    <result column="F_SERIAL" jdbcType="VARCHAR" property="fSerial" />
+    <result column="F_NUMB" jdbcType="INTEGER" property="fNumb" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_DEPT1" jdbcType="VARCHAR" property="fDept1" />
+    <result column="F_ACNO1" jdbcType="VARCHAR" property="fAcno1" />
+    <result column="F_NAME1" jdbcType="VARCHAR" property="fName1" />
+    <result column="F_BANK1" jdbcType="VARCHAR" property="fBank1" />
+    <result column="F_DEPT2" jdbcType="VARCHAR" property="fDept2" />
+    <result column="F_ACNO2" jdbcType="VARCHAR" property="fAcno2" />
+    <result column="F_NAME2" jdbcType="VARCHAR" property="fName2" />
+    <result column="F_BANK2" jdbcType="VARCHAR" property="fBank2" />
+    <result column="F_DATE1" jdbcType="VARCHAR" property="fDate1" />
+    <result column="F_DATE2" jdbcType="VARCHAR" property="fDate2" />
+    <result column="F_AMTS" jdbcType="DECIMAL" property="fAmts" />
+    <result column="F_AMT" jdbcType="DECIMAL" property="fAmt" />
+    <result column="F_FEE" jdbcType="DECIMAL" property="fFee" />
+    <result column="F_RMB" jdbcType="VARCHAR" property="fRmb" />
+    <result column="F_FEERMB" jdbcType="VARCHAR" property="fFeermb" />
+    <result column="F_TIME" jdbcType="VARCHAR" property="fTime" />
+    <result column="F_FRTDATE" jdbcType="VARCHAR" property="fFrtdate" />
+    <result column="F_FRTTIME" jdbcType="VARCHAR" property="fFrttime" />
+    <result column="F_FRTSRL" jdbcType="VARCHAR" property="fFrtsrl" />
+    <result column="F_MEMO" jdbcType="VARCHAR" property="fMemo" />
+    <result column="F_FLAG" jdbcType="VARCHAR" property="fFlag" />
+    <result column="F_CHK" jdbcType="VARCHAR" property="fChk" />
+    <result column="F_PRT" jdbcType="INTEGER" property="fPrt" />
+    <result column="F_PRTDEV" jdbcType="VARCHAR" property="fPrtdev" />
+    <result column="F_PRTTERM" jdbcType="VARCHAR" property="fPrtterm" />
+    <result column="F_PRTDEPT" jdbcType="VARCHAR" property="fPrtdept" />
+    <result column="F_PRTTIME" jdbcType="VARCHAR" property="fPrttime" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+    <result column="F_PAD2" jdbcType="VARCHAR" property="fPad2" />
+    <result column="F_PAD3" jdbcType="VARCHAR" property="fPad3" />
+    <result column="F_PAD4" jdbcType="VARCHAR" property="fPad4" />
+    <result column="F_PAD5" jdbcType="VARCHAR" property="fPad5" />
+    <result column="F_PAD6" jdbcType="VARCHAR" property="fPad6" />
+    <result column="F_PAD7" jdbcType="VARCHAR" property="fPad7" />
+    <result column="F_PAD8" jdbcType="VARCHAR" property="fPad8" />
+    <result column="F_PAD9" jdbcType="VARCHAR" property="fPad9" />
+    <result column="F_PAD10" jdbcType="VARCHAR" property="fPad10" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_cbsrt (F_DATE, F_TYPE, F_ACNO, 
+      F_SERIAL, F_NUMB, F_DEPT, 
+      F_DEPT1, F_ACNO1, F_NAME1, 
+      F_BANK1, F_DEPT2, F_ACNO2, 
+      F_NAME2, F_BANK2, F_DATE1, 
+      F_DATE2, F_AMTS, F_AMT, 
+      F_FEE, F_RMB, F_FEERMB, 
+      F_TIME, F_FRTDATE, F_FRTTIME, 
+      F_FRTSRL, F_MEMO, F_FLAG, 
+      F_CHK, F_PRT, F_PRTDEV, 
+      F_PRTTERM, F_PRTDEPT, F_PRTTIME, 
+      F_PAD1, F_PAD2, F_PAD3, 
+      F_PAD4, F_PAD5, F_PAD6, 
+      F_PAD7, F_PAD8, F_PAD9, 
+      F_PAD10)
+    values (#{fDate,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR}, #{fAcno,jdbcType=VARCHAR}, 
+      #{fSerial,jdbcType=VARCHAR}, #{fNumb,jdbcType=INTEGER}, #{fDept,jdbcType=VARCHAR}, 
+      #{fDept1,jdbcType=VARCHAR}, #{fAcno1,jdbcType=VARCHAR}, #{fName1,jdbcType=VARCHAR}, 
+      #{fBank1,jdbcType=VARCHAR}, #{fDept2,jdbcType=VARCHAR}, #{fAcno2,jdbcType=VARCHAR}, 
+      #{fName2,jdbcType=VARCHAR}, #{fBank2,jdbcType=VARCHAR}, #{fDate1,jdbcType=VARCHAR}, 
+      #{fDate2,jdbcType=VARCHAR}, #{fAmts,jdbcType=DECIMAL}, #{fAmt,jdbcType=DECIMAL}, 
+      #{fFee,jdbcType=DECIMAL}, #{fRmb,jdbcType=VARCHAR}, #{fFeermb,jdbcType=VARCHAR}, 
+      #{fTime,jdbcType=VARCHAR}, #{fFrtdate,jdbcType=VARCHAR}, #{fFrttime,jdbcType=VARCHAR}, 
+      #{fFrtsrl,jdbcType=VARCHAR}, #{fMemo,jdbcType=VARCHAR}, #{fFlag,jdbcType=VARCHAR}, 
+      #{fChk,jdbcType=VARCHAR}, #{fPrt,jdbcType=INTEGER}, #{fPrtdev,jdbcType=VARCHAR}, 
+      #{fPrtterm,jdbcType=VARCHAR}, #{fPrtdept,jdbcType=VARCHAR}, #{fPrttime,jdbcType=VARCHAR}, 
+      #{fPad1,jdbcType=VARCHAR}, #{fPad2,jdbcType=VARCHAR}, #{fPad3,jdbcType=VARCHAR}, 
+      #{fPad4,jdbcType=VARCHAR}, #{fPad5,jdbcType=VARCHAR}, #{fPad6,jdbcType=VARCHAR}, 
+      #{fPad7,jdbcType=VARCHAR}, #{fPad8,jdbcType=VARCHAR}, #{fPad9,jdbcType=VARCHAR}, 
+      #{fPad10,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_cbsrt
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fAcno != null">
+        F_ACNO,
+      </if>
+      <if test="fSerial != null">
+        F_SERIAL,
+      </if>
+      <if test="fNumb != null">
+        F_NUMB,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fDept1 != null">
+        F_DEPT1,
+      </if>
+      <if test="fAcno1 != null">
+        F_ACNO1,
+      </if>
+      <if test="fName1 != null">
+        F_NAME1,
+      </if>
+      <if test="fBank1 != null">
+        F_BANK1,
+      </if>
+      <if test="fDept2 != null">
+        F_DEPT2,
+      </if>
+      <if test="fAcno2 != null">
+        F_ACNO2,
+      </if>
+      <if test="fName2 != null">
+        F_NAME2,
+      </if>
+      <if test="fBank2 != null">
+        F_BANK2,
+      </if>
+      <if test="fDate1 != null">
+        F_DATE1,
+      </if>
+      <if test="fDate2 != null">
+        F_DATE2,
+      </if>
+      <if test="fAmts != null">
+        F_AMTS,
+      </if>
+      <if test="fAmt != null">
+        F_AMT,
+      </if>
+      <if test="fFee != null">
+        F_FEE,
+      </if>
+      <if test="fRmb != null">
+        F_RMB,
+      </if>
+      <if test="fFeermb != null">
+        F_FEERMB,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fFrtdate != null">
+        F_FRTDATE,
+      </if>
+      <if test="fFrttime != null">
+        F_FRTTIME,
+      </if>
+      <if test="fFrtsrl != null">
+        F_FRTSRL,
+      </if>
+      <if test="fMemo != null">
+        F_MEMO,
+      </if>
+      <if test="fFlag != null">
+        F_FLAG,
+      </if>
+      <if test="fChk != null">
+        F_CHK,
+      </if>
+      <if test="fPrt != null">
+        F_PRT,
+      </if>
+      <if test="fPrtdev != null">
+        F_PRTDEV,
+      </if>
+      <if test="fPrtterm != null">
+        F_PRTTERM,
+      </if>
+      <if test="fPrtdept != null">
+        F_PRTDEPT,
+      </if>
+      <if test="fPrttime != null">
+        F_PRTTIME,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2,
+      </if>
+      <if test="fPad3 != null">
+        F_PAD3,
+      </if>
+      <if test="fPad4 != null">
+        F_PAD4,
+      </if>
+      <if test="fPad5 != null">
+        F_PAD5,
+      </if>
+      <if test="fPad6 != null">
+        F_PAD6,
+      </if>
+      <if test="fPad7 != null">
+        F_PAD7,
+      </if>
+      <if test="fPad8 != null">
+        F_PAD8,
+      </if>
+      <if test="fPad9 != null">
+        F_PAD9,
+      </if>
+      <if test="fPad10 != null">
+        F_PAD10,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fAcno != null">
+        #{fAcno,jdbcType=VARCHAR},
+      </if>
+      <if test="fSerial != null">
+        #{fSerial,jdbcType=VARCHAR},
+      </if>
+      <if test="fNumb != null">
+        #{fNumb,jdbcType=INTEGER},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept1 != null">
+        #{fDept1,jdbcType=VARCHAR},
+      </if>
+      <if test="fAcno1 != null">
+        #{fAcno1,jdbcType=VARCHAR},
+      </if>
+      <if test="fName1 != null">
+        #{fName1,jdbcType=VARCHAR},
+      </if>
+      <if test="fBank1 != null">
+        #{fBank1,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept2 != null">
+        #{fDept2,jdbcType=VARCHAR},
+      </if>
+      <if test="fAcno2 != null">
+        #{fAcno2,jdbcType=VARCHAR},
+      </if>
+      <if test="fName2 != null">
+        #{fName2,jdbcType=VARCHAR},
+      </if>
+      <if test="fBank2 != null">
+        #{fBank2,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate1 != null">
+        #{fDate1,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate2 != null">
+        #{fDate2,jdbcType=VARCHAR},
+      </if>
+      <if test="fAmts != null">
+        #{fAmts,jdbcType=DECIMAL},
+      </if>
+      <if test="fAmt != null">
+        #{fAmt,jdbcType=DECIMAL},
+      </if>
+      <if test="fFee != null">
+        #{fFee,jdbcType=DECIMAL},
+      </if>
+      <if test="fRmb != null">
+        #{fRmb,jdbcType=VARCHAR},
+      </if>
+      <if test="fFeermb != null">
+        #{fFeermb,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fFrtdate != null">
+        #{fFrtdate,jdbcType=VARCHAR},
+      </if>
+      <if test="fFrttime != null">
+        #{fFrttime,jdbcType=VARCHAR},
+      </if>
+      <if test="fFrtsrl != null">
+        #{fFrtsrl,jdbcType=VARCHAR},
+      </if>
+      <if test="fMemo != null">
+        #{fMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag != null">
+        #{fFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="fChk != null">
+        #{fChk,jdbcType=VARCHAR},
+      </if>
+      <if test="fPrt != null">
+        #{fPrt,jdbcType=INTEGER},
+      </if>
+      <if test="fPrtdev != null">
+        #{fPrtdev,jdbcType=VARCHAR},
+      </if>
+      <if test="fPrtterm != null">
+        #{fPrtterm,jdbcType=VARCHAR},
+      </if>
+      <if test="fPrtdept != null">
+        #{fPrtdept,jdbcType=VARCHAR},
+      </if>
+      <if test="fPrttime != null">
+        #{fPrttime,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad2 != null">
+        #{fPad2,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad3 != null">
+        #{fPad3,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad4 != null">
+        #{fPad4,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad5 != null">
+        #{fPad5,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad6 != null">
+        #{fPad6,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad7 != null">
+        #{fPad7,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad8 != null">
+        #{fPad8,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad9 != null">
+        #{fPad9,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad10 != null">
+        #{fPad10,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

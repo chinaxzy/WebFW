@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="softpath">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_PATH" jdbcType="VARCHAR" property="fPath" />
+    <result column="F_REALPATH" jdbcType="VARCHAR" property="fRealpath" />
+    <result column="F_FLAG" jdbcType="VARCHAR" property="fFlag" />
+    <result column="F_INSTALL" jdbcType="VARCHAR" property="fInstall" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_PATH, F_REALPATH, F_FLAG, F_INSTALL, F_DEPT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_softpath
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_softpath
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_softpath (F_ID, F_PATH, F_REALPATH, 
+      F_FLAG, F_INSTALL, F_DEPT
+      )
+    values (#{fId,jdbcType=VARCHAR}, #{fPath,jdbcType=VARCHAR}, #{fRealpath,jdbcType=VARCHAR}, 
+      #{fFlag,jdbcType=VARCHAR}, #{fInstall,jdbcType=VARCHAR}, #{fDept,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_softpath
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fPath != null">
+        F_PATH,
+      </if>
+      <if test="fRealpath != null">
+        F_REALPATH,
+      </if>
+      <if test="fFlag != null">
+        F_FLAG,
+      </if>
+      <if test="fInstall != null">
+        F_INSTALL,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fPath != null">
+        #{fPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fRealpath != null">
+        #{fRealpath,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag != null">
+        #{fFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="fInstall != null">
+        #{fInstall,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_softpath
+    <set>
+      <if test="fPath != null">
+        F_PATH = #{fPath,jdbcType=VARCHAR},
+      </if>
+      <if test="fRealpath != null">
+        F_REALPATH = #{fRealpath,jdbcType=VARCHAR},
+      </if>
+      <if test="fFlag != null">
+        F_FLAG = #{fFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="fInstall != null">
+        F_INSTALL = #{fInstall,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_softpath
+    set F_PATH = #{fPath,jdbcType=VARCHAR},
+      F_REALPATH = #{fRealpath,jdbcType=VARCHAR},
+      F_FLAG = #{fFlag,jdbcType=VARCHAR},
+      F_INSTALL = #{fInstall,jdbcType=VARCHAR},
+      F_DEPT = #{fDept,jdbcType=VARCHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

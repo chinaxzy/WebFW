@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fee">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_TYPE" jdbcType="CHAR" property="fType" />
+    <result column="F_TRCD" jdbcType="CHAR" property="fTrcd" />
+    <result column="F_FLAG" jdbcType="CHAR" property="fFlag" />
+    <result column="F_FEERATE" jdbcType="DECIMAL" property="fFeerate" />
+    <result column="F_UNPAY" jdbcType="DECIMAL" property="fUnpay" />
+    <result column="F_MIN" jdbcType="DECIMAL" property="fMin" />
+    <result column="F_MAX" jdbcType="DECIMAL" property="fMax" />
+    <result column="F_PAD1" jdbcType="DOUBLE" property="fPad1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_fee (F_TYPE, F_TRCD, F_FLAG, F_FEERATE, 
+      F_UNPAY, F_MIN, F_MAX, 
+      F_PAD1)
+    values (#{fType,jdbcType=CHAR}, #{fTrcd,jdbcType=CHAR}, #{fFlag,jdbcType=CHAR}, #{fFeerate,jdbcType=DECIMAL}, 
+      #{fUnpay,jdbcType=DECIMAL}, #{fMin,jdbcType=DECIMAL}, #{fMax,jdbcType=DECIMAL}, 
+      #{fPad1,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_fee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fTrcd != null">
+        F_TRCD,
+      </if>
+      <if test="fFlag != null">
+        F_FLAG,
+      </if>
+      <if test="fFeerate != null">
+        F_FEERATE,
+      </if>
+      <if test="fUnpay != null">
+        F_UNPAY,
+      </if>
+      <if test="fMin != null">
+        F_MIN,
+      </if>
+      <if test="fMax != null">
+        F_MAX,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fType != null">
+        #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fTrcd != null">
+        #{fTrcd,jdbcType=CHAR},
+      </if>
+      <if test="fFlag != null">
+        #{fFlag,jdbcType=CHAR},
+      </if>
+      <if test="fFeerate != null">
+        #{fFeerate,jdbcType=DECIMAL},
+      </if>
+      <if test="fUnpay != null">
+        #{fUnpay,jdbcType=DECIMAL},
+      </if>
+      <if test="fMin != null">
+        #{fMin,jdbcType=DECIMAL},
+      </if>
+      <if test="fMax != null">
+        #{fMax,jdbcType=DECIMAL},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

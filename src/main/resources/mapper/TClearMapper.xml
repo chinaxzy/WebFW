@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="clear">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <id column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <id column="F_NUMBER" jdbcType="VARCHAR" property="fNumber" />
+    <result column="F_NUMBER1" jdbcType="VARCHAR" property="fNumber1" />
+    <result column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_TIME" jdbcType="VARCHAR" property="fTime" />
+    <result column="F_TIME1" jdbcType="VARCHAR" property="fTime1" />
+    <result column="F_TIME2" jdbcType="VARCHAR" property="fTime2" />
+    <result column="F_TIME3" jdbcType="VARCHAR" property="fTime3" />
+    <result column="F_WAITTIME" jdbcType="INTEGER" property="fWaittime" />
+    <result column="F_BUSITIME" jdbcType="INTEGER" property="fBusitime" />
+    <result column="F_ACNO" jdbcType="VARCHAR" property="fAcno" />
+    <result column="F_IDNO" jdbcType="VARCHAR" property="fIdno" />
+    <result column="F_CUSTNAME" jdbcType="VARCHAR" property="fCustname" />
+    <result column="F_CUSTTYPE" jdbcType="VARCHAR" property="fCusttype" />
+    <result column="F_CUSTLEVEL" jdbcType="VARCHAR" property="fCustlevel" />
+    <result column="F_MENUTYPE" jdbcType="VARCHAR" property="fMenutype" />
+    <result column="F_TRTP" jdbcType="VARCHAR" property="fTrtp" />
+
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+
+    <result column="F_DEVLS" jdbcType="VARCHAR" property="fDevls" />
+    <result column="F_SERIAL" jdbcType="VARCHAR" property="fSerial" />
+    <result column="F_SOURCE" jdbcType="VARCHAR" property="fSource" />
+    <result column="F_CALLTYPE" jdbcType="VARCHAR" property="fCalltype" />
+    <result column="F_OPERATOR" jdbcType="VARCHAR" property="fOperator" />
+    <result column="F_WINDID" jdbcType="VARCHAR" property="fWindid" />
+    <result column="F_EVALUATE" jdbcType="VARCHAR" property="fEvaluate" />
+    <result column="F_DONE" jdbcType="VARCHAR" property="fDone" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+
+    <result column="WDNAME" jdbcType="VARCHAR" property="fWdname" />
+    <result column="ZHNAME" jdbcType="VARCHAR" property="fZhname" />
+    <result column="FHNAME" jdbcType="VARCHAR" property="fFhname" />
+
+	<!--20171019 新增-->
+	<result column="F_START" jdbcType="VARCHAR" property="fStart" />
+	<result column="F_END" jdbcType="VARCHAR" property="fEnd" />
+	<result column="F_DATE1" jdbcType="VARCHAR" property="fDate1" />
+	<result column="F_LEFT" jdbcType="VARCHAR" property="fLeft" />
+    <result column="F_BOXNO" jdbcType="VARCHAR" property="fBoxno" />
+	<result column="F_RETNO" jdbcType="VARCHAR" property="fRetno" />
+	<result column="RESULT" jdbcType="VARCHAR" property="fResult" />
+	<result column="F_CURRENT" jdbcType="VARCHAR" property="fCurrent" />
+
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_DATE, a.F_DEPT, F_NUMBER, F_NUMBER1, F_DEVID, F_TIME, F_TIME1, F_TIME2, F_TIME3,
+    F_WAITTIME, F_BUSITIME, F_ACNO, F_IDNO, F_CUSTNAME, F_CUSTTYPE, F_CUSTLEVEL, F_MENUTYPE, 
+    F_TRTP, F_DEVLS, F_SERIAL, F_SOURCE, F_CALLTYPE, F_OPERATOR, F_WINDID, F_EVALUATE, 
+    F_DONE,
+
+    CASE F_CUSTTYPE
+    WHEN 'V' THEN 'VIP客户'
+    WHEN 'C' THEN '普通客户'
+    WHEN 'N' THEN '新入网'
+    ELSE '' END fCusttypename,
+
+    CASE F_MENUTYPE
+    WHEN '1' THEN '全球通'
+    WHEN '2' THEN '神州行'
+    WHEN '3' THEN '动感地带'
+    ELSE '' END fMenutypename,
+
+    F_CUSTLEVEL+'级' fCustlevelname,
+
+    CASE F_SOURCE
+    WHEN 'a' THEN '现场取号'
+    WHEN 'b' THEN '预约取号'
+    WHEN 'z' THEN '其他'
+    ELSE '' END fSourcename,
+
+    CASE F_CALLTYPE
+    WHEN '1' THEN '第一次叫号'
+    WHEN '2' THEN '重叫'
+    WHEN '0' THEN '优先叫号'
+    ELSE '' END fCalltypename,
+
+    CASE F_EVALUATE
+    WHEN '1' THEN '不满意'
+    WHEN '2' THEN '一般'
+    WHEN '3' THEN '满意'
+    ELSE '' END fEvaluatename,
+
+    CASE F_DONE
+    WHEN '0' THEN '取号'
+    WHEN '1' THEN '已叫号'
+    WHEN '2' THEN '交易结束'
+    WHEN '3' THEN '过号作废'
+    WHEN '4' THEN '调号后原号作废'
+    ELSE '' END fDonename
+  </sql>
+  <select id="selectClearRecord" parameterType="map" resultMap="BaseResultMap">
+	  SELECT A.F_DATE,A.F_TIME,A.F_DEVID,A.F_DEPT,
+      B.F_NAME WDNAME,
+      C.F_NAME ZHNAME,
+      D.F_NAME FHNAME,
+      A.F_LEFT,A.F_DEVLS,A.F_OPERATOR,A.F_RETNO,A.F_START,A.F_END,F_CURRENT,
+					
+					CASE WHEN A.F_DATE IS NOT NULL AND A.F_DATE != '' THEN CONVERT(CONCAT(SUBSTR(A.F_DATE,1,4),'-',SUBSTR(A.F_DATE,5,2),'-',SUBSTR(A.F_DATE,7,2)),CHAR) END AS F_DATE1,
+					
+					CASE WHEN A.F_TIME IS NOT NULL AND A.F_TIME != '' THEN CONVERT(CONCAT(SUBSTR(A.F_TIME,1,2),':',SUBSTR(A.F_TIME,3,2)),CHAR) END AS F_TIME1,
+      CASE
+      WHEN Y.F_NAME IS NOT NULL THEN Y.F_NAME
+      ELSE A.F_RETNO
+      END AS RESULT
+
+      FROM
+
+      (
+      SELECT * FROM t_clear
+      <if test="fEvid == 9902">
+        UNION ALL
+        SELECT * FROM t_clearukey
+      </if>
+      ) A
+
+      LEFT JOIN t_branch B ON A.F_DEPT=B.F_ID
+      LEFT JOIN t_branch C ON B.F_DEPT=C.F_ID
+      LEFT JOIN t_branch D ON C.F_DEPT=D.F_ID
+      LEFT JOIN t_codes Y ON Y.F_CATID='RS'
+      AND A.F_RETNO=Y.F_ID
+	<where>
+		<if test="fDateStart != null and fDateEnd !=null">
+		A.F_DATE &gt;= #{fDateStart} AND A.F_DATE &lt;= #{fDateEnd}
+	  </if>
+	  <if test="fDeptid !=null ">
+       AND B.F_DEPTID LIKE concat(#{fDeptid},'%')
+      </if>
+
+		AND A.F_DEPT=B.F_ID AND B.F_DEPT=C.F_ID
+
+	  <if test="fDevid != null">
+		AND A.F_DEVID=#{fDevid}
+	  </if>
+	  <if test="fOperator != null">
+		AND A.F_OPERATOR=#{fOperator}
+	  </if>
+	</where> 
+						
+	ORDER BY A.F_DATE DESC,A.F_TIME DESC,A.F_DEPT,A.F_DEVID
+  </select>
+</mapper>

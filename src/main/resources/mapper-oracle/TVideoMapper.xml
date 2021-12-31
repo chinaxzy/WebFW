@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="video">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_NAME" jdbcType="VARCHAR" property="fName" />
+    <result column="F_PASSWD" jdbcType="VARCHAR" property="fPasswd" />
+    <result column="F_CODE" jdbcType="VARCHAR" property="fCode" />
+    <result column="F_PAD" jdbcType="VARCHAR" property="fPad" />
+    <result column="F_DEPT" jdbcType="CHAR" property="fDept" />
+    <result column="F_ROOMID" jdbcType="VARCHAR" property="fRoomid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_PASSWD, F_CODE, F_PAD, F_DEPT, F_ROOMID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_video
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_video
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_video (F_ID, F_NAME, F_PASSWD, 
+      F_CODE, F_PAD, F_DEPT, F_ROOMID
+      )
+    values (#{fId,jdbcType=VARCHAR}, #{fName,jdbcType=VARCHAR}, #{fPasswd,jdbcType=VARCHAR}, 
+      #{fCode,jdbcType=VARCHAR}, #{fPad,jdbcType=VARCHAR}, #{fDept,jdbcType=CHAR}, #{fRoomid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_video
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fPasswd != null">
+        F_PASSWD,
+      </if>
+      <if test="fCode != null">
+        F_CODE,
+      </if>
+      <if test="fPad != null">
+        F_PAD,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fRoomid != null">
+        F_ROOMID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fPasswd != null">
+        #{fPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="fCode != null">
+        #{fCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad != null">
+        #{fPad,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fRoomid != null">
+        #{fRoomid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_video
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=VARCHAR},
+      </if>
+      <if test="fPasswd != null">
+        F_PASSWD = #{fPasswd,jdbcType=VARCHAR},
+      </if>
+      <if test="fCode != null">
+        F_CODE = #{fCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad != null">
+        F_PAD = #{fPad,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        F_DEPT = #{fDept,jdbcType=CHAR},
+      </if>
+      <if test="fRoomid != null">
+        F_ROOMID = #{fRoomid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_video
+    set F_NAME = #{fName,jdbcType=VARCHAR},
+      F_PASSWD = #{fPasswd,jdbcType=VARCHAR},
+      F_CODE = #{fCode,jdbcType=VARCHAR},
+      F_PAD = #{fPad,jdbcType=VARCHAR},
+      F_DEPT = #{fDept,jdbcType=CHAR},
+      F_ROOMID = #{fRoomid,jdbcType=VARCHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

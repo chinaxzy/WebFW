@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vtabusiness">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_SEATID" jdbcType="VARCHAR" property="fSeatid" />
+    <result column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_TIME" jdbcType="VARCHAR" property="fTime" />
+    <result column="F_TYPE" jdbcType="VARCHAR" property="fType" />
+    <result column="F_CUSTOMNAME" jdbcType="VARCHAR" property="fCustomname" />
+    <result column="F_CUSTOMSEX" jdbcType="VARCHAR" property="fCustomsex" />
+    <result column="F_CUSTOMID" jdbcType="VARCHAR" property="fCustomid" />
+    <result column="F_CUSTOMTEL" jdbcType="VARCHAR" property="fCustomtel" />
+    <result column="F_CUSTOMCARD" jdbcType="VARCHAR" property="fCustomcard" />
+    <result column="F_VTANO" jdbcType="VARCHAR" property="fVtano" />
+    <result column="F_VTCNO" jdbcType="VARCHAR" property="fVtcno" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+    <result column="F_PAD2" jdbcType="VARCHAR" property="fPad2" />
+    <result column="F_STARTTIME" jdbcType="VARCHAR" property="fStarttime" />
+    <result column="F_ENDTIME" jdbcType="VARCHAR" property="fEndtime" />
+    <result column="F_SEX" jdbcType="VARCHAR" property="fSex" />
+    <result column="F_LARGETYPE" jdbcType="VARCHAR" property="fLargetype" />
+    <result column="F_MEDIUM" jdbcType="VARCHAR" property="fMedium" />
+    <result column="F_SMALL" jdbcType="VARCHAR" property="fSmall" />
+    <result column="F_SIGNINFO" jdbcType="VARCHAR" property="fSigninfo" />
+    <result column="F_SATISFACTION" jdbcType="VARCHAR" property="fSatisfaction" />
+    <result column="F_TRADSTATUS" jdbcType="VARCHAR" property="fTradstatus" />
+    <result column="F_REQTOTALTIME" jdbcType="INTEGER" property="fReqtotaltime" />
+    <result column="F_MANCODE" jdbcType="VARCHAR" property="fMancode" />
+    <result column="F_VIP" jdbcType="VARCHAR" property="fVip" />
+    <result column="F_LEAVEREASON" jdbcType="VARCHAR" property="fLeavereason" />
+    <result column="F_AGE" jdbcType="VARCHAR" property="fAge" />
+    <result column="F_VIDEOURL" jdbcType="VARCHAR" property="fVideourl" />
+    <result column="F_PDFURL" jdbcType="VARCHAR" property="fPdfurl" />
+    <result column="F_VIDEOSTATUS" jdbcType="CHAR" property="fVideostatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_SEATID, F_DATE, F_TIME, F_TYPE, F_CUSTOMNAME, F_CUSTOMSEX, F_CUSTOMID, F_CUSTOMTEL, 
+    F_CUSTOMCARD, F_VTANO, F_VTCNO, F_PAD1, F_PAD2, F_STARTTIME, F_ENDTIME, F_SEX, F_LARGETYPE, 
+    F_MEDIUM, F_SMALL, F_SIGNINFO, F_SATISFACTION, F_TRADSTATUS, F_REQTOTALTIME, F_MANCODE, 
+    F_VIP, F_LEAVEREASON, F_AGE, F_VIDEOURL, F_PDFURL, F_VIDEOSTATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_vtabusiness
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_vtabusiness
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_vtabusiness (F_ID, F_SEATID, F_DATE, 
+      F_TIME, F_TYPE, F_CUSTOMNAME, 
+      F_CUSTOMSEX, F_CUSTOMID, F_CUSTOMTEL, 
+      F_CUSTOMCARD, F_VTANO, F_VTCNO, 
+      F_PAD1, F_PAD2, F_STARTTIME, 
+      F_ENDTIME, F_SEX, F_LARGETYPE, 
+      F_MEDIUM, F_SMALL, F_SIGNINFO, 
+      F_SATISFACTION, F_TRADSTATUS, F_REQTOTALTIME, 
+      F_MANCODE, F_VIP, F_LEAVEREASON, 
+      F_AGE, F_VIDEOURL, F_PDFURL, 
+      F_VIDEOSTATUS)
+    values (#{fId,jdbcType=VARCHAR}, #{fSeatid,jdbcType=VARCHAR}, #{fDate,jdbcType=VARCHAR}, 
+      #{fTime,jdbcType=VARCHAR}, #{fType,jdbcType=VARCHAR}, #{fCustomname,jdbcType=VARCHAR}, 
+      #{fCustomsex,jdbcType=VARCHAR}, #{fCustomid,jdbcType=VARCHAR}, #{fCustomtel,jdbcType=VARCHAR}, 
+      #{fCustomcard,jdbcType=VARCHAR}, #{fVtano,jdbcType=VARCHAR}, #{fVtcno,jdbcType=VARCHAR}, 
+      #{fPad1,jdbcType=VARCHAR}, #{fPad2,jdbcType=VARCHAR}, #{fStarttime,jdbcType=VARCHAR}, 
+      #{fEndtime,jdbcType=VARCHAR}, #{fSex,jdbcType=VARCHAR}, #{fLargetype,jdbcType=VARCHAR}, 
+      #{fMedium,jdbcType=VARCHAR}, #{fSmall,jdbcType=VARCHAR}, #{fSigninfo,jdbcType=VARCHAR}, 
+      #{fSatisfaction,jdbcType=VARCHAR}, #{fTradstatus,jdbcType=VARCHAR}, #{fReqtotaltime,jdbcType=INTEGER}, 
+      #{fMancode,jdbcType=VARCHAR}, #{fVip,jdbcType=VARCHAR}, #{fLeavereason,jdbcType=VARCHAR}, 
+      #{fAge,jdbcType=VARCHAR}, #{fVideourl,jdbcType=VARCHAR}, #{fPdfurl,jdbcType=VARCHAR}, 
+      #{fVideostatus,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_vtabusiness
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fSeatid != null">
+        F_SEATID,
+      </if>
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fCustomname != null">
+        F_CUSTOMNAME,
+      </if>
+      <if test="fCustomsex != null">
+        F_CUSTOMSEX,
+      </if>
+      <if test="fCustomid != null">
+        F_CUSTOMID,
+      </if>
+      <if test="fCustomtel != null">
+        F_CUSTOMTEL,
+      </if>
+      <if test="fCustomcard != null">
+        F_CUSTOMCARD,
+      </if>
+      <if test="fVtano != null">
+        F_VTANO,
+      </if>
+      <if test="fVtcno != null">
+        F_VTCNO,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2,
+      </if>
+      <if test="fStarttime != null">
+        F_STARTTIME,
+      </if>
+      <if test="fEndtime != null">
+        F_ENDTIME,
+      </if>
+      <if test="fSex != null">
+        F_SEX,
+      </if>
+      <if test="fLargetype != null">
+        F_LARGETYPE,
+      </if>
+      <if test="fMedium != null">
+        F_MEDIUM,
+      </if>
+      <if test="fSmall != null">
+        F_SMALL,
+      </if>
+      <if test="fSigninfo != null">
+        F_SIGNINFO,
+      </if>
+      <if test="fSatisfaction != null">
+        F_SATISFACTION,
+      </if>
+      <if test="fTradstatus != null">
+        F_TRADSTATUS,
+      </if>
+      <if test="fReqtotaltime != null">
+        F_REQTOTALTIME,
+      </if>
+      <if test="fMancode != null">
+        F_MANCODE,
+      </if>
+      <if test="fVip != null">
+        F_VIP,
+      </if>
+      <if test="fLeavereason != null">
+        F_LEAVEREASON,
+      </if>
+      <if test="fAge != null">
+        F_AGE,
+      </if>
+      <if test="fVideourl != null">
+        F_VIDEOURL,
+      </if>
+      <if test="fPdfurl != null">
+        F_PDFURL,
+      </if>
+      <if test="fVideostatus != null">
+        F_VIDEOSTATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fSeatid != null">
+        #{fSeatid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustomname != null">
+        #{fCustomname,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustomsex != null">
+        #{fCustomsex,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustomid != null">
+        #{fCustomid,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustomtel != null">
+        #{fCustomtel,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustomcard != null">
+        #{fCustomcard,jdbcType=VARCHAR},
+      </if>
+      <if test="fVtano != null">
+        #{fVtano,jdbcType=VARCHAR},
+      </if>
+      <if test="fVtcno != null">
+        #{fVtcno,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad2 != null">
+        #{fPad2,jdbcType=VARCHAR},
+      </if>
+      <if test="fStarttime != null">
+        #{fStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="fEndtime != null">
+        #{fEndtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fSex != null">
+        #{fSex,jdbcType=VARCHAR},
+      </if>
+      <if test="fLargetype != null">
+        #{fLargetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fMedium != null">
+        #{fMedium,jdbcType=VARCHAR},
+      </if>
+      <if test="fSmall != null">
+        #{fSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="fSigninfo != null">
+        #{fSigninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fSatisfaction != null">
+        #{fSatisfaction,jdbcType=VARCHAR},
+      </if>
+      <if test="fTradstatus != null">
+        #{fTradstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fReqtotaltime != null">
+        #{fReqtotaltime,jdbcType=INTEGER},
+      </if>
+      <if test="fMancode != null">
+        #{fMancode,jdbcType=VARCHAR},
+      </if>
+      <if test="fVip != null">
+        #{fVip,jdbcType=VARCHAR},
+      </if>
+      <if test="fLeavereason != null">
+        #{fLeavereason,jdbcType=VARCHAR},
+      </if>
+      <if test="fAge != null">
+        #{fAge,jdbcType=VARCHAR},
+      </if>
+      <if test="fVideourl != null">
+        #{fVideourl,jdbcType=VARCHAR},
+      </if>
+      <if test="fPdfurl != null">
+        #{fPdfurl,jdbcType=VARCHAR},
+      </if>
+      <if test="fVideostatus != null">
+        #{fVideostatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_vtabusiness
+    <set>
+      <if test="fSeatid != null">
+        F_SEATID = #{fSeatid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDate != null">
+        F_DATE = #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime != null">
+        F_TIME = #{fTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fType != null">
+        F_TYPE = #{fType,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustomname != null">
+        F_CUSTOMNAME = #{fCustomname,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustomsex != null">
+        F_CUSTOMSEX = #{fCustomsex,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustomid != null">
+        F_CUSTOMID = #{fCustomid,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustomtel != null">
+        F_CUSTOMTEL = #{fCustomtel,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustomcard != null">
+        F_CUSTOMCARD = #{fCustomcard,jdbcType=VARCHAR},
+      </if>
+      <if test="fVtano != null">
+        F_VTANO = #{fVtano,jdbcType=VARCHAR},
+      </if>
+      <if test="fVtcno != null">
+        F_VTCNO = #{fVtcno,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad2 != null">
+        F_PAD2 = #{fPad2,jdbcType=VARCHAR},
+      </if>
+      <if test="fStarttime != null">
+        F_STARTTIME = #{fStarttime,jdbcType=VARCHAR},
+      </if>
+      <if test="fEndtime != null">
+        F_ENDTIME = #{fEndtime,jdbcType=VARCHAR},
+      </if>
+      <if test="fSex != null">
+        F_SEX = #{fSex,jdbcType=VARCHAR},
+      </if>
+      <if test="fLargetype != null">
+        F_LARGETYPE = #{fLargetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fMedium != null">
+        F_MEDIUM = #{fMedium,jdbcType=VARCHAR},
+      </if>
+      <if test="fSmall != null">
+        F_SMALL = #{fSmall,jdbcType=VARCHAR},
+      </if>
+      <if test="fSigninfo != null">
+        F_SIGNINFO = #{fSigninfo,jdbcType=VARCHAR},
+      </if>
+      <if test="fSatisfaction != null">
+        F_SATISFACTION = #{fSatisfaction,jdbcType=VARCHAR},
+      </if>
+      <if test="fTradstatus != null">
+        F_TRADSTATUS = #{fTradstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fReqtotaltime != null">
+        F_REQTOTALTIME = #{fReqtotaltime,jdbcType=INTEGER},
+      </if>
+      <if test="fMancode != null">
+        F_MANCODE = #{fMancode,jdbcType=VARCHAR},
+      </if>
+      <if test="fVip != null">
+        F_VIP = #{fVip,jdbcType=VARCHAR},
+      </if>
+      <if test="fLeavereason != null">
+        F_LEAVEREASON = #{fLeavereason,jdbcType=VARCHAR},
+      </if>
+      <if test="fAge != null">
+        F_AGE = #{fAge,jdbcType=VARCHAR},
+      </if>
+      <if test="fVideourl != null">
+        F_VIDEOURL = #{fVideourl,jdbcType=VARCHAR},
+      </if>
+      <if test="fPdfurl != null">
+        F_PDFURL = #{fPdfurl,jdbcType=VARCHAR},
+      </if>
+      <if test="fVideostatus != null">
+        F_VIDEOSTATUS = #{fVideostatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_vtabusiness
+    set F_SEATID = #{fSeatid,jdbcType=VARCHAR},
+      F_DATE = #{fDate,jdbcType=VARCHAR},
+      F_TIME = #{fTime,jdbcType=VARCHAR},
+      F_TYPE = #{fType,jdbcType=VARCHAR},
+      F_CUSTOMNAME = #{fCustomname,jdbcType=VARCHAR},
+      F_CUSTOMSEX = #{fCustomsex,jdbcType=VARCHAR},
+      F_CUSTOMID = #{fCustomid,jdbcType=VARCHAR},
+      F_CUSTOMTEL = #{fCustomtel,jdbcType=VARCHAR},
+      F_CUSTOMCARD = #{fCustomcard,jdbcType=VARCHAR},
+      F_VTANO = #{fVtano,jdbcType=VARCHAR},
+      F_VTCNO = #{fVtcno,jdbcType=VARCHAR},
+      F_PAD1 = #{fPad1,jdbcType=VARCHAR},
+      F_PAD2 = #{fPad2,jdbcType=VARCHAR},
+      F_STARTTIME = #{fStarttime,jdbcType=VARCHAR},
+      F_ENDTIME = #{fEndtime,jdbcType=VARCHAR},
+      F_SEX = #{fSex,jdbcType=VARCHAR},
+      F_LARGETYPE = #{fLargetype,jdbcType=VARCHAR},
+      F_MEDIUM = #{fMedium,jdbcType=VARCHAR},
+      F_SMALL = #{fSmall,jdbcType=VARCHAR},
+      F_SIGNINFO = #{fSigninfo,jdbcType=VARCHAR},
+      F_SATISFACTION = #{fSatisfaction,jdbcType=VARCHAR},
+      F_TRADSTATUS = #{fTradstatus,jdbcType=VARCHAR},
+      F_REQTOTALTIME = #{fReqtotaltime,jdbcType=INTEGER},
+      F_MANCODE = #{fMancode,jdbcType=VARCHAR},
+      F_VIP = #{fVip,jdbcType=VARCHAR},
+      F_LEAVEREASON = #{fLeavereason,jdbcType=VARCHAR},
+      F_AGE = #{fAge,jdbcType=VARCHAR},
+      F_VIDEOURL = #{fVideourl,jdbcType=VARCHAR},
+      F_PDFURL = #{fPdfurl,jdbcType=VARCHAR},
+      F_VIDEOSTATUS = #{fVideostatus,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

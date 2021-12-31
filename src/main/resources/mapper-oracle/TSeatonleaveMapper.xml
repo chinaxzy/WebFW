@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="seatonleave">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="VARCHAR" property="fId" />
+    <result column="F_SEATID" jdbcType="VARCHAR" property="fSeatid" />
+    <result column="F_INTIME" jdbcType="VARCHAR" property="fIntime" />
+    <result column="F_TEMPOUT" jdbcType="VARCHAR" property="fTempout" />
+    <result column="F_TEMPSTART" jdbcType="VARCHAR" property="fTempstart" />
+    <result column="F_TEMPEND" jdbcType="VARCHAR" property="fTempend" />
+    <result column="F_TEMPTIME" jdbcType="VARCHAR" property="fTemptime" />
+    <result column="F_ID2" jdbcType="CHAR" property="fId2" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_SEATID, F_INTIME, F_TEMPOUT, F_TEMPSTART, F_TEMPEND, F_TEMPTIME, F_ID2
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_seatonleave
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_seatonleave
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_seatonleave (F_ID, F_SEATID, F_INTIME, 
+      F_TEMPOUT, F_TEMPSTART, F_TEMPEND, 
+      F_TEMPTIME, F_ID2)
+    values (#{fId,jdbcType=VARCHAR}, #{fSeatid,jdbcType=VARCHAR}, #{fIntime,jdbcType=VARCHAR}, 
+      #{fTempout,jdbcType=VARCHAR}, #{fTempstart,jdbcType=VARCHAR}, #{fTempend,jdbcType=VARCHAR}, 
+      #{fTemptime,jdbcType=VARCHAR}, #{fId2,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_seatonleave
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fSeatid != null">
+        F_SEATID,
+      </if>
+      <if test="fIntime != null">
+        F_INTIME,
+      </if>
+      <if test="fTempout != null">
+        F_TEMPOUT,
+      </if>
+      <if test="fTempstart != null">
+        F_TEMPSTART,
+      </if>
+      <if test="fTempend != null">
+        F_TEMPEND,
+      </if>
+      <if test="fTemptime != null">
+        F_TEMPTIME,
+      </if>
+      <if test="fId2 != null">
+        F_ID2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fSeatid != null">
+        #{fSeatid,jdbcType=VARCHAR},
+      </if>
+      <if test="fIntime != null">
+        #{fIntime,jdbcType=VARCHAR},
+      </if>
+      <if test="fTempout != null">
+        #{fTempout,jdbcType=VARCHAR},
+      </if>
+      <if test="fTempstart != null">
+        #{fTempstart,jdbcType=VARCHAR},
+      </if>
+      <if test="fTempend != null">
+        #{fTempend,jdbcType=VARCHAR},
+      </if>
+      <if test="fTemptime != null">
+        #{fTemptime,jdbcType=VARCHAR},
+      </if>
+      <if test="fId2 != null">
+        #{fId2,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_seatonleave
+    <set>
+      <if test="fSeatid != null">
+        F_SEATID = #{fSeatid,jdbcType=VARCHAR},
+      </if>
+      <if test="fIntime != null">
+        F_INTIME = #{fIntime,jdbcType=VARCHAR},
+      </if>
+      <if test="fTempout != null">
+        F_TEMPOUT = #{fTempout,jdbcType=VARCHAR},
+      </if>
+      <if test="fTempstart != null">
+        F_TEMPSTART = #{fTempstart,jdbcType=VARCHAR},
+      </if>
+      <if test="fTempend != null">
+        F_TEMPEND = #{fTempend,jdbcType=VARCHAR},
+      </if>
+      <if test="fTemptime != null">
+        F_TEMPTIME = #{fTemptime,jdbcType=VARCHAR},
+      </if>
+      <if test="fId2 != null">
+        F_ID2 = #{fId2,jdbcType=CHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_seatonleave
+    set F_SEATID = #{fSeatid,jdbcType=VARCHAR},
+      F_INTIME = #{fIntime,jdbcType=VARCHAR},
+      F_TEMPOUT = #{fTempout,jdbcType=VARCHAR},
+      F_TEMPSTART = #{fTempstart,jdbcType=VARCHAR},
+      F_TEMPEND = #{fTempend,jdbcType=VARCHAR},
+      F_TEMPTIME = #{fTemptime,jdbcType=VARCHAR},
+      F_ID2 = #{fId2,jdbcType=CHAR}
+    where F_ID = #{fId,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

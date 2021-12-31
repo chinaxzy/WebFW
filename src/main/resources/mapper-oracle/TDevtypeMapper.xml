@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="devtype">
+  <resultMap id="BaseResultMap" type="map">
+    <id column="F_ID" jdbcType="CHAR" property="fId" />
+    <result column="F_NAME" jdbcType="CHAR" property="fName" />
+    <result column="F_TYPE" jdbcType="CHAR" property="fType" />
+    <result column="F_PARTS" jdbcType="CHAR" property="fParts" />
+    <result column="F_MBOX" jdbcType="INTEGER" property="fMbox" />
+    <result column="F_PAD1" jdbcType="CHAR" property="fPad1" />
+    <result column="F_MENUS" jdbcType="VARCHAR" property="fMenus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    F_ID, F_NAME, F_TYPE, F_PARTS, F_MBOX, F_PAD1, F_MENUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_devtype
+    <where>
+      <if test="fId != null">
+        F_ID = #{fId,jdbcType=CHAR}
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from t_devtype
+    where F_ID = #{fId,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="map">
+    insert into t_devtype (F_ID, F_NAME, F_TYPE, F_PARTS, 
+      F_MBOX, F_PAD1, F_MENUS)
+    values (#{fId,jdbcType=CHAR}, #{fName,jdbcType=CHAR}, #{fType,jdbcType=CHAR}, #{fParts,jdbcType=CHAR}, 
+      #{fMbox,jdbcType=INTEGER}, #{fPad1,jdbcType=CHAR}, #{fMenus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_devtype
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        F_ID,
+      </if>
+      <if test="fName != null">
+        F_NAME,
+      </if>
+      <if test="fType != null">
+        F_TYPE,
+      </if>
+      <if test="fParts != null">
+        F_PARTS,
+      </if>
+      <if test="fMbox != null">
+        F_MBOX,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+      <if test="fMenus != null">
+        F_MENUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fId != null">
+        #{fId,jdbcType=CHAR},
+      </if>
+      <if test="fName != null">
+        #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fType != null">
+        #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fParts != null">
+        #{fParts,jdbcType=CHAR},
+      </if>
+      <if test="fMbox != null">
+        #{fMbox,jdbcType=INTEGER},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fMenus != null">
+        #{fMenus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="map">
+    update t_devtype
+    <set>
+      <if test="fName != null">
+        F_NAME = #{fName,jdbcType=CHAR},
+      </if>
+      <if test="fType != null">
+        F_TYPE = #{fType,jdbcType=CHAR},
+      </if>
+      <if test="fParts != null">
+        F_PARTS = #{fParts,jdbcType=CHAR},
+      </if>
+      <if test="fMbox != null">
+        F_MBOX = #{fMbox,jdbcType=INTEGER},
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1 = #{fPad1,jdbcType=CHAR},
+      </if>
+      <if test="fMenus != null">
+        F_MENUS = #{fMenus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="map">
+    update t_devtype
+    set F_NAME = #{fName,jdbcType=CHAR},
+      F_TYPE = #{fType,jdbcType=CHAR},
+      F_PARTS = #{fParts,jdbcType=CHAR},
+      F_MBOX = #{fMbox,jdbcType=INTEGER},
+      F_PAD1 = #{fPad1,jdbcType=CHAR},
+      F_MENUS = #{fMenus,jdbcType=VARCHAR}
+    where F_ID = #{fId,jdbcType=CHAR}
+  </update>
+
+</mapper>

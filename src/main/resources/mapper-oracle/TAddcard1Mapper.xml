@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="addcard1">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_DATE" jdbcType="VARCHAR" property="fDate" />
+    <result column="F_TIME" jdbcType="VARCHAR" property="fTime" />
+    <result column="F_DEVID" jdbcType="VARCHAR" property="fDevid" />
+    <result column="F_DEPT" jdbcType="VARCHAR" property="fDept" />
+    <result column="F_START" jdbcType="VARCHAR" property="fStart" />
+    <result column="F_END" jdbcType="VARCHAR" property="fEnd" />
+    <result column="F_COUNT" jdbcType="INTEGER" property="fCount" />
+    <result column="F_START2" jdbcType="VARCHAR" property="fStart2" />
+    <result column="F_END2" jdbcType="VARCHAR" property="fEnd2" />
+    <result column="F_COUNT2" jdbcType="INTEGER" property="fCount2" />
+    <result column="F_START3" jdbcType="VARCHAR" property="fStart3" />
+    <result column="F_END3" jdbcType="VARCHAR" property="fEnd3" />
+    <result column="F_COUNT3" jdbcType="INTEGER" property="fCount3" />
+    <result column="F_DEVLS" jdbcType="VARCHAR" property="fDevls" />
+    <result column="F_OPERATOR" jdbcType="VARCHAR" property="fOperator" />
+    <result column="F_RETNO" jdbcType="VARCHAR" property="fRetno" />
+    <result column="F_PAD1" jdbcType="VARCHAR" property="fPad1" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_addcard1 (F_DATE, F_TIME, F_DEVID, 
+      F_DEPT, F_START, F_END, 
+      F_COUNT, F_START2, F_END2, 
+      F_COUNT2, F_START3, F_END3, 
+      F_COUNT3, F_DEVLS, F_OPERATOR, 
+      F_RETNO, F_PAD1)
+    values (#{fDate,jdbcType=VARCHAR}, #{fTime,jdbcType=VARCHAR}, #{fDevid,jdbcType=VARCHAR}, 
+      #{fDept,jdbcType=VARCHAR}, #{fStart,jdbcType=VARCHAR}, #{fEnd,jdbcType=VARCHAR}, 
+      #{fCount,jdbcType=INTEGER}, #{fStart2,jdbcType=VARCHAR}, #{fEnd2,jdbcType=VARCHAR}, 
+      #{fCount2,jdbcType=INTEGER}, #{fStart3,jdbcType=VARCHAR}, #{fEnd3,jdbcType=VARCHAR}, 
+      #{fCount3,jdbcType=INTEGER}, #{fDevls,jdbcType=VARCHAR}, #{fOperator,jdbcType=VARCHAR}, 
+      #{fRetno,jdbcType=VARCHAR}, #{fPad1,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_addcard1
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        F_DATE,
+      </if>
+      <if test="fTime != null">
+        F_TIME,
+      </if>
+      <if test="fDevid != null">
+        F_DEVID,
+      </if>
+      <if test="fDept != null">
+        F_DEPT,
+      </if>
+      <if test="fStart != null">
+        F_START,
+      </if>
+      <if test="fEnd != null">
+        F_END,
+      </if>
+      <if test="fCount != null">
+        F_COUNT,
+      </if>
+      <if test="fStart2 != null">
+        F_START2,
+      </if>
+      <if test="fEnd2 != null">
+        F_END2,
+      </if>
+      <if test="fCount2 != null">
+        F_COUNT2,
+      </if>
+      <if test="fStart3 != null">
+        F_START3,
+      </if>
+      <if test="fEnd3 != null">
+        F_END3,
+      </if>
+      <if test="fCount3 != null">
+        F_COUNT3,
+      </if>
+      <if test="fDevls != null">
+        F_DEVLS,
+      </if>
+      <if test="fOperator != null">
+        F_OPERATOR,
+      </if>
+      <if test="fRetno != null">
+        F_RETNO,
+      </if>
+      <if test="fPad1 != null">
+        F_PAD1,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fDate != null">
+        #{fDate,jdbcType=VARCHAR},
+      </if>
+      <if test="fTime != null">
+        #{fTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fDevid != null">
+        #{fDevid,jdbcType=VARCHAR},
+      </if>
+      <if test="fDept != null">
+        #{fDept,jdbcType=VARCHAR},
+      </if>
+      <if test="fStart != null">
+        #{fStart,jdbcType=VARCHAR},
+      </if>
+      <if test="fEnd != null">
+        #{fEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="fCount != null">
+        #{fCount,jdbcType=INTEGER},
+      </if>
+      <if test="fStart2 != null">
+        #{fStart2,jdbcType=VARCHAR},
+      </if>
+      <if test="fEnd2 != null">
+        #{fEnd2,jdbcType=VARCHAR},
+      </if>
+      <if test="fCount2 != null">
+        #{fCount2,jdbcType=INTEGER},
+      </if>
+      <if test="fStart3 != null">
+        #{fStart3,jdbcType=VARCHAR},
+      </if>
+      <if test="fEnd3 != null">
+        #{fEnd3,jdbcType=VARCHAR},
+      </if>
+      <if test="fCount3 != null">
+        #{fCount3,jdbcType=INTEGER},
+      </if>
+      <if test="fDevls != null">
+        #{fDevls,jdbcType=VARCHAR},
+      </if>
+      <if test="fOperator != null">
+        #{fOperator,jdbcType=VARCHAR},
+      </if>
+      <if test="fRetno != null">
+        #{fRetno,jdbcType=VARCHAR},
+      </if>
+      <if test="fPad1 != null">
+        #{fPad1,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cd">
+  <resultMap id="BaseResultMap" type="map">
+    <result column="F_INFO1" jdbcType="VARCHAR" property="fInfo1" />
+    <result column="F_INFO2" jdbcType="VARCHAR" property="fInfo2" />
+    <result column="F_INFO3" jdbcType="VARCHAR" property="fInfo3" />
+    <result column="F_INFO4" jdbcType="VARCHAR" property="fInfo4" />
+    <result column="F_INFO5" jdbcType="VARCHAR" property="fInfo5" />
+    <result column="F_INFO6" jdbcType="VARCHAR" property="fInfo6" />
+    <result column="F_INFO7" jdbcType="VARCHAR" property="fInfo7" />
+    <result column="F_INFO8" jdbcType="VARCHAR" property="fInfo8" />
+    <result column="F_INFO9" jdbcType="VARCHAR" property="fInfo9" />
+  </resultMap>
+  <insert id="insert" parameterType="map">
+    insert into t_cd (F_INFO1, F_INFO2, F_INFO3, 
+      F_INFO4, F_INFO5, F_INFO6, 
+      F_INFO7, F_INFO8, F_INFO9
+      )
+    values (#{fInfo1,jdbcType=VARCHAR}, #{fInfo2,jdbcType=VARCHAR}, #{fInfo3,jdbcType=VARCHAR}, 
+      #{fInfo4,jdbcType=VARCHAR}, #{fInfo5,jdbcType=VARCHAR}, #{fInfo6,jdbcType=VARCHAR}, 
+      #{fInfo7,jdbcType=VARCHAR}, #{fInfo8,jdbcType=VARCHAR}, #{fInfo9,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="map">
+    insert into t_cd
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fInfo1 != null">
+        F_INFO1,
+      </if>
+      <if test="fInfo2 != null">
+        F_INFO2,
+      </if>
+      <if test="fInfo3 != null">
+        F_INFO3,
+      </if>
+      <if test="fInfo4 != null">
+        F_INFO4,
+      </if>
+      <if test="fInfo5 != null">
+        F_INFO5,
+      </if>
+      <if test="fInfo6 != null">
+        F_INFO6,
+      </if>
+      <if test="fInfo7 != null">
+        F_INFO7,
+      </if>
+      <if test="fInfo8 != null">
+        F_INFO8,
+      </if>
+      <if test="fInfo9 != null">
+        F_INFO9,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fInfo1 != null">
+        #{fInfo1,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo2 != null">
+        #{fInfo2,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo3 != null">
+        #{fInfo3,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo4 != null">
+        #{fInfo4,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo5 != null">
+        #{fInfo5,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo6 != null">
+        #{fInfo6,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo7 != null">
+        #{fInfo7,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo8 != null">
+        #{fInfo8,jdbcType=VARCHAR},
+      </if>
+      <if test="fInfo9 != null">
+        #{fInfo9,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>
